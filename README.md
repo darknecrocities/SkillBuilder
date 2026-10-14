@@ -12,10 +12,11 @@ SkillBuilder is a production-grade collection of Agent Skills designed for Googl
    - [Skill 2: production-etiquette](#2-production-etiquette)
 3. [Automation Scripts & CLI Utilities](#automation-scripts--cli-utilities)
 4. [Verification & Testing Suites](#verification--testing-suites)
-5. [Installation & Setup](#installation--setup)
-   - [Global Installation (All Projects)](#option-a-global-installation)
-   - [Project-Level Installation (Team Sharing)](#option-b-project-level-installation)
-   - [Mandatory Enforcement via AGENTS.md](#mandatory-enforcement-via-agentsmd)
+5. [Installation & Setup in Google Antigravity](#installation--setup-in-google-antigravity)
+   - [Method 1: Global Plugin Setup (Recommended)](#method-1-global-plugin-setup-recommended---automatic-for-all-projects)
+   - [Method 2: Project-Level Setup (Team Sharing)](#method-2-project-level-setup-team-sharing-via-version-control)
+   - [Method 3: Standalone On-Demand Skills](#method-3-standalone-on-demand-skills-no-always-on-enforcement)
+   - [Troubleshooting & FAQ](#troubleshooting--faq)
 6. [Repository Structure](#repository-structure)
 
 ---
@@ -152,54 +153,131 @@ All 20 unit test cases execute in < 1 second with 100% pass rates.
 
 ---
 
-## Installation & Setup
+---
 
-### Option A: Global Plugin Installation (Recommended - Automatic for All Projects)
-To enforce both skills automatically in every conversation and workspace across your entire machine without needing to configure individual projects:
+## Installation & Setup in Google Antigravity
 
+Follow one of the setup methods below depending on whether you want machine-wide automatic enforcement or per-repository team sharing.
+
+### Method 1: Global Plugin Setup (Recommended - Automatic for All Projects)
+
+This is the fastest and most complete setup. It registers SkillBuilder as a machine-wide Antigravity plugin. Antigravity will automatically load the skills and enforce the rules across **every current and future project** on your computer.
+
+#### Step 1: Clone the Repository into Antigravity Plugins Directory
+
+- **macOS / Linux**:
+  ```bash
+  git clone https://github.com/darknecrocities/SkillBuilder.git ~/.gemini/config/plugins/skill-builder
+  ```
+
+- **Windows (PowerShell)**:
+  ```powershell
+  git clone https://github.com/darknecrocities/SkillBuilder.git $HOME\.gemini\config\plugins\skill-builder
+  ```
+
+#### Step 2: How It Operates Inside Antigravity
+Once cloned into the plugins directory:
+1. Antigravity automatically detects `plugin.json` and activates the `skill-builder` plugin.
+2. The rules in `rules/AGENTS.md` are automatically merged into Antigravity's active rule set, executing on **every conversation turn**.
+3. Both `world-class-engineering` and `production-etiquette` skills are registered and available in the skill catalog.
+
+#### Step 3: Verify the Installation
+1. Start Antigravity or open a new conversation.
+2. Send this test prompt to the agent:
+   ```text
+   What engineering standards and active skills are configured in this session?
+   ```
+   The agent will respond confirming that `world-class-engineering` and `production-etiquette` are active, and cite the mandatory 8-rule etiquette policy.
+
+#### Step 4: Updating to the Latest Standards
+To pull new guidelines, templates, or bugfixes in the future:
 ```bash
-# Clone or copy directly into the global Antigravity plugins directory:
-mkdir -p ~/.gemini/config/plugins/skill-builder
-cp -r . ~/.gemini/config/plugins/skill-builder/
+cd ~/.gemini/config/plugins/skill-builder && git pull
 ```
 
-When installed as a global plugin:
-- Antigravity automatically discovers and enables `skill-builder`.
-- The rule defined in `rules/AGENTS.md` is automatically loaded into the agent's context on every turn.
-- The agent is forced to adhere to both `world-class-engineering` and `production-etiquette` across all current and future projects.
+---
 
-### Option B: Global Skills Installation (On-Demand)
-If you only want the skills available in the skill catalog without forcing them on every prompt:
+### Method 2: Project-Level Setup (Team Sharing via Version Control)
 
+Use this method if you want to commit these standards directly into a specific project repository so that every engineer and agent on your team shares the exact same rules.
+
+#### Step 1: Copy Skills and Rules into Your Project Root
+In your project repository:
 ```bash
-mkdir -p ~/.gemini/config/skills
-cp -r skills/world-class-engineering ~/.gemini/config/skills/
-cp -r skills/production-etiquette ~/.gemini/config/skills/
-```
-
-### Option C: Project-Level Installation (Team Sharing via Version Control)
-To share these skills and mandatory rules with your engineering team via Git in any repository:
-
-```bash
-# In your target project repository:
+# 1. Create the Antigravity agent directories
 mkdir -p .agents/skills
 
-# Copy skills and rules
+# 2. Copy the skills into .agents/skills/
 cp -r /path/to/SkillBuilder/skills/* .agents/skills/
-cp /path/to/SkillBuilder/AGENTS.md ./AGENTS.md
 
-# Register in .agents/skills.json
-cat << 'EOF' > .agents/skills.json
-{
-  "entries": [
-    { "path": ".agents/skills" }
-  ]
-}
-EOF
+# 3. Copy the mandatory rules to the repository root
+cp /path/to/SkillBuilder/AGENTS.md ./AGENTS.md
 ```
 
-### Mandatory Enforcement via AGENTS.md
-To ensure that Antigravity unconditionally follows both skills during every session, add this rule block to your project's root `AGENTS.md` (or globally in your workspace configuration):
+#### Step 2: Register Skills in `.agents/skills.json`
+Create or update `.agents/skills.json` at the root of your project:
+```json
+{
+  "entries": [
+    {
+      "path": ".agents/skills"
+    }
+  ]
+}
+```
+
+#### Step 3: Commit to Git
+```bash
+git add .agents/ AGENTS.md
+git commit -m "chore: configure Antigravity world-class engineering and production etiquette standards"
+git push
+```
+Any teammate opening this repository with Antigravity will automatically inherit these rules.
+
+---
+
+### Method 3: Standalone On-Demand Skills (No Always-On Enforcement)
+
+If you only want these skills available in your Antigravity catalog on demand without forcing them on every turn:
+
+- **macOS / Linux**:
+  ```bash
+  mkdir -p ~/.gemini/config/skills
+  git clone https://github.com/darknecrocities/SkillBuilder.git /tmp/skillbuilder
+  cp -r /tmp/skillbuilder/skills/* ~/.gemini/config/skills/
+  rm -rf /tmp/skillbuilder
+  ```
+
+- **Windows (PowerShell)**:
+  ```powershell
+  mkdir -Force $HOME\.gemini\config\skills
+  git clone https://github.com/darknecrocities/SkillBuilder.git $env:TEMP\skillbuilder
+  Copy-Item -Recurse $env:TEMP\skillbuilder\skills\* $HOME\.gemini\config\skills\
+  Remove-Item -Recurse -Force $env:TEMP\skillbuilder
+  ```
+
+---
+
+### Troubleshooting & FAQ
+
+#### Why is the agent not automatically applying the skills in my prompts?
+Skills in Antigravity use progressive disclosure: their full instructions are only read when requested or triggered. To make them mandatory on every turn, ensure `rules/AGENTS.md` is present in `~/.gemini/config/plugins/skill-builder/rules/AGENTS.md` (Method 1) or in your project's root `AGENTS.md` (Method 2).
+
+#### Do I need to restart Antigravity after installing?
+If you are currently in an active conversation, simply start a new conversation or restart Antigravity so it re-indexes newly installed plugins and rules.
+
+#### How do I run the Python tools manually?
+All tools use only Python 3 standard library modules:
+```bash
+# Audit 500-line limits
+python3 ~/.gemini/config/plugins/skill-builder/skills/world-class-engineering/scripts/check_source_line_limits.py --path .
+
+# Audit project hygiene (.env, Dockerfile, CI/CD)
+python3 ~/.gemini/config/plugins/skill-builder/skills/production-etiquette/scripts/scaffold_project_hygiene.py --path . --check
+
+# Analyze diff budget (< 1k lines) and generate PR descriptions
+python3 ~/.gemini/config/plugins/skill-builder/skills/production-etiquette/scripts/analyze_git_commit_chunks.py --path .
+```
 
 ```markdown
 # Mandatory Engineering Discipline & Production Etiquette
