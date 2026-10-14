@@ -1,0 +1,65 @@
+# ==============================================================================
+# Multi-Stage Production Dockerfile for Node.js / TypeScript Applications
+# Security: Runs as non-root user (UID 10001), minimal attack surface
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Stage 1: Build Dependencies and Compile TypeScript
+# ------------------------------------------------------------------------------
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Install build dependencies if needed (e.g., native python/make for node-gyp)
+RUN apk add --no-cache python3 make g++
+
+# Copy package manifests for optimal layer caching
+COPY package*.json tsconfig*.json ./
+
+# Install ALL dependencies (including devDependencies for building)
+RUN npm ci
+
+# Copy application source code
+COPY src/ ./src/
+
+# Compile TypeScript into JavaScript (dist/)
+RUN npm run build
+
+# Prune devDependencies to keep only production dependencies
+RUN npm prune --production
+
+# ------------------------------------------------------------------------------
+# Stage 2: Minimal Production Runtime
+# ------------------------------------------------------------------------------
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+# Set production environment
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# Install curl for container health checks
+RUN apk add --no-cache curl
+
+# Create unprivileged user (UID 10001) for security
+RUN addgroup -g 10001 -S appgroup && \
+    adduser -u 10001 -S appuser -G appgroup
+
+# Copy production dependencies and compiled artifacts from builder
+COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
+COPY --from=builder --chown=appuser:appgroup /app/dist ./dist
+COPY --from=builder --chown=appuser:appgroup /app/package.json ./package.json
+
+# Switch to non-root user
+USER appuser
+
+# Expose application port
+EXPOSE 3000
+
+# Container healthcheck
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/health || exit 1
+
+# Start the application
+CMD ["node", "dist/index.js"]
