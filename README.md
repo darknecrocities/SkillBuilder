@@ -154,27 +154,39 @@ All 20 unit test cases execute in < 1 second with 100% pass rates.
 
 ## Installation & Setup
 
-### Option A: Global Installation
-To make both skills available across all projects and conversations on your machine:
+### Option A: Global Plugin Installation (Recommended - Automatic for All Projects)
+To enforce both skills automatically in every conversation and workspace across your entire machine without needing to configure individual projects:
+
+```bash
+# Clone or copy directly into the global Antigravity plugins directory:
+mkdir -p ~/.gemini/config/plugins/skill-builder
+cp -r . ~/.gemini/config/plugins/skill-builder/
+```
+
+When installed as a global plugin:
+- Antigravity automatically discovers and enables `skill-builder`.
+- The rule defined in `rules/AGENTS.md` is automatically loaded into the agent's context on every turn.
+- The agent is forced to adhere to both `world-class-engineering` and `production-etiquette` across all current and future projects.
+
+### Option B: Global Skills Installation (On-Demand)
+If you only want the skills available in the skill catalog without forcing them on every prompt:
 
 ```bash
 mkdir -p ~/.gemini/config/skills
-
-# Copy skills to global configuration
 cp -r skills/world-class-engineering ~/.gemini/config/skills/
 cp -r skills/production-etiquette ~/.gemini/config/skills/
 ```
 
-### Option B: Project-Level Installation
-To share these skills with your engineering team via Git in any repository:
+### Option C: Project-Level Installation (Team Sharing via Version Control)
+To share these skills and mandatory rules with your engineering team via Git in any repository:
 
 ```bash
-# In your project repository:
+# In your target project repository:
 mkdir -p .agents/skills
 
-# Copy skills into .agents/skills
-cp -r /path/to/SkillBuilder/skills/world-class-engineering .agents/skills/
-cp -r /path/to/SkillBuilder/skills/production-etiquette .agents/skills/
+# Copy skills and rules
+cp -r /path/to/SkillBuilder/skills/* .agents/skills/
+cp /path/to/SkillBuilder/AGENTS.md ./AGENTS.md
 
 # Register in .agents/skills.json
 cat << 'EOF' > .agents/skills.json
