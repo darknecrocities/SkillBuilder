@@ -17,10 +17,12 @@ This skill governs how AI pair programmers interpret, refine, and structure inco
 | Resource Type | Document | Description |
 | :--- | :--- | :--- |
 | **Reference** | [references/prompt-polishing-framework.md](references/prompt-polishing-framework.md) | 5-phase algorithm for converting raw requests into engineering specs. |
+| **Reference** | [references/continuous-learning-protocol.md](references/continuous-learning-protocol.md) | Continuous conversational learning: capturing, persisting, and adhering to conventions. |
 | **Reference** | [references/token-savings-principles.md](references/token-savings-principles.md) | Token-saving techniques: removing conversational fluff, tables, code blocks. |
 | **Reference** | [references/prompt-error-catalog.md](references/prompt-error-catalog.md) | Common prompt defects: vague targets, missing edge cases, conflicting rules. |
 | **Template** | [templates/polished_prompt_template.md](templates/polished_prompt_template.md) | Reusable markdown template for polished technical requirements. |
 | **Utility** | [scripts/polish_prompt.py](scripts/polish_prompt.py) | CLI utility to clean and structure raw user prompts locally. |
+| **Utility** | [scripts/record_learning.py](scripts/record_learning.py) | CLI utility to dynamically record and query learned conventions across turns. |
 
 ---
 
