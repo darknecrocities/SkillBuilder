@@ -1,5 +1,7 @@
 {
   "name": "skill-builder",
-  "description": "Global engineering discipline enforcing world-class software engineering and production etiquette standards.",
+  "description": "Personalized full-stack engineering discipline for Arron Kian Parejas: prompt polishing, token-efficient pair programming, UI/Frontend, Backend, Database, Cloud/DevOps, AI/LLM, and QA/Error cataloging.",
+  "author": "Arron Kian Parejas (@darknecrocities)",
+  "version": "2.0.0",
   "disabled": false
 }

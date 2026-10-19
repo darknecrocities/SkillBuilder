@@ -1,0 +1,39 @@
+name: Production CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: 5-Gate Quality Pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: "Gate 1: Lint & Code Style"
+        run: npm run lint
+
+      - name: "Gate 2: Static Type Check"
+        run: npx tsc --noEmit
+
+      - name: "Gate 3: Automated Unit & Integration Tests"
+        run: npm test -- --coverage
+
+      - name: "Gate 4: Dependency Security Audit"
+        run: npm audit --audit-level=high
+
+      - name: "Gate 5: Docker Container Build"
+        run: docker build -t app:test .

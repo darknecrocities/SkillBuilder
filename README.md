@@ -1,335 +1,230 @@
-# SkillBuilder: Antigravity Engineering Standards & Production Etiquette Skills
+```text
+  ███████╗██╗  ██╗██╗██╗     ██╗     ██████╗ ██╗   ██╗██╗██╗     ██████╗ ███████╗██████╗ 
+  ██╔════╝██║ ██╔╝██║██║     ██║     ██╔══██╗██║   ██║██║██║     ██╔══██╗██╔════╝██╔══██╗
+  ███████╗█████═╝ ██║██║     ██║     ██████╔╝██║   ██║██║██║     ██║  ██║█████╗  ██████╔╝
+  ╚════██║██╔═██╗ ██║██║     ██║     ██╔══██╗██║   ██║██║██║     ██║  ██║██╔══╝  ██╔══██╗
+  ███████║██║ ╚██╗██║███████╗███████╗██████╔╝╚██████╔╝██║███████╗██████╔╝███████╗██║  ██║
+  ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+```
 
-SkillBuilder is a production-grade collection of Agent Skills designed for Google Antigravity. It transforms AI coding agents into disciplined, senior-level software engineers and systems architects by providing concrete operating workflows, architectural constraints, security guardrails, automated project scaffolding, and version-control etiquette.
+# SkillBuilder: Antigravity Engineering & Pair-Programming Standards
+
+SkillBuilder is a production-grade collection of Agent Skills and architectural guardrails designed for **Google Antigravity**. Authored by **Arron Kian Parejas (@darknecrocities)** and scalable to engineering teams worldwide, it transforms AI coding assistants into disciplined senior architects and pair programmers.
+
+---
+
+## Operating Philosophy
+
+Most AI coding assistants suffer from structural myopia: they hallucinate parameters, mock databases with temporary static arrays, leak credentials into version control, exceed maintainable file boundaries, and decorate interfaces with generic "vibe coding" slop.
+
+SkillBuilder enforces an uncompromising engineering standard:
+
+> **Understand first. Polish the prompt. Learn continuously. Reject vibe coding. Implement minimally. Test thoroughly. Catalog every error. Deliver real software without waste.**
 
 ---
 
 ## Table of Contents
 
-1. [Overview & Philosophy](#overview--philosophy)
-2. [Skills Included](#skills-included)
-   - [Skill 1: world-class-engineering](#1-world-class-engineering)
-   - [Skill 2: production-etiquette](#2-production-etiquette)
-3. [Automation Scripts & CLI Utilities](#automation-scripts--cli-utilities)
-4. [Verification & Testing Suites](#verification--testing-suites)
-5. [Installation & Setup in Google Antigravity](#installation--setup-in-google-antigravity)
-   - [Method 1: Global Plugin Setup (Recommended)](#method-1-global-plugin-setup-recommended---automatic-for-all-projects)
-   - [Method 2: Project-Level Setup (Team Sharing)](#method-2-project-level-setup-team-sharing-via-version-control)
-   - [Method 3: Standalone On-Demand Skills](#method-3-standalone-on-demand-skills-no-always-on-enforcement)
-   - [Troubleshooting & FAQ](#troubleshooting--faq)
-6. [Repository Structure](#repository-structure)
+1. [Arron's Personal Workspace (`arronkianparejas/`)](#arrons-personal-workspace-arronkianparejas)
+2. [Continuous Conversational Learning (CLP)](#continuous-conversational-learning-clp)
+3. [Anti-Vibe-Coding UI Craftsmanship](#anti-vibe-coding-ui-craftsmanship)
+4. [The 9 Production Skills](#the-9-production-skills)
+5. [Prompt Polishing Engine (PPE)](#prompt-polishing-engine-ppe)
+6. [Token Savings & High-Density Pairing](#token-savings--high-density-pairing)
+7. [QA Testing & Master Error Catalog](#qa-testing--master-error-catalog)
+8. [Installation & Antigravity Integration](#installation--antigravity-integration)
+9. [Automated Verification Suites](#automated-verification-suites)
+10. [Repository Architecture](#repository-architecture)
 
 ---
 
-## Overview & Philosophy
+## Arron's Personal Workspace (`arronkianparejas/`)
 
-Most AI coding assistants generate code without long-term architectural foresight: they exceed maintainable file boundaries, leak credentials, fabricate non-existent API parameters, mock databases with temporary static arrays, and ignore production containerization.
+A dedicated configuration and tooling hub tailored to Arron's project construction workflows and tech stacks:
 
-SkillBuilder enforces an uncompromising engineering philosophy:
-
-> Understand first. Plan deliberately. Implement minimally. Test independently. Verify everything. Maintain relentlessly. Real software, real security, real resilience. No toys, no leaked secrets, no unverified assumptions.
-
----
-
-## Skills Included
-
-### 1. `world-class-engineering`
-
-**Role**: Principal Software Engineer & AI Systems Architect  
-**Location**: `skills/world-class-engineering/`
-
-This skill provides comprehensive architectural guidance across frontend, backend, database design, AI/ML engineering, security modeling, and code review.
-
-#### Key Features:
-- **The 6-Phase Engineering Operating System (EOS)**:
-  - *Phase A: Understand*: Inspect repository structure, package manifests, runtime versions, and existing conventions.
-  - *Phase B: Define*: Establish explicit functional, non-functional, security, and error-handling criteria.
-  - *Phase C: Plan*: Formulate structured technical designs with data flow diagrams and API contracts.
-  - *Phase D: Implement*: Minimal, cohesive, production-ready code reusing established abstractions.
-  - *Phase E: Verify*: Execute tests, type checkers, linters, and line-count checks.
-  - *Phase F: Deliver*: Transparent reporting of changes, test logs, migration requirements, and known limits.
-- **The 500-Line Source File Policy**:
-  - Enforces a strict 500 physical line maximum on all source files (`.ts`, `.tsx`, `.js`, `.py`, `.go`, `.rs`, `.java`, `.cs`).
-  - Includes a 7-step extraction protocol for safely decomposing oversized files without breaking downstream consumers.
-- **The 7 Quality Gates**:
-  - Requirements, Architecture, Implementation, Correctness, Security, Maintainability, and Delivery.
-- **Supporting References & Templates**:
-  - 10 reference guides: `architecture.md`, `clean-code.md`, `full-stack.md`, `ai-engineering.md`, `security.md`, `testing-and-verification.md`, `code-review.md`, `performance.md`, `git-and-change-management.md`, `delivery-checklist.md`.
-  - 4 production templates: `implementation-plan.md`, `code-review.md`, `test-plan.md`, `architecture-decision-record.md`.
+- **[`profile.json`](arronkianparejas/profile.json)**: Author metadata, preferred stacks (React 19, Next.js, Tailwind v4, Flutter, Node.js, FastAPI, Go, PostgreSQL, Cloud SQL, GCP, Gemini 2.5), and token budget preferences.
+- **[`personal_pairing_manifesto.md`](arronkianparejas/personal_pairing_manifesto.md)**: The 8 non-negotiable tenets of pair-programming with Arron.
+- **[`prompt_templates/`](arronkianparejas/prompt_templates/)**: High-density templates for feature specifications, bug reproductions, and ADRs.
+- **[`scripts/sync_to_global.sh`](arronkianparejas/scripts/sync_to_global.sh)**: One-command sync linking SkillBuilder directly to `~/.gemini/config/plugins/skill-builder`.
+- **[`scripts/scaffold_project.sh`](arronkianparejas/scripts/scaffold_project.sh)**: Rapid project scaffolder initializing `.gitignore`, `.env.example`, `.agents/`, and `AGENTS.md`.
 
 ---
 
-### 2. `production-etiquette`
+## Continuous Conversational Learning (CLP)
 
-**Role**: Principal Systems Architect & Production Readiness Engineer  
-**Location**: `skills/production-etiquette/`
+Agents must learn continuously across conversation turns and sessions without forgetting corrections:
 
-This skill acts as the day-to-day operational rulebook, automating project hygiene and enforcing non-negotiable standards for secrets, containers, networking, and Git workflows.
+1. **Immediate Invariant Ingestion**: When a developer corrects an architectural pattern, imports, or naming conventions, the agent extracts the invariant.
+2. **Workspace Persistence**: The convention is recorded in `.agents/learned_conventions.md` using `scripts/record_learning.py`.
+3. **Turn-by-Turn Compliance**: Before planning or code generation, the agent scans recorded conventions to guarantee zero repetition of corrected mistakes.
 
-#### The 7 Non-Negotiable Pillars:
+CLI Utility:
+```bash
+# Record a new learned convention
+python3 skills/prompt-refinement-and-metacognition/scripts/record_learning.py \
+  --record "Use named exports for all React components" --category ARCH
 
-1. **Automatic Environment & Secrets Hygiene**:
-   - Whenever APIs, databases, or tokens are introduced, automatically configure `.env.example`, `.env`, and `.gitignore`.
-   - Never commit raw credentials. Enforce boot-time configuration validation with schema validators (Zod, Pydantic).
-2. **Standardized Containerization (Docker by Default)**:
-   - Provide multi-stage Dockerfiles separating build dependencies from minimal runtime images (`alpine`, `distroless`, `slim`).
-   - Run containers strictly as unprivileged non-root users (`USER 10001` / `appuser`).
-   - Supply `docker-compose.yml` with explicit dependency health checks (`condition: service_healthy`).
-3. **Deep Pre-Planning Research Protocol**:
-   - Mandatory empirical investigation of actual code, installed dependencies, lockfiles, and official upstream docs before proposing plans.
-   - Eliminates hallucinated API flags, invented library methods, and incorrect runtime assumptions.
-4. **Network & Request Resilience**:
-   - Mandatory connection and read timeouts on every outbound request (no unbounded network calls).
-   - In-memory caching with explicit Time-To-Live (TTL) and mutation-driven cache invalidation.
-   - Debouncing on user input fields and throttling on high-frequency event streams.
-   - Bounded exponential backoff with full random jitter on transient errors (HTTP 429, 502, 503, 504).
-   - Circuit breakers to prevent cascading outages during downstream service failures.
-5. **The Anti-Mock / Fully Functional Mandate**:
-   - Zero tolerance for "toy demo" code, mock in-memory arrays pretending to be databases, or unlinked UI buttons.
-   - All features must implement real schemas, real persistent storage (PostgreSQL, SQLite, structured file stores), real API wiring, and complete error handling.
-6. **Continuous Testing & Automated CI/CD**:
-   - Every feature and bugfix requires automated unit and integration tests.
-   - Standalone GitHub Actions CI workflow (`.github/workflows/ci.yml`) enforcing 5 gates: Linting, Type Checking, Automated Tests, Dependency Security Audit, and Docker Build Verification.
-7. **Git Branching, Commit Chunking (< 1k lines), & Ready-to-Review PRs**:
-   - Purposeful branch prefixes: `feat/`, `fix/`, `refactor/`, `perf/`, `docs/`, `test/`, `chore/`.
-   - The 1,000-line push budget: Decomposing massive diffs into cohesive, atomic commits.
-   - Automated PR preparation: Full conventional titles, technical decision summaries, test logs, and rollback procedures.
+# List all recorded conventions in active project
+python3 skills/prompt-refinement-and-metacognition/scripts/record_learning.py --list
+```
 
 ---
 
-## Automation Scripts & CLI Utilities
+## Anti-Vibe-Coding UI Craftsmanship
 
-Both skills include production-ready, zero-dependency Python 3 CLI utilities located in their respective `scripts/` directories:
+SkillBuilder strictly eliminates generic AI "vibe coding" aesthetic tropes:
 
-### 1. Source Line Limit Validator (`check_source_line_limits.py`)
-- **Path**: `skills/world-class-engineering/scripts/check_source_line_limits.py`
-- Recursively audits source files for adherence to the 500-line physical limit.
-- Automatically excludes package managers, build artifacts, lockfiles, and virtual environments.
-- Returns exit code `0` on pass, `1` on violation, and supports `--json` output for CI/CD integration.
-- Usage:
-  ```bash
-  python3 skills/world-class-engineering/scripts/check_source_line_limits.py --path . --verbose
-  ```
+- **No Neon Gradients or Glows**: Prohibits purple-to-indigo/cyan gradients and green glowing borders (`shadow-[0_0_...`). Mandates high-contrast neutral scales (zinc, slate, stone) with subtle 1px dividers.
+- **No Card-Soup**: Prohibits wrapping every single element in high-elevation rounded cards. Layout structure is driven by typography, column rules, and intentional whitespace.
+- **No Emojis as UI Icons**: Prohibits using raw emojis in buttons, navigation, and headings. Mandates semantic vector SVG icons (Lucide Icons) with accessible attributes.
+- **No Frivolous Badges**: Prohibits decorative version pills ("v1.0.0-beta", "AI-Powered", "Fast"). Badges are permitted solely for real system lifecycle states (`RUNNING`, `FAILED`, `HEALTHY`).
+- **Grounded Technical Copywriting**: Prohibits synthetic marketing buzzwords (*"seamlessly elevate your synergy"*). Mandates direct, factual descriptions of system behavior.
 
-### 2. Project Hygiene Scaffolder (`scaffold_project_hygiene.py`)
-- **Path**: `skills/production-etiquette/scripts/scaffold_project_hygiene.py`
-- Audits and auto-scaffolds missing project hygiene files: `.gitignore`, `.env.example`, `Dockerfile`, `.dockerignore`, `docker-compose.yml`, `.github/workflows/ci.yml`, and `.github/pull_request_template.md`.
-- Automatically detects project ecosystem (Node.js, Python, Go, or generic).
-- Non-destructive: preserves existing user files while filling in missing requirements.
-- Usage:
-  ```bash
-  # Audit project
-  python3 skills/production-etiquette/scripts/scaffold_project_hygiene.py --path <project-dir> --check
-
-  # Auto-scaffold missing files
-  python3 skills/production-etiquette/scripts/scaffold_project_hygiene.py --path <project-dir> --apply
-  ```
-
-### 3. Git Commit Chunk & PR Analyzer (`analyze_git_commit_chunks.py`)
-- **Path**: `skills/production-etiquette/scripts/analyze_git_commit_chunks.py`
-- Inspects working tree diffs and enforces the 1,000-line review budget.
-- Clusters modified files into logical atomic commit chunks (Database, Service, API, UI, Test, Infrastructure).
-- Generates Conventional Commit suggestions and ready-to-run GitHub CLI (`gh pr create`) commands with structured descriptions.
-- Usage:
-  ```bash
-  python3 skills/production-etiquette/scripts/analyze_git_commit_chunks.py --path .
-  ```
+Automated Linter:
+```bash
+python3 skills/ui-frontend-engineering/scripts/verify_frontend_quality.py --path src/components/
+```
 
 ---
 
-## Verification & Testing Suites
+## The 9 Production Skills
 
-Both skills include comprehensive `unittest` test suites verifying the functionality of all CLI tools and resilience wrappers:
+SkillBuilder organizes software engineering into 9 specialized, progressively disclosed skills:
+
+| Skill | Role | Key Capabilities |
+| :--- | :--- | :--- |
+| **`world-class-engineering`** | Principal Software Engineer | 6-Phase EOS (Understand -> Define -> Plan -> Implement -> Verify -> Deliver), 500-line source file limit, 7 quality gates. |
+| **`production-etiquette`** | Production Readiness Engineer | Secrets hygiene (`.env.example`), multi-stage non-root Docker (`USER 10001`), resilient networking (timeouts, retries with jitter), anti-mock mandate. |
+| **`prompt-refinement-and-metacognition`** | Principal Prompt Engineer | 5-phase Prompt Polishing Engine (PPE), ambiguity detection, token compression, Continuous Learning Protocol (`record_learning.py`). |
+| **`qa-testing-and-error-resolution`** | Principal QA & Reliability Engineer | 4-tier testing trophy (Unit, Integration, Contract, E2E), pre-flight QA gates, Master Error Catalog, List-an-Error (LaE) tracking. |
+| **`ui-frontend-engineering`** | Frontend & UI/UX Architect | Tailwind CSS v4 design tokens, Radix UI & shadcn primitives, WCAG 2.2 AA accessibility, Core Web Vitals, Anti-Vibe-Coding standard. |
+| **`backend-systems-engineering`** | Backend Systems Architect | Clean/Hexagonal Architecture, REST/gRPC API design, Zod/Pydantic v2 boundary validation, JWT rotation, idempotency keys, RFC 7807 problem details. |
+| **`database-and-datastore-engineering`** | Principal Database Architect | PostgreSQL, SQLite, Cloud SQL, zero-downtime expand-and-contract migrations, non-blocking indexes (`CONCURRENTLY`), PgBouncer connection pooling. |
+| **`cloud-devops-infrastructure`** | Cloud & Platform Engineer | GCP Cloud Run, GKE, IAM least-privilege, Secret Manager, distroless containers, 5-gate GitHub Actions CI pipeline, OpenTelemetry tracing. |
+| **`ai-and-llm-engineering`** | Principal AI Systems Engineer | Gemini 2.5 Pro/Flash, `google-genai` SDK, Antigravity subagents, schema-enforced structured outputs, defensive tool execution, hybrid RAG. |
+
+---
+
+## Prompt Polishing Engine (PPE)
+
+The user prompt is the foundation of all generated software. Before writing code on complex requests, SkillBuilder automatically runs the **PPE**:
+
+1. **Intent Extraction**: Identifies the core functional deliverable and scope boundary.
+2. **Ambiguity & Edge-Case Scan**: Uncovers missing error handling, auth requirements, and state dropouts.
+3. **Structured Specification**: Converts narrative thoughts into an RFC-style specification matrix.
+4. **Token Compression**: Strips conversational padding and formats requirements into compact tables.
+5. **Verification Gate**: Attaches automated verification commands.
+
+CLI Utility:
+```bash
+python3 skills/prompt-refinement-and-metacognition/scripts/polish_prompt.py --text "build an express api for user auth with jwt"
+```
+
+---
+
+## Token Savings & High-Density Pairing
+
+To maximize context window longevity and reduce inference latency:
+- **Progressive Disclosure**: Only skill names and descriptions are loaded initially (<300 lines per `SKILL.md`). In-depth guides in `references/` are pulled into context only when needed.
+- **Local CLI Execution**: Mechanical checks (line counts, project hygiene, commit chunks, token budgets, error lookups, convention logging) are executed by fast local Python scripts without spending model tokens.
+- **High-Density Formatting**: Eliminates conversational filler in favor of surgical diffs, markdown tables, and precise line links (`file:///...#L10`).
+
+CLI Token Budget Estimator:
+```bash
+python3 skills/ai-and-llm-engineering/scripts/calculate_token_budget.py --text "Sample system prompt payload"
+```
+
+---
+
+## QA Testing & Master Error Catalog
+
+SkillBuilder maintains an encyclopedia of software defects across Frontend, Backend, Database, Cloud, and AI systems. Whenever an error occurs, the **List-an-Error (LaE)** protocol captures:
+1. `[Error Signature]`: Exact message and code.
+2. `[Root Cause]`: Mechanical explanation.
+3. `[Remediation]`: Concrete code patch.
+4. `[Regression Test]`: Automated test preventing recurrence.
+
+Search the Master Error Catalog:
+```bash
+python3 skills/qa-testing-and-error-resolution/scripts/lookup_error.py --query "deadlock"
+python3 skills/qa-testing-and-error-resolution/scripts/lookup_error.py --query "hydration" --category frontend
+```
+
+---
+
+## Installation & Antigravity Integration
+
+SkillBuilder can be installed globally or per-project. For complete setup details, refer to [`INTEGRATION_GUIDE.md`](INTEGRATION_GUIDE.md).
+
+### One-Command Quickstart
+```bash
+# Clone repository
+git clone https://github.com/darknecrocities/SkillBuilder.git ~/SkillBuilder
+cd ~/SkillBuilder
+
+# Install globally for all projects on this machine
+bash scripts/install.sh --global
+
+# Or scaffold a specific project repository
+bash scripts/install.sh --project /path/to/my-project
+```
+
+---
+
+## Automated Verification Suites
+
+SkillBuilder includes a master test runner executing 12 independent verification suites:
 
 ```bash
-# Test World-Class Engineering tooling:
-python3 -m unittest discover -s skills/world-class-engineering/tests -p "test_*.py" -v
-
-# Test Production Etiquette tooling:
-python3 -m unittest discover -s skills/production-etiquette/tests -p "test_*.py" -v
+bash scripts/verify_all_skills.sh
 ```
 
-All 20 unit test cases execute in < 1 second with 100% pass rates.
+Checks executed:
+1. **500-Line Source File Policy**: Verifies all source files adhere to the 500-line limit.
+2. **World-Class Engineering Unit Tests**: Validates line-checking logic and extraction protocols.
+3. **Project Hygiene Unit Tests**: Validates `.env.example`, `.gitignore`, and container scaffolding.
+4. **Git Commit Chunking Tests**: Validates 1,000-line push budget and cluster analysis.
+5. **Prompt Refinement Tests**: Validates intent extraction and filler stripping.
+6. **Continuous Learning Tests**: Validates dynamic convention persistence and querying.
+7. **Master Error Catalog Tests**: Validates search index and keyword matching.
+8. **Frontend Quality & Anti-Vibe-Coding Tests**: Validates accessibility and anti-vibe-coding rules.
+9. **Backend Contract Tests**: Validates schema validation linter.
+10. **Database Hygiene Tests**: Validates SQL migration safety and hazardous lock checks.
+11. **Container Security Tests**: Validates non-root user and multi-stage container rules.
+12. **AI Token Budget Tests**: Validates token calculation and payload density estimation.
 
 ---
 
----
-
-## Installation & Setup in Google Antigravity
-
-Follow one of the setup methods below depending on whether you want machine-wide automatic enforcement or per-repository team sharing.
-
-### Method 1: Global Plugin Setup (Recommended - Automatic for All Projects)
-
-This is the fastest and most complete setup. It registers SkillBuilder as a machine-wide Antigravity plugin. Antigravity will automatically load the skills and enforce the rules across **every current and future project** on your computer.
-
-#### Step 1: Clone the Repository into Antigravity Plugins Directory
-
-- **macOS / Linux**:
-  ```bash
-  git clone https://github.com/darknecrocities/SkillBuilder.git ~/.gemini/config/plugins/skill-builder
-  ```
-
-- **Windows (PowerShell)**:
-  ```powershell
-  git clone https://github.com/darknecrocities/SkillBuilder.git $HOME\.gemini\config\plugins\skill-builder
-  ```
-
-#### Step 2: How It Operates Inside Antigravity
-Once cloned into the plugins directory:
-1. Antigravity automatically detects `plugin.json` and activates the `skill-builder` plugin.
-2. The rules in `rules/AGENTS.md` are automatically merged into Antigravity's active rule set, executing on **every conversation turn**.
-3. Both `world-class-engineering` and `production-etiquette` skills are registered and available in the skill catalog.
-
-#### Step 3: Verify the Installation
-1. Start Antigravity or open a new conversation.
-2. Send this test prompt to the agent:
-   ```text
-   What engineering standards and active skills are configured in this session?
-   ```
-   The agent will respond confirming that `world-class-engineering` and `production-etiquette` are active, and cite the mandatory 8-rule etiquette policy.
-
-#### Step 4: Updating to the Latest Standards
-To pull new guidelines, templates, or bugfixes in the future:
-```bash
-cd ~/.gemini/config/plugins/skill-builder && git pull
-```
-
----
-
-### Method 2: Project-Level Setup (Team Sharing via Version Control)
-
-Use this method if you want to commit these standards directly into a specific project repository so that every engineer and agent on your team shares the exact same rules.
-
-#### Step 1: Copy Skills and Rules into Your Project Root
-In your project repository:
-```bash
-# 1. Create the Antigravity agent directories
-mkdir -p .agents/skills
-
-# 2. Copy the skills into .agents/skills/
-cp -r /path/to/SkillBuilder/skills/* .agents/skills/
-
-# 3. Copy the mandatory rules to the repository root
-cp /path/to/SkillBuilder/AGENTS.md ./AGENTS.md
-```
-
-#### Step 2: Register Skills in `.agents/skills.json`
-Create or update `.agents/skills.json` at the root of your project:
-```json
-{
-  "entries": [
-    {
-      "path": ".agents/skills"
-    }
-  ]
-}
-```
-
-#### Step 3: Commit to Git
-```bash
-git add .agents/ AGENTS.md
-git commit -m "chore: configure Antigravity world-class engineering and production etiquette standards"
-git push
-```
-Any teammate opening this repository with Antigravity will automatically inherit these rules.
-
----
-
-### Method 3: Standalone On-Demand Skills (No Always-On Enforcement)
-
-If you only want these skills available in your Antigravity catalog on demand without forcing them on every turn:
-
-- **macOS / Linux**:
-  ```bash
-  mkdir -p ~/.gemini/config/skills
-  git clone https://github.com/darknecrocities/SkillBuilder.git /tmp/skillbuilder
-  cp -r /tmp/skillbuilder/skills/* ~/.gemini/config/skills/
-  rm -rf /tmp/skillbuilder
-  ```
-
-- **Windows (PowerShell)**:
-  ```powershell
-  mkdir -Force $HOME\.gemini\config\skills
-  git clone https://github.com/darknecrocities/SkillBuilder.git $env:TEMP\skillbuilder
-  Copy-Item -Recurse $env:TEMP\skillbuilder\skills\* $HOME\.gemini\config\skills\
-  Remove-Item -Recurse -Force $env:TEMP\skillbuilder
-  ```
-
----
-
-### Troubleshooting & FAQ
-
-#### Why is the agent not automatically applying the skills in my prompts?
-Skills in Antigravity use progressive disclosure: their full instructions are only read when requested or triggered. To make them mandatory on every turn, ensure `rules/AGENTS.md` is present in `~/.gemini/config/plugins/skill-builder/rules/AGENTS.md` (Method 1) or in your project's root `AGENTS.md` (Method 2).
-
-#### Do I need to restart Antigravity after installing?
-If you are currently in an active conversation, simply start a new conversation or restart Antigravity so it re-indexes newly installed plugins and rules.
-
-#### How do I run the Python tools manually?
-All tools use only Python 3 standard library modules:
-```bash
-# Audit 500-line limits
-python3 ~/.gemini/config/plugins/skill-builder/skills/world-class-engineering/scripts/check_source_line_limits.py --path .
-
-# Audit project hygiene (.env, Dockerfile, CI/CD)
-python3 ~/.gemini/config/plugins/skill-builder/skills/production-etiquette/scripts/scaffold_project_hygiene.py --path . --check
-
-# Analyze diff budget (< 1k lines) and generate PR descriptions
-python3 ~/.gemini/config/plugins/skill-builder/skills/production-etiquette/scripts/analyze_git_commit_chunks.py --path .
-```
-
-```markdown
-# Mandatory Engineering Discipline & Production Etiquette
-
-All software architecture, implementation, refactoring, and development tasks MUST strictly adhere to both the `world-class-engineering` and `production-etiquette` skills:
-
-1. **Environment & Secret Hygiene**:
-   - Whenever APIs, databases, or third-party tokens are introduced, automatically verify and configure `.env.example`, `.env`, and `.gitignore`.
-2. **Standardized Containerization**:
-   - Provide a production-hardened multi-stage Dockerfile (non-root user, minimal base) and `docker-compose.yml` with health checks.
-3. **Deep Pre-Planning Research**:
-   - Perform empirical codebase and official documentation research before formulating any plan.
-4. **Network & Request Resilience**:
-   - Enforce explicit connection/read timeouts, in-memory caching with invalidation, debouncing on inputs, and bounded exponential backoff with jitter on retries.
-5. **Anti-Mock / Fully Functional Mandate**:
-   - Strictly avoid static mock arrays or toy interactive demos; all features must have real persistence, validation schemas, and complete error handling.
-6. **Continuous Testing & CI/CD**:
-   - Provide automated unit/integration tests for every feature and maintain an automated CI/CD pipeline (`.github/workflows/ci.yml`).
-7. **Git Branching, Commit Chunking (< 1k lines), & Ready-to-Review PRs**:
-   - Branch deliberately (`feat/`, `fix/`), decompose changes into cohesive atomic commits within the 1,000-line budget, and author complete, ready-to-merge Pull Requests.
-8. **500-Line Source File Policy**:
-   - Maintain a 500-line physical limit on all source files, verified via `check_source_line_limits.py`.
-```
-
----
-
-## Repository Structure
+## Repository Architecture
 
 ```text
 SkillBuilder/
-├── README.md                                    # Master documentation (no emojis)
-├── AGENTS.md                                    # Mandatory agent rules
-├── .gitignore                                   # Standard repository exclusions
+├── plugin.json                                 # Antigravity plugin manifest
+├── README.md                                   # Comprehensive documentation with ASCII header
+├── INTEGRATION_GUIDE.md                        # Step-by-step setup guide for Antigravity
+├── AGENTS.md                                   # Root rules enforced on all projects
+├── rules/
+│   └── AGENTS.md                               # Plugin-level rules
 ├── .agents/
-│   └── skills.json                              # Antigravity skill discovery config
-└── skills/
-    ├── world-class-engineering/
-    │   ├── SKILL.md                             # Architecture & EOS workflow
-    │   ├── references/                          # 10 architecture & quality guides
-    │   ├── templates/                           # 4 design & review templates
-    │   ├── scripts/                             # check_source_line_limits.py
-    │   └── tests/                               # Line limit validator tests
-    └── production-etiquette/
-        ├── SKILL.md                             # Operational etiquette workflow
-        ├── references/                          # 7 production standards guides
-        ├── templates/                           # Docker, CI/CD, resilience templates
-        ├── scripts/                             # Hygiene scaffolder & PR analyzer
-        └── tests/                               # Scaffolder & PR analyzer tests
+│   └── skills.json                             # Discovered skills configuration
+├── arronkianparejas/                           # Arron's Personal Workspace
+│   ├── profile.json                            # Personal profile and stack defaults
+│   ├── personal_pairing_manifesto.md           # Pair-programming standards
+│   ├── prompt_templates/                       # High-density prompt templates
+│   └── scripts/
+│       ├── sync_to_global.sh                   # Symlinks to ~/.gemini/config/plugins/
+│       └── scaffold_project.sh                 # Scaffolds new projects with Arron's standards
+├── skills/
+│   ├── world-class-engineering/                # EOS & 500-line ceiling
+│   ├── production-etiquette/                   # Secrets, Docker, CI/CD, Git chunking
+│   ├── prompt-refinement-and-metacognition/    # Prompt Polishing Engine & Continuous Learning
+│   ├── qa-testing-and-error-resolution/        # Testing trophy & Master Error Catalog
+│   ├── ui-frontend-engineering/                # UI, Tailwind v4, a11y, Anti-Vibe-Coding
+│   ├── backend-systems-engineering/            # Clean architecture, APIs, Zod, auth
+│   ├── database-and-datastore-engineering/     # Relational design, migrations, indexing
+│   ├── cloud-devops-infrastructure/            # GCP, distroless containers, IaC, CI/CD
+│   └── ai-and-llm-engineering/                 # Gemini API, structured outputs, RAG
+└── scripts/
+    ├── install.sh                              # Universal installer (Global / Project)
+    └── verify_all_skills.sh                    # Master verification test runner
 ```
-
----
-
-## License
-
-This project is released under the MIT License.

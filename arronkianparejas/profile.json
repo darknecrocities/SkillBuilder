@@ -1,0 +1,67 @@
+{
+  "author": {
+    "name": "Arron Kian Parejas",
+    "handle": "darknecrocities",
+    "email": "parejasarronkian@gmail.com",
+    "role": "Principal Software Engineer & AI Systems Architect"
+  },
+  "preferences": {
+    "pairing_style": "metacognitive_direct",
+    "token_savings_mode": true,
+    "require_prompt_polishing": true,
+    "require_continuous_learning": true,
+    "anti_vibe_coding_mode": true,
+    "require_verification_before_delivery": true,
+    "require_error_cataloging": true,
+    "source_file_line_limit": 500
+  },
+  "ui_craftsmanship": {
+    "prohibit_purple_gradients": true,
+    "prohibit_neon_glow": true,
+    "prohibit_card_soup": true,
+    "prohibit_frivolous_badges": true,
+    "prohibit_ui_emojis": true,
+    "standard_icon_library": "Lucide SVG Icons",
+    "design_tokens": "Tailwind CSS v4 CSS variables",
+    "color_palette": "High-contrast functional neutrals (Zinc/Slate)"
+  },
+  "preferred_stacks": {
+    "frontend": [
+      "React 19",
+      "Next.js (App Router)",
+      "Tailwind CSS v4",
+      "Radix UI / shadcn/ui",
+      "Flutter / Dart"
+    ],
+    "backend": [
+      "Node.js (TypeScript)",
+      "Python (FastAPI, Pydantic v2)",
+      "Go (Standard Library, Chi)"
+    ],
+    "database": [
+      "PostgreSQL",
+      "SQLite",
+      "Google Cloud SQL",
+      "Prisma / Drizzle ORM",
+      "pgvector"
+    ],
+    "cloud_and_infrastructure": [
+      "Google Cloud Platform (Cloud Run, GKE, IAM, Secret Manager)",
+      "Docker (Multi-stage, distroless, non-root USER 10001)",
+      "Docker Compose",
+      "GitHub Actions (5-gate CI/CD)"
+    ],
+    "ai_and_agents": [
+      "Gemini 2.5 Pro / Flash",
+      "Google GenAI SDK (google-genai)",
+      "Google Antigravity SDK",
+      "Structured Outputs (JSON Schema)",
+      "Hybrid RAG & Vector Embeddings"
+    ]
+  },
+  "paths": {
+    "global_plugin_dir": "~/.gemini/config/plugins/skill-builder",
+    "workspace_agents_dir": ".agents",
+    "learned_conventions_file": ".agents/learned_conventions.md"
+  }
+}
