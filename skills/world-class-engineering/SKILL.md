@@ -168,14 +168,14 @@ Before declaring any feature or bugfix complete, evaluate against these 7 gates:
 Copy or symlink this skill directory to your global Antigravity config directory:
 ```bash
 mkdir -p ~/.gemini/config/skills
-cp -r /Users/arronkianparejas/.gemini/antigravity/scratch/world-class-engineering ~/.gemini/config/skills/
+cp -r path/to/world-class-engineering ~/.gemini/config/skills/
 ```
 
 ### Option B: Project-Level Installation (Checked into Git for your team)
 Place the skill inside the `.agents/skills/` directory of your project repository:
 ```bash
 mkdir -p <project-root>/.agents/skills
-cp -r /Users/arronkianparejas/.gemini/antigravity/scratch/world-class-engineering <project-root>/.agents/skills/
+cp -r path/to/world-class-engineering <project-root>/.agents/skills/
 ```
 
 ### Mandatory Enforcement via `AGENTS.md`

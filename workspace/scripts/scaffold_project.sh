@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # Script: scaffold_project.sh
-# Purpose: Initialize a project with Arron's standards & Antigravity skills.
-# Author: Arron Kian Parejas (@darknecrocities)
+# Purpose: Initialize a project with SkillBuilder standards & Antigravity skills.
 # ==============================================================================
 
 set -euo pipefail
@@ -10,7 +9,7 @@ set -euo pipefail
 TARGET_DIR="${1:-.}"
 TARGET_PATH="$(cd "${TARGET_DIR}" && pwd)"
 
-echo "=== Scaffolding Arron's Standards into: ${TARGET_PATH} ==="
+echo "=== Scaffolding SkillBuilder Engineering Standards into: ${TARGET_PATH} ==="
 
 mkdir -p "${TARGET_PATH}/.agents"
 mkdir -p "${TARGET_PATH}/.github/workflows"
@@ -30,7 +29,7 @@ EOF
 cat << 'EOF' > "${TARGET_PATH}/AGENTS.md"
 # Mandatory Engineering Discipline & Production Etiquette
 
-All work in this repository must strictly adhere to Arron Kian Parejas's engineering standards:
+All work in this repository must strictly adhere to SkillBuilder engineering standards:
 
 1. **Prompt Polishing**: Clarify requirements, constraints, and test criteria before writing code.
 2. **Anti-Mock Mandate**: Use real schemas and real persistence. Never mock data with static arrays.
@@ -77,4 +76,4 @@ LOG_LEVEL=info
 EOF
 fi
 
-echo "[SUCCESS] Project scaffolded with Arron's standards at: ${TARGET_PATH}"
+echo "[SUCCESS] Project scaffolded with SkillBuilder standards at: ${TARGET_PATH}"

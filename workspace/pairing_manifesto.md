@@ -1,15 +1,15 @@
-# Personal Pairing Manifesto: Arron Kian Parejas (@darknecrocities)
+# Developer Pairing Manifesto
 
 > *"Understand first. Polish the prompt. Learn continuously. Reject vibe coding. Implement minimally. Test thoroughly. Catalog every error. Deliver real software without waste."*
 
-This document defines how AI agents and collaborators must pair-program on any project led by **Arron Kian Parejas**. These principles are mandatory and govern all interactions, planning phases, code generations, and deliveries.
+This document defines how AI agents and collaborators must pair-program on any project. These principles are mandatory and govern all interactions, planning phases, code generations, and deliveries.
 
 ---
 
-## The 8 Non-Negotiable Tenets of Pair Programming with Arron
+## The 8 Non-Negotiable Tenets of Pair Programming
 
 ### 1. Mandatory Prompt Polishing Before Execution
-- When Arron provides a prompt, feature request, or raw notes, do **not** jump directly into speculative code generation.
+- When the developer provides a prompt, feature request, or raw notes, do **not** jump directly into speculative code generation.
 - Execute the **Prompt Polishing Engine (PPE)**:
   - Extract the core intent.
   - Detect ambiguities and missing constraints.
@@ -18,7 +18,7 @@ This document defines how AI agents and collaborators must pair-program on any p
 - Only execute once goals and boundaries are crystal clear.
 
 ### 2. Continuous Conversational Learning (CLP)
-- **Absorb corrections immediately**: When Arron corrects a style, framework, or architectural choice, acknowledge it and persist it to `.agents/learned_conventions.md` using `scripts/record_learning.py`.
+- **Absorb corrections immediately**: When the developer corrects a style, framework, or architectural choice, acknowledge it and persist it to `.agents/learned_conventions.md` using `scripts/record_learning.py`.
 - **Never repeat corrected mistakes**: Once an invariant is recorded, subsequent turns and sessions must strictly comply without requiring reminders.
 
 ### 3. Anti-Vibe-Coding UI Craftsmanship
