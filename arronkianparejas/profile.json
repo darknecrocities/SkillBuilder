@@ -9,9 +9,21 @@
     "pairing_style": "metacognitive_direct",
     "token_savings_mode": true,
     "require_prompt_polishing": true,
+    "require_continuous_learning": true,
+    "anti_vibe_coding_mode": true,
     "require_verification_before_delivery": true,
     "require_error_cataloging": true,
     "source_file_line_limit": 500
+  },
+  "ui_craftsmanship": {
+    "prohibit_purple_gradients": true,
+    "prohibit_neon_glow": true,
+    "prohibit_card_soup": true,
+    "prohibit_frivolous_badges": true,
+    "prohibit_ui_emojis": true,
+    "standard_icon_library": "Lucide SVG Icons",
+    "design_tokens": "Tailwind CSS v4 CSS variables",
+    "color_palette": "High-contrast functional neutrals (Zinc/Slate)"
   },
   "preferred_stacks": {
     "frontend": [
@@ -49,6 +61,7 @@
   },
   "paths": {
     "global_plugin_dir": "~/.gemini/config/plugins/skill-builder",
-    "workspace_agents_dir": ".agents"
+    "workspace_agents_dir": ".agents",
+    "learned_conventions_file": ".agents/learned_conventions.md"
   }
 }

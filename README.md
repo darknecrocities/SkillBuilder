@@ -1,35 +1,40 @@
-# SkillBuilder: World-Class Antigravity Engineering & Pair-Programming Skills
+```text
+  ███████╗██╗  ██╗██╗██╗     ██╗     ██████╗ ██╗   ██╗██╗██╗     ██████╗ ███████╗██████╗ 
+  ██╔════╝██║ ██╔╝██║██║     ██║     ██╔══██╗██║   ██║██║██║     ██╔══██╗██╔════╝██╔══██╗
+  ███████╗█████═╝ ██║██║     ██║     ██████╔╝██║   ██║██║██║     ██║  ██║█████╗  ██████╔╝
+  ╚════██║██╔═██╗ ██║██║     ██║     ██╔══██╗██║   ██║██║██║     ██║  ██║██╔══╝  ██╔══██╗
+  ███████║██║ ╚██╗██║███████╗███████╗██████╔╝╚██████╔╝██║███████╗██████╔╝███████╗██║  ██║
+  ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+```
 
-[![Verification Status](https://img.shields.io/badge/verification-11%2F11%20passing-brightgreen.svg)](scripts/verify_all_skills.sh)
-[![Line Ceiling](https://img.shields.io/badge/source%20files-%3C%20500%20lines-blue.svg)](skills/world-class-engineering/scripts/check_source_line_limits.py)
-[![Antigravity](https://img.shields.io/badge/google-antigravity-orange.svg)](INTEGRATION_GUIDE.md)
-[![Author](https://img.shields.io/badge/author-Arron%20Kian%20Parejas%20(@darknecrocities)-purple.svg)](arronkianparejas/profile.json)
+# SkillBuilder: Antigravity Engineering & Pair-Programming Standards
 
-**SkillBuilder** is a production-grade collection of Agent Skills and engineering guardrails designed for **Google Antigravity**. Crafted specifically for **Arron Kian Parejas (@darknecrocities)** and scalable to engineering teams worldwide, it transforms AI coding assistants into disciplined senior architects and pair programmers.
+SkillBuilder is a production-grade collection of Agent Skills and architectural guardrails designed for **Google Antigravity**. Authored by **Arron Kian Parejas (@darknecrocities)** and scalable to engineering teams worldwide, it transforms AI coding assistants into disciplined senior architects and pair programmers.
+
+---
+
+## Operating Philosophy
+
+Most AI coding assistants suffer from structural myopia: they hallucinate parameters, mock databases with temporary static arrays, leak credentials into version control, exceed maintainable file boundaries, and decorate interfaces with generic "vibe coding" slop.
+
+SkillBuilder enforces an uncompromising engineering standard:
+
+> **Understand first. Polish the prompt. Learn continuously. Reject vibe coding. Implement minimally. Test thoroughly. Catalog every error. Deliver real software without waste.**
 
 ---
 
 ## Table of Contents
 
-1. [Overview & Philosophy](#overview--philosophy)
-2. [Arron's Personal Workspace (`arronkianparejas/`)](#arrons-personal-workspace-arronkianparejas)
-3. [The 9 Production Skills](#the-9-production-skills)
-4. [Prompt Polishing Engine (PPE)](#prompt-polishing-engine-ppe)
-5. [Token Savings & High-Density Pairing](#token-savings--high-density-pairing)
-6. [QA Testing & Master Error Catalog](#qa-testing--master-error-catalog)
-7. [Installation & Antigravity Integration](#installation--antigravity-integration)
-8. [Automated Verification Suites](#automated-verification-suites)
-9. [Repository Architecture](#repository-architecture)
-
----
-
-## Overview & Philosophy
-
-Most AI coding assistants suffer from structural myopia: they hallucinate parameters, mock databases with temporary static arrays, leak credentials into version control, exceed maintainable file boundaries, and burn thousands of tokens on conversational filler.
-
-SkillBuilder enforces an uncompromising engineering standard:
-
-> **Understand first. Polish the prompt. Implement minimally. Test thoroughly. Catalog every error. Deliver real software without waste.**
+1. [Arron's Personal Workspace (`arronkianparejas/`)](#arrons-personal-workspace-arronkianparejas)
+2. [Continuous Conversational Learning (CLP)](#continuous-conversational-learning-clp)
+3. [Anti-Vibe-Coding UI Craftsmanship](#anti-vibe-coding-ui-craftsmanship)
+4. [The 9 Production Skills](#the-9-production-skills)
+5. [Prompt Polishing Engine (PPE)](#prompt-polishing-engine-ppe)
+6. [Token Savings & High-Density Pairing](#token-savings--high-density-pairing)
+7. [QA Testing & Master Error Catalog](#qa-testing--master-error-catalog)
+8. [Installation & Antigravity Integration](#installation--antigravity-integration)
+9. [Automated Verification Suites](#automated-verification-suites)
+10. [Repository Architecture](#repository-architecture)
 
 ---
 
@@ -38,10 +43,47 @@ SkillBuilder enforces an uncompromising engineering standard:
 A dedicated configuration and tooling hub tailored to Arron's project construction workflows and tech stacks:
 
 - **[`profile.json`](arronkianparejas/profile.json)**: Author metadata, preferred stacks (React 19, Next.js, Tailwind v4, Flutter, Node.js, FastAPI, Go, PostgreSQL, Cloud SQL, GCP, Gemini 2.5), and token budget preferences.
-- **[`personal_pairing_manifesto.md`](arronkianparejas/personal_pairing_manifesto.md)**: The 6 non-negotiable tenets of pair-programming with Arron.
+- **[`personal_pairing_manifesto.md`](arronkianparejas/personal_pairing_manifesto.md)**: The 8 non-negotiable tenets of pair-programming with Arron.
 - **[`prompt_templates/`](arronkianparejas/prompt_templates/)**: High-density templates for feature specifications, bug reproductions, and ADRs.
 - **[`scripts/sync_to_global.sh`](arronkianparejas/scripts/sync_to_global.sh)**: One-command sync linking SkillBuilder directly to `~/.gemini/config/plugins/skill-builder`.
 - **[`scripts/scaffold_project.sh`](arronkianparejas/scripts/scaffold_project.sh)**: Rapid project scaffolder initializing `.gitignore`, `.env.example`, `.agents/`, and `AGENTS.md`.
+
+---
+
+## Continuous Conversational Learning (CLP)
+
+Agents must learn continuously across conversation turns and sessions without forgetting corrections:
+
+1. **Immediate Invariant Ingestion**: When a developer corrects an architectural pattern, imports, or naming conventions, the agent extracts the invariant.
+2. **Workspace Persistence**: The convention is recorded in `.agents/learned_conventions.md` using `scripts/record_learning.py`.
+3. **Turn-by-Turn Compliance**: Before planning or code generation, the agent scans recorded conventions to guarantee zero repetition of corrected mistakes.
+
+CLI Utility:
+```bash
+# Record a new learned convention
+python3 skills/prompt-refinement-and-metacognition/scripts/record_learning.py \
+  --record "Use named exports for all React components" --category ARCH
+
+# List all recorded conventions in active project
+python3 skills/prompt-refinement-and-metacognition/scripts/record_learning.py --list
+```
+
+---
+
+## Anti-Vibe-Coding UI Craftsmanship
+
+SkillBuilder strictly eliminates generic AI "vibe coding" aesthetic tropes:
+
+- **No Neon Gradients or Glows**: Prohibits purple-to-indigo/cyan gradients and green glowing borders (`shadow-[0_0_...`). Mandates high-contrast neutral scales (zinc, slate, stone) with subtle 1px dividers.
+- **No Card-Soup**: Prohibits wrapping every single element in high-elevation rounded cards. Layout structure is driven by typography, column rules, and intentional whitespace.
+- **No Emojis as UI Icons**: Prohibits using raw emojis in buttons, navigation, and headings. Mandates semantic vector SVG icons (Lucide Icons) with accessible attributes.
+- **No Frivolous Badges**: Prohibits decorative version pills ("v1.0.0-beta", "AI-Powered", "Fast"). Badges are permitted solely for real system lifecycle states (`RUNNING`, `FAILED`, `HEALTHY`).
+- **Grounded Technical Copywriting**: Prohibits synthetic marketing buzzwords (*"seamlessly elevate your synergy"*). Mandates direct, factual descriptions of system behavior.
+
+Automated Linter:
+```bash
+python3 skills/ui-frontend-engineering/scripts/verify_frontend_quality.py --path src/components/
+```
 
 ---
 
@@ -53,9 +95,9 @@ SkillBuilder organizes software engineering into 9 specialized, progressively di
 | :--- | :--- | :--- |
 | **`world-class-engineering`** | Principal Software Engineer | 6-Phase EOS (Understand -> Define -> Plan -> Implement -> Verify -> Deliver), 500-line source file limit, 7 quality gates. |
 | **`production-etiquette`** | Production Readiness Engineer | Secrets hygiene (`.env.example`), multi-stage non-root Docker (`USER 10001`), resilient networking (timeouts, retries with jitter), anti-mock mandate. |
-| **`prompt-refinement-and-metacognition`** | Principal Prompt Engineer | 5-phase Prompt Polishing Engine (PPE), ambiguity detection, token compression, structured engineering specifications. |
+| **`prompt-refinement-and-metacognition`** | Principal Prompt Engineer | 5-phase Prompt Polishing Engine (PPE), ambiguity detection, token compression, Continuous Learning Protocol (`record_learning.py`). |
 | **`qa-testing-and-error-resolution`** | Principal QA & Reliability Engineer | 4-tier testing trophy (Unit, Integration, Contract, E2E), pre-flight QA gates, Master Error Catalog, List-an-Error (LaE) tracking. |
-| **`ui-frontend-engineering`** | Frontend & UI/UX Architect | Tailwind CSS v4 design tokens, Radix UI & shadcn primitives, WCAG 2.2 AA accessibility, Core Web Vitals (LCP, INP, CLS), optimistic state updates. |
+| **`ui-frontend-engineering`** | Frontend & UI/UX Architect | Tailwind CSS v4 design tokens, Radix UI & shadcn primitives, WCAG 2.2 AA accessibility, Core Web Vitals, Anti-Vibe-Coding standard. |
 | **`backend-systems-engineering`** | Backend Systems Architect | Clean/Hexagonal Architecture, REST/gRPC API design, Zod/Pydantic v2 boundary validation, JWT rotation, idempotency keys, RFC 7807 problem details. |
 | **`database-and-datastore-engineering`** | Principal Database Architect | PostgreSQL, SQLite, Cloud SQL, zero-downtime expand-and-contract migrations, non-blocking indexes (`CONCURRENTLY`), PgBouncer connection pooling. |
 | **`cloud-devops-infrastructure`** | Cloud & Platform Engineer | GCP Cloud Run, GKE, IAM least-privilege, Secret Manager, distroless containers, 5-gate GitHub Actions CI pipeline, OpenTelemetry tracing. |
@@ -84,7 +126,7 @@ python3 skills/prompt-refinement-and-metacognition/scripts/polish_prompt.py --te
 
 To maximize context window longevity and reduce inference latency:
 - **Progressive Disclosure**: Only skill names and descriptions are loaded initially (<300 lines per `SKILL.md`). In-depth guides in `references/` are pulled into context only when needed.
-- **Local CLI Execution**: Mechanical checks (line counts, project hygiene, commit chunks, token budgets, error lookups) are executed by fast local Python scripts without spending model tokens.
+- **Local CLI Execution**: Mechanical checks (line counts, project hygiene, commit chunks, token budgets, error lookups, convention logging) are executed by fast local Python scripts without spending model tokens.
 - **High-Density Formatting**: Eliminates conversational filler in favor of surgical diffs, markdown tables, and precise line links (`file:///...#L10`).
 
 CLI Token Budget Estimator:
@@ -131,7 +173,7 @@ bash scripts/install.sh --project /path/to/my-project
 
 ## Automated Verification Suites
 
-SkillBuilder includes a master test runner executing 11 independent verification suites:
+SkillBuilder includes a master test runner executing 12 independent verification suites:
 
 ```bash
 bash scripts/verify_all_skills.sh
@@ -143,12 +185,13 @@ Checks executed:
 3. **Project Hygiene Unit Tests**: Validates `.env.example`, `.gitignore`, and container scaffolding.
 4. **Git Commit Chunking Tests**: Validates 1,000-line push budget and cluster analysis.
 5. **Prompt Refinement Tests**: Validates intent extraction and filler stripping.
-6. **Master Error Catalog Tests**: Validates search index and keyword matching.
-7. **Frontend Quality Tests**: Validates automated accessibility (a11y) checks.
-8. **Backend Contract Tests**: Validates schema validation linter.
-9. **Database Hygiene Tests**: Validates SQL migration safety and hazardous lock checks.
-10. **Container Security Tests**: Validates non-root user and multi-stage container rules.
-11. **AI Token Budget Tests**: Validates token calculation and payload density estimation.
+6. **Continuous Learning Tests**: Validates dynamic convention persistence and querying.
+7. **Master Error Catalog Tests**: Validates search index and keyword matching.
+8. **Frontend Quality & Anti-Vibe-Coding Tests**: Validates accessibility and anti-vibe-coding rules.
+9. **Backend Contract Tests**: Validates schema validation linter.
+10. **Database Hygiene Tests**: Validates SQL migration safety and hazardous lock checks.
+11. **Container Security Tests**: Validates non-root user and multi-stage container rules.
+12. **AI Token Budget Tests**: Validates token calculation and payload density estimation.
 
 ---
 
@@ -157,7 +200,7 @@ Checks executed:
 ```text
 SkillBuilder/
 ├── plugin.json                                 # Antigravity plugin manifest
-├── README.md                                   # Comprehensive documentation
+├── README.md                                   # Comprehensive documentation with ASCII header
 ├── INTEGRATION_GUIDE.md                        # Step-by-step setup guide for Antigravity
 ├── AGENTS.md                                   # Root rules enforced on all projects
 ├── rules/
@@ -174,9 +217,9 @@ SkillBuilder/
 ├── skills/
 │   ├── world-class-engineering/                # EOS & 500-line ceiling
 │   ├── production-etiquette/                   # Secrets, Docker, CI/CD, Git chunking
-│   ├── prompt-refinement-and-metacognition/    # Prompt Polishing Engine & token savings
+│   ├── prompt-refinement-and-metacognition/    # Prompt Polishing Engine & Continuous Learning
 │   ├── qa-testing-and-error-resolution/        # Testing trophy & Master Error Catalog
-│   ├── ui-frontend-engineering/                # UI, Tailwind v4, a11y, Core Web Vitals
+│   ├── ui-frontend-engineering/                # UI, Tailwind v4, a11y, Anti-Vibe-Coding
 │   ├── backend-systems-engineering/            # Clean architecture, APIs, Zod, auth
 │   ├── database-and-datastore-engineering/     # Relational design, migrations, indexing
 │   ├── cloud-devops-infrastructure/            # GCP, distroless containers, IaC, CI/CD
