@@ -1,6 +1,7 @@
 ---
 name: production-etiquette
-description: Enforces development etiquette and production standards: automatic .env/.gitignore setup, Docker containerization, deep research before planning, resilient networking (timeouts, cache, debounce, retry), fully functional implementations (zero mock data), testing, and CI/CD.
+description: >-
+  Enforces development etiquette and production standards: automatic .env/.gitignore setup, Docker containerization, deep research before planning, resilient networking (timeouts, cache, debounce, retry), fully functional implementations (zero mock data), testing, and CI/CD.
 ---
 
 # Production Readiness & Engineering Etiquette

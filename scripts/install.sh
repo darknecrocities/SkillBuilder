@@ -24,7 +24,7 @@ Options:
 
 Examples:
   ./install.sh --global
-  ./install.sh --project /Users/arronkianparejas/my-project
+  ./install.sh --project /path/to/my-project
 EOF
 }
 

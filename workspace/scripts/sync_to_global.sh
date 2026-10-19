@@ -2,7 +2,6 @@
 # ==============================================================================
 # Script: sync_to_global.sh
 # Purpose: Synchronize SkillBuilder repository to global Antigravity plugins directory.
-# Author: Arron Kian Parejas (@darknecrocities)
 # ==============================================================================
 
 set -euo pipefail

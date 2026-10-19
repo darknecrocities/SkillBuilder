@@ -3,7 +3,7 @@
 **Title**: [ADR-001: Brief Decision Name]
 **Status**: [Proposed / Accepted / Superseded]
 **Date**: [YYYY-MM-DD]
-**Author**: Arron Kian Parejas (@darknecrocities)
+**Author**: [Author Name / Handle]
 
 ---
 

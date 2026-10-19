@@ -25,7 +25,7 @@ SkillBuilder enforces an uncompromising engineering standard:
 
 ## Table of Contents
 
-1. [Arron's Personal Workspace (`arronkianparejas/`)](#arrons-personal-workspace-arronkianparejas)
+1. [Developer Workspace (`workspace/`)](#developer-workspace-workspace)
 2. [Continuous Conversational Learning (CLP)](#continuous-conversational-learning-clp)
 3. [Anti-Vibe-Coding UI Craftsmanship](#anti-vibe-coding-ui-craftsmanship)
 4. [The 9 Production Skills](#the-9-production-skills)
@@ -38,15 +38,15 @@ SkillBuilder enforces an uncompromising engineering standard:
 
 ---
 
-## Arron's Personal Workspace (`arronkianparejas/`)
+## Developer Workspace (`workspace/`)
 
-A dedicated configuration and tooling hub tailored to Arron's project construction workflows and tech stacks:
+A dedicated configuration and tooling hub for developer preferences, pair-programming standards, and project scaffolding:
 
-- **[`profile.json`](arronkianparejas/profile.json)**: Author metadata, preferred stacks (React 19, Next.js, Tailwind v4, Flutter, Node.js, FastAPI, Go, PostgreSQL, Cloud SQL, GCP, Gemini 2.5), and token budget preferences.
-- **[`personal_pairing_manifesto.md`](arronkianparejas/personal_pairing_manifesto.md)**: The 8 non-negotiable tenets of pair-programming with Arron.
-- **[`prompt_templates/`](arronkianparejas/prompt_templates/)**: High-density templates for feature specifications, bug reproductions, and ADRs.
-- **[`scripts/sync_to_global.sh`](arronkianparejas/scripts/sync_to_global.sh)**: One-command sync linking SkillBuilder directly to `~/.gemini/config/plugins/skill-builder`.
-- **[`scripts/scaffold_project.sh`](arronkianparejas/scripts/scaffold_project.sh)**: Rapid project scaffolder initializing `.gitignore`, `.env.example`, `.agents/`, and `AGENTS.md`.
+- **[`profile.json`](workspace/profile.json)**: Developer metadata, preferred stacks (React 19, Next.js, Tailwind v4, Flutter, Node.js, FastAPI, Go, PostgreSQL, Cloud SQL, GCP, Gemini 2.5), and token budget preferences.
+- **[`pairing_manifesto.md`](workspace/pairing_manifesto.md)**: The 8 non-negotiable tenets of pair-programming.
+- **[`prompt_templates/`](workspace/prompt_templates/)**: High-density templates for feature specifications, bug reproductions, and ADRs.
+- **[`scripts/sync_to_global.sh`](workspace/scripts/sync_to_global.sh)**: One-command sync linking SkillBuilder directly to `~/.gemini/config/plugins/skill-builder`.
+- **[`scripts/scaffold_project.sh`](workspace/scripts/scaffold_project.sh)**: Rapid project scaffolder initializing `.gitignore`, `.env.example`, `.agents/`, and `AGENTS.md`.
 
 ---
 
@@ -207,13 +207,13 @@ SkillBuilder/
 │   └── AGENTS.md                               # Plugin-level rules
 ├── .agents/
 │   └── skills.json                             # Discovered skills configuration
-├── arronkianparejas/                           # Arron's Personal Workspace
-│   ├── profile.json                            # Personal profile and stack defaults
-│   ├── personal_pairing_manifesto.md           # Pair-programming standards
+├── workspace/                                  # Developer Workspace & Presets
+│   ├── profile.json                            # Developer profile and stack defaults
+│   ├── pairing_manifesto.md                    # Pair-programming standards
 │   ├── prompt_templates/                       # High-density prompt templates
 │   └── scripts/
 │       ├── sync_to_global.sh                   # Symlinks to ~/.gemini/config/plugins/
-│       └── scaffold_project.sh                 # Scaffolds new projects with Arron's standards
+│       └── scaffold_project.sh                 # Scaffolds new projects with SkillBuilder standards
 ├── skills/
 │   ├── world-class-engineering/                # EOS & 500-line ceiling
 │   ├── production-etiquette/                   # Secrets, Docker, CI/CD, Git chunking
