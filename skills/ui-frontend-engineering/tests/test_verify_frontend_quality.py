@@ -43,6 +43,27 @@ class TestVerifyFrontendQuality(unittest.TestCase):
         issues = audit_component_content(snippet, "test.tsx")
         self.assertTrue(any(i["rule"] == "UI-ANTI-VIBE-PURPLE-GRADIENT" for i in issues))
 
+    def test_detects_sluggish_transition(self):
+        snippet = '<button className="transition-all duration-700 hover:opacity-80">Click</button>'
+        issues = audit_component_content(snippet, "test.tsx")
+        self.assertTrue(any(i["rule"] == "UI-SLUGGISH-TRANSITION" for i in issues))
+
+    def test_detects_tacky_shadow(self):
+        snippet = '<div className="card shadow-2xl rounded-xl">Card</div>'
+        issues = audit_component_content(snippet, "test.tsx")
+        self.assertTrue(any(i["rule"] == "UI-TACKY-SHADOW" for i in issues))
+
+    def test_detects_continuous_motion_missing_fallback(self):
+        snippet = '<span className="animate-spin w-4 h-4">Loading</span>'
+        issues = audit_component_content(snippet, "test.tsx")
+        self.assertTrue(any(i["rule"] == "UI-MOTION-NO-FALLBACK" for i in issues))
+
+    def test_passes_continuous_motion_with_fallback(self):
+        snippet = '<span className="animate-spin motion-reduce:animate-none w-4 h-4">Loading</span>'
+        issues = audit_component_content(snippet, "test.tsx")
+        self.assertFalse(any(i["rule"] == "UI-MOTION-NO-FALLBACK" for i in issues))
+
 
 if __name__ == "__main__":
     unittest.main()
+

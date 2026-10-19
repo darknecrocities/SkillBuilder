@@ -102,6 +102,46 @@ def audit_component_content(content: str, filepath: str) -> List[Dict[str, str]]
             "message": "Purple/indigo gradient trope detected. Use clean neutral palettes with purposeful functional accents."
         })
 
+    # 7. Anti-Vibe-Coding: Check for sluggish transition-all or excessive transition durations
+    sluggish_match = re.search(r"(?:transition-all\s+duration-(?:500|700|1000)|transition:\s*all\s+(?:0\.[5-9]|[1-9]\d*)\s*s|transition:\s*all\s+[5-9]\d{2,}\s*ms)", content, re.IGNORECASE)
+    if sluggish_match:
+        line_no = content[:sluggish_match.start()].count("\n") + 1
+        issues.append({
+            "file": filepath,
+            "line": str(line_no),
+            "rule": "UI-SLUGGISH-TRANSITION",
+            "severity": "WARNING",
+            "message": "Sluggish transition or blanket 'transition-all' with high duration detected. Use specific property transitions (e.g., transition-colors) with snappy durations (150-250ms) or spring physics."
+        })
+
+    # 8. Anti-Vibe-Coding: Check for tacky, excessive drop-shadows
+    shadow_match = re.search(r"\b(?:shadow-2xl|drop-shadow-2xl)\b|shadow-\[0_2[0-9]px|shadow-\[0_3[0-9]px", content, re.IGNORECASE)
+    if shadow_match:
+        line_no = content[:shadow_match.start()].count("\n") + 1
+        issues.append({
+            "file": filepath,
+            "line": str(line_no),
+            "rule": "UI-TACKY-SHADOW",
+            "severity": "WARNING",
+            "message": "Heavy drop-shadow detected. Prefer crisp hairline specular borders (1px) and subtle depth (shadow-sm/md) over muddy 2XL blur shadows."
+        })
+
+    # 9. Anti-Vibe-Coding & A11y: Check for continuous CSS animation without motion-reduce fallback
+    for anim_match in re.finditer(r"\b(animate-spin|animate-bounce|animate-ping)\b", content):
+        line_start = content.rfind("\n", 0, anim_match.start())
+        line_end = content.find("\n", anim_match.end())
+        line_str = content[line_start if line_start != -1 else 0:line_end if line_end != -1 else len(content)]
+        if "motion-reduce" not in line_str:
+            line_no = content[:anim_match.start()].count("\n") + 1
+            issues.append({
+                "file": filepath,
+                "line": str(line_no),
+                "rule": "UI-MOTION-NO-FALLBACK",
+                "severity": "WARNING",
+                "message": f"Continuous animation '{anim_match.group(1)}' lacks a 'motion-reduce:animate-none' fallback for accessibility."
+            })
+            break
+
     return issues
 
 
