@@ -16,6 +16,7 @@ This skill establishes frontend engineering discipline across web and mobile pla
 
 | Resource Type | Document | Description |
 | :--- | :--- | :--- |
+| **Reference** | [references/anti-vibe-coding-standard.md](references/anti-vibe-coding-standard.md) | Anti-Vibe-Coding standard: forbidding purple/green glow, card-soup, badges, emojis. |
 | **Reference** | [references/design-systems-and-tailwind.md](references/design-systems-and-tailwind.md) | Tailwind CSS v4, design tokens, Radix UI & shadcn/ui component patterns. |
 | **Reference** | [references/responsive-and-accessible-ui.md](references/responsive-and-accessible-ui.md) | Mobile-first viewport rules, focus management, ARIA roles, keyboard nav. |
 | **Reference** | [references/frontend-performance-and-vitals.md](references/frontend-performance-and-vitals.md) | Core Web Vitals (LCP, INP, CLS), code-splitting, lazy loading, bundle budgets. |
@@ -47,6 +48,13 @@ This skill establishes frontend engineering discipline across web and mobile pla
 ### 4. Client State & Optimistic Mutations
 - Distinguish between **Server Cache** (remote entity state managed via TanStack Query / SWR) and **Client State** (transient UI state managed via Zustand / React Context).
 - Implement optimistic updates on mutations with automatic rollback on error.
+
+### 5. Strict Anti-Vibe-Coding Aesthetic Guardrails
+- **No Neon Gradients or Glows**: Prohibit purple/indigo gradients and neon green glowing borders. Use high-contrast neutral scales (zinc/slate).
+- **No Card-Soup**: Prohibit wrapping every item in high-elevation rounded cards. Use typographic hierarchy, white space, and subtle 1px dividers.
+- **No Emojis as UI Icons**: Strictly prohibit using raw emojis in buttons, nav links, or headers. Use semantic vector SVG icons (Lucide, Radix) with `aria-hidden="true"`.
+- **No Frivolous Badges**: Prohibit cosmetic "v1.0.0", "AI-Powered", or decorative pill chips. Allow badges only for real system lifecycle state.
+- **Human Technical Copywriting**: Prohibit synthetic AI marketing hype ("seamlessly elevate your synergy"). Use concise, direct, factual descriptions.
 
 ---
 

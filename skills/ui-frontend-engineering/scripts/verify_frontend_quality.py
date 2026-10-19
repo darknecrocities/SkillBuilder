@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 CLI utility to audit frontend components (JSX/TSX/HTML) for accessibility (a11y)
-and common frontend quality defects.
+and Anti-Vibe-Coding quality guardrails.
 
 Author: Arron Kian Parejas (@darknecrocities)
 Part of SkillBuilder
@@ -12,6 +12,9 @@ import os
 import re
 import sys
 from typing import Dict, List, Tuple
+
+
+COMMON_UI_EMOJIS = r"[\U0001F680\U00002728\U0001F525\U0001F389\U0001F4A1\U00002699\U0001F916\U00002B50\U0001F6A7\U0001F4E6]"
 
 
 def audit_component_content(content: str, filepath: str) -> List[Dict[str, str]]:
@@ -47,7 +50,7 @@ def audit_component_content(content: str, filepath: str) -> List[Dict[str, str]]
                 "message": "Button appears to lack accessible text or aria-label."
             })
 
-    # 3. Check for inputs without id
+    # 3. Check for inputs without id or aria-label
     input_tags = re.finditer(r"<input\b([^>]*)>", content, re.IGNORECASE)
     for match in input_tags:
         attrs = match.group(1)
@@ -60,6 +63,44 @@ def audit_component_content(content: str, filepath: str) -> List[Dict[str, str]]
                 "severity": "WARNING",
                 "message": "Input element lacks an 'id' or 'aria-label' for label pairing."
             })
+
+    # 4. Anti-Vibe-Coding: Check for raw emojis in UI text nodes
+    # Exclude comments
+    non_comment_content = re.sub(r"/\*[\s\S]*?\*/|//[^\n]*", "", content)
+    emoji_matches = re.finditer(COMMON_UI_EMOJIS, non_comment_content)
+    for match in emoji_matches:
+        line_no = content[:match.start()].count("\n") + 1
+        issues.append({
+            "file": filepath,
+            "line": str(line_no),
+            "rule": "UI-ANTI-VIBE-EMOJI",
+            "severity": "ERROR",
+            "message": "Raw emoji detected in UI text node. Use semantic SVG vector icons instead of emojis."
+        })
+
+    # 5. Anti-Vibe-Coding: Check for neon glowing drop-shadows or borders
+    glow_match = re.search(r"(?:shadow-\[0_0_\d+px|drop-shadow-\[0_0_\d+px|shadow-green-500\/50|shadow-emerald-500)", content, re.IGNORECASE)
+    if glow_match:
+        line_no = content[:glow_match.start()].count("\n") + 1
+        issues.append({
+            "file": filepath,
+            "line": str(line_no),
+            "rule": "UI-ANTI-VIBE-GLOW",
+            "severity": "ERROR",
+            "message": "Neon glowing drop-shadow or border detected. Use clean neutral borders (1px) without glowing effects."
+        })
+
+    # 6. Anti-Vibe-Coding: Check for purple/indigo linear gradient tropes
+    gradient_match = re.search(r"bg-gradient-to-[a-z]+\s+(?:from-purple|from-indigo|from-violet)", content, re.IGNORECASE)
+    if gradient_match:
+        line_no = content[:gradient_match.start()].count("\n") + 1
+        issues.append({
+            "file": filepath,
+            "line": str(line_no),
+            "rule": "UI-ANTI-VIBE-PURPLE-GRADIENT",
+            "severity": "WARNING",
+            "message": "Purple/indigo gradient trope detected. Use clean neutral palettes with purposeful functional accents."
+        })
 
     return issues
 
@@ -85,7 +126,7 @@ def audit_directory(path: str) -> List[Dict[str, str]]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Audit frontend files for a11y & quality issues.")
+    parser = argparse.ArgumentParser(description="Audit frontend files for a11y & anti-vibe-coding quality.")
     parser.add_argument("--path", "-p", type=str, default=".", help="Directory or file path to audit")
     args = parser.parse_args()
 
@@ -99,7 +140,7 @@ def main():
         sys.exit(1)
 
     if not issues:
-        print(f"[PASS] No frontend quality or accessibility violations detected in: {args.path}")
+        print(f"[PASS] No frontend quality, a11y, or anti-vibe-coding violations detected in: {args.path}")
         sys.exit(0)
 
     print(f"\n[FAIL] Detected {len(issues)} frontend quality issue(s):\n" + "=" * 60)

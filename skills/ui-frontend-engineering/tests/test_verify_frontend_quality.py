@@ -28,6 +28,21 @@ class TestVerifyFrontendQuality(unittest.TestCase):
         issues = audit_component_content(snippet, "test.tsx")
         self.assertEqual(len(issues), 0)
 
+    def test_detects_anti_vibe_emoji(self):
+        snippet = '<button className="btn">🚀 Launch App</button>'
+        issues = audit_component_content(snippet, "test.tsx")
+        self.assertTrue(any(i["rule"] == "UI-ANTI-VIBE-EMOJI" for i in issues))
+
+    def test_detects_anti_vibe_neon_glow(self):
+        snippet = '<div className="rounded-lg shadow-[0_0_20px_#22c55e]">Content</div>'
+        issues = audit_component_content(snippet, "test.tsx")
+        self.assertTrue(any(i["rule"] == "UI-ANTI-VIBE-GLOW" for i in issues))
+
+    def test_detects_anti_vibe_purple_gradient(self):
+        snippet = '<div className="bg-gradient-to-r from-purple-600 to-indigo-600">Header</div>'
+        issues = audit_component_content(snippet, "test.tsx")
+        self.assertTrue(any(i["rule"] == "UI-ANTI-VIBE-PURPLE-GRADIENT" for i in issues))
+
 
 if __name__ == "__main__":
     unittest.main()
