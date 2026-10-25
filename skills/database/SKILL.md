@@ -6,7 +6,7 @@ description: Architect, implement, and maintain resilient relational and NoSQL d
 # Database & Datastore Engineering (`/database`)
 
 > **Role**: Principal Database Architect & Data Engineer  
-> **Philosophy**: *Data is the foundation. Index intentionally. Migrate without downtime. Guard ACID integrity.*
+> **Philosophy**: *Data is the foundation. Index intentionally. Migrate without downtime. Guard ACID integrity. Keep transactions micro-short.*
 
 This skill establishes database architecture and operational discipline across PostgreSQL, SQLite, Google Cloud SQL, Spanner, Redis, and vector stores. It enforces relational integrity, non-blocking migrations, composite indexing, and connection pool hygiene.
 
@@ -27,30 +27,85 @@ This skill establishes database architecture and operational discipline across P
 
 ---
 
-## 2. Core Database Invariants
+## 2. Zero-Downtime Expand-and-Contract Migrations
 
-### 1. Zero-Downtime Expand-and-Contract Migrations
-- Never rename a column or drop a table in a single migration while an application is running.
-- Use the 3-step **Expand and Contract** protocol:
-  1. **Expand**: Add the new column/table with nullable/default constraints. Deploy code writing to both old and new.
-  2. **Backfill**: Migrate historical records in batches with throttled queries.
-  3. **Contract**: Switch code to read exclusively from the new column/table. Drop the deprecated column in a subsequent deploy.
+```mermaid
+flowchart TD
+    subgraph Step1["Step 1: Expand (Deploy 1)"]
+        A["Add new column/table nullable or with default"]
+        B["Deploy code dual-writing to Old and New columns"]
+    end
+    subgraph Step2["Step 2: Backfill (Async Job)"]
+        C["Batch backfill historical records in chunks (e.g. 5,000 rows)"]
+        D["Verify checksums and record parity between columns"]
+    end
+    subgraph Step3["Step 3: Contract (Deploy 2)"]
+        E["Switch application to read exclusively from New column"]
+        F["Remove Old column writing code"]
+        G["Drop Old column via non-blocking migration"]
+    end
+    Step1 --> Step2 --> Step3
+```
 
-### 2. Foreign Key Indexing Mandate
-- Every Foreign Key column (`*_id`) used in joins or lookups must have an explicit B-tree index. Missing FK indexes cause full table scans during joins and cascades.
+### PostgreSQL Migration Guardrails:
+1. **Never use `ALTER TABLE ... ADD COLUMN ... DEFAULT <expensive>`** without PG 11+ instant metadata defaults.
+2. **Never create indexes synchronously** on production tables:
+   ```sql
+   -- ❌ HAZARDOUS: Locks table for writes
+   CREATE INDEX idx_users_email ON users(email);
 
-### 3. Non-Blocking Index Creation in Production
-- In PostgreSQL, always use `CREATE INDEX CONCURRENTLY` in production environments to avoid exclusive table read/write locks.
-
-### 4. Connection Pool Hygiene
-- Never open unbounded database connections. Configure pooling (e.g. PgBouncer or connection pool sizes = `(2 * CPU_CORES) + effective_spindle_count`).
-- Keep transactions short: perform heavy calculations and network I/O outside database transactions.
+   -- ✅ PRODUCTION: Non-blocking background build
+   CREATE INDEX CONCURRENTLY idx_users_email ON users(email);
+   ```
+3. **Always set lock timeouts** before running DDL migrations:
+   ```sql
+   SET lock_timeout = '3s';
+   SET statement_timeout = '15s';
+   ```
 
 ---
 
-## 3. Automation Tool: Database Hygiene Verifier
+## 3. Index Optimization & N+1 Elimination
+
+### 3.1 Index Types Decision Matrix
+- **B-tree (Default)**: Equality (`=`), range (`<`, `>`, `BETWEEN`), sorting (`ORDER BY`).
+- **GIN (Generalized Inverted Index)**: `JSONB` document paths, arrays, full-text search (`tsvector`).
+- **Partial Index**: High cardinality sub-queries (e.g. `WHERE status = 'unprocessed'`). Saves 90%+ index memory.
+- **Composite Index Order**: Equality columns first, range/sort columns second (`(tenant_id, created_at DESC)`).
+
+### 3.2 Eliminating N+1 Query Anti-Patterns
+```typescript
+// ❌ ANTI-PATTERN: N+1 queries in loop
+const users = await db.users.findMany();
+for (const user of users) {
+  user.posts = await db.posts.findMany({ where: { userId: user.id } }); // N queries!
+}
+
+// ✅ PRODUCTION: Single batch join or DataLoader
+const usersWithPosts = await db.users.findMany({
+  include: { posts: true } // Single JOIN or IN (...) query
+});
+```
+
+---
+
+## 4. Connection Pool Tuning
+
+Unbounded connections exhaust server RAM and trigger `remaining connection slots are reserved for non-replication superuser connections`.
+
+### Mathematical Pool Sizing Formula:
+$$\text{Pool Size} = (\text{CPU Cores} \times 2) + \text{Disk Spindle Count}$$
+For a 4-core cloud instance, pool size should be **8 to 12 connections per worker**, never hundreds.
+
+### Safe Session Timeouts:
+- `statement_timeout = '5000ms'` (kill runaway queries before consuming all worker threads)
+- `idle_in_transaction_session_timeout = '10000ms'` (reclaim idle locked connections)
+
+---
+
+## 5. Automation Tool: Database Hygiene Verifier
 
 Audit SQL migration scripts for hazardous locks or missing indexes:
 ```bash
-python3 scripts/verify_database_hygiene.py --path migrations/
+python3 skills/database/scripts/verify_database_hygiene.py --path migrations/
 ```
