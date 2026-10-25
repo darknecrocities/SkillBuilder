@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # Script: install.sh
-# Purpose: Universal installer for SkillBuilder on Google Antigravity.
+# Purpose: Universal installer for SkillBuilder across Antigravity, Cursor, Claude, Codex, Windsurf & Cline.
 # Author: Arron Kian Parejas (@darknecrocities)
 # ==============================================================================
 
@@ -12,24 +12,36 @@ GLOBAL_PLUGIN_DIR="${HOME}/.gemini/config/plugins/skill-builder"
 
 show_help() {
   cat << EOF
-SkillBuilder Antigravity Installer
+SkillBuilder Multi-Platform Installer
 
 Usage:
   ./install.sh [OPTIONS]
 
-Options:
+Antigravity Options:
   --global, -g         Install globally for all Antigravity projects (via symlink)
   --project, -p <DIR>  Install into a specific project directory (.agents/ + AGENTS.md)
+
+Multi-Platform Export Options:
+  --cursor <DIR>       Export Cursor rules (.cursor/rules/*.mdc + .cursorrules)
+  --claude <DIR>       Export Anthropic Claude Code rules (CLAUDE.md)
+  --codex <DIR>        Export OpenAI Codex / ChatGPT instructions (CODEX.md)
+  --windsurf <DIR>     Export Windsurf Cascade rules (.windsurfrules)
+  --cline <DIR>        Export Cline / Roo-Code rules (.clinerules)
+  --all <DIR>          Export all platform configurations simultaneously
+
+General:
   --help, -h           Show this help message
 
 Examples:
   ./install.sh --global
   ./install.sh --project /path/to/my-project
+  ./install.sh --cursor /path/to/cursor-repo
+  ./install.sh --all /path/to/my-repo
 EOF
 }
 
 install_global() {
-  echo "=== Installing SkillBuilder Globally ==="
+  echo "=== Installing SkillBuilder Globally for Antigravity ==="
   echo "Source: ${REPO_DIR}"
   echo "Target: ${GLOBAL_PLUGIN_DIR}"
 
@@ -82,6 +94,16 @@ EOF
   echo "Remember to commit .agents/ and AGENTS.md to your Git repository."
 }
 
+export_platform() {
+  PLATFORM="$1"
+  TARGET_DIR="$2"
+  if [ ! -d "${TARGET_DIR}" ]; then
+    echo "Creating target directory: ${TARGET_DIR}"
+    mkdir -p "${TARGET_DIR}"
+  fi
+  python3 "${REPO_DIR}/scripts/export_multiplatform.py" --repo "${REPO_DIR}" --target "${TARGET_DIR}" --platform "${PLATFORM}"
+}
+
 # Parse flags
 if [ $# -eq 0 ]; then
   install_global
@@ -100,6 +122,54 @@ while [ $# -gt 0 ]; do
         exit 1
       fi
       install_project "$2"
+      shift 2
+      ;;
+    --cursor)
+      if [ -z "${2:-}" ]; then
+        echo "Error: --cursor requires a directory path argument." >&2
+        exit 1
+      fi
+      export_platform "cursor" "$2"
+      shift 2
+      ;;
+    --claude)
+      if [ -z "${2:-}" ]; then
+        echo "Error: --claude requires a directory path argument." >&2
+        exit 1
+      fi
+      export_platform "claude" "$2"
+      shift 2
+      ;;
+    --codex)
+      if [ -z "${2:-}" ]; then
+        echo "Error: --codex requires a directory path argument." >&2
+        exit 1
+      fi
+      export_platform "codex" "$2"
+      shift 2
+      ;;
+    --windsurf)
+      if [ -z "${2:-}" ]; then
+        echo "Error: --windsurf requires a directory path argument." >&2
+        exit 1
+      fi
+      export_platform "windsurf" "$2"
+      shift 2
+      ;;
+    --cline)
+      if [ -z "${2:-}" ]; then
+        echo "Error: --cline requires a directory path argument." >&2
+        exit 1
+      fi
+      export_platform "cline" "$2"
+      shift 2
+      ;;
+    --all)
+      if [ -z "${2:-}" ]; then
+        echo "Error: --all requires a directory path argument." >&2
+        exit 1
+      fi
+      export_platform "all" "$2"
       shift 2
       ;;
     --help|-h)
