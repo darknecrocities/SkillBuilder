@@ -36,9 +36,9 @@ Consult the specialized references and reusable templates for detailed execution
 
 ---
 
-## 1.5 The 20 Modular Engineering Skills (`/`)
+## 1.5 The 21 Modular Engineering Skills (`/`)
 
-The SkillBuilder ecosystem decomposes into 20 focused, highly-actionable skills directly callable via `/`:
+The SkillBuilder ecosystem decomposes into 21 focused, highly-actionable skills directly callable via `/`:
 
 | Command | Skill Name | Scope & Core Responsibility |
 | :--- | :--- | :--- |
@@ -46,7 +46,8 @@ The SkillBuilder ecosystem decomposes into 20 focused, highly-actionable skills 
 | `/anti-slop` | **Anti-AI-Slop & Craftsmanship** | Strips decorative badges, generic marketing fluff, neon gradients, and mock arrays. |
 | `/research` | **Autonomous Research & Fallbacks** | Discovers and evaluates production-grade library alternatives when packages fail. |
 | `/qa` | **Responsiveness QA & Sub-Agents** | Viewport audit (375px/768px/1280px+), a11y, touch targets (>=44px), sub-agent QA. |
-| `/ui` | **UI Design Systems & Tokens** | High-contrast neutral scales (zinc/slate), fluid typography, Lucide SVG vector icons. |
+| `/ui` | **UI Design Systems & Tokens** | Apple HIG, Cupertino blur materials, squircle smoothing, high-contrast neutrals, Lucide SVGs. |
+| `/3d` | **3D WebGL & Product Showcase** | Three.js, React Three Fiber, PBR clearcoat shaders, Draco GLTF compression, 60fps budgets. |
 | `/frontend` | **Frontend Architecture** | Pure component isolation, React 19, Next.js App Router, Flutter, effect cleanup. |
 | `/backend` | **Backend Systems Engineering** | Clean architecture, domain boundaries, strict schema validation (Zod, Pydantic v2). |
 | `/security` | **Security Hardening** | OWASP Top 10 defenses, zero hardcoded secrets, SQL injection defense, CORS/CSP. |
@@ -62,6 +63,21 @@ The SkillBuilder ecosystem decomposes into 20 focused, highly-actionable skills 
 | `/continuous-learning` | **Conversational Learning (CLP)** | Persists project invariants to `.agents/learned_conventions.md` to prevent repeated errors. |
 | `/refactor` | **Safe Refactoring** | Strangler Fig pattern, decomposing god files approaching the 500-line ceiling. |
 | `/git-workflow` | **Git Workflow & Releases** | Git branching, commit chunking (< 1,000 lines), Conventional Commits, release tagging. |
+
+---
+
+## 1.6 Antigravity Slash Command Synergy Strategy
+
+To achieve maximum output quality, combine Antigravity native commands with specialized modular skills in a single prompt:
+
+- **Complex Feature Planning**: `/plan /world-class-engineering /anti-slop <feature>`
+  - Activates Antigravity's interactive planning engine while strictly enforcing the 6-phase EOS lifecycle and purging AI marketing tropes.
+- **Modern Luxury UI & Apple Craftsmanship**: `/plan /ui /3d <product showcase>`
+  - Combines Cupertino blur acrylic materials with WebGL PBR clearcoat 3D rendering for Tesla/Apple caliber interactive experiences.
+- **Full-Stack Vertical Slice**: `/plan /fullstack /database /backend <feature>`
+  - Guarantees zero mock arrays, real SQLite/PostgreSQL schemas, Zod API contracts, and optimistic frontend mutations.
+- **Architectural Alignment Interview**: `/grill-me /world-class-engineering <system>`
+  - Triggers an interactive Socratic design review to resolve trade-offs before generating code.
 
 ---
 
