@@ -63,6 +63,11 @@ class TestVerifyFrontendQuality(unittest.TestCase):
         issues = audit_component_content(snippet, "test.tsx")
         self.assertFalse(any(i["rule"] == "UI-MOTION-NO-FALLBACK" for i in issues))
 
+    def test_detects_generic_card_soup(self):
+        snippet = '<div className="grid grid-cols-1 md:grid-cols-3 gap-6"><div><h3>Feature 1</h3></div><div><h3>Feature 2</h3></div></div>'
+        issues = audit_component_content(snippet, "test.tsx")
+        self.assertTrue(any(i["rule"] == "UI-GENERIC-CARD-SOUP" for i in issues))
+
 
 if __name__ == "__main__":
     unittest.main()

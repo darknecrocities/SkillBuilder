@@ -142,6 +142,18 @@ def audit_component_content(content: str, filepath: str) -> List[Dict[str, str]]
             })
             break
 
+    # 10. Anti-Slop: Check for generic AI 3-card soup placeholder pattern
+    card_soup_match = re.search(r"(?:grid-cols-3|grid-cols-1\s+md:grid-cols-3)[^>]*>[\s\S]*?(?:Feature\s+[1-3]|Card\s+[1-3]|Title\s+[1-3]|Benefit\s+[1-3])", content, re.IGNORECASE)
+    if card_soup_match:
+        line_no = content[:card_soup_match.start()].count("\n") + 1
+        issues.append({
+            "file": filepath,
+            "line": str(line_no),
+            "rule": "UI-GENERIC-CARD-SOUP",
+            "severity": "WARNING",
+            "message": "Generic AI 3-card soup pattern detected with placeholder cards. Use domain-specific asymmetrical layouts or purposeful data grids."
+        })
+
     return issues
 
 
