@@ -23,6 +23,7 @@ This skill purges synthetic AI tropes and enforces professional engineering rigo
 | **Reference** | [../ui/references/unique-art-styles-and-aesthetics.md](../ui/references/unique-art-styles-and-aesthetics.md) | 4 Authentic Art Movements (Tactical, Swiss, Wabi-Sabi, CAD) replacing SaaS flatland. |
 | **Reference** | [../ui/references/kinetic-typography-and-variable-fonts.md](../ui/references/kinetic-typography-and-variable-fonts.md) | Variable font axes (`wght`, `wdth`), clip-path text reveals, and tabular numbers. |
 | **Reference** | [../ui/references/advanced-motion-web-and-flutter.md](../ui/references/advanced-motion-web-and-flutter.md) | Framer Motion zero-re-render springs & Flutter Impeller 120Hz detent haptics. |
+| **Reference** | [../ui/references/universal-mobile-motion-architecture.md](../ui/references/universal-mobile-motion-architecture.md) | Universal mobile motion: React Native worklets, iOS SwiftUI, Android Compose, and Flutter. |
 | **Template** | [templates/CraftedAppLogo.svg](templates/CraftedAppLogo.svg) | Production-grade mathematical vector SVG logo mark passing all 4 stress tests. |
 | **Template** | [templates/CraftedAppLogo.tsx](templates/CraftedAppLogo.tsx) | React vector logo component with material and monochrome silhouette variants. |
 | **Template** | [../ui/templates/TactileSpringButton.tsx](../ui/templates/TactileSpringButton.tsx) | Production tactile button implementing Apple spring physics and 44x44px touch targets. |

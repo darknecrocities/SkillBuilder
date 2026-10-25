@@ -123,9 +123,9 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 
 ---
 
-## Anti-AI-Slop Craftsmanship, Authentic Art Movements & Dual-Platform Motion
+## Anti-AI-Slop Craftsmanship, Authentic Art Movements & Universal Mobile Motion
 
-SkillBuilder rejects generic AI "vibe coding" (purple hero gradients, nested card-soup, floaty 3s fades, and blurry raster logo blobs) in favor of mathematical vectors, physical materials, authentic design movements, kinetic variable typography, and dual-platform spring physics:
+SkillBuilder rejects generic AI "vibe coding" (purple hero gradients, nested card-soup, floaty 3s fades, and blurry raster logo blobs) in favor of mathematical vectors, physical materials, authentic design movements, kinetic variable typography, and universal multi-platform spring physics:
 
 ```mermaid
 flowchart TD
@@ -141,11 +141,13 @@ flowchart TD
         M3["Japanese Wabi-Sabi: Asymmetric breathing room, sumi/washi organic tones, serene pacing"]
         M4["Technical CAD Architecture: Telemetry coordinate grids, hairline rulers, vector wireframes"]
     end
-    subgraph Motion["3. Dual-Platform Motion Architecture (Web & Mobile)"]
+    subgraph Motion["3. Universal Motion Architecture (Web & Multi-Platform Mobile)"]
         E["Web: Framer Motion Zero-Re-Render Pipeline (useMotionValue + useTransform composite layers)"]
-        F["Mobile: Flutter Impeller 120Hz Pipeline (AnimationController.unbounded + SpringSimulation)"]
-        G["Tactile Detent Haptics: HapticFeedback.selectionClick() on physical rotary tick crossings"]
-        H["Kinetic Variable Fonts: Smooth interpolation across 'wght', 'wdth', 'slnt', 'opsz', 'GRAD'"]
+        F1["React Native: Reanimated 3 UI-Thread Worklets + Gesture Handler + Expo Haptics"]
+        F2["iOS (SwiftUI): withAnimation(.spring) + UIImpactFeedbackGenerator + Canvas GPU"]
+        F3["Android (Compose): Animatable spring + LocalHapticFeedback + Hardware Canvas"]
+        F4["Flutter (Dart): AnimationController.unbounded + SpringSimulation + Impeller 120Hz"]
+        G["Tactile Detent Haptics: Precise physical feedback on discrete rotary detent tick boundaries"]
     end
     subgraph WebGL3D["4. 3D WebGL Roadster Showcase (/3d)"]
         I["Three.js PBR MeshPhysicalMaterial (Clearcoat 1.0) & Studio 3-Point HDR Rig"]
@@ -156,10 +158,13 @@ flowchart TD
 
 ### Production Component Templates Catalog
 
-| Component Template | Platform | Design Movement / Physics | Key Capabilities |
+| Component Template | Platform / Ecosystem | Design Movement / Physics | Key Capabilities |
 | :--- | :--- | :--- | :--- |
-| **`IndustrialTactileEncoder.tsx`** | Web (React) | Industrial Tactical (Teenage Eng) | Draggable rotary knob, spring detents, live SVG oscilloscope, tabular Hz readout. |
+| **`IndustrialTactileEncoder.native.tsx`** | Mobile (React Native) | Industrial Tactical (Reanimated 3) | 120Hz UI-thread worklets, Expo Haptics detents, SVG oscilloscope, tabular numerals. |
+| **`IndustrialTactileEncoder.swift`** | Mobile (iOS SwiftUI) | Industrial Tactical (CoreHaptics) | Native SwiftUI drag gesture, `withAnimation(.spring)`, rigid haptics, Canvas waveform. |
+| **`IndustrialTactileEncoder.kt`** | Mobile (Android Compose) | Industrial Tactical (Jetpack Compose) | Compose pointerInput, `Animatable` spring, LocalHapticFeedback, Canvas oscilloscope. |
 | **`IndustrialTactileEncoder.dart`** | Mobile (Flutter) | Industrial Tactical (Impeller 120Hz) | Unbounded spring dial, `selectionClick()` detent haptics, CustomPainter waveform. |
+| **`IndustrialTactileEncoder.tsx`** | Web (React) | Industrial Tactical (Teenage Eng) | Draggable rotary knob, spring detents, live SVG oscilloscope, tabular Hz readout. |
 | **`KineticTextReveal.tsx`** | Web (React) | Swiss International Editorial | Staggered clip-path headline reveal, variable-weight hover interpolation (`wght`/`wdth`). |
 | **`MagneticSpatialCard.tsx`** | Web (React) | Spatial 3D / Perspective | Spring-driven tilt, dynamic specular glare tracking, elevated 3D depth layer. |
 | **`AppleGlassCard.tsx`** | Web (React) | Cupertino Acrylic Glass | Multi-layer backdrop blur (24px), specular top-edge highlight, continuous squircle. |

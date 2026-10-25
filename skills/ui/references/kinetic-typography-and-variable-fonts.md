@@ -234,6 +234,33 @@ class _MaskedTextRevealState extends State<MaskedTextReveal>
 }
 ```
 
+### 4.3 Universal Mobile Tabular Figures (React Native, SwiftUI, Compose)
+
+```tsx
+// React Native Tabular Telemetry
+<Text style={{ fontFamily: 'Courier', fontVariant: ['tabular-nums'] }}>
+  {count.toLocaleString()}
+</Text>
+```
+
+```swift
+// Native iOS SwiftUI Tabular Digits
+Text(verbatim: "\(count)")
+    .font(.system(size: 28, weight: .bold, design: .monospaced))
+    .monospacedDigit()
+```
+
+```kotlin
+// Android Jetpack Compose Tabular Figures
+Text(
+    text = count.toString(),
+    style = TextStyle(
+        fontFamily = FontFamily.Monospace,
+        fontFeatureSettings = "tnum 1, zero 1"
+    )
+)
+```
+
 ---
 
 ## 5. Anti-Slop Typography Checklist

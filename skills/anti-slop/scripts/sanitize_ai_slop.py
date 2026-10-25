@@ -23,7 +23,7 @@ SLOP_PATTERNS: List[Tuple[str, str, str]] = [
 ]
 
 IGNORED_DIRS = {".git", "node_modules", "dist", "build", ".agents", ".gemini", "__pycache__", "venv", ".venv"}
-CHECKED_EXTENSIONS = {".ts", ".tsx", ".js", ".jsx", ".py", ".md", ".html", ".css", ".dart"}
+CHECKED_EXTENSIONS = {".ts", ".tsx", ".js", ".jsx", ".py", ".md", ".html", ".css", ".dart", ".swift", ".kt"}
 
 
 def scan_file(file_path: str) -> List[Dict[str, any]]:

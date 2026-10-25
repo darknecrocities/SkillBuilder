@@ -5,9 +5,9 @@ description: UI design systems, tokens, Apple HIG, and glassmorphism craftsmansh
 
 # UI Design Systems & Craftsmanship (`/ui`)
 
-> **Philosophy**: *Form follows function. Reject visual noise, neon purple card-soup, and generic SaaS flatland. Build tactile, high-contrast, mathematically precise interfaces using disciplined tokens, authentic art movements, physical spring dynamics, and semantic vector icons across Web and Mobile.*
+> **Philosophy**: *Form follows function. Reject visual noise, neon purple card-soup, and generic SaaS flatland. Build tactile, high-contrast, mathematically precise interfaces using disciplined tokens, authentic art movements, physical spring dynamics, and semantic vector icons across Web and Universal Mobile (React Native, iOS SwiftUI, Android Compose, Flutter).*
 
-This skill establishes production-grade design system foundations across React 19, Next.js, Tailwind CSS v4, Flutter / Dart, and modern cross-platform interfaces.
+This skill establishes production-grade design system foundations across React 19, Next.js, Tailwind CSS v4, React Native, Swift (iOS), Kotlin (Android), Flutter (Dart), and modern cross-platform interfaces.
 
 ---
 
@@ -31,10 +31,12 @@ flowchart TD
         I["Specular Inner Borders (1px 15-20% highlight)"]
         J["Continuous Squircles (Superellipses)"]
     end
-    subgraph Motion["4. Dual-Platform Motion & Haptics"]
+    subgraph Motion["4. Universal Motion & Haptics"]
         K["Web: Framer Motion Zero-Re-render Springs"]
-        L["Mobile: Flutter Impeller 120Hz + Detent Haptics"]
-        M["WCAG 2.2 AA/AAA Contrast & Reduced Motion"]
+        L["React Native: Reanimated 3 Native Worklets"]
+        M["iOS: SwiftUI withAnimation(.spring) + CoreHaptics"]
+        N["Android: Compose Animatable + LocalHapticFeedback"]
+        O["Flutter: Impeller 120Hz + Detent Haptics"]
     end
     Foundation --> Movements --> Materials --> Motion
 ```
@@ -45,9 +47,10 @@ flowchart TD
 
 | Document | Scope & Focus | Target Platforms |
 | :--- | :--- | :--- |
-| [references/unique-art-styles-and-aesthetics.md](references/unique-art-styles-and-aesthetics.md) | Detailed specifications for the 4 Non-Generic Art Movements (Color palettes, typography, UI patterns, and layout rules). | Web & Mobile (Flutter) |
-| [references/kinetic-typography-and-variable-fonts.md](references/kinetic-typography-and-variable-fonts.md) | Variable font axes (`wght`, `wdth`, `slnt`, `opsz`, `GRAD`), clip-path text reveals, and tabular numbers. | Web (Framer Motion) & Mobile (Flutter) |
-| [references/advanced-motion-web-and-flutter.md](references/advanced-motion-web-and-flutter.md) | Spring physics parameters, Framer Motion zero-re-render gestures, Flutter `AnimationController.unbounded`, and detent haptics. | Web (Framer Motion) & Mobile (Flutter / Impeller) |
+| [references/unique-art-styles-and-aesthetics.md](references/unique-art-styles-and-aesthetics.md) | Detailed specifications for the 4 Non-Generic Art Movements (Color palettes, typography, UI patterns, and layout rules). | Web & Universal Mobile |
+| [references/universal-mobile-motion-architecture.md](references/universal-mobile-motion-architecture.md) | Universal mobile motion guide: Reanimated 3 worklets, SwiftUI spring/haptics, Compose animatables, and Flutter Impeller. | React Native, SwiftUI, Compose, Flutter |
+| [references/kinetic-typography-and-variable-fonts.md](references/kinetic-typography-and-variable-fonts.md) | Variable font axes (`wght`, `wdth`, `slnt`, `opsz`, `GRAD`), clip-path text reveals, and tabular numbers across Web & Mobile. | Web, React Native, iOS, Android, Flutter |
+| [references/advanced-motion-web-and-flutter.md](references/advanced-motion-web-and-flutter.md) | Harmonic oscillator spring physics parameters ($m\ddot{x} + c\dot{x} + kx = 0$), Framer Motion, and Flutter `unbounded`. | Web & Flutter |
 
 ---
 
@@ -77,25 +80,37 @@ AI slop universally relies on centered purple cards and generic Inter font. Brea
 
 ---
 
-## 4. Dual-Platform Motion Architecture
+## 4. Universal Motion Architecture (Web & Mobile)
 
 ### 4.1 Web: Framer Motion Zero-Re-Render Pipeline
 - Avoid updating React state during continuous pointer drag loops.
 - Use `useMotionValue` and `useTransform` to mutate DOM transforms directly in the composite layer.
 - Enforce spring physics: `stiffness: 380, damping: 28, mass: 1.0` for tactical controls.
-- Respect reduced motion via `useReducedMotion()`.
 
-### 4.2 Mobile: Flutter / Dart & Impeller 120Hz GPU Pipeline
-- Use `AnimationController.unbounded(vsync: this)` with `SpringSimulation` to prevent clipping spring oscillation overshoots.
+### 4.2 React Native: Reanimated 3 UI-Thread Worklets
+- Gesture updates execute on the native UI thread via `Gesture.Pan()` without crossing the JS bridge.
+- Spring animations with `withSpring(target, { stiffness: 350, damping: 28 })`.
+- Tactile detents via `expo-haptics` (`Haptics.selectionAsync()`).
+
+### 4.3 Native iOS: SwiftUI & CoreHaptics
+- Physical springs with `withAnimation(.spring(response: 0.35, dampingFraction: 0.72))`.
+- Tactile detent feedback via `UIImpactFeedbackGenerator(style: .rigid)`.
+- GPU-accelerated drawing via SwiftUI `Canvas`.
+
+### 4.4 Native Android: Jetpack Compose & Kotlin
+- Non-blocking spring simulation using `Animatable` and `spring(dampingRatio, stiffness)`.
+- Haptics via `LocalHapticFeedback.current.performHapticFeedback(HapticFeedbackType.TextHandleMove)`.
+- Hardware-accelerated drawing via Compose `Canvas`.
+
+### 4.5 Flutter / Dart: Impeller 120Hz GPU Pipeline
+- Use `AnimationController.unbounded(vsync: this)` with `SpringSimulation` to preserve overshoot.
 - Trigger `HapticFeedback.selectionClick()` on discrete angular detent crossings.
-- Use `CustomPainter` with `RepaintBoundary` to keep high-frequency drawing off the widget build tree.
-- Check `MediaQuery.of(context).accessibleNavigation` for motion accessibility.
+- Use `CustomPainter` with `RepaintBoundary` for 120Hz frame rates.
 
 ---
 
 ## 5. Apple Human Interface & Cupertino Materials
 
-### 5.1 Cupertino Material Hierarchy
 | Material Level | Background Tint | Backdrop Blur | Specular Border | Typical Use Case |
 | :--- | :--- | :--- | :--- | :--- |
 | **Ultra Thin** | `rgba(24, 24, 27, 0.45)` | `blur(16px)` | `rgba(255, 255, 255, 0.08)` | Sub-panels, hover states, overlays |
@@ -105,14 +120,17 @@ AI slop universally relies on centered purple cards and generic Inter font. Brea
 
 ---
 
-## 6. Production Component Templates
+## 6. Production Component Templates Catalog
 
 Ready-to-use production components in `skills/ui/templates/`:
 
-| Component Template | Platform | Aesthetic Movement & Physics | Description |
+| Component Template | Platform / Ecosystem | Aesthetic Movement & Physics | Description |
 | :--- | :--- | :--- | :--- |
-| **`IndustrialTactileEncoder.tsx`** | Web (React) | Industrial Tactical (Teenage Eng) | Draggable rotary knob, spring detents, live oscilloscope, tabular Hz readout. |
+| **`IndustrialTactileEncoder.native.tsx`** | Mobile (React Native) | Industrial Tactical (Reanimated 3) | 120Hz UI-thread worklets, Expo Haptics detents, SVG oscilloscope, tabular numerals. |
+| **`IndustrialTactileEncoder.swift`** | Mobile (iOS SwiftUI) | Industrial Tactical (CoreHaptics) | Native SwiftUI drag gesture, `withAnimation(.spring)`, rigid haptics, Canvas waveform. |
+| **`IndustrialTactileEncoder.kt`** | Mobile (Android Compose) | Industrial Tactical (Jetpack Compose) | Compose pointerInput, `Animatable` spring, LocalHapticFeedback, Canvas oscilloscope. |
 | **`IndustrialTactileEncoder.dart`** | Mobile (Flutter) | Industrial Tactical (Impeller 120Hz) | Unbounded spring dial, `selectionClick()` detent haptics, CustomPainter waveform. |
+| **`IndustrialTactileEncoder.tsx`** | Web (React) | Industrial Tactical (Teenage Eng) | Draggable rotary knob, spring detents, live SVG oscilloscope, tabular Hz readout. |
 | **`KineticTextReveal.tsx`** | Web (React) | Swiss International Editorial | Staggered clip-path headline reveal, variable-weight hover interpolation. |
 | **`MagneticSpatialCard.tsx`** | Web (React) | Spatial 3D / Perspective | Spring-driven tilt, dynamic specular glare tracking, elevated 3D depth. |
 | **`AppleGlassCard.tsx`** | Web (React) | Cupertino Acrylic Glass | Multi-layer backdrop blur, specular top-edge highlight, continuous squircle. |
