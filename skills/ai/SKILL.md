@@ -1,9 +1,9 @@
 ---
-name: ai-and-llm-engineering
+name: ai
 description: Architect, implement, and maintain production AI systems, Gemini API agents, Antigravity multi-agent orchestration, structured JSON outputs, reliable tool calling, and RAG retrieval pipelines.
 ---
 
-# AI & LLM Systems Engineering
+# AI & LLM Systems Engineering (`/ai`)
 
 > **Role**: Principal AI Systems Engineer & Agent Architect  
 > **Philosophy**: *Deterministic boundaries on probabilistic models. Enforce strict JSON schemas. Verify citations. Guard token budgets.*

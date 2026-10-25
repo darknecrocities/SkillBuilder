@@ -36,6 +36,35 @@ Consult the specialized references and reusable templates for detailed execution
 
 ---
 
+## 1.5 The 20 Modular Engineering Skills (`/`)
+
+The SkillBuilder ecosystem decomposes into 20 focused, highly-actionable skills directly callable via `/`:
+
+| Command | Skill Name | Scope & Core Responsibility |
+| :--- | :--- | :--- |
+| `/world-class-engineering` | **World-Class Engineering** | Master EOS orchestrator, 6-phase lifecycle, 500-line source file policy. |
+| `/anti-slop` | **Anti-AI-Slop & Craftsmanship** | Strips decorative badges, generic marketing fluff, neon gradients, and mock arrays. |
+| `/research` | **Autonomous Research & Fallbacks** | Discovers and evaluates production-grade library alternatives when packages fail. |
+| `/qa` | **Responsiveness QA & Sub-Agents** | Viewport audit (375px/768px/1280px+), a11y, touch targets (>=44px), sub-agent QA. |
+| `/ui` | **UI Design Systems & Tokens** | High-contrast neutral scales (zinc/slate), fluid typography, Lucide SVG vector icons. |
+| `/frontend` | **Frontend Architecture** | Pure component isolation, React 19, Next.js App Router, Flutter, effect cleanup. |
+| `/backend` | **Backend Systems Engineering** | Clean architecture, domain boundaries, strict schema validation (Zod, Pydantic v2). |
+| `/security` | **Security Hardening** | OWASP Top 10 defenses, zero hardcoded secrets, SQL injection defense, CORS/CSP. |
+| `/fullstack` | **Fullstack Anti-Mock Delivery** | Complete vertical slices from UI to real database (PostgreSQL/SQLite) with zero mock arrays. |
+| `/database` | **Database & Datastores** | Zero-downtime migrations (expand/contract), index optimization, ACID integrity. |
+| `/devops` | **Cloud & Container DevOps** | Hardened multi-stage Dockerfiles (`USER 10001`), docker-compose, CI/CD pipelines. |
+| `/ai` | **AI & LLM Engineering** | Production Gemini SDK, structured JSON outputs, defensive tool calling, token budgets. |
+| `/prompt-polish` | **Prompt Refinement (PPE)** | Transforms raw prompts into token-efficient engineering specifications. |
+| `/production-etiquette` | **Production Etiquette** | Secret hygiene (`.env.example`), resilient network client (timeouts, retry with jitter). |
+| `/performance` | **Performance & Web Vitals** | Core Web Vitals (LCP, CLS, INP), N+1 query elimination, bundle size budgets. |
+| `/api-design` | **API Contract Design** | OpenAPI 3.1 specifications, RFC 7807 problem details, idempotency headers. |
+| `/observability` | **Distributed Telemetry** | OpenTelemetry tracing, structured JSON logs with correlation IDs, health probes. |
+| `/continuous-learning` | **Conversational Learning (CLP)** | Persists project invariants to `.agents/learned_conventions.md` to prevent repeated errors. |
+| `/refactor` | **Safe Refactoring** | Strangler Fig pattern, decomposing god files approaching the 500-line ceiling. |
+| `/git-workflow` | **Git Workflow & Releases** | Git branching, commit chunking (< 1,000 lines), Conventional Commits, release tagging. |
+
+---
+
 ## 2. Engineering Operating System (EOS)
 
 For every non-trivial task, strictly execute through these six phases:

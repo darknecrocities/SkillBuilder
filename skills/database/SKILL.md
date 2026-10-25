@@ -1,9 +1,9 @@
 ---
-name: database-and-datastore-engineering
+name: database
 description: Architect, implement, and maintain resilient relational and NoSQL databases, zero-downtime schema migrations (expand/contract), index optimization, and connection pooling.
 ---
 
-# Database & Datastore Engineering
+# Database & Datastore Engineering (`/database`)
 
 > **Role**: Principal Database Architect & Data Engineer  
 > **Philosophy**: *Data is the foundation. Index intentionally. Migrate without downtime. Guard ACID integrity.*

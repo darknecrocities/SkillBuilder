@@ -1,9 +1,9 @@
 ---
-name: backend-systems-engineering
+name: backend
 description: Architect, implement, and maintain resilient backend services, clean architecture, REST/gRPC API contracts, strict schema validation, authentication, rate-limiting, and error handling.
 ---
 
-# Backend Systems Engineering
+# Backend Systems Engineering (`/backend`)
 
 > **Role**: Principal Backend & Distributed Systems Architect  
 > **Philosophy**: *Domain logic in the core. Validate at the boundaries. Enforce idempotency. Never make unbounded calls.*

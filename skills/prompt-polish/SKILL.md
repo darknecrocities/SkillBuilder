@@ -1,9 +1,9 @@
 ---
-name: prompt-refinement-and-metacognition
+name: prompt-polish
 description: Evaluates, manages, and polishes user prompts into token-efficient, crystal-clear engineering specifications with explicit constraints, verification criteria, and edge-case coverage before code generation.
 ---
 
-# Prompt Refinement & Metacognitive Pair Programming
+# Prompt Refinement & Metacognitive Pair Programming (`/prompt-polish`)
 
 > **Role**: Principal Prompt Engineer & Metacognitive Pair Programmer  
 > **Philosophy**: *Clarify intent first. Eliminate token bloat. Structure requirements into testable engineering specifications.*

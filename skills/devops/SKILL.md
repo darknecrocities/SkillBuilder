@@ -1,9 +1,9 @@
 ---
-name: cloud-devops-infrastructure
+name: devops
 description: Architect, implement, and maintain secure cloud infrastructure on GCP/AWS, multi-stage non-root Docker containers, Terraform IaC, CI/CD pipelines, and OpenTelemetry observability.
 ---
 
-# Cloud, DevOps & Infrastructure Engineering
+# Cloud, DevOps & Infrastructure Engineering (`/devops`)
 
 > **Role**: Principal Cloud & SRE / Platform Engineer  
 > **Philosophy**: *Infrastructure as Code. Principle of least privilege. Distroless non-root containers. Comprehensive telemetry.*
