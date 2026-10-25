@@ -9,13 +9,13 @@
 
 # SkillBuilder: Anti-AI-Slop Dynamic Engineering Ecosystem
 
-SkillBuilder is a production-grade suite of **20 specialized Agent Skills** and architectural guardrails designed for **Google Antigravity**. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI coding agents into disciplined senior software architects and pair programmers.
+SkillBuilder is a production-grade suite of **20 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
 
 ---
 
 ## Operating Philosophy
 
-Most AI code generation defaults to synthetic tropes: bloated comments explaining obvious lines, fake in-memory mock arrays pretending to be databases, neon purple gradients with glowing borders, and unmaintained dependency choices that fail in production.
+Most AI coding assistants suffer from structural myopia: they hallucinate parameters, mock databases with temporary static arrays, leak credentials into version control, exceed maintainable file boundaries, and decorate interfaces with generic "vibe coding" slop.
 
 SkillBuilder enforces an uncompromising engineering standard:
 
@@ -23,91 +23,156 @@ SkillBuilder enforces an uncompromising engineering standard:
 
 ---
 
-## Table of Contents
+## Multi-Platform Compatibility Matrix
 
-1. [The 20 Modular Skills (`/`)](#the-20-modular-skills-)
-2. [Anti-AI-Slop & Craftsmanship](#anti-ai-slop--craftsmanship)
-3. [Autonomous Research & Fallback Pivots](#autonomous-research--fallback-pivots)
-4. [Responsiveness QA & Sub-Agent Verification](#responsiveness-qa--sub-agent-verification)
-5. [Developer Workspace (`workspace/`)](#developer-workspace-workspace)
-6. [Continuous Conversational Learning (CLP)](#continuous-conversational-learning-clp)
-7. [Installation & Antigravity Integration](#installation--antigravity-integration)
-8. [Automated Verification Suites (25 Suites)](#automated-verification-suites-25-suites)
-9. [Repository Architecture](#repository-architecture)
+SkillBuilder runs natively across the entire modern AI coding ecosystem:
+
+| Platform | Primary Configuration | Integration Mechanism | One-Line Installation |
+| :--- | :--- | :--- | :--- |
+| **Google Antigravity** | `plugin.json`, `.agents/skills/` | Native Plugin & Global Symlink | `./scripts/install.sh --global` |
+| **Cursor IDE** | `.cursor/rules/*.mdc`, `.cursorrules` | Native Cursor Rules Engine | `./scripts/install.sh --cursor .` |
+| **Claude Code** | `CLAUDE.md` | Anthropic Project Memory | `./scripts/install.sh --claude .` |
+| **Codex / OpenAI** | `CODEX.md` | System Prompts & Custom Instructions | `./scripts/install.sh --codex .` |
+| **Windsurf / Cascade** | `.windsurfrules` | Cascade System Rules | `./scripts/install.sh --windsurf .` |
+| **Cline / Roo-Code** | `.clinerules` | Cline Autonomous Agent Rules | `./scripts/install.sh --cline .` |
 
 ---
 
-## The 20 Modular Skills (`/`)
+## The Antigravity Power Combo Strategy (`/plan` + `/world-class-engineering`)
 
-Every skill is directly discoverable and executable via `/` slash commands in Antigravity:
+To produce the highest-quality software architecture, verified test suites, and clean, ready-to-merge GitHub Pull Requests on **Google Antigravity**, combine slash commands into the **Power Combo Workflow**:
 
-| Slash Command | Skill Name | Core Architectural Responsibility |
+```text
+/plan /world-class-engineering <your feature or refactoring goal>
+```
+
+```mermaid
+flowchart TD
+    INPUT["User: /plan /world-class-engineering <Task>"] --> PPE["Phase 1: Metacognitive Prompt Polishing (/prompt-polish)"]
+    PPE --> PLAN["Phase 2: Interactive Implementation Plan Artifact (/plan)"]
+    PLAN --> APPROVE{"User Review & Approval"}
+    APPROVE -- "Proceed" --> EXEC["Phase 3: Multi-Discipline Execution (/anti-slop, /research, /security)"]
+    EXEC --> QA["Phase 4: Responsiveness & 26-Suite Verification (/qa)"]
+    QA --> CHUNK["Phase 5: Atomic Commit Chunking (< 1k lines) (/git-workflow)"]
+    CHUNK --> PR["Phase 6: Ready-to-Merge Pull Request + Walkthrough"]
+```
+
+### The 6-Stage Power Delivery Lifecycle
+
+1. **Metacognitive Ingestion & Prompt Polishing (`/prompt-polish`)**:
+   - Ingests user intent and checks `.agents/learned_conventions.md` to prevent repeating previously corrected mistakes.
+   - Extracts hidden assumptions, strips conversational padding, and structures requirements into an RFC-style specification matrix.
+2. **Interactive Design Artifact (`/plan`)**:
+   - Generates a formal technical implementation plan artifact in the Antigravity conversation directory.
+   - Maps out component boundaries, data flows, database schemas, and verification strategies with mermaid diagrams.
+   - Halts execution and presents an interactive **Proceed** button for user review.
+3. **Anti-Slop Sanitized Implementation (`/anti-slop` & `/fullstack`)**:
+   - Zero decorative badges (`shields.io`), zero obvious comments (`// set loading to true`), zero fake mock arrays.
+   - Builds complete vertical slices wired to real persistence (SQLite, PostgreSQL, Cloud SQL) with strict Zod/Pydantic validation.
+   - Enforces the disciplined neutral palette (zinc/slate) and semantic Lucide SVG vector icons (zero raw emojis in UI buttons).
+4. **Autonomous Fallback Pivots (`/research`)**:
+   - If any library, build tool, or dependency fails to install or is deprecated, autonomously discovers and benchmarks production-grade replacements using the P.A.T.H.S. criteria (Performance, Activity, Type safety, Hygiene, Size).
+5. **Continuous Verification & 500-Line Ceiling (`/world-class-engineering` & `/qa`)**:
+   - Audits all source files against the strict **500-line physical limit** (`check_source_line_limits.py`).
+   - Audits mobile (375px), tablet (768px), desktop (1280px), and widescreen viewports for touch targets (>=44px), focus visibility, and fluid layout scaling.
+   - Executes the master 26-suite verification test runner.
+6. **Atomic Commit Chunking & Ready-to-Review PR (`/git-workflow`)**:
+   - Automatically clusters diffs into cohesive commits strictly below the **1,000-line push budget**.
+   - Uses Conventional Commits (`feat:`, `fix:`, `refactor:`, `test:`).
+   - Authors a complete GitHub Pull Request via `gh pr create` with test receipts, walkthrough diffs, and semantic release tags.
+
+### Specialized Slash Command Combos
+
+| Intent | Recommended Command Combination | Outcome |
 | :--- | :--- | :--- |
-| `/world-class-engineering` | **World-Class Engineering** | Master EOS orchestrator (Understand -> Define -> Plan -> Implement -> Verify -> Deliver), 500-line source file policy. |
-| `/anti-slop` | **Anti-AI-Slop Sanitizer** | Purges decorative badges (`shields.io`), marketing copy, obvious comments, and fake mock databases. |
-| `/research` | **Autonomous Research & Fallbacks** | Discovers modern, production-grade library alternatives when dependencies fail or are deprecated. |
-| `/qa` | **Responsiveness QA & Sub-Agents** | Viewport testing (375px/768px/1280px+), a11y (WCAG AA), touch targets (>=44px), Master Error Catalog. |
-| `/ui` | **UI Design Systems & Tokens** | High-contrast neutral scales (zinc/slate), fluid typography, Lucide SVG vector icons (no raw emojis). |
-| `/frontend` | **Frontend Architecture** | Pure UI separation, React 19, Next.js App Router, Flutter, `useEffect` AbortController cleanup. |
-| `/backend` | **Backend Systems Engineering** | Clean architecture (Hexagonal), domain boundaries, strict runtime validation (Zod, Pydantic v2). |
-| `/security` | **Security Hardening** | OWASP Top 10 defenses, zero hardcoded secrets, SQL injection defense, CORS/CSP policies. |
-| `/fullstack` | **Fullstack Anti-Mock Delivery** | Complete vertical slices from UI to database (PostgreSQL/SQLite) with zero fake mock arrays. |
-| `/database` | **Database & Datastores** | Zero-downtime migrations (expand/contract), index optimization, ACID transactional integrity. |
-| `/devops` | **Cloud & Container DevOps** | Hardened multi-stage Dockerfiles (`USER 10001`), docker-compose, CI/CD pipelines, distroless images. |
-| `/ai` | **AI & LLM Engineering** | Production Gemini SDK, structured JSON outputs (`response_schema`), defensive tool calling, token budgets. |
-| `/prompt-polish` | **Prompt Refinement (PPE)** | 5-phase Prompt Polishing Engine transforming raw requests into token-efficient specifications. |
-| `/production-etiquette` | **Production Etiquette** | Secret hygiene (`.env.example`), resilient network client (timeouts 3s/15s, retry with jitter). |
-| `/performance` | **Performance & Web Vitals** | Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms), N+1 query elimination, bundle budgets. |
-| `/api-design` | **API Contract Design** | OpenAPI 3.1 specifications, RFC 7807 Problem Details error format, idempotency headers. |
-| `/observability` | **Distributed Telemetry** | OpenTelemetry distributed tracing, structured JSON logs with correlation IDs, health/ready probes. |
-| `/continuous-learning` | **Conversational Learning (CLP)** | Persists project invariants to `.agents/learned_conventions.md` to prevent repeated errors. |
-| `/refactor` | **Safe Refactoring** | Strangler Fig pattern, characterization testing, decomposing god files approaching 500 lines. |
-| `/git-workflow` | **Git Workflow & Releases** | Git branching, commit chunking (< 1,000 lines), Conventional Commits, release tagging. |
+| **Enterprise Feature Delivery** | `/plan /world-class-engineering <goal>` | Full technical design doc, multi-discipline implementation, automated testing, and chunked PR. |
+| **Fullstack Vertical Slice** | `/plan /fullstack <goal>` | Real database migration, ORM repository, validated API route, and responsive UI without mocks. |
+| **Safe Refactoring** | `/plan /refactor <module>` | Characterization testing, Strangler Fig pattern, and decomposing files approaching 500 lines. |
+| **Multi-Device Viewport QA** | `/plan /qa <viewports>` | 4-tier viewport matrix audit, touch target verification, a11y checks, and sub-agent test execution. |
+| **Security Hardening** | `/plan /security <surface>` | OWASP Top 10 remediation, SQL query parameterization, and secret scanning. |
 
 ---
 
-## Anti-AI-Slop & Craftsmanship
+## The 20-Skill Master Reference Matrix
 
-SkillBuilder actively audits and sanitizes codebases against synthetic AI tropes:
-- **No Shields.io Badges**: Eliminates decorative badge spam in documentation and code headers.
-- **No Fake Mock Databases**: Prohibits static in-memory toy arrays pretending to be permanent data.
-- **No Obvious Comments**: Prohibits restating what code already expresses (`// set loading to true`).
-- **No Neon Vibe Aesthetics**: Prohibits neon purple-indigo gradients and glowing border rings.
-- **No Emojis as UI Controls**: Replaces raw emojis in buttons/headers with accessible Lucide SVG vector icons.
+Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules in Cursor:
 
-Audit CLI:
+| Command | Skill Name | Domain | Core Capabilities & Focus | Standalone CLI Tool | Primary Guardrail |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `/world-class-engineering` | **World-Class Engineering** | Architecture | 6-Phase EOS lifecycle (Understand -> Define -> Plan -> Implement -> Verify -> Deliver). | `check_source_line_limits.py` | Strict 500-line physical source file limit. |
+| `/anti-slop` | **Anti-AI-Slop Sanitizer** | Clean Code | Purges decorative badges, fake mock databases, neon gradients, obvious comments, and marketing copy. | `sanitize_ai_slop.py` | Zero `shields.io`, zero fake mock arrays, zero emojis in UI controls. |
+| `/research` | **Autonomous Research & Fallbacks** | Discovery | Autonomous fallback engine; researches alternatives when packages fail or deprecate. | `research_alternatives.py` | P.A.T.H.S. trade-off evaluation & minimal POC validation. |
+| `/qa` | **Responsiveness QA & Sub-Agents** | Quality | 4-tier viewport matrix (375px/768px/1280px+), a11y (WCAG AA), touch targets, Master Error Catalog. | `verify_responsiveness_and_qa.py` | Min 44x44px touch targets, zero fixed-pixel containers. |
+| `/ui` | **UI Design Systems & Tokens** | UI/UX | High-contrast neutral scales (zinc/slate), fluid typography, Lucide SVG icons. | `verify_ui_tokens.py` | Zero raw emojis in buttons/headers; explicit button types. |
+| `/frontend` | **Frontend Architecture** | Frontend | Pure component isolation, React 19, Next.js App Router, Flutter, memory leak prevention. | `verify_frontend_architecture.py` | AbortController on async `useEffect`; error boundaries. |
+| `/backend` | **Backend Systems Engineering** | Backend | Clean architecture (Hexagonal), domain services, REST/gRPC contracts, idempotency. | `verify_api_contracts.py` | Strict runtime schema validation (Zod, Pydantic v2). |
+| `/security` | **Security Hardening** | Security | OWASP Top 10 defenses, zero hardcoded secrets, SQL injection defense, CORS/CSP policies. | `audit_security_hygiene.py` | Parameterized queries only; zero committed API credentials. |
+| `/fullstack` | **Fullstack Anti-Mock Delivery** | Fullstack | Complete vertical slices from UI to database (PostgreSQL/SQLite) with zero mock arrays. | `verify_end_to_end_integration.py` | Anti-mock mandate: real persistence on every feature. |
+| `/database` | **Database & Datastores** | Data | Zero-downtime migrations (expand/contract), index optimization, ACID transactional integrity. | `verify_database_hygiene.py` | Non-blocking index creation; reversible migrations. |
+| `/devops` | **Cloud & Container DevOps** | DevOps | Hardened multi-stage Dockerfiles (`USER 10001`), docker-compose, CI/CD pipelines. | `verify_container_security.py` | Non-root containers only; health checks on services. |
+| `/ai` | **AI & LLM Engineering** | AI / GenAI | Production Gemini SDK, structured JSON outputs (`response_schema`), defensive tool calling. | `calculate_token_budget.py` | Schema-enforced outputs; token context window limits. |
+| `/prompt-polish` | **Prompt Refinement (PPE)** | Metacognition | 5-phase Prompt Polishing Engine transforming raw requests into token-efficient specifications. | `polish_prompt.py` | Token compression and explicit acceptance criteria. |
+| `/production-etiquette` | **Production Etiquette** | Reliability | Secret hygiene (`.env.example`), resilient network client (timeouts 3s/15s, retry with jitter). | `scaffold_project_hygiene.py` | Mandatory `.env.example` and timeout configs. |
+| `/performance` | **Performance & Web Vitals** | Optimization | Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms), N+1 query elimination, bundle budgets. | `audit_performance_budgets.py` | Zero N+1 query cascades; explicit image dimensions. |
+| `/api-design` | **API Contract Design** | API | OpenAPI 3.1 specifications, RFC 7807 Problem Details error format, idempotency headers. | `validate_openapi_spec.py` | RFC 7807 error format; required 2xx/4xx/5xx responses. |
+| `/observability` | **Distributed Telemetry** | SRE | OpenTelemetry distributed tracing, structured JSON logs with correlation IDs, health/ready probes. | `verify_telemetry_standards.py` | Mandatory correlation IDs (`trace_id`); `/healthz` endpoints. |
+| `/continuous-learning` | **Conversational Learning (CLP)** | Memory | Persists project invariants to `.agents/learned_conventions.md` to prevent repeated errors. | `record_learning.py` | Immediate recording of corrections; zero repeated mistakes. |
+| `/refactor` | **Safe Refactoring** | Refactoring | Strangler Fig pattern, characterization testing, decomposing god files approaching 500 lines. | `detect_refactor_opportunities.py` | Proactive decomposition when files reach 350-400 lines. |
+| `/git-workflow` | **Git Workflow & Releases** | Git / VCS | Git branching, commit chunking (< 1,000 lines), Conventional Commits, release tagging. | `analyze_git_commit_chunks.py` | Strict 1,000-line change budget per commit chunk. |
+
+---
+
+## Multi-Platform Installation Guide
+
+### Option 1: Google Antigravity
+
 ```bash
-python3 skills/anti-slop/scripts/sanitize_ai_slop.py --path .
+# Global installation (active in all Antigravity projects on this workstation)
+./scripts/install.sh --global
+
+# Or per-project installation (.agents/skills/ + AGENTS.md)
+./scripts/install.sh --project /path/to/my-project
 ```
 
----
+### Option 2: Cursor IDE
 
-## Autonomous Research & Fallback Pivots
-
-When a dependency fails to install, exhibits breaking bugs, or is deprecated:
-1. **Root Cause Isolation**: Determines if failure is environmental (C++ build tools) or systemic (abandoned library).
-2. **Ecosystem Discovery**: Searches actively maintained alternatives across PyPI/npm/Crates.io.
-3. **P.A.T.H.S. Trade-Off Evaluation**: Analyzes Performance, Activity, Type Safety, Hygiene (licensing), and Size.
-4. **Minimal POC Validation**: Validates candidate in a minimal standalone reproduction before adoption.
-
-Audit CLI:
+Convert all 20 skills into native `.cursor/rules/*.mdc` rule files and a consolidated `.cursorrules`:
 ```bash
-python3 skills/research/scripts/research_alternatives.py --query moment
+./scripts/install.sh --cursor /path/to/my-cursor-project
+```
+- Each skill becomes a modular `.cursor/rules/<skill>.mdc` file with frontmatter (`globs: *`, `alwaysApply: false`).
+- Cursor automatically surfaces and references skills contextually or via `@` mentions in chat.
+
+### Option 3: Anthropic Claude Code & Claude Desktop
+
+Export guidelines into `CLAUDE.md`:
+```bash
+./scripts/install.sh --claude /path/to/my-claude-project
+```
+- Generates `CLAUDE.md` in the project root, which Claude Code automatically reads as project memory on every command.
+- For Claude Desktop, copy `CLAUDE.md` contents into **Project Instructions**.
+
+### Option 4: OpenAI Codex / ChatGPT / GPT-4o
+
+Export guidelines into `CODEX.md`:
+```bash
+./scripts/install.sh --codex /path/to/my-openai-project
+```
+- Paste `CODEX.md` into **ChatGPT Custom Instructions** or OpenAI Assistant System Prompts.
+
+### Option 5: Windsurf & Cline / Roo-Code
+
+Export native `.windsurfrules` and `.clinerules`:
+```bash
+./scripts/install.sh --windsurf /path/to/my-project
+./scripts/install.sh --cline /path/to/my-project
 ```
 
----
+### Option 6: Universal Multi-Platform Setup (All-in-One)
 
-## Responsiveness QA & Sub-Agent Verification
-
-Ensures applications adapt gracefully across the **4-Tier Viewport Matrix**:
-- **Mobile** (`375x667` / `390x844`): Single column, touch targets >= 44x44px, zero horizontal overflow.
-- **Tablet** (`768x1024`): Fluid responsive multi-column transitions, collapsible navigation.
-- **Desktop** (`1280x800` / `1440x900`): Bounded content containers (`max-w-7xl`), multi-pane dashboards.
-- **Widescreen** (`1920x1080+`): Centered layouts without awkward stretching.
-
-Audit CLI:
+Generate configurations for all IDEs and agents simultaneously:
 ```bash
-python3 skills/qa/scripts/verify_responsiveness_and_qa.py --path .
+./scripts/install.sh --all /path/to/my-project
 ```
 
 ---
@@ -115,9 +180,9 @@ python3 skills/qa/scripts/verify_responsiveness_and_qa.py --path .
 ## Developer Workspace (`workspace/`)
 
 A dedicated configuration and tooling hub:
-- **[`profile.json`](workspace/profile.json)**: Developer metadata, preferred stacks, and token budget preferences.
+- **[`profile.json`](workspace/profile.json)**: Developer metadata, preferred stacks (React 19, Next.js, Tailwind v4, Flutter, Node.js, FastAPI, Go, PostgreSQL, Cloud SQL, GCP, Gemini 2.5), and token budget preferences.
 - **[`pairing_manifesto.md`](workspace/pairing_manifesto.md)**: The 8 non-negotiable tenets of pair-programming.
-- **[`prompt_templates/`](workspace/prompt_templates/)**: High-density templates for specifications and bug reproductions.
+- **[`prompt_templates/`](workspace/prompt_templates/)**: High-density prompt templates for specifications and bug reproductions.
 
 ---
 
@@ -135,29 +200,16 @@ python3 skills/continuous-learning/scripts/record_learning.py --list
 
 ---
 
-## Installation & Antigravity Integration
+## Automated Verification Suites (26 Suites)
 
-### Universal One-Command Quickstart
-```bash
-# Install globally for all projects on this workstation
-./scripts/install.sh --global
-
-# Or install directly into a specific project repository
-./scripts/install.sh --project /path/to/my-project
-```
-
----
-
-## Automated Verification Suites (25 Suites)
-
-SkillBuilder includes a master test runner executing 25 independent verification suites:
+SkillBuilder includes a master test runner executing 26 independent verification suites:
 
 ```bash
 ./scripts/verify_all_skills.sh
 ```
 
-Checks executed:
-1. **500-Line Source File Policy**: Verifies all source files adhere to the 500-line limit.
+All 26 suites run and pass in under 0.5s:
+1. **500-Line Source File Policy**: Verifies all source files adhere to the 500-line ceiling.
 2. **World-Class Engineering Unit Tests**: Validates line-checking and EOS extraction logic.
 3. **Anti-AI-Slop Tests**: Validates badge, mock array, and obvious comment sanitization.
 4. **Autonomous Research Tests**: Validates package alternative recommendation engine.
@@ -182,6 +234,7 @@ Checks executed:
 23. **Prompt Polish Learning Tests**: Validates convention indexing.
 24. **Production Etiquette Hygiene Tests**: Validates `.env.example`, `.gitignore`, and scaffolding.
 25. **Production Etiquette Git Chunk Tests**: Validates git diff partitioning.
+26. **Multi-Platform Exporter Tests**: Validates Cursor, Claude, Codex, Windsurf, and Cline rule exports.
 
 ---
 
@@ -218,6 +271,7 @@ SkillBuilder/
 │   ├── refactor/                               # Safe debt remediation & file decomposition
 │   └── git-workflow/                           # Atomic commit chunking (<1k lines) & releases
 └── scripts/
-    ├── install.sh                              # Universal installer (Global / Project)
-    └── verify_all_skills.sh                    # Master 25-suite verification test runner
+    ├── install.sh                              # Universal multi-platform installer
+    ├── export_multiplatform.py                 # Multi-platform exporter (Cursor, Claude, Codex)
+    └── verify_all_skills.sh                    # Master 26-suite verification test runner
 ```
