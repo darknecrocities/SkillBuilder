@@ -7,191 +7,181 @@
   ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 ```
 
-# SkillBuilder: Antigravity Engineering & Pair-Programming Standards
+# SkillBuilder: Anti-AI-Slop Dynamic Engineering Ecosystem
 
-SkillBuilder is a production-grade collection of Agent Skills and architectural guardrails designed for **Google Antigravity**. Authored by **Arron Kian Parejas (@darknecrocities)** and scalable to engineering teams worldwide, it transforms AI coding assistants into disciplined senior architects and pair programmers.
+SkillBuilder is a production-grade suite of **20 specialized Agent Skills** and architectural guardrails designed for **Google Antigravity**. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI coding agents into disciplined senior software architects and pair programmers.
 
 ---
 
 ## Operating Philosophy
 
-Most AI coding assistants suffer from structural myopia: they hallucinate parameters, mock databases with temporary static arrays, leak credentials into version control, exceed maintainable file boundaries, and decorate interfaces with generic "vibe coding" slop.
+Most AI code generation defaults to synthetic tropes: bloated comments explaining obvious lines, fake in-memory mock arrays pretending to be databases, neon purple gradients with glowing borders, and unmaintained dependency choices that fail in production.
 
 SkillBuilder enforces an uncompromising engineering standard:
 
-> **Understand first. Polish the prompt. Learn continuously. Reject vibe coding. Implement minimally. Test thoroughly. Catalog every error. Deliver real software without waste.**
+> **Understand first. Polish the prompt. Learn continuously. Eliminate AI slop. Build real persistence. Test viewports relentlessly. Catalog errors. Deliver production software.**
 
 ---
 
 ## Table of Contents
 
-1. [Developer Workspace (`workspace/`)](#developer-workspace-workspace)
-2. [Continuous Conversational Learning (CLP)](#continuous-conversational-learning-clp)
-3. [Anti-Vibe-Coding UI Craftsmanship](#anti-vibe-coding-ui-craftsmanship)
-4. [The 9 Production Skills](#the-9-production-skills)
-5. [Prompt Polishing Engine (PPE)](#prompt-polishing-engine-ppe)
-6. [Token Savings & High-Density Pairing](#token-savings--high-density-pairing)
-7. [QA Testing & Master Error Catalog](#qa-testing--master-error-catalog)
-8. [Installation & Antigravity Integration](#installation--antigravity-integration)
-9. [Automated Verification Suites](#automated-verification-suites)
-10. [Repository Architecture](#repository-architecture)
+1. [The 20 Modular Skills (`/`)](#the-20-modular-skills-)
+2. [Anti-AI-Slop & Craftsmanship](#anti-ai-slop--craftsmanship)
+3. [Autonomous Research & Fallback Pivots](#autonomous-research--fallback-pivots)
+4. [Responsiveness QA & Sub-Agent Verification](#responsiveness-qa--sub-agent-verification)
+5. [Developer Workspace (`workspace/`)](#developer-workspace-workspace)
+6. [Continuous Conversational Learning (CLP)](#continuous-conversational-learning-clp)
+7. [Installation & Antigravity Integration](#installation--antigravity-integration)
+8. [Automated Verification Suites (25 Suites)](#automated-verification-suites-25-suites)
+9. [Repository Architecture](#repository-architecture)
+
+---
+
+## The 20 Modular Skills (`/`)
+
+Every skill is directly discoverable and executable via `/` slash commands in Antigravity:
+
+| Slash Command | Skill Name | Core Architectural Responsibility |
+| :--- | :--- | :--- |
+| `/world-class-engineering` | **World-Class Engineering** | Master EOS orchestrator (Understand -> Define -> Plan -> Implement -> Verify -> Deliver), 500-line source file policy. |
+| `/anti-slop` | **Anti-AI-Slop Sanitizer** | Purges decorative badges (`shields.io`), marketing copy, obvious comments, and fake mock databases. |
+| `/research` | **Autonomous Research & Fallbacks** | Discovers modern, production-grade library alternatives when dependencies fail or are deprecated. |
+| `/qa` | **Responsiveness QA & Sub-Agents** | Viewport testing (375px/768px/1280px+), a11y (WCAG AA), touch targets (>=44px), Master Error Catalog. |
+| `/ui` | **UI Design Systems & Tokens** | High-contrast neutral scales (zinc/slate), fluid typography, Lucide SVG vector icons (no raw emojis). |
+| `/frontend` | **Frontend Architecture** | Pure UI separation, React 19, Next.js App Router, Flutter, `useEffect` AbortController cleanup. |
+| `/backend` | **Backend Systems Engineering** | Clean architecture (Hexagonal), domain boundaries, strict runtime validation (Zod, Pydantic v2). |
+| `/security` | **Security Hardening** | OWASP Top 10 defenses, zero hardcoded secrets, SQL injection defense, CORS/CSP policies. |
+| `/fullstack` | **Fullstack Anti-Mock Delivery** | Complete vertical slices from UI to database (PostgreSQL/SQLite) with zero fake mock arrays. |
+| `/database` | **Database & Datastores** | Zero-downtime migrations (expand/contract), index optimization, ACID transactional integrity. |
+| `/devops` | **Cloud & Container DevOps** | Hardened multi-stage Dockerfiles (`USER 10001`), docker-compose, CI/CD pipelines, distroless images. |
+| `/ai` | **AI & LLM Engineering** | Production Gemini SDK, structured JSON outputs (`response_schema`), defensive tool calling, token budgets. |
+| `/prompt-polish` | **Prompt Refinement (PPE)** | 5-phase Prompt Polishing Engine transforming raw requests into token-efficient specifications. |
+| `/production-etiquette` | **Production Etiquette** | Secret hygiene (`.env.example`), resilient network client (timeouts 3s/15s, retry with jitter). |
+| `/performance` | **Performance & Web Vitals** | Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms), N+1 query elimination, bundle budgets. |
+| `/api-design` | **API Contract Design** | OpenAPI 3.1 specifications, RFC 7807 Problem Details error format, idempotency headers. |
+| `/observability` | **Distributed Telemetry** | OpenTelemetry distributed tracing, structured JSON logs with correlation IDs, health/ready probes. |
+| `/continuous-learning` | **Conversational Learning (CLP)** | Persists project invariants to `.agents/learned_conventions.md` to prevent repeated errors. |
+| `/refactor` | **Safe Refactoring** | Strangler Fig pattern, characterization testing, decomposing god files approaching 500 lines. |
+| `/git-workflow` | **Git Workflow & Releases** | Git branching, commit chunking (< 1,000 lines), Conventional Commits, release tagging. |
+
+---
+
+## Anti-AI-Slop & Craftsmanship
+
+SkillBuilder actively audits and sanitizes codebases against synthetic AI tropes:
+- **No Shields.io Badges**: Eliminates decorative badge spam in documentation and code headers.
+- **No Fake Mock Databases**: Prohibits static in-memory toy arrays pretending to be permanent data.
+- **No Obvious Comments**: Prohibits restating what code already expresses (`// set loading to true`).
+- **No Neon Vibe Aesthetics**: Prohibits neon purple-indigo gradients and glowing border rings.
+- **No Emojis as UI Controls**: Replaces raw emojis in buttons/headers with accessible Lucide SVG vector icons.
+
+Audit CLI:
+```bash
+python3 skills/anti-slop/scripts/sanitize_ai_slop.py --path .
+```
+
+---
+
+## Autonomous Research & Fallback Pivots
+
+When a dependency fails to install, exhibits breaking bugs, or is deprecated:
+1. **Root Cause Isolation**: Determines if failure is environmental (C++ build tools) or systemic (abandoned library).
+2. **Ecosystem Discovery**: Searches actively maintained alternatives across PyPI/npm/Crates.io.
+3. **P.A.T.H.S. Trade-Off Evaluation**: Analyzes Performance, Activity, Type Safety, Hygiene (licensing), and Size.
+4. **Minimal POC Validation**: Validates candidate in a minimal standalone reproduction before adoption.
+
+Audit CLI:
+```bash
+python3 skills/research/scripts/research_alternatives.py --query moment
+```
+
+---
+
+## Responsiveness QA & Sub-Agent Verification
+
+Ensures applications adapt gracefully across the **4-Tier Viewport Matrix**:
+- **Mobile** (`375x667` / `390x844`): Single column, touch targets >= 44x44px, zero horizontal overflow.
+- **Tablet** (`768x1024`): Fluid responsive multi-column transitions, collapsible navigation.
+- **Desktop** (`1280x800` / `1440x900`): Bounded content containers (`max-w-7xl`), multi-pane dashboards.
+- **Widescreen** (`1920x1080+`): Centered layouts without awkward stretching.
+
+Audit CLI:
+```bash
+python3 skills/qa/scripts/verify_responsiveness_and_qa.py --path .
+```
 
 ---
 
 ## Developer Workspace (`workspace/`)
 
-A dedicated configuration and tooling hub for developer preferences, pair-programming standards, and project scaffolding:
-
-- **[`profile.json`](workspace/profile.json)**: Developer metadata, preferred stacks (React 19, Next.js, Tailwind v4, Flutter, Node.js, FastAPI, Go, PostgreSQL, Cloud SQL, GCP, Gemini 2.5), and token budget preferences.
+A dedicated configuration and tooling hub:
+- **[`profile.json`](workspace/profile.json)**: Developer metadata, preferred stacks, and token budget preferences.
 - **[`pairing_manifesto.md`](workspace/pairing_manifesto.md)**: The 8 non-negotiable tenets of pair-programming.
-- **[`prompt_templates/`](workspace/prompt_templates/)**: High-density templates for feature specifications, bug reproductions, and ADRs.
-- **[`scripts/sync_to_global.sh`](workspace/scripts/sync_to_global.sh)**: One-command sync linking SkillBuilder directly to `~/.gemini/config/plugins/skill-builder`.
-- **[`scripts/scaffold_project.sh`](workspace/scripts/scaffold_project.sh)**: Rapid project scaffolder initializing `.gitignore`, `.env.example`, `.agents/`, and `AGENTS.md`.
+- **[`prompt_templates/`](workspace/prompt_templates/)**: High-density templates for specifications and bug reproductions.
 
 ---
 
 ## Continuous Conversational Learning (CLP)
 
-Agents must learn continuously across conversation turns and sessions without forgetting corrections:
-
-1. **Immediate Invariant Ingestion**: When a developer corrects an architectural pattern, imports, or naming conventions, the agent extracts the invariant.
-2. **Workspace Persistence**: The convention is recorded in `.agents/learned_conventions.md` using `scripts/record_learning.py`.
-3. **Turn-by-Turn Compliance**: Before planning or code generation, the agent scans recorded conventions to guarantee zero repetition of corrected mistakes.
-
-CLI Utility:
+Agents absorb developer corrections and persist them to disk:
 ```bash
-# Record a new learned convention
-python3 skills/prompt-refinement-and-metacognition/scripts/record_learning.py \
-  --record "Use named exports for all React components" --category ARCH
+# Record an architectural invariant
+python3 skills/continuous-learning/scripts/record_learning.py \
+  --category ARCH --text "Use native fetch over axios in all new backend services"
 
-# List all recorded conventions in active project
-python3 skills/prompt-refinement-and-metacognition/scripts/record_learning.py --list
-```
-
----
-
-## Anti-Vibe-Coding UI Craftsmanship
-
-SkillBuilder strictly eliminates generic AI "vibe coding" aesthetic tropes:
-
-- **No Neon Gradients or Glows**: Prohibits purple-to-indigo/cyan gradients and green glowing borders (`shadow-[0_0_...`). Mandates high-contrast neutral scales (zinc, slate, stone) with subtle 1px dividers.
-- **No Card-Soup**: Prohibits wrapping every single element in high-elevation rounded cards. Layout structure is driven by typography, column rules, and intentional whitespace.
-- **No Emojis as UI Icons**: Prohibits using raw emojis in buttons, navigation, and headings. Mandates semantic vector SVG icons (Lucide Icons) with accessible attributes.
-- **No Frivolous Badges**: Prohibits decorative version pills ("v1.0.0-beta", "AI-Powered", "Fast"). Badges are permitted solely for real system lifecycle states (`RUNNING`, `FAILED`, `HEALTHY`).
-- **Grounded Technical Copywriting**: Prohibits synthetic marketing buzzwords (*"seamlessly elevate your synergy"*). Mandates direct, factual descriptions of system behavior.
-
-Automated Linter:
-```bash
-python3 skills/ui-frontend-engineering/scripts/verify_frontend_quality.py --path src/components/
-```
-
----
-
-## The 9 Production Skills
-
-SkillBuilder organizes software engineering into 9 specialized, progressively disclosed skills:
-
-| Skill | Role | Key Capabilities |
-| :--- | :--- | :--- |
-| **`world-class-engineering`** | Principal Software Engineer | 6-Phase EOS (Understand -> Define -> Plan -> Implement -> Verify -> Deliver), 500-line source file limit, 7 quality gates. |
-| **`production-etiquette`** | Production Readiness Engineer | Secrets hygiene (`.env.example`), multi-stage non-root Docker (`USER 10001`), resilient networking (timeouts, retries with jitter), anti-mock mandate. |
-| **`prompt-refinement-and-metacognition`** | Principal Prompt Engineer | 5-phase Prompt Polishing Engine (PPE), ambiguity detection, token compression, Continuous Learning Protocol (`record_learning.py`). |
-| **`qa-testing-and-error-resolution`** | Principal QA & Reliability Engineer | 4-tier testing trophy (Unit, Integration, Contract, E2E), pre-flight QA gates, Master Error Catalog, List-an-Error (LaE) tracking. |
-| **`ui-frontend-engineering`** | Frontend & UI/UX Architect | Tailwind CSS v4 design tokens, Radix UI & shadcn primitives, WCAG 2.2 AA accessibility, Core Web Vitals, Anti-Vibe-Coding standard. |
-| **`backend-systems-engineering`** | Backend Systems Architect | Clean/Hexagonal Architecture, REST/gRPC API design, Zod/Pydantic v2 boundary validation, JWT rotation, idempotency keys, RFC 7807 problem details. |
-| **`database-and-datastore-engineering`** | Principal Database Architect | PostgreSQL, SQLite, Cloud SQL, zero-downtime expand-and-contract migrations, non-blocking indexes (`CONCURRENTLY`), PgBouncer connection pooling. |
-| **`cloud-devops-infrastructure`** | Cloud & Platform Engineer | GCP Cloud Run, GKE, IAM least-privilege, Secret Manager, distroless containers, 5-gate GitHub Actions CI pipeline, OpenTelemetry tracing. |
-| **`ai-and-llm-engineering`** | Principal AI Systems Engineer | Gemini 2.5 Pro/Flash, `google-genai` SDK, Antigravity subagents, schema-enforced structured outputs, defensive tool execution, hybrid RAG. |
-
----
-
-## Prompt Polishing Engine (PPE)
-
-The user prompt is the foundation of all generated software. Before writing code on complex requests, SkillBuilder automatically runs the **PPE**:
-
-1. **Intent Extraction**: Identifies the core functional deliverable and scope boundary.
-2. **Ambiguity & Edge-Case Scan**: Uncovers missing error handling, auth requirements, and state dropouts.
-3. **Structured Specification**: Converts narrative thoughts into an RFC-style specification matrix.
-4. **Token Compression**: Strips conversational padding and formats requirements into compact tables.
-5. **Verification Gate**: Attaches automated verification commands.
-
-CLI Utility:
-```bash
-python3 skills/prompt-refinement-and-metacognition/scripts/polish_prompt.py --text "build an express api for user auth with jwt"
-```
-
----
-
-## Token Savings & High-Density Pairing
-
-To maximize context window longevity and reduce inference latency:
-- **Progressive Disclosure**: Only skill names and descriptions are loaded initially (<300 lines per `SKILL.md`). In-depth guides in `references/` are pulled into context only when needed.
-- **Local CLI Execution**: Mechanical checks (line counts, project hygiene, commit chunks, token budgets, error lookups, convention logging) are executed by fast local Python scripts without spending model tokens.
-- **High-Density Formatting**: Eliminates conversational filler in favor of surgical diffs, markdown tables, and precise line links (`file:///...#L10`).
-
-CLI Token Budget Estimator:
-```bash
-python3 skills/ai-and-llm-engineering/scripts/calculate_token_budget.py --text "Sample system prompt payload"
-```
-
----
-
-## QA Testing & Master Error Catalog
-
-SkillBuilder maintains an encyclopedia of software defects across Frontend, Backend, Database, Cloud, and AI systems. Whenever an error occurs, the **List-an-Error (LaE)** protocol captures:
-1. `[Error Signature]`: Exact message and code.
-2. `[Root Cause]`: Mechanical explanation.
-3. `[Remediation]`: Concrete code patch.
-4. `[Regression Test]`: Automated test preventing recurrence.
-
-Search the Master Error Catalog:
-```bash
-python3 skills/qa-testing-and-error-resolution/scripts/lookup_error.py --query "deadlock"
-python3 skills/qa-testing-and-error-resolution/scripts/lookup_error.py --query "hydration" --category frontend
+# List all recorded invariants
+python3 skills/continuous-learning/scripts/record_learning.py --list
 ```
 
 ---
 
 ## Installation & Antigravity Integration
 
-SkillBuilder can be installed globally or per-project. For complete setup details, refer to [`INTEGRATION_GUIDE.md`](INTEGRATION_GUIDE.md).
-
-### One-Command Quickstart
+### Universal One-Command Quickstart
 ```bash
-# Clone repository
-git clone https://github.com/darknecrocities/SkillBuilder.git ~/SkillBuilder
-cd ~/SkillBuilder
+# Install globally for all projects on this workstation
+./scripts/install.sh --global
 
-# Install globally for all projects on this machine
-bash scripts/install.sh --global
-
-# Or scaffold a specific project repository
-bash scripts/install.sh --project /path/to/my-project
+# Or install directly into a specific project repository
+./scripts/install.sh --project /path/to/my-project
 ```
 
 ---
 
-## Automated Verification Suites
+## Automated Verification Suites (25 Suites)
 
-SkillBuilder includes a master test runner executing 12 independent verification suites:
+SkillBuilder includes a master test runner executing 25 independent verification suites:
 
 ```bash
-bash scripts/verify_all_skills.sh
+./scripts/verify_all_skills.sh
 ```
 
 Checks executed:
 1. **500-Line Source File Policy**: Verifies all source files adhere to the 500-line limit.
-2. **World-Class Engineering Unit Tests**: Validates line-checking logic and extraction protocols.
-3. **Project Hygiene Unit Tests**: Validates `.env.example`, `.gitignore`, and container scaffolding.
-4. **Git Commit Chunking Tests**: Validates 1,000-line push budget and cluster analysis.
-5. **Prompt Refinement Tests**: Validates intent extraction and filler stripping.
-6. **Continuous Learning Tests**: Validates dynamic convention persistence and querying.
-7. **Master Error Catalog Tests**: Validates search index and keyword matching.
-8. **Frontend Quality & Anti-Vibe-Coding Tests**: Validates accessibility and anti-vibe-coding rules.
-9. **Backend Contract Tests**: Validates schema validation linter.
-10. **Database Hygiene Tests**: Validates SQL migration safety and hazardous lock checks.
-11. **Container Security Tests**: Validates non-root user and multi-stage container rules.
-12. **AI Token Budget Tests**: Validates token calculation and payload density estimation.
+2. **World-Class Engineering Unit Tests**: Validates line-checking and EOS extraction logic.
+3. **Anti-AI-Slop Tests**: Validates badge, mock array, and obvious comment sanitization.
+4. **Autonomous Research Tests**: Validates package alternative recommendation engine.
+5. **Responsiveness QA Tests**: Validates viewport matrix, fixed-width traps, and touch targets.
+6. **List-an-Error QA Tests**: Validates Master Error Catalog lookup and classification.
+7. **UI Design Tokens Tests**: Validates vector icons, raw emoji bans, and token scales.
+8. **UI Frontend Quality Tests**: Validates accessibility and anti-vibe-coding rules.
+9. **Frontend Architecture Tests**: Validates lifecycle memory safety and AbortController signals.
+10. **Security Defense Tests**: Validates SQL injection defense and secret leak detection.
+11. **Fullstack Anti-Mock Tests**: Validates real persistence and boundary schema validation.
+12. **Performance & Web Vitals Tests**: Validates N+1 query cascades and CLS image dimensions.
+13. **API Design OpenAPI Tests**: Validates OpenAPI 3.1 contracts and status code definitions.
+14. **Observability Telemetry Tests**: Validates structured logging and healthcheck endpoints.
+15. **Safe Refactoring Tests**: Validates detection of oversized files and deep nesting.
+16. **Git Workflow Commit Chunking Tests**: Validates the 1,000-line commit chunk budget.
+17. **Continuous Learning Tests**: Validates convention persistence and deduplication.
+18. **Backend API Contract Tests**: Validates route contracts and schema validation.
+19. **Database Hygiene Tests**: Validates migration safety and non-blocking indexing.
+20. **Container DevOps Security Tests**: Validates non-root user and multi-stage container rules.
+21. **AI Token Budget Tests**: Validates token calculation and context window budgeting.
+22. **Prompt Polish Tests**: Validates intent extraction and filler stripping.
+23. **Prompt Polish Learning Tests**: Validates convention indexing.
+24. **Production Etiquette Hygiene Tests**: Validates `.env.example`, `.gitignore`, and scaffolding.
+25. **Production Etiquette Git Chunk Tests**: Validates git diff partitioning.
 
 ---
 
@@ -199,32 +189,35 @@ Checks executed:
 
 ```text
 SkillBuilder/
-├── plugin.json                                 # Antigravity plugin manifest
-├── README.md                                   # Comprehensive documentation with ASCII header
+├── plugin.json                                 # Antigravity plugin manifest (v3.0.0)
+├── README.md                                   # Comprehensive documentation & slash command index
 ├── INTEGRATION_GUIDE.md                        # Step-by-step setup guide for Antigravity
 ├── AGENTS.md                                   # Root rules enforced on all projects
 ├── rules/
 │   └── AGENTS.md                               # Plugin-level rules
-├── .agents/
-│   └── skills.json                             # Discovered skills configuration
 ├── workspace/                                  # Developer Workspace & Presets
-│   ├── profile.json                            # Developer profile and stack defaults
-│   ├── pairing_manifesto.md                    # Pair-programming standards
-│   ├── prompt_templates/                       # High-density prompt templates
-│   └── scripts/
-│       ├── sync_to_global.sh                   # Symlinks to ~/.gemini/config/plugins/
-│       └── scaffold_project.sh                 # Scaffolds new projects with SkillBuilder standards
 ├── skills/
-│   ├── world-class-engineering/                # EOS & 500-line ceiling
-│   ├── production-etiquette/                   # Secrets, Docker, CI/CD, Git chunking
-│   ├── prompt-refinement-and-metacognition/    # Prompt Polishing Engine & Continuous Learning
-│   ├── qa-testing-and-error-resolution/        # Testing trophy & Master Error Catalog
-│   ├── ui-frontend-engineering/                # UI, Tailwind v4, a11y, Anti-Vibe-Coding
-│   ├── backend-systems-engineering/            # Clean architecture, APIs, Zod, auth
-│   ├── database-and-datastore-engineering/     # Relational design, migrations, indexing
-│   ├── cloud-devops-infrastructure/            # GCP, distroless containers, IaC, CI/CD
-│   └── ai-and-llm-engineering/                 # Gemini API, structured outputs, RAG
+│   ├── world-class-engineering/                # Master EOS & 500-line ceiling
+│   ├── anti-slop/                              # Anti-AI-slop & clean craftsmanship
+│   ├── research/                               # Autonomous research & alternative fallbacks
+│   ├── qa/                                     # Viewport responsiveness & Master Error Catalog
+│   ├── ui/                                     # Design tokens, neutral scales & Lucide icons
+│   ├── frontend/                               # React 19, Next.js, Flutter & effect cleanup
+│   ├── backend/                                # Clean architecture & Zod/Pydantic validation
+│   ├── security/                               # OWASP Top 10, SQL parameterization & secrets
+│   ├── fullstack/                              # Anti-mock vertical slices & real persistence
+│   ├── database/                               # Zero-downtime migrations & ACID integrity
+│   ├── devops/                                 # Multi-stage non-root containers & CI/CD
+│   ├── ai/                                     # Gemini SDK, structured JSON & token budgets
+│   ├── prompt-polish/                          # Prompt Polishing Engine (PPE)
+│   ├── production-etiquette/                   # Resilient network clients & secret hygiene
+│   ├── performance/                            # Core Web Vitals & N+1 query elimination
+│   ├── api-design/                             # OpenAPI 3.1 & RFC 7807 Problem Details
+│   ├── observability/                          # OpenTelemetry tracing & structured JSON logs
+│   ├── continuous-learning/                    # Persistent conventions (CLP)
+│   ├── refactor/                               # Safe debt remediation & file decomposition
+│   └── git-workflow/                           # Atomic commit chunking (<1k lines) & releases
 └── scripts/
     ├── install.sh                              # Universal installer (Global / Project)
-    └── verify_all_skills.sh                    # Master verification test runner
+    └── verify_all_skills.sh                    # Master 25-suite verification test runner
 ```
