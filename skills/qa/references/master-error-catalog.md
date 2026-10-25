@@ -84,7 +84,62 @@ A cross-discipline knowledgebase of real-world software defects, diagnostic comm
 
 ---
 
-## 4. Cloud & DevOps Errors
+## 4. Mobile & OS Lifecycle Errors
+
+### [ERR-MOB-001] Background Memory Pressure Eviction Crash
+- **Category**: Mobile
+- **Symptom**: App terminates abruptly when backgrounded with `EXC_RESOURCE RESOURCE_TYPE_MEMORY` or silent process eviction by OS watchdog.
+- **Root Cause**: High resident memory footprint caused by retaining uncompressed bitmap decoders and background listeners during background transitions.
+- **Diagnostic Command**: Profile memory allocations in Xcode Instruments or Android Studio Memory Profiler while triggering background state.
+- **Resolution**:
+  1. Register for `onTrimMemory` (Android) or `didReceiveMemoryWarning` (iOS) and immediately purge in-memory caches.
+  2. Pause background animation timers and release decoded image bitmaps.
+  3. Flush unsaved state to disk and retain only lightweight model identifiers.
+- **Regression Prevention**: Unit test validating cache eviction listeners trigger on memory warning notifications.
+
+---
+
+### [ERR-MOB-002] Cold-Start Deep-Link Desynchronization
+- **Category**: Mobile
+- **Symptom**: Tapping a deep link when the app is completely terminated crashes on launch with `NullPointerException: userSession is null` or routes to the login screen instead of the target entity.
+- **Root Cause**: The navigation router mounts the destination screen before asynchronous authentication token rehydration finishes from secure storage.
+- **Diagnostic Command**: Launch app via terminal URI trigger (`adb shell am start -W -a android.intent.action.VIEW -d "myapp://entity/123"`).
+- **Resolution**:
+  1. Implement a pending deep-link intent queue that buffers incoming URLs during cold start.
+  2. Await authentication verification before releasing buffered deep links to the router.
+  3. Provide fallback routing if the target entity is missing or unauthenticated.
+- **Regression Prevention**: End-to-end integration test verifying deep-link resolution during cold-start launch.
+
+---
+
+## 5. Network & State Resilience Errors
+
+### [ERR-NET-001] Indefinite Hanging Network Request
+- **Category**: Network
+- **Symptom**: Application spinner runs perpetually; user interface hangs indefinitely on unstable cellular or flaky Wi-Fi connections.
+- **Root Cause**: Missing connection and socket read timeouts on HTTP client, allowing half-open TCP connections to linger indefinitely.
+- **Diagnostic Command**: Simulate dropped packets or black-hole proxy on outbound endpoint.
+- **Resolution**:
+  1. Bind all fetch and HTTP requests to an `AbortController` with a 3-second connection timeout and 15-second read timeout.
+  2. Implement user-facing retry button with bounded exponential backoff.
+- **Regression Prevention**: Mock client test verifying request aborts and throws `TimeoutError` within configured deadline.
+
+---
+
+### [ERR-STATE-001] Stale Optimistic State Rollback Divergence
+- **Category**: State
+- **Symptom**: User executes an action (e.g. toggle favorite), optimistic state updates immediately, backend mutation fails, but UI remains in corrupted edited state.
+- **Root Cause**: Mutation failure handler did not restore the pre-mutation snapshot or swallowed the error without notifying the state store.
+- **Diagnostic Command**: Mock backend endpoint to return HTTP 500 and observe UI rollback behavior.
+- **Resolution**:
+  1. Capture `snapshot = currentState` immediately before applying optimistic update.
+  2. In error catch handler, dispatch `setState(snapshot)` to cleanly rollback state.
+  3. Display non-intrusive toast notification explaining mutation failure.
+- **Regression Prevention**: Automated test verifying state snapshot restores on simulated network rejection.
+
+---
+
+## 6. Cloud & DevOps Errors
 
 ### [ERR-CL-001] Kubernetes / Container OOMKilled
 - **Category**: Cloud
@@ -110,7 +165,7 @@ A cross-discipline knowledgebase of real-world software defects, diagnostic comm
 
 ---
 
-## 5. AI & LLM Errors
+## 7. AI & LLM Errors
 
 ### [ERR-AI-001] Structured Output Schema Validation Failure
 - **Category**: AI
