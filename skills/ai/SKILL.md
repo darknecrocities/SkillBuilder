@@ -6,7 +6,7 @@ description: Architect, implement, and maintain production AI systems, Gemini AP
 # AI & LLM Systems Engineering (`/ai`)
 
 > **Role**: Principal AI Systems Engineer & Agent Architect  
-> **Philosophy**: *Deterministic boundaries on probabilistic models. Enforce strict JSON schemas. Verify citations. Guard token budgets.*
+> **Philosophy**: *Deterministic boundaries on probabilistic models. Enforce strict JSON schemas. Ground assertions in verified citations. Guard token budgets. Never poll in loops.*
 
 This skill establishes production discipline for Generative AI, Large Language Models, and autonomous agent loops. It enforces the official `google-genai` SDK patterns, Antigravity subagent orchestration, strict schema-constrained outputs, defensive tool execution, and token budget optimization.
 
@@ -27,32 +27,74 @@ This skill establishes production discipline for Generative AI, Large Language M
 
 ---
 
-## 2. Core AI Systems Invariants
+## 2. Gemini API Production SDK Standards (`google-genai`)
 
-### 1. Mandatory Schema-Enforced Structured Outputs
-- When programmatic systems consume LLM responses, never parse unstructured markdown.
-- Enforce `response_mime_type="application/json"` with `response_schema` (Pydantic model or JSON Schema).
-- Parse and validate the response against the schema immediately upon receipt.
+Always use the modern, unified `google-genai` SDK (do not use deprecated `google-generativeai`):
 
-### 2. Defensive Tool & Function Calling
-- Model tool declarations must define explicit property descriptions and required fields.
-- Wrap all tool execution handlers in `try/except` blocks. If a tool fails, return a structured error message to the model rather than crashing the agent loop.
-- Tools mutating real-world systems must enforce idempotency and permission checks.
+```python
+from google import genai
+from google.genai import types
+from pydantic import BaseModel, Field
 
-### 3. Grounded Retrieval-Augmented Generation (RAG)
-- Every generated factual assertion must cite its source chunk ID (`[Doc: Chunk 12]`).
-- Do not inject raw unchunked documents into context. Use semantic or recursive character chunking (500–1000 tokens with 10% overlap).
-- Combine dense vector retrieval with keyword/BM25 search (Hybrid Search).
+client = genai.Client()
 
-### 4. Context Budget & Prompt Caching
-- Reuse static system instructions and documentation across multi-turn sessions to leverage context caching.
-- Enforce strict token budget ceilings per agent invocation.
+class AnalysisResult(BaseModel):
+    summary: str = Field(description="2-3 sentence technical overview")
+    confidence: float = Field(ge=0.0, le=1.0)
+    risk_factors: list[str]
+
+# Strict Schema-Enforced Generation
+response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents="Analyze production database connection spikes",
+    config=types.GenerateContentConfig(
+        response_mime_type="application/json",
+        response_schema=AnalysisResult,
+        temperature=0.1,  # Low entropy for structured output
+    ),
+)
+
+data: AnalysisResult = response.parsed
+print(f"Risk factors count: {len(data.risk_factors)}")
+```
 
 ---
 
-## 3. Automation Tool: Token Budget Calculator
+## 3. Antigravity Agent Orchestration & Reactive Wakeup
 
-Estimate token footprint and optimize prompt payloads:
-```bash
-python3 scripts/calculate_token_budget.py --text "User system prompt payload"
+When coordinating autonomous multi-agent pipelines:
+1. **Never Poll in Loops**: The agent infrastructure automatically resumes parent agent context when subagents, background tasks, or schedules complete. Never call `sleep()` or query task status in a loop.
+2. **Defensive Subagent Tool Handlers**:
+   - Every tool call must be wrapped in `try/except`.
+   - Tool errors must return structured error objects (`{"error": "FILE_NOT_FOUND", "path": path}`) so the agent can reason and pivot, rather than crashing the loop.
+3. **Context Preservation**: Pass exact task parameters and isolation boundaries to subagents.
+
+---
+
+## 4. Grounded RAG & Citation Integrity
+
+```mermaid
+flowchart LR
+    A["User Query"] --> B["Hybrid Search (BM25 + Dense Embeddings)"]
+    B --> C["Top K Chunks (Reranked)"]
+    C --> D["Context Injection with Chunk IDs"]
+    D --> E["Model Generation with Explicit [Chunk ID] Citations"]
+    E --> F["Automated Hallucination & Citation Verification"]
 ```
+
+### Citation Invariants:
+- Every factual claim must include a markdown reference: `According to system spec [Spec: Section 4.2], the timeout is 15s.`
+- Chunks must be sized between 500 and 1,000 tokens with 10% overlap.
+- Never feed unparsed PDFs or raw uncleaned HTML into the prompt; extract clean markdown text first.
+
+---
+
+## 5. Token Budget Calculator CLI
+
+Estimate token consumption, character-to-token ratios, and cost estimates:
+```bash
+python3 skills/ai/scripts/calculate_token_budget.py --text "User system prompt payload"
+```
+Verifies:
+- Payload fits within target context window.
+- Token count does not exceed prompt budget limits.

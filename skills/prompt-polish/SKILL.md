@@ -6,7 +6,7 @@ description: Evaluates, manages, and polishes user prompts into token-efficient,
 # Prompt Refinement & Metacognitive Pair Programming (`/prompt-polish`)
 
 > **Role**: Principal Prompt Engineer & Metacognitive Pair Programmer  
-> **Philosophy**: *Clarify intent first. Eliminate token bloat. Structure requirements into testable engineering specifications.*
+> **Philosophy**: *Clarify intent first. Eliminate token bloat. Structure requirements into testable engineering specifications. Declare sensible defaults. Never guess ambiguous business logic.*
 
 This skill governs how AI pair programmers interpret, refine, and structure incoming user prompts. It turns ambiguous or raw requests into crisp, actionable technical specifications while minimizing token consumption and preventing hallucinated requirements.
 
@@ -32,39 +32,39 @@ Whenever a user provides a complex or underspecified task, execute the PPE befor
 
 ```mermaid
 flowchart TD
-    A["Raw User Prompt"] --> B["Phase 1: Intent Extraction"]
+    A["Raw User Request"] --> B["Phase 1: Intent Extraction & Scope Boundary"]
     B --> C["Phase 2: Ambiguity & Edge-Case Scan"]
-    C --> D["Phase 3: Structured Specification"]
-    D --> E["Phase 4: Token Compression"]
-    E --> F["Phase 5: Acceptance & Verification Gate"]
+    C --> D["Phase 3: High-Density Structured Specification"]
+    D --> E["Phase 4: Token Compression & Table Formatting"]
+    E --> F["Phase 5: Automated Verification Gate Definition"]
 ```
 
-### Phase 1: Intent Extraction
-- Identify the primary goal in one clear sentence.
-- Determine the scope boundaries: Frontend, Backend, Database, Cloud, or Multi-tier.
-- Extract target technologies and existing codebase conventions.
+### Phase 1: Intent Extraction & Scope Boundary
+- State the objective in exactly one active-voice engineering sentence.
+- Identify the target tier: Frontend, Backend, Database, Cloud/DevOps, or Fullstack slice.
+- Isolate existing tech stack constraints and learned conventions from `.agents/learned_conventions.md`.
 
 ### Phase 2: Ambiguity & Edge-Case Scan
-- Uncover implicit assumptions (e.g. auth required? persistence type? error handling?).
-- Identify failure states: what happens on network drop, invalid input, duplicate records?
-- If critical context is missing, ask focused multiple-choice questions. Otherwise, adopt sensible production defaults and declare them.
+- Uncover unstated architectural assumptions (e.g. data persistence format, error schemas, concurrency constraints).
+- Scan for edge conditions: network failures, duplicate records, timeout limits, boundary inputs.
+- If an ambiguous requirement would alter fundamental database or auth architecture, ask a focused multiple-choice question. Otherwise, select the production standard default and explicitly state the assumption.
 
-### Phase 3: Structured Specification
-- Organize the request using [templates/polished_prompt_template.md](templates/polished_prompt_template.md):
-  - **Objective**: 1 sentence.
-  - **Functional Requirements Matrix**: Explicit inputs, transformations, and outputs.
-  - **Non-Functional Requirements**: Latency, timeouts, security, accessibility.
+### Phase 3: High-Density Specification
+Format the polished specification with:
+1. **Target Deliverable**: Concrete files to create or modify.
+2. **Functional Requirements Matrix**: Inputs, transformations, outputs.
+3. **Non-Functional Guardrails**: Latency budgets, security sanitization, accessibility compliance, source line limits (< 500 lines).
 
 ### Phase 4: Token Compression
-- Remove conversational filler ("I was wondering if you could please help me...").
-- Format repeated structures into compact markdown tables.
-- Keep instructions high-signal and dense.
+- Eliminate introductory conversational filler ("Sure, I can help you build that! Here is the code...").
+- Format repeated parameters into dense markdown tables.
+- Use targeted diffs or focused code snippets instead of regurgitating unmodified hundreds of lines.
 
-### Phase 5: Acceptance & Verification Gate
-- Define the exact automated commands to verify the work:
-  - Unit test commands
-  - Type-check commands
-  - Linter and line-count checks
+### Phase 5: Verification Gate Definition
+Every polished specification must end with executable verification commands:
+- Type check: `tsc --noEmit` or `mypy`
+- Unit tests: `python3 -m unittest ...` or `npm test`
+- Source line limit check: `python3 skills/world-class-engineering/scripts/check_source_line_limits.py --path .`
 
 ---
 
@@ -73,8 +73,12 @@ flowchart TD
 Clean and structure raw user input from the terminal:
 ```bash
 # Polish a prompt string
-python3 scripts/polish_prompt.py --text "make me a quick login api in node with jwt and error handling"
+python3 skills/prompt-polish/scripts/polish_prompt.py --text "make me a quick login api in node with jwt and error handling"
 
 # Polish a raw prompt file
-python3 scripts/polish_prompt.py --file raw_prompt.txt --output polished_spec.md
+python3 skills/prompt-polish/scripts/polish_prompt.py --file raw_prompt.txt --output polished_spec.md
 ```
+Audits:
+- Identifies missing non-functional requirements (timeouts, error envelopes).
+- Formats inputs into clean engineering specifications.
+- Strips conversational token bloat.
