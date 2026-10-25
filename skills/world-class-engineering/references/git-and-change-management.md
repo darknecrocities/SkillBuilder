@@ -28,14 +28,16 @@ Before executing any file modifications or git commands:
 
 ---
 
-## 3. Commit Message Standards (Conventional Commits)
+## 3. Commit Message Standards (Conventional Commits: Title + Description)
 
-Format commit messages using the standard **Conventional Commits** specification:
+Format commit messages using the standard **Conventional Commits** specification with **mandatory Title AND Description Body**:
 
 ```text
-<type>(<optional scope>): <short summary in imperative mood>
+<type>(<optional scope>): <short summary in imperative mood under 72 chars>
 
-[optional body explaining motivation, context, and breaking changes]
+- Context / Why: Problem statement, motivation, or requirement driving the change.
+- Key Changes / What: Bulleted breakdown of affected modules, schemas, and files.
+- Verification / Impact: Exact automated test commands executed and guardrail receipts.
 
 [optional footer(s), e.g., Closes #123]
 ```
@@ -53,18 +55,23 @@ Format commit messages using the standard **Conventional Commits** specification
 ```text
 feat(billing): add stripe webhook signature validation
 
-- Implement HMAC-SHA256 signature verification in webhook handler
-- Add test coverage for valid, tampered, and expired signatures
-- Introduce STRIPE_WEBHOOK_SECRET to environment configuration
+- Context / Why: Prevent webhook replay and signature spoofing attacks.
+- Key Changes / What:
+  * Implement HMAC-SHA256 signature verification in webhook handler
+  * Add test coverage for valid, tampered, and expired signatures
+  * Introduce STRIPE_WEBHOOK_SECRET to environment configuration
+- Verification / Impact: 12 webhook unit tests passing; all files under 500 lines.
 
 Closes #412
 ```
 
 ---
 
-## 4. Branching & PR Guidelines
+## 4. Branching, Remote Push & PR Lifecycle
 
-- **Short-Lived Feature Branches**: Branch names should be descriptive and prefixed by purpose (e.g., `feat/oauth-login`, `fix/cart-race-condition`, `chore/bump-deps`).
+- **Short-Lived Feature Branches**: Branch names must be descriptive and prefixed by purpose (e.g., `feat/oauth-login`, `fix/cart-race-condition`, `chore/bump-deps`).
+- **Always Push to the Remote Branch**: Every commit must be pushed immediately to `origin <branch-name>`. Never leave unpushed local commits.
+- **Always Open or Update a Pull Request**: Every feature or phase completion must author or update an active, ready-to-merge GitHub Pull Request (`gh pr create` / `gh pr edit`).
 - **PR Description Hygiene**:
   - State the problem being solved.
   - Summarize the architectural approach and key trade-offs.

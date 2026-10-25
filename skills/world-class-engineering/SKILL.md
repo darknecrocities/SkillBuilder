@@ -36,13 +36,14 @@ Consult the specialized references and reusable templates for detailed execution
 
 ---
 
-## 1.5 The 21 Modular Engineering Skills (`/`)
+## 1.5 The 22 Modular Engineering Skills (`/`)
 
-The SkillBuilder ecosystem decomposes into 21 focused, highly-actionable skills directly callable via `/`:
+The SkillBuilder ecosystem decomposes into 22 focused, highly-actionable skills directly callable via `/`:
 
 | Command | Skill Name | Scope & Core Responsibility |
 | :--- | :--- | :--- |
-| `/world-class-engineering` | **World-Class Engineering** | Master EOS orchestrator, 6-phase lifecycle, 500-line source file policy. |
+| `/full-scale-mode` | **Full-Scale Mode** | Master Phased Project Orchestration Engine (aliased with `/world-class-engineering`), 7-phase EOS lifecycle, parallel subagent swarms. |
+| `/world-class-engineering` | **World-Class Engineering** | Master EOS orchestrator, 6-phase lifecycle, 500-line source file policy (aliased with `/full-scale-mode`). |
 | `/anti-slop` | **Anti-AI-Slop & Craftsmanship** | Strips decorative badges, generic marketing fluff, neon gradients, and mock arrays. |
 | `/research` | **Autonomous Research & Fallbacks** | Discovers and evaluates production-grade library alternatives when packages fail. |
 | `/qa` | **Responsiveness QA & Sub-Agents** | Viewport audit (375px/768px/1280px+), a11y, touch targets (>=44px), sub-agent QA. |
@@ -70,8 +71,8 @@ The SkillBuilder ecosystem decomposes into 21 focused, highly-actionable skills 
 
 To achieve maximum output quality, combine Antigravity native commands with specialized modular skills in a single prompt:
 
-- **Complex Feature Planning**: `/plan /world-class-engineering /anti-slop <feature>`
-  - Activates Antigravity's interactive planning engine while strictly enforcing the 6-phase EOS lifecycle and purging AI marketing tropes.
+- **Full-Scale Feature Planning**: `/plan /full-scale-mode` (or `/plan /world-class-engineering`)
+  - Activates Antigravity's interactive planning engine while strictly enforcing the 7-phase EOS lifecycle, token budget ceilings, and subagent orchestration.
 - **Modern Luxury UI & Apple Craftsmanship**: `/plan /ui /3d <product showcase>`
   - Combines Cupertino blur acrylic materials with WebGL PBR clearcoat 3D rendering for Tesla/Apple caliber interactive experiences.
 - **Full-Stack Vertical Slice**: `/plan /fullstack /database /backend <feature>`

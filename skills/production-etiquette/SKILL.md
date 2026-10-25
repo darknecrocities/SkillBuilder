@@ -81,11 +81,13 @@ Every outgoing network request, API client, and authentication workflow must imp
   4. Dependency security audit (`npm audit`, `pip-audit`, `govulncheck`).
   5. Docker build verification.
 
-### Pillar 7: Git Branching, Chunked Commits (< 1k lines), & Ready-to-Review PRs
+### Pillar 7: Git Branching, Meaningful Commits (Title + Description), Push to Branch & Ready-to-Review PRs
 - **Explicit Branch Prefixes**: Every branch must follow purpose-driven conventions: `feat/`, `fix/`, `refactor/`, `perf/`, `docs/`, `test/`, `chore/` (or `feat/project-bootstrap` for initial setup).
 - **The 1,000-Line Push Budget**: Never push a single commit or unreviewed diff exceeding 1,000 lines of code. Analyze changed files and decompose into cohesive atomic commits (Schema -> Service -> API -> Tests).
+- **Meaningful Commits with Title + Description**: Every commit must feature a Conventional Title AND a structured Description body explaining Why, What, and Verification. Zero lazy commits.
+- **Always Push to the Remote Branch**: Publish commits immediately to `origin <branch-name>`; never leave unpushed local commits.
 - **Green State Rule**: Every commit must compile, pass static types, and pass tests independently.
-- **Ready-to-Review PRs**: Always prepare complete Pull Requests with structured titles, technical summaries, file changes, verification logs, and rollback procedures so the user can review and merge with minimal friction.
+- **Always Open or Update a PR**: Always author or update an active, ready-to-merge GitHub Pull Request with structured titles, technical summaries, verification logs, and rollback procedures.
 
 ---
 
@@ -123,5 +125,5 @@ All development in this repository MUST comply with the `production-etiquette` s
 4. Implement network resilience: explicit timeouts, caching, debouncing, and jittered retries.
 5. Strictly avoid static mock arrays or toy demo code; all features must be fully functional and persistent.
 6. Provide automated tests and maintain the project's CI/CD workflow (.github/workflows/ci.yml).
-7. Branch deliberately (feat/, fix/), limit push diffs to < 1,000 lines, and author ready-to-review Pull Requests with complete descriptions and verification evidence.
+7. Branch deliberately (feat/, fix/), limit push diffs to < 1,000 lines, author meaningful commits with Title + Description, always push to remote branch, and maintain ready-to-merge Pull Requests.
 ```
