@@ -126,7 +126,7 @@ flowchart TD
     PPE --> PLAN["Phase 2: Interactive Implementation Plan Artifact (/plan)"]
     PLAN --> APPROVE{"User Review & Approval"}
     APPROVE -- "Proceed" --> EXEC["Phase 3: Multi-Discipline Execution (/anti-slop, /research, /security)"]
-    EXEC --> QA["Phase 4: Two-Tier QA & 29-Suite Verification (/qa)"]
+    EXEC --> QA["Phase 4: Two-Tier QA & 30-Suite Verification (/qa)"]
     QA --> CHUNK["Phase 5: Atomic Commit Chunking (< 1k lines) (/git-workflow)"]
     CHUNK --> PR["Phase 6: Ready-to-Merge Pull Request + Walkthrough"]
 ```
@@ -149,11 +149,12 @@ flowchart TD
 5. **Continuous Verification & 500-Line Ceiling (`/full-scale-mode`, `/world-class-engineering` & `/qa`)**:
    - Audits all source files against the strict **500-line physical limit** (`check_source_line_limits.py`).
    - Executes the **Two-Tier QA Engine**: Full UI/Frontend QA (`/qa ui`) for viewports, 44x44pt touch targets, WCAG AA, and 120Hz GPU compositor, plus Full App Functional QA (`/qa app`) for state machines, real persistence, 3s/15s timeouts, and mobile lifecycles.
-   - Executes the master 29-suite verification test runner.
-6. **Atomic Commit Chunking & Ready-to-Review PR (`/git-workflow`)**:
-   - Automatically clusters diffs into cohesive commits strictly below the **1,000-line push budget**.
-   - Uses Conventional Commits (`feat:`, `fix:`, `refactor:`, `test:`).
-   - Authors a complete GitHub Pull Request via `gh pr create` with test receipts, walkthrough diffs, and semantic release tags.
+   - Executes the master 30-suite verification test runner.
+6. **Meaningful Commits (Title + Description), Push to Branch & Ready-to-Review PR (`/git-workflow`, `/full-scale-mode`)**:
+   - Decomposes diffs into cohesive commits strictly below the **1,000-line push budget**.
+   - Enforces **mandatory multi-line Conventional Commits** with a clear title AND a structured description body (Why, What, Verification).
+   - **Always pushes immediately to remote branch** (`git push origin <branch>`).
+   - **Always authors or updates a ready-to-merge GitHub Pull Request** via `gh pr create` / `gh pr edit` with test receipts, walkthrough diffs, and semantic release tags.
 
 ### Specialized Slash Command Combos
 
@@ -194,7 +195,7 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 | `/observability` | **Distributed Telemetry** | SRE | OpenTelemetry distributed tracing, structured JSON logs with correlation IDs, health/ready probes. | `verify_telemetry_standards.py` | Mandatory correlation IDs (`trace_id`); `/healthz` endpoints. |
 | `/continuous-learning` | **Conversational Learning (CLP)** | Memory | Persists project invariants to `.agents/learned_conventions.md` to prevent repeated errors. | `record_learning.py` | Immediate recording of corrections; zero repeated mistakes. |
 | `/refactor` | **Safe Refactoring** | Refactoring | Strangler Fig pattern, characterization testing, decomposing god files approaching 500 lines. | `detect_refactor_opportunities.py` | Proactive decomposition when files reach 350-400 lines. |
-| `/git-workflow` | **Git Workflow & Releases** | Git / VCS | Git branching, commit chunking (< 1,000 lines), Conventional Commits, release tagging. | `analyze_git_commit_chunks.py` | Strict 1,000-line change budget per commit chunk. |
+| `/git-workflow` | **Git Delivery & PR Engine** | Release | Conventional Commits (Title + Description), 1,000-line budget, remote branch push, and GitHub PR authoring. | `analyze_git_commit_chunks.py` & `verify_git_delivery_etiquette.py` | Mandatory Title + Description body; always push & open PR. |
 
 ---
 
@@ -406,5 +407,5 @@ SkillBuilder/
 └── scripts/
     ├── install.sh                              # Universal multi-platform installer
     ├── export_multiplatform.py                 # Multi-platform exporter (Cursor, Claude, Codex)
-    └── verify_all_skills.sh                    # Master 29-suite verification test runner
+    └── verify_all_skills.sh                    # Master 30-suite verification test runner
 ```

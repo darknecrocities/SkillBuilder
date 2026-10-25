@@ -83,7 +83,7 @@ flowchart TD
 4. **Phase 3 (Concurrent Build)**: Dispatch parallel subagents for Track 3A (Backend/DB) and Track 3B (UI/UX/3D).
 5. **Phase 4 (Harden & Contain)**: Dispatch parallel subagents for Track 4A (Security/Resilience) and Track 4B (DevOps/Telemetry).
 6. **Phase 5 (Verify & Catalog)**: Execute Two-Tier QA sweeps (`/qa ui` and `/qa app`) and 500-line source file checks.
-7. **Phase 6 (Ship & Persist)**: Split commits strictly under the 1,000-line review budget, tag release (`vX.Y.Z`), author PR, and record learnings.
+7. **Phase 6 (Ship & Persist)**: Split commits under 1,000 lines with mandatory Conventional Title AND structured Description body, push to remote tracking branch, open/update ready-to-merge GitHub PR, tag release (`vX.Y.Z`), and record learnings.
 
 ---
 

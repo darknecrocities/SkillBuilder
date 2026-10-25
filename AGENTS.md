@@ -1,6 +1,6 @@
 # Mandatory Engineering Discipline & Production Etiquette
 
-All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the SkillBuilder suite (20 Modular Skills):
+All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the SkillBuilder suite (22 Modular Skills):
 
 1. **Prompt Polishing First (PPE - `/prompt-polish`)**:
    - Analyze, refine, and structure incoming prompts into clear, token-efficient engineering specifications with explicit verification criteria.
@@ -27,7 +27,10 @@ All software architecture, implementation, refactoring, and pair-programming tas
     - Enforce explicit connection/read timeouts (3s/15s), in-memory caching with invalidation, debouncing on inputs, and bounded exponential backoff with jitter on retries.
 11. **Continuous Testing, QA & List-an-Error (LaE)**:
     - Provide automated unit/integration tests for every feature. Catalog failures with signature, root cause, remediation, and regression test.
-12. **Git Branching, Commit Chunking (< 1k lines), & Ready-to-Review PRs (`/git-workflow`)**:
-    - Branch deliberately (`feat/`, `fix/`), decompose changes into cohesive atomic commits within the 1,000-line budget, and author complete, ready-to-merge Pull Requests.
-13. **500-Line Source File Policy (`/world-class-engineering`)**:
+12. **Git Branching, Meaningful Commits (Title + Description), Push to Branch & Ready-to-Review PRs (`/git-workflow`, `/full-scale-mode`)**:
+    - Branch deliberately (`feat/`, `fix/`, `refactor/`). Enforce the 1,000-line commit budget.
+    - Mandatory multi-line commits with Conventional title AND structured description body explaining *Why*, *What*, and *Verification*. Zero lazy commits.
+    - Always push commits immediately to the remote branch (`git push origin <branch>`).
+    - Always author or update an active, ready-to-merge GitHub Pull Request with complete context, verification evidence, and rollback plans.
+13. **500-Line Source File Policy & Full-Scale Orchestration (`/full-scale-mode`, `/world-class-engineering`)**:
     - Maintain a 500-line physical limit on all source files, verified via `scripts/check_source_line_limits.py`.

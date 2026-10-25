@@ -124,7 +124,9 @@ flowchart TD
   1. Record any new project conventions or user corrections to `.agents/learned_conventions.md`.
   2. If any source file approaches 500 lines, execute the 7-step safe refactoring protocol.
   3. Run `analyze_git_commit_chunks.py`: Decompose changes into cohesive commits strictly below the **1,000-line review budget**.
-  4. Author Conventional Commits (`feat:`, `test:`, `fix:`, `refactor:`).
-  5. Push commits, create semantic release tag (`vX.Y.Z`), and generate/update GitHub Pull Request.
-  6. Author comprehensive walkthrough artifact in the conversation directory.
-- **Exit Criteria**: Working tree clean, PR ready to merge, release tag pushed, walkthrough presented.
+  4. Author Conventional Commits with **mandatory Title AND structured Description body** explaining *Why*, *What*, and *Verification*. Zero lazy commits.
+  5. **Always push to remote tracking branch**: Execute `git push origin <branch-name>`.
+  6. **Always open or update GitHub Pull Request**: Author or update active PR via `gh pr create` / `gh pr edit` with complete architectural context, test receipts, and rollback instructions.
+  7. Tag semantic release version (`vX.Y.Z`) and push tag (`git push origin vX.Y.Z`).
+  8. Author comprehensive walkthrough artifact in the conversation directory.
+- **Exit Criteria**: Working tree clean and synchronized with remote, active PR ready to merge, release tag pushed, walkthrough presented.

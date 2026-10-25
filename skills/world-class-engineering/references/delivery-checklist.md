@@ -47,6 +47,9 @@ This checklist must be audited and verified before declaring any non-trivial eng
 
 ### Gate 7: Delivery & Reporting
 - [ ] A concise, transparent summary of changed files is prepared.
+- [ ] Commits adhere to the 1,000-line budget with **mandatory Conventional Title AND structured Description body**.
+- [ ] All commits are pushed to the remote branch (`git push origin <branch>`) with working tree clean.
+- [ ] Active, ready-to-merge GitHub Pull Request authored or updated (`gh pr create` / `gh pr edit`).
 - [ ] Exact verification commands and test execution results are documented.
 - [ ] Any required configuration changes, new environment variables, or migration steps are clearly noted.
 - [ ] Known edge cases, trade-offs, or remaining limitations are honestly reported.
