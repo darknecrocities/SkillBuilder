@@ -27,6 +27,43 @@ SkillBuilder enforces an uncompromising engineering standard:
 
 ---
 
+## Live Demonstration: SkillBuilder in Action
+
+Experience the unedited engineering workflow of SkillBuilder operating inside **Google Antigravity** with **Gemini 3.8 Flash (High)**. This demonstration captures an autonomous agent diagnosing and remediating critical visual clipping, contrast defects, and layout regressions across a production portfolio application—complete with dynamic camera shifts, smooth punch-in zooms, 4-tier viewport audits, automated test suites, and 500-line limit checks.
+
+<p align="center">
+  <img src="assets/skillbuilder-demo-kinetic-banner.svg" alt="SkillBuilder Live Demonstration Kinetic Banner" width="100%" />
+</p>
+
+<div align="center">
+  <video src="assets/skillbuilderdemo_cinematic_web.mp4" poster="assets/skillbuilderdemo_cinematic_poster.png" controls="controls" width="100%" style="border-radius: 12px; box-shadow: 0 16px 36px rgba(0,0,0,0.6); max-width: 960px;">
+    Your browser does not support the video tag.
+  </video>
+  <p>
+    <em>🎬 <strong>Cinematic Edition (107.35s)</strong>: Dynamic camera shifts &bull; Smooth cosine punch-in zooms &bull; Glassmorphic telemetry HUD badges &bull; Mastered ambient soundtrack &amp; synchronized tactile UI clicks</em>
+  </p>
+  <p>
+    <a href="assets/skillbuilderdemo_cinematic_web.mp4"><strong>▶️ Play Cinematic Edition (1080p Web)</strong></a> &bull;
+    <a href="assets/skillbuilderdemo_web.mp4"><strong>📺 Play Pure Raw Edition (Wide-Angle)</strong></a> &bull;
+    <a href="assets/skillbuilderdemo_edited.mp4"><strong>💾 Download 4K Retina Master (2938x1912)</strong></a>
+  </p>
+</div>
+
+### Architectural Breakdown & Dynamic Camera Shift Map
+
+| Phase | Timeline | Action & Highlight Target | Camera Shift Vector `(X1, Y1) -> (X2, Y2)` | Zoom | Telemetry HUD Badge & Highlight |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **01** | `0:10 - 0:15` | **GitHub Repo Exploration** (`skills/` directory) | `(450, 720) -> (600, 580)` | `2.0x` | `REPO EXPLORATION // GitHub skills/ Directory`<br>Glowing cyan box around `skills/` folder |
+| **02** | `0:18 - 0:27` | **Clean Architecture & RFC 7807** (`backend/SKILL.md`) | `(500, 720) -> (680, 420)` | `2.0x` | `CLEAN ARCHITECTURE // Core Domain & Persistence`<br>Glides from `SKILL.md` into architecture diagram |
+| **03** | `0:29 - 0:38` | **Live Agent Runtime Stream** (Gemini 3.8 Flash High) | `(705, 350) -> (705, 550)` | `2.0x` | `LIVE RUNTIME // Gemini 3.8 Flash High Agent Execution`<br>Frames live file edit stream (`Hero.tsx`, `App.tsx`) |
+| **04** | `0:41 - 0:53` | **Two-Tier QA Remediation Plan** (`/qa`) | `(705, 575) -> (1480, 350)` | `2.0x` | `QA REMEDIATION PLAN // Two-Tier Visual Bug Fixes`<br>Shifts from left clicked card across to opened plan |
+| **05** | `1:04 - 1:14` | **Hit Command: `/fu` Autocomplete** (`fullstack`) | `(705, 1120) -> (705, 940)` | `2.0x` | `HIT COMMAND // /full Autocomplete & Orchestration`<br>Frames prompt bar and autocomplete popup menu |
+| **06** | `1:15 - 1:25` | **Hit Command: `/Ai` & Skill Tooltips** (`anti-slop`) | `(705, 1120) -> (705, 940)` | `2.0x` | `HIT COMMAND // /Ai & /anti-slop Tooltip Cards`<br>Frames prompt bar and skill catalog popup |
+| **07** | `1:28 - 1:38` | **Verified Output on `localhost:3001`** | `(500, 475) -> (960, 520)` | `2.0x` | `VERIFIED OUTPUT // Zero Clipping & 99.99% Alignment`<br>Frames unclipped Swiss hero title and Capabilities |
+| **08** | `1:40 - 1:46` | **Deterministic Verification Gate** (Vitest & 500-Line) | `(705, 630) -> (1480, 390)` | `2.0x` | `GATE PASSED // 30 Test Suites & 500-Line Limit`<br>Shifts from terminal test run to verification checklist |
+
+---
+
 ## The Golden Rule: Always Start with `/plan`
 
 The single greatest source of AI-generated bugs, unmaintainable "vibe coding", and discarded prototypes is **skipping the planning phase**. When an agent jumps directly into code generation, it is forced to guess database schemas, invent non-existent packages, leak hardcoded credentials, and violate file limits.
