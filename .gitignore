@@ -29,3 +29,7 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+
+# Raw media captures
+*.mov
+
