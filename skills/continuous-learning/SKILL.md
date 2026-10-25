@@ -7,42 +7,71 @@ description: Continuous conversational learning protocol (CLP) skill. Persists u
 
 > **Philosophy**: *Mistakes happen once; repeating them is unacceptable. Absorb developer corrections immediately, record invariants to disk, and enforce them forever.*
 
-This skill governs the Conversational Learning Protocol (CLP). It turns user corrections, preferred patterns, and architecture rules into persisted project invariants.
+This skill governs the Conversational Learning Protocol (CLP). It turns user corrections, preferred patterns, architecture rules, and repo idioms into persisted project invariants that survive across agent contexts, sub-agent invocations, and session restarts.
 
 ---
 
 ## 1. The Continuous Learning Cycle
 
 ```mermaid
-flowchart LR
-    A["User Correction / Constraint"] --> B["Acknowledge & Isolate Invariant"]
-    B --> C["Persist to .agents/learned_conventions.md"]
-    C --> D["Pre-Flight Inspection on Every Prompt"]
-    D --> E["Zero Repeated Mistakes"]
+flowchart TD
+    A["Developer Feedback or Correction"] --> B["1. Signal Detection & Invariant Extraction"]
+    B --> C["2. Conflict Check against Existing Rules"]
+    C --> D["3. Write to .agents/learned_conventions.md"]
+    D --> E["4. Pre-Flight Verification on Every Future Task"]
+    E --> F["Zero Repeated Mistakes & Constant Alignment"]
 ```
 
-### Rule 1: Immediate Memory Persistence
-- When a user corrects a pattern (e.g. *"Use Tailwind v4 syntax"*, *"Never use Axios, use native fetch"*, *"Our DB IDs use prefix usr_"*), invoke `record_learning.py` immediately.
-- Never rely solely on in-context memory. Persist to disk so future sessions and sub-agents inherit the rules.
-
-### Rule 2: Invariant Structure
-Every learned rule is stored with standard categorization and timestamps:
-`- **[CATEGORY-001] (YYYY-MM-DD)**: <Concrete actionable invariant>`
-- `UI`: Styling, tokens, icon preferences, font scales.
-- `ARCH`: Framework choices, package prohibitions, layer boundaries.
-- `API`: Response envelope formats, status code handling.
-- `DATA`: Database migration tools, ID schemas, index requirements.
-- `SEC`: Specific auth protocols, disallowed patterns.
+### 1.1 Detection Signals: When to Record Invariants
+Trigger the learning protocol automatically whenever:
+1. **Direct Correction**: The user corrects an implementation choice (e.g. *"Use Tailwind v4 instead of v3"*, *"Never use Axios, use native fetch"*).
+2. **Architecture Enforcement**: The user clarifies an organizational rule (e.g. *"All models must reside in src/domain/models"*).
+3. **Naming & Schema Conventions**: The user defines an entity convention (e.g. *"All table IDs must use ULID prefixes like usr_..."*).
+4. **Environment Quirks**: A unique workaround is discovered during build or test execution (e.g. *"On macOS ARM64, invoke python3 with specific DYLD path"*).
 
 ---
 
-## 2. Learning Recorder CLI
+## 2. Invariant Taxonomy & Schema
 
-Record and query learned conventions:
+Every learned rule is stored in `.agents/learned_conventions.md` using strict semantic prefixes:
+
+| Category Code | Domain | Scope & Example |
+| :--- | :--- | :--- |
+| `[UI-xxx]` | Design & Styling | Palette restrictions, typography scales, icon library preference. |
+| `[ARCH-xxx]` | System Architecture | Layer boundaries, dependency inversion, package prohibitions. |
+| `[API-xxx]` | API Contracts | Error payload envelope, idempotency headers, versioning schemes. |
+| `[DATA-xxx]` | Persistence & DB | Migration tooling, soft delete policies, indexing rules. |
+| `[SEC-xxx]` | Security & Auth | Token storage mechanisms, allowed JWT algorithms, CORS whitelist. |
+| `[TOOL-xxx]` | Tooling & Build | Custom test runner flags, linter rules, compiler arguments. |
+
+### Canonical Entry Format:
+```markdown
+- **[ARCH-004] (2026-10-25)**: Standardize all HTTP network calls on Node 18+ native `fetch`. Do not install `axios` or `request`.
+```
+
+---
+
+## 3. Pre-Flight Enforcement Workflow
+
+Before generating or modifying any code in the repository:
+1. Read `.agents/learned_conventions.md` if present in the workspace root or parent directory.
+2. Cross-reference the proposed solution against all recorded invariants.
+3. If a conflict is detected between standard practices and a project-specific learned convention, the **project learned convention takes absolute precedence**.
+4. Confirm compliance silently in the thought process before delivering the code.
+
+---
+
+## 4. Learning Recorder CLI
+
+Record and query learned conventions automatically via script:
+
 ```bash
-# Record an invariant
-python3 skills/continuous-learning/scripts/record_learning.py --category ARCH --text "Use native fetch over axios in all new modules"
+# Record an architectural convention
+python3 skills/continuous-learning/scripts/record_learning.py --category ARCH --text "Standardize on native fetch; do not install axios"
 
-# List all recorded conventions
+# Record a UI convention
+python3 skills/continuous-learning/scripts/record_learning.py --category UI --text "Use SF Pro font stack with -0.02em tracking for headings"
+
+# List and audit all recorded conventions
 python3 skills/continuous-learning/scripts/record_learning.py --list
 ```

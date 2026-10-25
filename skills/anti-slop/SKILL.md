@@ -5,13 +5,25 @@ description: Anti-AI-slop and clean craftsmanship skill. Eliminates decorative b
 
 # Anti-AI-Slop & Clean Craftsmanship (`/anti-slop`)
 
-> **Philosophy**: *Zero fluff. Zero decorative badges. Zero toy mock arrays. Zero neon purple gradients. Deliver real, human-grade, high-density software.*
+> **Philosophy**: *Zero fluff. Zero decorative badges. Zero toy mock arrays. Zero neon purple gradients. Zero conversational sycophancy. Deliver real, human-grade, high-density software.*
 
-This skill purges synthetic AI tropes and enforces professional engineering rigor across architecture, implementation, user interfaces, and documentation.
+This skill purges synthetic AI tropes and enforces professional engineering rigor across architecture, implementation, user interfaces, documentation, and agent pairing.
 
 ---
 
 ## 1. The Anti-Slop Prohibitions
+
+```mermaid
+flowchart LR
+    A["Incoming AI Output"] --> B{"Contains Slop?"}
+    B -- "Badges & Shields" --> C["Strip Markdown Badges"]
+    B -- "In-Memory Mock Arrays" --> D["Implement Real DB / Schema"]
+    B -- "Trivial Comments" --> E["Purge Self-Evident Notes"]
+    B -- "Neon Purple / Glows" --> F["Replace with High-Contrast Neutrals"]
+    B -- "Raw Emojis in Controls" --> G["Replace with Semantic Lucide SVGs"]
+    B -- "Fluffy Greetings" --> H["Direct Technical Communication"]
+    C & D & E & F & G & H --> I["Clean Human-Grade Codebase"]
+```
 
 | Slop Category | Prohibited Pattern | Mandatory Engineering Standard |
 | :--- | :--- | :--- |
@@ -21,6 +33,7 @@ This skill purges synthetic AI tropes and enforces professional engineering rigo
 | **Neon Vibe Tropes** | Purple/indigo gradients (`from-purple-600 to-indigo-600`), neon glow rings. | Disciplined neutrals (`zinc`, `slate`), subtle 1px borders, high contrast. |
 | **Card Soup** | 3-column generic SaaS cards nested within cards. | Bespoke functional layouts tailored to the domain's data hierarchy. |
 | **Raw Emoji Controls** | 🚀, ✨, 🔥 in buttons, navigation, and headers. | Semantic SVG icons (Lucide Icons) with `aria-hidden="true"`. |
+| **Conversational Sycophancy** | "Sure! I'd be happy to help with that!", "Great choice!". | Omit conversational padding; provide dense, targeted engineering answers. |
 | **Marketing Copy** | "Revolutionary AI-powered next-generation paradigm". | Direct, factual, token-efficient technical communication. |
 
 ---
@@ -29,76 +42,75 @@ This skill purges synthetic AI tropes and enforces professional engineering rigo
 
 When authoring or reviewing code, execute the sanitization pass:
 
-```mermaid
-flowchart TD
-    A["Raw Code / Design"] --> B["Detect AI Slop Markers"]
-    B --> C{"Any Slop Found?"}
-    C -- "Yes" --> D["Strip Badges & Marketing Fluff"]
-    D --> E["Remove Obvious Comments"]
-    E --> F["Replace Mock Arrays with Real DB"]
-    F --> G["Enforce Neutral Palette & Lucide Icons"]
-    G --> H["Verified Production Quality"]
-    C -- "No" --> H
+### Rule 1: Zero Restatement Comments
+Comments must explain **why**, never **what**. If code requires a comment to explain what it is doing, refactor variable or function names.
+
+```typescript
+// ❌ AI SLOP: Self-evident restatements
+// Check if user is authenticated
+if (!session.user) {
+  // Redirect to login page
+  router.push("/login");
+  // Return early
+  return null;
+}
+
+// ✅ CLEAN PRODUCTION: Self-documenting code
+if (!session.user) {
+  router.push("/login");
+  return null;
+}
 ```
 
-### Sanitizer CLI Execution
-Audit any directory using the standalone validator:
-```bash
-python3 skills/anti-slop/scripts/sanitize_ai_slop.py --path .
+### Rule 2: Anti-Mock / Real Persistence Mandate
+Never generate arrays of fake objects when creating API endpoints or data services. Use SQLite with `better-sqlite3`, PostgreSQL with `pg`, or local structured storage with Zod schema validation:
+
+```typescript
+// ❌ AI SLOP: In-memory toy array pretending to be a database
+const USERS = [
+  { id: "1", name: "Alice", role: "admin" },
+  { id: "2", name: "Bob", role: "user" },
+];
+
+export async function GET() {
+  return Response.json(USERS);
+}
+
+// ✅ CLEAN PRODUCTION: Parameterized SQL against real storage
+import Database from "better-sqlite3";
+import { z } from "zod";
+
+const db = new Database("app.db");
+db.pragma("journal_mode = WAL");
+
+const UserSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(1),
+  role: z.enum(["admin", "user"]),
+});
+
+export async function GET() {
+  const rows = db.prepare("SELECT id, name, role FROM users WHERE active = 1").all();
+  return Response.json(UserSchema.array().parse(rows));
+}
 ```
+
+### Rule 3: High-Density Pairing Communication
+When communicating with the user or other agents:
+1. Never open with pleasantries or flattery ("Certainly! I can definitely do that for you!").
+2. State the exact action taken, diff, and verification status.
+3. Structure complex information using markdown tables or code fences.
 
 ---
 
-## 3. Concrete Before vs. After Code Examples
+## 3. Sanitizer CLI Execution
 
-### Example A: Comments & Code Simplicity
-```typescript
-// ❌ AI SLOP: Obvious comments, premature factory wrappers
-// Function to fetch the user profile
-export function getUserProfileFactory() {
-  return async function(userId: string) {
-    // Check if user id is provided
-    if (!userId) {
-      // Throw an error if not found
-      throw new Error("User ID is required");
-    }
-    // Return the user data
-    return await db.users.findUnique({ where: { id: userId } });
-  };
-}
-
-// ✅ CLEAN PRODUCTION: Direct, typed, intent-revealing
-export async function getUserProfile(userId: string): Promise<User> {
-  if (!userId) throw new ValidationError("userId must not be empty");
-  const user = await db.users.findUnique({ where: { id: userId } });
-  if (!user) throw new NotFoundError(`User ${userId} does not exist`);
-  return user;
-}
+Audit any directory using the standalone anti-slop validator:
+```bash
+python3 skills/anti-slop/scripts/sanitize_ai_slop.py --path .
 ```
-
-### Example B: UI Palette & Iconography
-```tsx
-// ❌ AI SLOP: Purple gradient, raw emoji, generic card soup
-<div className="bg-gradient-to-r from-purple-600 to-indigo-600 p-8 rounded-2xl shadow-xl">
-  <h2 className="text-white font-bold">🚀 AI-Powered Assistant v1.0</h2>
-  <button className="bg-green-400 hover:bg-green-500 text-black px-4 py-2 rounded-xl shadow-[0_0_15px_#22c55e]">
-    ✨ Start Generating
-  </button>
-</div>
-
-// ✅ CLEAN PRODUCTION: Accessible neutral scale, Lucide SVG, precise state
-import { Sparkles } from "lucide-react";
-
-<div className="bg-zinc-900 border border-zinc-800 p-6 rounded-lg">
-  <div className="flex items-center gap-2">
-    <Sparkles className="w-4 h-4 text-zinc-400" aria-hidden="true" />
-    <h2 className="text-sm font-medium text-zinc-100">Telemetry Engine</h2>
-  </div>
-  <button 
-    type="button"
-    className="mt-4 px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-900 text-xs font-medium rounded transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-400"
-  >
-    Execute Pipeline
-  </button>
-</div>
-```
+This CLI verifies:
+- Presence of shields.io badges in documentation.
+- Trivial restatement comments in source files.
+- Hardcoded mock data arrays pretending to be state.
+- Neon gradient utility classes and raw emoji buttons.
