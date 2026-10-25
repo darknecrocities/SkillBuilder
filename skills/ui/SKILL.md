@@ -5,9 +5,9 @@ description: UI design systems, tokens, Apple HIG, and glassmorphism craftsmansh
 
 # UI Design Systems & Craftsmanship (`/ui`)
 
-> **Philosophy**: *Form follows function. Reject visual noise, neon purple card-soup, and fake vibe-coding. Build tactile, high-contrast, mathematically precise interfaces using disciplined tokens, Apple Human Interface standards, and semantic vector icons.*
+> **Philosophy**: *Form follows function. Reject visual noise, neon purple card-soup, and generic SaaS flatland. Build tactile, high-contrast, mathematically precise interfaces using disciplined tokens, authentic art movements, physical spring dynamics, and semantic vector icons across Web and Mobile.*
 
-This skill establishes production-grade design system foundations across React 19, Next.js, Tailwind CSS v4, and modern web applications.
+This skill establishes production-grade design system foundations across React 19, Next.js, Tailwind CSS v4, Flutter / Dart, and modern cross-platform interfaces.
 
 ---
 
@@ -17,160 +17,111 @@ This skill establishes production-grade design system foundations across React 1
 flowchart TD
     subgraph Foundation["1. Foundation Layer"]
         A["Disciplined Neutral Palette (Zinc/Slate)"]
-        B["Fluid Typography (SF Pro / System Sans)"]
-        C["8pt Strict Spacing Grid"]
+        B["Kinetic Variable Typography (wght, wdth, tnum)"]
+        C["8pt Strict Spatial & Grid Alignment"]
     end
-    subgraph Materials["2. Cupertino Materials Layer"]
-        D["Multi-layer Backdrop Blur (24px-32px)"]
-        E["Specular Inner Borders (1px 15-20% highlight)"]
-        F["Continuous Squircles (Corner Smoothing)"]
+    subgraph Movements["2. Authentic Art Movements"]
+        D["Industrial Tactical (Braun / Teenage Eng)"]
+        E["Swiss International Editorial (Grid / Asymmetry)"]
+        F["Japanese Wabi-Sabi (Organic Asymmetry)"]
+        G["Technical CAD (Wireframe / Telemetry)"]
     end
-    subgraph Motion["3. Tactile Motion & Accessibility"]
-        G["Natural Spring Physics (Stiffness 300, Damping 30)"]
-        H["Semantic Lucide SVGs (aria-hidden)"]
-        I["WCAG 2.2 AA/AAA Contrast Safety"]
+    subgraph Materials["3. Physical Materials & Cupertino"]
+        H["Multi-layer Acrylic Blur (24px-32px)"]
+        I["Specular Inner Borders (1px 15-20% highlight)"]
+        J["Continuous Squircles (Superellipses)"]
     end
-    Foundation --> Materials --> Motion
+    subgraph Motion["4. Dual-Platform Motion & Haptics"]
+        K["Web: Framer Motion Zero-Re-render Springs"]
+        L["Mobile: Flutter Impeller 120Hz + Detent Haptics"]
+        M["WCAG 2.2 AA/AAA Contrast & Reduced Motion"]
+    end
+    Foundation --> Movements --> Materials --> Motion
 ```
 
 ---
 
-## 2. Apple Human Interface Guidelines & Cupertino Aesthetics
+## 2. Specialized Architectural References
 
-### 2.1 The Cupertino Material Hierarchy
-Apple interfaces rely on translucent materials that reflect lighting context without degrading readability. Every glass surface must obey physical optical properties:
-
-| Material Level | Background Tint | Backdrop Blur | Saturation | Inner Specular Border | Typical Use Case |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Ultra Thin** | `rgba(24, 24, 27, 0.45)` | `blur(16px)` | `160%` | `rgba(255, 255, 255, 0.08)` | Sub-panels, hover states, overlays |
-| **Thin** | `rgba(24, 24, 27, 0.60)` | `blur(20px)` | `170%` | `rgba(255, 255, 255, 0.12)` | Secondary sidebars, floating docks |
-| **Regular** | `rgba(24, 24, 27, 0.72)` | `blur(28px)` | `180%` | `rgba(255, 255, 255, 0.15)` | Primary cards, control centers, modals |
-| **Thick** | `rgba(18, 18, 22, 0.85)` | `blur(40px)` | `200%` | `rgba(255, 255, 255, 0.20)` | Persistent navigation bars, status headers |
-
-#### Production Cupertino Acrylic CSS Formula:
-```css
-.cupertino-material-regular {
-  /* Surface Tint */
-  background-color: rgba(24, 24, 27, 0.72);
-  
-  /* Dual-engine backdrop blur with chromatic saturation */
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  
-  /* Outer hairline separation */
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  
-  /* Specular top-light refraction (Physical glass Fresnel highlight) */
-  box-shadow: 
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.18),
-    0 20px 40px -15px rgba(0, 0, 0, 0.55);
-}
-```
-
-### 2.2 Continuous Squircle Curvature (Superellipses)
-Standard CSS `border-radius: 16px` creates sharp tangent discontinuities where straight edges meet circular arcs. Apple uses **superellipses** (continuous curvature, exponent $n \approx 4$ or 60% corner smoothing):
-
-1. **Standard Tailwind Approximation**: Combine high radius (`rounded-2xl` or `rounded-3xl`) with inset hairline borders to soften edge transitions.
-2. **SVG Masking for Exact Lamé Curves**:
-```tsx
-// Exact iOS Squircle Path Generator for React
-export const SquircleMask: React.FC<{ children: React.ReactNode; width: number; height: number }> = ({
-  children,
-  width,
-  height,
-}) => {
-  return (
-    <div className="relative overflow-hidden" style={{ borderRadius: "24px" }}>
-      {/* Specular hairline inner border */}
-      <div 
-        className="pointer-events-none absolute inset-0 z-10 rounded-[inherit] border border-white/10" 
-        aria-hidden="true" 
-      />
-      {children}
-    </div>
-  );
-};
-```
-
-### 2.3 Typography: System Font Tracking & Optical Sizing
-Never use decorative, hard-to-read web fonts for functional UI. Standardize on the system font stack (`-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, sans-serif`):
-
-```css
-/* Precise Optical Tracking Matrix */
-.text-display {
-  font-size: 2.25rem; /* 36px */
-  line-height: 2.5rem;
-  letter-spacing: -0.035em; /* Tight tracking for large headings */
-  font-weight: 700;
-}
-
-.text-title {
-  font-size: 1.25rem; /* 20px */
-  line-height: 1.75rem;
-  letter-spacing: -0.02em;
-  font-weight: 600;
-}
-
-.text-body {
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.25rem;
-  letter-spacing: -0.005em;
-  font-weight: 400;
-}
-
-.text-caption {
-  font-size: 0.75rem; /* 12px */
-  line-height: 1rem;
-  letter-spacing: 0.015em; /* Relaxed tracking for small legibility */
-  font-weight: 500;
-}
-```
-
-### 2.4 Tactile Spring Physics (No Linear Mud)
-Apple interaction relies on mass-spring-damper physics rather than mechanical cubic-beziers:
-- **Button Press**: scale down to `0.97`, duration `150ms`, spring damping `0.7`.
-- **Card Hover**: scale up to `1.01`, elevation shadow expansion.
-- **Toggle Switch**: crisp sliding spring with overshoot damping.
-
-```css
-/* Tactile Apple Spring Curve */
-.spring-tactile {
-  transition-property: transform, box-shadow, background-color;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .spring-tactile {
-    transition: none !important;
-    transform: none !important;
-  }
-}
-```
-
----
-
-## 3. Anti-AI-Slop Visual Commandments
-
-| Prohibited AI Slop | Engineering Mandate | Root Reason |
+| Document | Scope & Focus | Target Platforms |
 | :--- | :--- | :--- |
-| **Neon Purple / Pink Gradients** (`bg-gradient-to-r from-purple-500 to-indigo-600`) | Deep neutral surfaces (`zinc-900`, `zinc-950`) with single-pixel specular highlights | Neon gradients scream synthetic AI template and cause eye fatigue |
-| **Card Soup / Nested Boxes** | Semantic structural flow using whitespace, dividers, and grouped hierarchy | Random rounded cards nested inside other cards clutter comprehension |
-| **Raw Emojis in Controls** (`<button>🚀 Deploy</button>`) | Lucide SVG icons (`<Rocket className="w-4 h-4" aria-hidden="true" />`) | Emojis render inconsistently across OSs and fail accessible styling |
-| **Glow Halo Borders** (`box-shadow: 0 0 30px #a855f7`) | Inset specular hairlines (`border: 1px solid rgba(255,255,255,0.08)`) | Halos look amateurish and lack physical realism |
-| **Low Contrast Grey on Black** | WCAG 2.2 AA compliant tokens (`zinc-100` for primary text, `zinc-400` for secondary) | Readability is paramount for productivity applications |
+| [references/unique-art-styles-and-aesthetics.md](references/unique-art-styles-and-aesthetics.md) | Detailed specifications for the 4 Non-Generic Art Movements (Color palettes, typography, UI patterns, and layout rules). | Web & Mobile (Flutter) |
+| [references/kinetic-typography-and-variable-fonts.md](references/kinetic-typography-and-variable-fonts.md) | Variable font axes (`wght`, `wdth`, `slnt`, `opsz`, `GRAD`), clip-path text reveals, and tabular numbers. | Web (Framer Motion) & Mobile (Flutter) |
+| [references/advanced-motion-web-and-flutter.md](references/advanced-motion-web-and-flutter.md) | Spring physics parameters, Framer Motion zero-re-render gestures, Flutter `AnimationController.unbounded`, and detent haptics. | Web (Framer Motion) & Mobile (Flutter / Impeller) |
 
 ---
 
-## 4. Production Templates & Reference Implementations
+## 3. The 4 Non-Generic Art Movements
 
-The `/ui` skill includes ready-to-use production components in `skills/ui/templates/`:
-- **`AppleGlassCard.tsx`**: Cupertino acrylic material card with specular top highlight, metric badge, and accessible actions.
-- **`SpatialControlCenter.tsx`**: macOS / visionOS inspired spatial control widget with multi-layer translucency, tactile toggles, and continuous range sliders.
+AI slop universally relies on centered purple cards and generic Inter font. Break out of this flatland using authentic design movements:
+
+### 3.1 Industrial Tactical Functionalism (Dieter Rams / Teenage Engineering)
+- **Palette**: Deep matte chassis (`#09090b`), high-contrast technical accents (`#FF4400` safety orange, `#F59E0B` amber).
+- **Typography**: Monospace and tabular numbers (`tnum`, `zero`) for telemetry readouts.
+- **Components**: Draggable rotary encoder dials, detent tick markings, knurled textures, live oscilloscope displays.
+
+### 3.2 Swiss International Editorial (Müller-Brockmann)
+- **Palette**: High-contrast black/white canvas (`#09090b` / `#ffffff`) with stark scarlet red accent (`#E11D48`).
+- **Typography**: Architectural sans-serif headlines with tight tracking (`-0.035em`) paired with editorial captions.
+- **Components**: Staggered clip-path text reveals, asymmetric editorial split columns, multi-axis variable font interpolation.
+
+### 3.3 Japanese Wabi-Sabi & Organic Tactility
+- **Palette**: Warm earthen neutrals (sumi ink `#121214`, washi cream `#F7F6F2`, bamboo `#2E3A2E`).
+- **Typography**: Refined transitional serifs paired with restrained geometric sans.
+- **Components**: Asymmetric white-space breathing room, gentle spring transitions, subtle grain overlays.
+
+### 3.4 Technical CAD & Wireframe Architecture
+- **Palette**: Precision blueprint ink (`#020617`), cyan telemetry (`#06B6D4`), phosphor green (`#10B981`).
+- **Typography**: Dense tabular monospace matrices, slashed zeros, coordinate indices.
+- **Components**: Orthogonal coordinate grids, crosshair rulers, vector wireframes, spatial dimension annotations.
 
 ---
 
-## 5. Automated Verification CLI
+## 4. Dual-Platform Motion Architecture
+
+### 4.1 Web: Framer Motion Zero-Re-Render Pipeline
+- Avoid updating React state during continuous pointer drag loops.
+- Use `useMotionValue` and `useTransform` to mutate DOM transforms directly in the composite layer.
+- Enforce spring physics: `stiffness: 380, damping: 28, mass: 1.0` for tactical controls.
+- Respect reduced motion via `useReducedMotion()`.
+
+### 4.2 Mobile: Flutter / Dart & Impeller 120Hz GPU Pipeline
+- Use `AnimationController.unbounded(vsync: this)` with `SpringSimulation` to prevent clipping spring oscillation overshoots.
+- Trigger `HapticFeedback.selectionClick()` on discrete angular detent crossings.
+- Use `CustomPainter` with `RepaintBoundary` to keep high-frequency drawing off the widget build tree.
+- Check `MediaQuery.of(context).accessibleNavigation` for motion accessibility.
+
+---
+
+## 5. Apple Human Interface & Cupertino Materials
+
+### 5.1 Cupertino Material Hierarchy
+| Material Level | Background Tint | Backdrop Blur | Specular Border | Typical Use Case |
+| :--- | :--- | :--- | :--- | :--- |
+| **Ultra Thin** | `rgba(24, 24, 27, 0.45)` | `blur(16px)` | `rgba(255, 255, 255, 0.08)` | Sub-panels, hover states, overlays |
+| **Thin** | `rgba(24, 24, 27, 0.60)` | `blur(20px)` | `rgba(255, 255, 255, 0.12)` | Secondary sidebars, floating docks |
+| **Regular** | `rgba(24, 24, 27, 0.72)` | `blur(28px)` | `rgba(255, 255, 255, 0.15)` | Primary cards, control centers, modals |
+| **Thick** | `rgba(18, 18, 22, 0.85)` | `blur(40px)` | `rgba(255, 255, 255, 0.20)` | Persistent navigation bars, headers |
+
+---
+
+## 6. Production Component Templates
+
+Ready-to-use production components in `skills/ui/templates/`:
+
+| Component Template | Platform | Aesthetic Movement & Physics | Description |
+| :--- | :--- | :--- | :--- |
+| **`IndustrialTactileEncoder.tsx`** | Web (React) | Industrial Tactical (Teenage Eng) | Draggable rotary knob, spring detents, live oscilloscope, tabular Hz readout. |
+| **`IndustrialTactileEncoder.dart`** | Mobile (Flutter) | Industrial Tactical (Impeller 120Hz) | Unbounded spring dial, `selectionClick()` detent haptics, CustomPainter waveform. |
+| **`KineticTextReveal.tsx`** | Web (React) | Swiss International Editorial | Staggered clip-path headline reveal, variable-weight hover interpolation. |
+| **`MagneticSpatialCard.tsx`** | Web (React) | Spatial 3D / Perspective | Spring-driven tilt, dynamic specular glare tracking, elevated 3D depth. |
+| **`AppleGlassCard.tsx`** | Web (React) | Cupertino Acrylic Glass | Multi-layer backdrop blur, specular top-edge highlight, continuous squircle. |
+| **`SpatialControlCenter.tsx`** | Web (React) | Apple Spatial Control | Translucent control widget, tactile toggles, continuous range sliders. |
+| **`TactileSpringButton.tsx`** | Web (React) | Apple Mass-Spring-Damper | Snappy micro-interaction button with 44x44px accessible touch target. |
+
+---
+
+## 7. Automated Verification CLI
 
 Verify design tokens, prohibited gradients, and icon accessibility automatically:
 ```bash

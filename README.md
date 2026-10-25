@@ -123,9 +123,9 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 
 ---
 
-## Anti-AI-Slop Craftsmanship, Brand Logos & Motion Physics
+## Anti-AI-Slop Craftsmanship, Authentic Art Movements & Dual-Platform Motion
 
-SkillBuilder rejects generic AI "vibe coding" (purple hero gradients, nested card-soup, floaty 3s fades, and blurry raster logo blobs) in favor of mathematical vectors, physical materials, and scientific color theory:
+SkillBuilder rejects generic AI "vibe coding" (purple hero gradients, nested card-soup, floaty 3s fades, and blurry raster logo blobs) in favor of mathematical vectors, physical materials, authentic design movements, kinetic variable typography, and dual-platform spring physics:
 
 ```mermaid
 flowchart TD
@@ -135,23 +135,40 @@ flowchart TD
         C["Dynamic Optical Tracking Curves (-0.035em Headings, +0.06em Captions)"]
         D["Tabular Numbers ('tnum' 1, 'zero' 1) for Telemetry Precision"]
     end
-    subgraph AppleDesign["2. Apple HIG & Cupertino Materials (/ui)"]
-        E["Translucent Dark Tint (zinc-900 @ 65-72%) with Specular Inner Lighting (1px)"]
-        F["Continuous Squircles (Corner Smoothing 60%) & Dual-Engine Blur (28px saturate 180%)"]
-        G["Tactile Apple Spring Physics (Mass-Spring-Damper: 380k, 30c) on UI Controls"]
-        H["GPU-Only Composite Transformations (Strictly 'transform' & 'opacity')"]
+    subgraph Movements["2. Authentic Art Movements (/ui)"]
+        M1["Industrial Tactical Functionalism: Dieter Rams / Teenage Engineering hardware rotary encoders"]
+        M2["Swiss International Editorial: Josef Müller-Brockmann grid systems & clip-path typography"]
+        M3["Japanese Wabi-Sabi: Asymmetric breathing room, sumi/washi organic tones, serene pacing"]
+        M4["Technical CAD Architecture: Telemetry coordinate grids, hairline rulers, vector wireframes"]
     end
-    subgraph WebGL3D["3. 3D WebGL Roadster Showcase (/3d)"]
+    subgraph Motion["3. Dual-Platform Motion Architecture (Web & Mobile)"]
+        E["Web: Framer Motion Zero-Re-Render Pipeline (useMotionValue + useTransform composite layers)"]
+        F["Mobile: Flutter Impeller 120Hz Pipeline (AnimationController.unbounded + SpringSimulation)"]
+        G["Tactile Detent Haptics: HapticFeedback.selectionClick() on physical rotary tick crossings"]
+        H["Kinetic Variable Fonts: Smooth interpolation across 'wght', 'wdth', 'slnt', 'opsz', 'GRAD'"]
+    end
+    subgraph WebGL3D["4. 3D WebGL Roadster Showcase (/3d)"]
         I["Three.js PBR MeshPhysicalMaterial (Clearcoat 1.0) & Studio 3-Point HDR Rig"]
         J["OrbitControls with Inertial Damping & Strict GPU Memory Disposal"]
     end
-    AntiSlop --- AppleDesign --- WebGL3D
+    AntiSlop --- Movements --- Motion --- WebGL3D
 ```
 
-- **Production App Logo Templates**: Ready-to-use vector assets in `skills/anti-slop/templates/CraftedAppLogo.svg` and `skills/anti-slop/templates/CraftedAppLogo.tsx` (passes all 4 stress tests with material & monochrome variants).
-- **Production Cupertino Components**: Ready-to-use in `skills/ui/templates/AppleGlassCard.tsx`, `skills/ui/templates/SpatialControlCenter.tsx`, and `skills/ui/templates/TactileSpringButton.tsx`.
-- **Production 3D Automotive Showcase**: Ready-to-use in `skills/3d/templates/ThreeRoadsterShowcase.tsx`.
-- **Automated Validation Gates**: Checked via `sanitize_ai_slop.py`, `verify_ui_tokens.py`, `verify_frontend_quality.py`, and `verify_3d_performance.py`.
+### Production Component Templates Catalog
+
+| Component Template | Platform | Design Movement / Physics | Key Capabilities |
+| :--- | :--- | :--- | :--- |
+| **`IndustrialTactileEncoder.tsx`** | Web (React) | Industrial Tactical (Teenage Eng) | Draggable rotary knob, spring detents, live SVG oscilloscope, tabular Hz readout. |
+| **`IndustrialTactileEncoder.dart`** | Mobile (Flutter) | Industrial Tactical (Impeller 120Hz) | Unbounded spring dial, `selectionClick()` detent haptics, CustomPainter waveform. |
+| **`KineticTextReveal.tsx`** | Web (React) | Swiss International Editorial | Staggered clip-path headline reveal, variable-weight hover interpolation (`wght`/`wdth`). |
+| **`MagneticSpatialCard.tsx`** | Web (React) | Spatial 3D / Perspective | Spring-driven tilt, dynamic specular glare tracking, elevated 3D depth layer. |
+| **`AppleGlassCard.tsx`** | Web (React) | Cupertino Acrylic Glass | Multi-layer backdrop blur (24px), specular top-edge highlight, continuous squircle. |
+| **`SpatialControlCenter.tsx`** | Web (React) | Apple Spatial Control | Translucent control widget, tactile toggles, continuous range sliders. |
+| **`TactileSpringButton.tsx`** | Web (React) | Apple Mass-Spring-Damper | Snappy micro-interaction button with 44x44px accessible touch target. |
+| **`CraftedAppLogo.svg` / `.tsx`** | Web / Vector | Mathematical Brand System | Passes all 4 Logo Stress Tests with material and monochrome silhouette variants. |
+| **`ThreeRoadsterShowcase.tsx`** | Web (Three.js) | Interactive 3D WebGL | PBR dual-coat automotive paint, 60fps budget, Draco GLTF loader, HDR lighting. |
+
+- **Automated Validation Gates**: Checked via `sanitize_ai_slop.py`, `verify_ui_tokens.py`, `verify_frontend_quality.py`, `check_source_line_limits.py`, and `verify_3d_performance.py`.
 
 ---
 

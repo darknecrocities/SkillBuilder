@@ -20,6 +20,9 @@ This skill purges synthetic AI tropes and enforces professional engineering rigo
 | **Reference** | [references/color-theory-and-palette-architecture.md](references/color-theory-and-palette-architecture.md) | 60-30-10 spatial rule, OKLCH perceptual lightness, temperature undertones, WCAG 2.2. |
 | **Reference** | [references/typography-and-font-pairing.md](references/typography-and-font-pairing.md) | Editorial serif + neo-grotesque pairing, dynamic optical tracking, tabular numbers. |
 | **Reference** | [references/animation-and-motion-design.md](references/animation-and-motion-design.md) | Apple mass-spring-damper physics, GPU-only composite rule, staggered list choreography. |
+| **Reference** | [../ui/references/unique-art-styles-and-aesthetics.md](../ui/references/unique-art-styles-and-aesthetics.md) | 4 Authentic Art Movements (Tactical, Swiss, Wabi-Sabi, CAD) replacing SaaS flatland. |
+| **Reference** | [../ui/references/kinetic-typography-and-variable-fonts.md](../ui/references/kinetic-typography-and-variable-fonts.md) | Variable font axes (`wght`, `wdth`), clip-path text reveals, and tabular numbers. |
+| **Reference** | [../ui/references/advanced-motion-web-and-flutter.md](../ui/references/advanced-motion-web-and-flutter.md) | Framer Motion zero-re-render springs & Flutter Impeller 120Hz detent haptics. |
 | **Template** | [templates/CraftedAppLogo.svg](templates/CraftedAppLogo.svg) | Production-grade mathematical vector SVG logo mark passing all 4 stress tests. |
 | **Template** | [templates/CraftedAppLogo.tsx](templates/CraftedAppLogo.tsx) | React vector logo component with material and monochrome silhouette variants. |
 | **Template** | [../ui/templates/TactileSpringButton.tsx](../ui/templates/TactileSpringButton.tsx) | Production tactile button implementing Apple spring physics and 44x44px touch targets. |
