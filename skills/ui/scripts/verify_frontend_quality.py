@@ -142,6 +142,34 @@ def audit_component_content(content: str, filepath: str) -> List[Dict[str, str]]
             })
             break
 
+    # 10. Anti-Slop: Check for generic AI 3-card soup placeholder pattern
+    card_soup_match = re.search(r"(?:grid-cols-3|grid-cols-1\s+md:grid-cols-3)[^>]*>[\s\S]*?(?:Feature\s+[1-3]|Card\s+[1-3]|Title\s+[1-3]|Benefit\s+[1-3])", content, re.IGNORECASE)
+    if card_soup_match:
+        line_no = content[:card_soup_match.start()].count("\n") + 1
+        issues.append({
+            "file": filepath,
+            "line": str(line_no),
+            "rule": "UI-GENERIC-CARD-SOUP",
+            "severity": "WARNING",
+            "message": "Generic AI 3-card soup pattern detected with placeholder cards. Use domain-specific asymmetrical layouts or purposeful data grids."
+        })
+
+    # 11. Anti-Slop: Check for dark containers lacking specular border or edge highlight
+    dark_cards = re.finditer(r"<div\b[^>]*className=[\"'][^\"']*\b(?:bg-zinc-950|bg-zinc-900|bg-black)\b[^\"']*\b(?:rounded-xl|rounded-2xl|rounded-3xl)\b[^\"']*[\"'][^>]*>", content)
+    for card_match in dark_cards:
+        tag_str = card_match.group(0)
+        has_border = "border" in tag_str or "inset 0 1px" in tag_str or "inset 0 -1px" in tag_str
+        if not has_border:
+            line_no = content[:card_match.start()].count("\n") + 1
+            issues.append({
+                "file": filepath,
+                "line": str(line_no),
+                "rule": "UI-MISSING-SPECULAR-EDGE",
+                "severity": "WARNING",
+                "message": "Dark surface container lacks specular border or sub-pixel edge definition. Add a 1px specular border (e.g., border-zinc-800 or border-white/10) to separate surface planes."
+            })
+            break
+
     return issues
 
 

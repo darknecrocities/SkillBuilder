@@ -18,10 +18,12 @@ SLOP_PATTERNS: List[Tuple[str, str, str]] = [
     ("ObviousComment", r"(//|#)\s*(set\s+loading\s+to|increment\s+\w+\s+by|handle\s+click|return\s+the\s+result)", "Obvious redundant comment"),
     ("NeonVibeGradient", r"(from-purple-\d00\s+to-indigo-\d00|shadow-\[0_0_)", "Neon vibe-coding gradient or glow border"),
     ("MarketingBuzzword", r"(revolutionary\s+ai[- ]powered|seamless\s+and\s+intuitive|next-gen(?:eration)?\s+paradigm)", "Synthetic AI marketing buzzword"),
+    ("AILogoTrope", r"(swirling[- ]gradient[- ](?:ribbon|sphere)|floating[- ]isometric[- ](?:cube|hexagon))", "Generic AI logo trope marker detected"),
+    ("FuzzyNeonHalo", r"box-shadow:\s*0\s+0\s+(?:4\d|5\d|[6-9]\d|\d{3,})px", "Excessive fuzzy neon halo shadow without physical falloff"),
 ]
 
 IGNORED_DIRS = {".git", "node_modules", "dist", "build", ".agents", ".gemini", "__pycache__", "venv", ".venv"}
-CHECKED_EXTENSIONS = {".ts", ".tsx", ".js", ".jsx", ".py", ".md", ".html", ".css", ".dart"}
+CHECKED_EXTENSIONS = {".ts", ".tsx", ".js", ".jsx", ".py", ".md", ".html", ".css", ".dart", ".swift", ".kt"}
 
 
 def scan_file(file_path: str) -> List[Dict[str, any]]:

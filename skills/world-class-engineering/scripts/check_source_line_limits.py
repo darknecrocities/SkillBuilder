@@ -18,7 +18,8 @@ from typing import Dict, List, Set, Tuple
 DEFAULT_MAX_LINES = 500
 
 DEFAULT_EXTENSIONS: Set[str] = {
-    ".ts", ".tsx", ".js", ".jsx", ".py", ".java", ".go", ".rs", ".cs",
+    ".ts", ".tsx", ".js", ".jsx", ".py", ".java", ".go", ".rs", ".cs", ".dart",
+    ".swift", ".kt",
 }
 
 DEFAULT_EXCLUDE_DIRS: Set[str] = {

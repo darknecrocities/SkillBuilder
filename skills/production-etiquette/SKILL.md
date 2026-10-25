@@ -95,16 +95,16 @@ Every outgoing network request, API client, and authentication workflow must imp
 Verify or scaffold missing `.gitignore`, `.env.example`, `Dockerfile`, and CI/CD files:
 ```bash
 # Audit project hygiene
-python3 scripts/scaffold_project_hygiene.py --path <project-directory> --check
+python3 skills/production-etiquette/scripts/scaffold_project_hygiene.py --path <project-directory> --check
 
 # Auto-scaffold missing files
-python3 scripts/scaffold_project_hygiene.py --path <project-directory> --apply
+python3 skills/production-etiquette/scripts/scaffold_project_hygiene.py --path <project-directory> --apply
 ```
 
 ### Tool 2: Git Commit Chunk & PR Analyzer
 Analyze working tree diffs, enforce the 1,000-line review budget, cluster atomic commits, and generate PR descriptions:
 ```bash
-python3 scripts/analyze_git_commit_chunks.py --path <project-directory>
+python3 skills/production-etiquette/scripts/analyze_git_commit_chunks.py --path <project-directory>
 ```
 
 ---

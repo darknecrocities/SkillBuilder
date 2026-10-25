@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" aria-label="SkillBuilder Crafted Logo Mark" role="img">
+  <defs>
+    <!-- Specular Hairline Inner Border -->
+    <linearGradient id="specular-edge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.28" />
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02" />
+    </linearGradient>
+
+    <!-- Deep Cupertino Acrylic Base -->
+    <linearGradient id="acrylic-base" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#18181b" />
+      <stop offset="100%" stop-color="#09090b" />
+    </linearGradient>
+
+    <!-- Core Focal Compass Glow -->
+    <radialGradient id="focal-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Continuous Apple Squircle Background Enclosure (512x512) -->
+  <path d="M 128 32
+           C 48 32, 32 48, 32 128
+           L 32 384
+           C 32 464, 48 480, 128 480
+           L 384 480
+           C 464 480, 480 464, 480 384
+           L 480 128
+           C 480 48, 464 32, 384 32
+           Z" 
+        fill="url(#acrylic-base)" />
+
+  <!-- Specular 1px Hairline Inner Highlight -->
+  <path d="M 128 32
+           C 48 32, 32 48, 32 128
+           L 32 384
+           C 32 464, 48 480, 128 480
+           L 384 480
+           C 464 480, 480 464, 480 384
+           L 480 128
+           C 480 48, 464 32, 384 32
+           Z" 
+        fill="none" 
+        stroke="url(#specular-edge)" 
+        stroke-width="2.5" />
+
+  <!-- Ambient Light Reflection -->
+  <circle cx="256" cy="256" r="140" fill="url(#focal-glow)" />
+
+  <!-- Geometric Engineering Mark: The Precision Diamond / Nexus -->
+  <!-- Outer Diamond (Monochrome Silhouette Core) -->
+  <path d="M 256 112 
+           L 368 256 
+           L 256 400 
+           L 144 256 
+           Z" 
+        fill="#f4f4f5" />
+
+  <!-- Negative Space Inner Core Aperture -->
+  <circle cx="256" cy="256" r="48" fill="#09090b" />
+
+  <!-- High-Precision Telemetry Focal Point -->
+  <circle cx="256" cy="256" r="22" fill="#0284c7" />
+  <circle cx="256" cy="256" r="8" fill="#f4f4f5" />
+</svg>

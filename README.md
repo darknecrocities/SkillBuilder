@@ -9,7 +9,7 @@
 
 # SkillBuilder: Anti-AI-Slop Dynamic Engineering Ecosystem
 
-SkillBuilder is a production-grade suite of **20 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
+SkillBuilder is a production-grade suite of **21 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
 
 ---
 
@@ -52,7 +52,7 @@ flowchart TD
     PPE --> PLAN["Phase 2: Interactive Implementation Plan Artifact (/plan)"]
     PLAN --> APPROVE{"User Review & Approval"}
     APPROVE -- "Proceed" --> EXEC["Phase 3: Multi-Discipline Execution (/anti-slop, /research, /security)"]
-    EXEC --> QA["Phase 4: Responsiveness & 26-Suite Verification (/qa)"]
+    EXEC --> QA["Phase 4: Responsiveness & 27-Suite Verification (/qa)"]
     QA --> CHUNK["Phase 5: Atomic Commit Chunking (< 1k lines) (/git-workflow)"]
     CHUNK --> PR["Phase 6: Ready-to-Merge Pull Request + Walkthrough"]
 ```
@@ -75,7 +75,7 @@ flowchart TD
 5. **Continuous Verification & 500-Line Ceiling (`/world-class-engineering` & `/qa`)**:
    - Audits all source files against the strict **500-line physical limit** (`check_source_line_limits.py`).
    - Audits mobile (375px), tablet (768px), desktop (1280px), and widescreen viewports for touch targets (>=44px), focus visibility, and fluid layout scaling.
-   - Executes the master 26-suite verification test runner.
+   - Executes the master 27-suite verification test runner.
 6. **Atomic Commit Chunking & Ready-to-Review PR (`/git-workflow`)**:
    - Automatically clusters diffs into cohesive commits strictly below the **1,000-line push budget**.
    - Uses Conventional Commits (`feat:`, `fix:`, `refactor:`, `test:`).
@@ -93,7 +93,7 @@ flowchart TD
 
 ---
 
-## The 20-Skill Master Reference Matrix
+## The 21-Skill Master Reference Matrix
 
 Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules in Cursor:
 
@@ -103,7 +103,8 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 | `/anti-slop` | **Anti-AI-Slop Sanitizer** | Clean Code | Purges decorative badges, fake mock databases, neon gradients, obvious comments, and marketing copy. | `sanitize_ai_slop.py` | Zero `shields.io`, zero fake mock arrays, zero emojis in UI controls. |
 | `/research` | **Autonomous Research & Fallbacks** | Discovery | Autonomous fallback engine; researches alternatives when packages fail or deprecate. | `research_alternatives.py` | P.A.T.H.S. trade-off evaluation & minimal POC validation. |
 | `/qa` | **Responsiveness QA & Sub-Agents** | Quality | 4-tier viewport matrix (375px/768px/1280px+), a11y (WCAG AA), touch targets, Master Error Catalog. | `verify_responsiveness_and_qa.py` | Min 44x44px touch targets, zero fixed-pixel containers. |
-| `/ui` | **UI Design Systems & Tokens** | UI/UX | High-contrast neutral scales (zinc/slate), fluid typography, Lucide SVG icons. | `verify_ui_tokens.py` | Zero raw emojis in buttons/headers; explicit button types. |
+| `/ui` | **UI Design Systems & Tokens** | UI/UX | Apple HIG, Cupertino blur materials, squircle smoothing, high-contrast neutral scales (zinc/slate), Lucide SVGs. | `verify_ui_tokens.py` | Zero raw emojis in buttons/headers; explicit button types. |
+| `/3d` | **3D WebGL & Product Showcase** | 3D/Graphics | Three.js, React Three Fiber, PBR clearcoat shaders, Draco GLTF compression, 60fps budgets, context loss handling. | `verify_3d_performance.py` | DPR clamped to <= 2.0; Draco GLTF loader; WebGL disposal. |
 | `/frontend` | **Frontend Architecture** | Frontend | Pure component isolation, React 19, Next.js App Router, Flutter, memory leak prevention. | `verify_frontend_architecture.py` | AbortController on async `useEffect`; error boundaries. |
 | `/backend` | **Backend Systems Engineering** | Backend | Clean architecture (Hexagonal), domain services, REST/gRPC contracts, idempotency. | `verify_api_contracts.py` | Strict runtime schema validation (Zod, Pydantic v2). |
 | `/security` | **Security Hardening** | Security | OWASP Top 10 defenses, zero hardcoded secrets, SQL injection defense, CORS/CSP policies. | `audit_security_hygiene.py` | Parameterized queries only; zero committed API credentials. |
@@ -122,6 +123,62 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 
 ---
 
+## Anti-AI-Slop Craftsmanship, Authentic Art Movements & Universal Mobile Motion
+
+SkillBuilder rejects generic AI "vibe coding" (purple hero gradients, nested card-soup, floaty 3s fades, and blurry raster logo blobs) in favor of mathematical vectors, physical materials, authentic design movements, kinetic variable typography, and universal multi-platform spring physics:
+
+```mermaid
+flowchart TD
+    subgraph AntiSlop["1. Anti-AI-Slop & Brand Craftsmanship (/anti-slop)"]
+        A["The 4 Logo Stress Tests: Silhouette (Pure B&W), 16px Favicon, 5s Memory Sketch, Vector Cleanliness"]
+        B["60-30-10 Spatial Color Architecture & OKLCH Perceptual Lightness"]
+        C["Dynamic Optical Tracking Curves (-0.035em Headings, +0.06em Captions)"]
+        D["Tabular Numbers ('tnum' 1, 'zero' 1) for Telemetry Precision"]
+    end
+    subgraph Movements["2. Authentic Art Movements (/ui)"]
+        M1["Industrial Tactical Functionalism: Dieter Rams / Teenage Engineering hardware rotary encoders"]
+        M2["Swiss International Editorial: Josef Müller-Brockmann grid systems & clip-path typography"]
+        M3["Japanese Wabi-Sabi: Asymmetric breathing room, sumi/washi organic tones, serene pacing"]
+        M4["Technical CAD Architecture: Telemetry coordinate grids, hairline rulers, vector wireframes"]
+    end
+    subgraph Motion["3. Universal Motion Architecture (Web & Multi-Platform Mobile)"]
+        E["Web: Framer Motion Zero-Re-Render Pipeline (useMotionValue + useTransform composite layers)"]
+        F1["React Native: Reanimated 3 UI-Thread Worklets + Gesture Handler + Expo Haptics"]
+        F2["iOS (SwiftUI): withAnimation(.spring) + UIImpactFeedbackGenerator + Canvas GPU"]
+        F3["Android (Compose): Animatable spring + LocalHapticFeedback + Hardware Canvas"]
+        F4["Flutter (Dart): AnimationController.unbounded + SpringSimulation + Impeller 120Hz"]
+        G["Tactile Detent Haptics: Precise physical feedback on discrete rotary detent tick boundaries"]
+    end
+    subgraph WebGL3D["4. 3D WebGL Roadster Showcase (/3d)"]
+        I["Three.js PBR MeshPhysicalMaterial (Clearcoat 1.0) & Studio 3-Point HDR Rig"]
+        J["OrbitControls with Inertial Damping & Strict GPU Memory Disposal"]
+    end
+    AntiSlop --- Movements --- Motion --- WebGL3D
+```
+
+### Production Component Templates Catalog
+
+| Component Template | Platform / Ecosystem | Design Movement / Physics | Key Capabilities |
+| :--- | :--- | :--- | :--- |
+| **`MachinedTitaniumStrip.tsx`** | Web (React) | Studio Anodized Hardware | Anodized titanium chassis, knurled fader, 16-seg LED meter, zero-dep Web Audio clicks. |
+| **`SpatialCommandPalette.tsx`** | Web (React) | Apple / Linear Spatial UX | Cupertino acrylic refraction, physical 3D keycaps, spring `layoutId` active pill. |
+| **`IndustrialTactileEncoder.native.tsx`** | Mobile (React Native) | Industrial Tactical (Reanimated 3) | 120Hz UI-thread worklets, Expo Haptics detents, SVG oscilloscope, tabular numerals. |
+| **`IndustrialTactileEncoder.swift`** | Mobile (iOS SwiftUI) | Industrial Tactical (CoreHaptics) | Native SwiftUI drag gesture, `withAnimation(.spring)`, rigid haptics, Canvas waveform. |
+| **`IndustrialTactileEncoder.kt`** | Mobile (Android Compose) | Industrial Tactical (Jetpack Compose) | Compose pointerInput, `Animatable` spring, LocalHapticFeedback, Canvas oscilloscope. |
+| **`IndustrialTactileEncoder.dart`** | Mobile (Flutter) | Industrial Tactical (Impeller 120Hz) | Unbounded spring dial, `selectionClick()` detent haptics, CustomPainter waveform. |
+| **`IndustrialTactileEncoder.tsx`** | Web (React) | Industrial Tactical (Teenage Eng) | Draggable rotary knob, spring detents, live SVG oscilloscope, tabular Hz readout. |
+| **`KineticTextReveal.tsx`** | Web (React) | Swiss International Editorial | Staggered clip-path headline reveal, variable-weight hover interpolation (`wght`/`wdth`). |
+| **`MagneticSpatialCard.tsx`** | Web (React) | Spatial 3D / Perspective | Spring-driven tilt, dynamic specular glare tracking, elevated 3D depth layer. |
+| **`AppleGlassCard.tsx`** | Web (React) | Cupertino Acrylic Glass | Multi-layer backdrop blur (24px), specular top-edge highlight, continuous squircle. |
+| **`SpatialControlCenter.tsx`** | Web (React) | Apple Spatial Control | Translucent control widget, tactile toggles, continuous range sliders. |
+| **`TactileSpringButton.tsx`** | Web (React) | Apple Mass-Spring-Damper | Snappy micro-interaction button with 44x44px accessible touch target. |
+| **`CraftedAppLogo.svg` / `.tsx`** | Web / Vector | Mathematical Brand System | Passes all 4 Logo Stress Tests with material and monochrome silhouette variants. |
+| **`ThreeRoadsterShowcase.tsx`** | Web (Three.js) | Interactive 3D WebGL | PBR dual-coat automotive paint, 60fps budget, Draco GLTF loader, HDR lighting. |
+
+- **Automated Validation Gates**: Checked via `sanitize_ai_slop.py`, `verify_ui_tokens.py`, `verify_frontend_quality.py`, `check_source_line_limits.py`, and `verify_3d_performance.py`.
+
+---
+
 ## Multi-Platform Installation Guide
 
 ### Option 1: Google Antigravity
@@ -136,7 +193,7 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 
 ### Option 2: Cursor IDE
 
-Convert all 20 skills into native `.cursor/rules/*.mdc` rule files and a consolidated `.cursorrules`:
+Convert all 21 skills into native `.cursor/rules/*.mdc` rule files and a consolidated `.cursorrules`:
 ```bash
 ./scripts/install.sh --cursor /path/to/my-cursor-project
 ```

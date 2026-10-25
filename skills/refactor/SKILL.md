@@ -5,9 +5,9 @@ description: Safe refactoring and technical debt remediation skill. Enforces Str
 
 # Safe Refactoring & Technical Debt Remediation (`/refactor`)
 
-> **Philosophy**: *Never refactor without tests. Change behavior or change structure, never both in the same turn. Decompose god files before they hit 500 lines.*
+> **Philosophy**: *Never refactor without tests. Change behavior or change structure, never both in the same turn. Decompose god files before they hit 500 lines. Strangler Fig over big-bang rewrites.*
 
-This skill establishes disciplined patterns for paying down technical debt, decomposing bloated modules, and modernizing legacy code without outages.
+This skill establishes disciplined patterns for paying down technical debt, decomposing bloated modules, and modernizing legacy code without introducing regressions or downtime.
 
 ---
 
@@ -16,28 +16,77 @@ This skill establishes disciplined patterns for paying down technical debt, deco
 ```mermaid
 flowchart TD
     A["Legacy / Bloated Module"] --> B["Phase 1: Characterization Tests (Pin Current Behavior)"]
-    B --> C["Phase 2: Extract Sub-Components & Interfaces"]
-    C --> D["Phase 3: Verify All Existing Tests Pass"]
-    D --> E["Phase 4: Swap Old Implementation for New (Branch by Abstraction)"]
-    E --> F["Phase 5: Purge Dead Code & Verify Line Limits"]
+    B --> C["Phase 2: Introduce Abstraction Layer (Interface)"]
+    C --> D["Phase 3: Implement New Modular Subsystems"]
+    D --> E["Phase 4: Verify Full Test Suite Parity"]
+    E --> F["Phase 5: Route Traffic to New Subsystem (Branch by Abstraction)"]
+    F --> G["Phase 6: Delete Deprecated Code & Verify Line Limits"]
 ```
 
-### Rule 1: The "Two Hats" Discipline
-- When wearing the **Refactoring Hat**, do not add new features or modify existing contracts. Only restructure code to improve cohesion, naming, and readability.
-- When wearing the **Feature Hat**, do not perform sweeping architectural refactors. Write minimal changes to satisfy requirements.
-
-### Rule 2: Decomposing Files Approaching 500 Lines
-- Monitor file lengths proactively. If any source file reaches **350–400 lines**, decompose it immediately:
-  - Extract pure helper utilities to a sibling `utils/` or `helpers/` module.
-  - Extract domain entity schemas to `types.ts` or `models.py`.
-  - Extract database queries to a dedicated `repository.ts`.
-- Never allow a file to breach the hard **500-line source file limit**.
+### The "Two Hats" Discipline:
+1. **The Refactoring Hat**: You restructure existing code to improve maintainability, reduce cyclomatic complexity, and decompose bloated files. You **do not** add new business features or alter external API contracts. Every existing test must remain green.
+2. **The Feature Hat**: You introduce new capabilities and write new tests. You **do not** perform sprawling rewrites of unrelated modules in the same commit.
 
 ---
 
-## 2. Refactor Opportunities Detector CLI
+## 2. Decomposing God Files (The 500-Line Policy)
+
+When any source file (`.ts`, `.tsx`, `.py`, `.go`) exceeds **350–400 lines**, decompose it before it violates the 500-line physical limit:
+
+| File Type | Extraction Target | Destination Path |
+| :--- | :--- | :--- |
+| **Monolithic Component** | Sub-views & presentational child widgets | `components/<Feature>/<SubView>.tsx` |
+| **Inline Validation Schemas** | Zod / Pydantic schemas and types | `schemas/<feature>Schema.ts` |
+| **Inline Database Calls** | Repository query methods | `repositories/<feature>Repository.ts` |
+| **Complex Pure Functions** | Mathematical or string formatting logic | `utils/<domain>Utils.ts` |
+| **State & Effects** | Custom React hooks or store slices | `hooks/use<Feature>State.ts` |
+
+---
+
+## 3. Branch by Abstraction & Strangler Fig Patterns
+
+When replacing a critical production subsystem (e.g. switching from raw SQL queries to an ORM, or replacing an old payment gateway):
+
+```mermaid
+flowchart LR
+    A["Callers"] --> B["1. Abstraction Interface (PaymentGateway)"]
+    B --> C["Legacy Gateway Implementation (Active)"]
+    B -.-> D["Modern Gateway Implementation (Testing)"]
+    subgraph Migration["Phase 2: Feature Flag Switch"]
+        B --> D
+    end
+    subgraph Cleanup["Phase 3: Deprecation"]
+        E["Delete Legacy Gateway File"]
+    end
+```
+
+1. **Create the Abstraction**: Define a clean interface describing the operations callers need.
+2. **Implement Existing Caller Adapter**: Wrap the current legacy code behind the interface without changing behavior.
+3. **Build the New Modern Implementation**: Write the replacement subsystem conforming to the interface, backed by unit tests.
+4. **Gradually Migrate Callers**: Use a feature flag or configuration toggle to route traffic.
+5. **Deprecate & Delete**: Remove the legacy implementation and obsolete tests.
+
+---
+
+## 4. Characterization (Golden Master) Testing
+
+When refactoring legacy code that has zero unit tests:
+1. Write characterization tests that capture the **current actual behavior** for a wide matrix of inputs, even if the current behavior includes known quirks.
+2. Store the input/output fixtures (Golden Master snapshot).
+3. Execute the refactor.
+4. Run characterization tests to guarantee zero unexpected behavioral drift.
+5. Author dedicated unit tests for the newly extracted components.
+
+---
+
+## 5. Refactor Opportunities Detector CLI
 
 Scan your repository for complex, deeply-nested, or bloated files needing refactoring:
 ```bash
 python3 skills/refactor/scripts/detect_refactor_opportunities.py --path .
 ```
+Audits:
+- Source files exceeding 350 lines (approaching the 500-line limit).
+- Functions with cyclomatic complexity > 10.
+- Deeply nested indentation structures (> 4 levels).
+- Files containing duplicate utility implementations.

@@ -15,33 +15,113 @@ This skill governs fullstack feature implementation, ensuring every feature is d
 
 ```mermaid
 flowchart LR
-    A["1. Database Schema & Migration"] --> B["2. Data Access Repository (ORM / SQL)"]
+    A["1. Database Schema (DDL / Migration)"] --> B["2. Data Access Repository (SQL / Pool)"]
     B --> C["3. Business Domain Service"]
-    C --> D["4. API Route + Schema Validation (Zod / Pydantic)"]
-    D --> E["5. Client Hook / Server Component"]
-    E --> F["6. Interactive UI & Error Boundary"]
+    C --> D["4. API Route + Zod Validation"]
+    D --> E["5. Client Query / Server Component"]
+    E --> F["6. Interactive UI + Optimistic Rollback"]
 ```
 
-### Rule 1: Zero Static In-Memory Toy Databases
-- **Prohibited**: Creating `const mockUsers = [...]` or `const FAKE_PRODUCTS = [...]` inside application code and pretending persistent state works.
-- **Mandate**: Provision real storage:
-  - Local / CLI / Embedded: SQLite (`better-sqlite3`, `sqlite3`, `aiosqlite`) or structured JSON/file stores.
-  - Production / Server: PostgreSQL, Cloud SQL, AlloyDB, or Supabase.
-
-### Rule 2: Strict Boundary Schema Validation
-- Never pipe untrusted HTTP body/query data directly into domain services or SQL queries.
-- Parse and validate incoming requests using strict schemas (e.g., Zod in TypeScript, Pydantic in Python).
-
-### Rule 3: End-to-End Interactivity
-- Every UI button must wire to a real API endpoint.
-- Every API endpoint must return standard status codes (`200 OK`, `201 Created`, `400 Bad Request`, `404 Not Found`, `500 Internal Error`).
-- Optimistic updates must handle rollback gracefully if the server returns an error.
+### The 4 Vertical Slice Rules:
+1. **Zero Mock Arrays**: Never ship `const mockUsers = [...]` or in-memory arrays pretending to be durable state. Wire SQLite, PostgreSQL, or structured file stores.
+2. **End-to-End Type Safety**: Share or mirror validation schemas between frontend and backend contracts.
+3. **Optimistic Rollback**: UI mutations must optimistically render the expected state, but roll back cleanly with a toast notification if the network or server rejects the transaction.
+4. **Automated Integration Test**: Every slice must include an integration test verifying the full round-trip from HTTP POST to database persistence.
 
 ---
 
-## 2. End-to-End Integration Auditor CLI
+## 2. Complete Vertical Slice Blueprint
 
-Audit your codebase for mock stubs and unpersisted API routes:
+### Tier 1: Database Migration (PostgreSQL / SQLite)
+```sql
+-- migrations/001_create_tasks.sql
+CREATE TABLE IF NOT EXISTS tasks (
+  id TEXT PRIMARY KEY NOT NULL,
+  title TEXT NOT NULL CHECK(length(title) >= 1 AND length(title) <= 200),
+  completed BOOLEAN NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_tasks_created_at ON tasks(created_at DESC);
+```
+
+### Tier 2: Repository with Real Parameterized Queries
+```typescript
+// src/repositories/taskRepository.ts
+import Database from "better-sqlite3";
+
+export interface TaskRecord {
+  id: string;
+  title: string;
+  completed: boolean;
+  created_at: string;
+}
+
+export class TaskRepository {
+  constructor(private db: Database.Database) {}
+
+  findAll(): TaskRecord[] {
+    const stmt = this.db.prepare("SELECT id, title, completed, created_at FROM tasks ORDER BY created_at DESC");
+    return stmt.all().map((row: any) => ({
+      ...row,
+      completed: Boolean(row.completed),
+    }));
+  }
+
+  create(id: string, title: string): TaskRecord {
+    const stmt = this.db.prepare("INSERT INTO tasks (id, title, completed) VALUES (?, ?, 0)");
+    stmt.run(id, title);
+    return { id, title, completed: false, created_at: new Date().toISOString() };
+  }
+}
+```
+
+### Tier 3: API Route with Strict Schema Validation
+```typescript
+// src/routes/tasks.ts
+import { z } from "zod";
+import { TaskRepository } from "../repositories/taskRepository";
+
+const CreateTaskSchema = z.object({
+  id: z.string().uuid(),
+  title: z.string().trim().min(1, "Title cannot be empty").max(200),
+});
+
+export function createTaskHandler(repo: TaskRepository) {
+  return async (req: Request): Promise<Response> => {
+    try {
+      const body = await req.json();
+      const validated = CreateTaskSchema.safeParse(body);
+      if (!validated.success) {
+        return Response.json(
+          {
+            type: "https://api.example.com/errors/validation",
+            title: "Validation Failed",
+            status: 400,
+            invalid_params: validated.error.errors,
+          },
+          { status: 400 }
+        );
+      }
+
+      const task = repo.create(validated.data.id, validated.data.title);
+      return Response.json(task, { status: 201 });
+    } catch (err: unknown) {
+      return Response.json({ status: 500, title: "Internal Server Error" }, { status: 500 });
+    }
+  };
+}
+```
+
+---
+
+## 3. End-to-End Integration Auditor CLI
+
+Audit your codebase for mock stubs, hardcoded fake arrays, and unpersisted API routes:
 ```bash
 python3 skills/fullstack/scripts/verify_end_to_end_integration.py --path .
 ```
+This CLI verifies:
+1. Zero in-memory mock datasets in service or route layers.
+2. Verified database schema and migration files exist.
+3. Every API mutation endpoint contains schema validation.
+4. UI mutation forms include loading and error feedback states.
