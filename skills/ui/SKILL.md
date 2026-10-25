@@ -5,7 +5,7 @@ description: UI design systems, tokens, Apple HIG, and glassmorphism craftsmansh
 
 # UI Design Systems & Craftsmanship (`/ui`)
 
-> **Philosophy**: *Form follows function. Reject visual noise, neon purple card-soup, and generic SaaS flatland. Build tactile, high-contrast, mathematically precise interfaces using disciplined tokens, authentic art movements, physical spring dynamics, and semantic vector icons across Web and Universal Mobile (React Native, iOS SwiftUI, Android Compose, Flutter).*
+> **Philosophy**: *Form follows function. Reject visual noise, neon purple card-soup, and generic SaaS flatland. Build tactile, high-contrast, mathematically precise interfaces using disciplined tokens, authentic art movements, physical spring dynamics, sub-pixel directional lighting, and semantic vector icons across Web and Universal Mobile.*
 
 This skill establishes production-grade design system foundations across React 19, Next.js, Tailwind CSS v4, React Native, Swift (iOS), Kotlin (Android), Flutter (Dart), and modern cross-platform interfaces.
 
@@ -16,7 +16,7 @@ This skill establishes production-grade design system foundations across React 1
 ```mermaid
 flowchart TD
     subgraph Foundation["1. Foundation Layer"]
-        A["Disciplined Neutral Palette (Zinc/Slate)"]
+        A["Disciplined Neutral Palette (Zinc/Slate/Obsidian)"]
         B["Kinetic Variable Typography (wght, wdth, tnum)"]
         C["8pt Strict Spatial & Grid Alignment"]
     end
@@ -26,19 +26,20 @@ flowchart TD
         F["Japanese Wabi-Sabi (Organic Asymmetry)"]
         G["Technical CAD (Wireframe / Telemetry)"]
     end
-    subgraph Materials["3. Physical Materials & Cupertino"]
-        H["Multi-layer Acrylic Blur (24px-32px)"]
-        I["Specular Inner Borders (1px 15-20% highlight)"]
-        J["Continuous Squircles (Superellipses)"]
+    subgraph SubPixel["3. Sub-Pixel Precision & Materials"]
+        H["Single Zenith Light: 1px Specular Top Highlight"]
+        I["OLED Anti-Banding: 1.8% Fractal Noise Overlays"]
+        J["Acoustic Micro-Clicks: Web Audio API Synthesizer"]
+        K["Cupertino Acrylic Blur (24-32px saturate 180%)"]
     end
     subgraph Motion["4. Universal Motion & Haptics"]
-        K["Web: Framer Motion Zero-Re-render Springs"]
-        L["React Native: Reanimated 3 Native Worklets"]
-        M["iOS: SwiftUI withAnimation(.spring) + CoreHaptics"]
-        N["Android: Compose Animatable + LocalHapticFeedback"]
-        O["Flutter: Impeller 120Hz + Detent Haptics"]
+        L["Web: Framer Motion Zero-Re-render Springs"]
+        M["React Native: Reanimated 3 Native Worklets"]
+        N["iOS: SwiftUI withAnimation(.spring) + CoreHaptics"]
+        O["Android: Compose Animatable + LocalHapticFeedback"]
+        P["Flutter: Impeller 120Hz + Detent Haptics"]
     end
-    Foundation --> Movements --> Materials --> Motion
+    Foundation --> Movements --> SubPixel --> Motion
 ```
 
 ---
@@ -47,6 +48,7 @@ flowchart TD
 
 | Document | Scope & Focus | Target Platforms |
 | :--- | :--- | :--- |
+| [references/premium-ui-craft-and-subpixel-engineering.md](references/premium-ui-craft-and-subpixel-engineering.md) | Sub-pixel directional lighting, Fresnel highlights, OLED anti-banding, tactile travel, and Web Audio click synthesizer. | Web & Universal Mobile |
 | [references/unique-art-styles-and-aesthetics.md](references/unique-art-styles-and-aesthetics.md) | Detailed specifications for the 4 Non-Generic Art Movements (Color palettes, typography, UI patterns, and layout rules). | Web & Universal Mobile |
 | [references/universal-mobile-motion-architecture.md](references/universal-mobile-motion-architecture.md) | Universal mobile motion guide: Reanimated 3 worklets, SwiftUI spring/haptics, Compose animatables, and Flutter Impeller. | React Native, SwiftUI, Compose, Flutter |
 | [references/kinetic-typography-and-variable-fonts.md](references/kinetic-typography-and-variable-fonts.md) | Variable font axes (`wght`, `wdth`, `slnt`, `opsz`, `GRAD`), clip-path text reveals, and tabular numbers across Web & Mobile. | Web, React Native, iOS, Android, Flutter |
@@ -80,36 +82,34 @@ AI slop universally relies on centered purple cards and generic Inter font. Brea
 
 ---
 
-## 4. Universal Motion Architecture (Web & Mobile)
+## 4. Sub-Pixel Directional Lighting & Ultra-Premium Craftsmanship
 
-### 4.1 Web: Framer Motion Zero-Re-Render Pipeline
-- Avoid updating React state during continuous pointer drag loops.
-- Use `useMotionValue` and `useTransform` to mutate DOM transforms directly in the composite layer.
-- Enforce spring physics: `stiffness: 380, damping: 28, mass: 1.0` for tactical controls.
+### 4.1 The Single Zenith Light Principle
+Every physical container models a 90° overhead ambient light source:
+- **Top Specular Hairline**: `inset 0 1px 0 0 rgba(255, 255, 255, 0.12)`.
+- **Bottom Ambient Shadow**: `inset 0 -1px 0 0 rgba(0, 0, 0, 0.45)`.
+- **Quadratic Contact Shadows**: Multi-stop shadow combining tight 1px contact lines (`0 1px 2px rgba(0,0,0,0.4)`) with diffuse ambient occlusion (`0 20px 40px -15px rgba(0,0,0,0.6)`).
 
-### 4.2 React Native: Reanimated 3 UI-Thread Worklets
-- Gesture updates execute on the native UI thread via `Gesture.Pan()` without crossing the JS bridge.
-- Spring animations with `withSpring(target, { stiffness: 350, damping: 28 })`.
-- Tactile detents via `expo-haptics` (`Haptics.selectionAsync()`).
+### 4.2 OLED Anti-Banding & Materiality
+- Use temperature-tinted obsidian (`#08090a` / `#09090b`) instead of flat `#000000` to prevent OLED purple smear.
+- Overlay 1.8% SVG fractal noise to break up 8-bit gradient quantization and impart a bead-blasted aluminum feel.
 
-### 4.3 Native iOS: SwiftUI & CoreHaptics
-- Physical springs with `withAnimation(.spring(response: 0.35, dampingFraction: 0.72))`.
-- Tactile detent feedback via `UIImpactFeedbackGenerator(style: .rigid)`.
-- GPU-accelerated drawing via SwiftUI `Canvas`.
-
-### 4.4 Native Android: Jetpack Compose & Kotlin
-- Non-blocking spring simulation using `Animatable` and `spring(dampingRatio, stiffness)`.
-- Haptics via `LocalHapticFeedback.current.performHapticFeedback(HapticFeedbackType.TextHandleMove)`.
-- Hardware-accelerated drawing via Compose `Canvas`.
-
-### 4.5 Flutter / Dart: Impeller 120Hz GPU Pipeline
-- Use `AnimationController.unbounded(vsync: this)` with `SpringSimulation` to preserve overshoot.
-- Trigger `HapticFeedback.selectionClick()` on discrete angular detent crossings.
-- Use `CustomPainter` with `RepaintBoundary` for 120Hz frame rates.
+### 4.3 Zero-Dependency Acoustic Micro-Synthesizer
+Inline 1.2ms synthetic click impulses (`2.4kHz` triangle wave with exponential gain decay) via Web Audio API on toggle flips and rotary/fader detent crossing.
 
 ---
 
-## 5. Apple Human Interface & Cupertino Materials
+## 5. Universal Motion Architecture (Web & Mobile)
+
+- **Web (Framer Motion)**: Zero-re-render gestures with `useMotionValue` and `useTransform` directly mutating composite style layers.
+- **React Native**: Reanimated 3 UI-thread worklets (`'worklet'`) with zero JS bridge overhead during drag interactions.
+- **iOS (SwiftUI)**: Physical springs via `withAnimation(.spring(response: 0.35, dampingFraction: 0.72))` + `UIImpactFeedbackGenerator`.
+- **Android (Compose)**: `Animatable.animateTo(spring())` + `LocalHapticFeedback`.
+- **Flutter**: `AnimationController.unbounded` + `SpringSimulation` for 120Hz Impeller rendering.
+
+---
+
+## 6. Cupertino Materials Hierarchy
 
 | Material Level | Background Tint | Backdrop Blur | Specular Border | Typical Use Case |
 | :--- | :--- | :--- | :--- | :--- |
@@ -120,12 +120,14 @@ AI slop universally relies on centered purple cards and generic Inter font. Brea
 
 ---
 
-## 6. Production Component Templates Catalog
+## 7. Production Component Templates Catalog
 
 Ready-to-use production components in `skills/ui/templates/`:
 
 | Component Template | Platform / Ecosystem | Aesthetic Movement & Physics | Description |
 | :--- | :--- | :--- | :--- |
+| **`MachinedTitaniumStrip.tsx`** | Web (React) | Studio Anodized Hardware | Anodized titanium chassis, knurled fader, 16-seg LED meter, Web Audio clicks. |
+| **`SpatialCommandPalette.tsx`** | Web (React) | Apple / Linear Spatial UX | Cupertino acrylic refraction, physical 3D keycaps, spring `layoutId` active pill. |
 | **`IndustrialTactileEncoder.native.tsx`** | Mobile (React Native) | Industrial Tactical (Reanimated 3) | 120Hz UI-thread worklets, Expo Haptics detents, SVG oscilloscope, tabular numerals. |
 | **`IndustrialTactileEncoder.swift`** | Mobile (iOS SwiftUI) | Industrial Tactical (CoreHaptics) | Native SwiftUI drag gesture, `withAnimation(.spring)`, rigid haptics, Canvas waveform. |
 | **`IndustrialTactileEncoder.kt`** | Mobile (Android Compose) | Industrial Tactical (Jetpack Compose) | Compose pointerInput, `Animatable` spring, LocalHapticFeedback, Canvas oscilloscope. |
@@ -139,14 +141,16 @@ Ready-to-use production components in `skills/ui/templates/`:
 
 ---
 
-## 7. Automated Verification CLI
+## 8. Automated Verification CLI
 
 Verify design tokens, prohibited gradients, and icon accessibility automatically:
 ```bash
 python3 skills/ui/scripts/verify_ui_tokens.py --path .
+python3 skills/ui/scripts/verify_frontend_quality.py --path .
 ```
 This CLI verifies:
 1. Zero raw emojis in button, link, or heading elements.
 2. Zero unauthorized arbitrary padding or neon gradient classes.
 3. Accessible `aria-hidden="true"` on vector icon instances.
 4. WCAG compliant contrast pairings across surface tokens.
+5. Presence of 1px specular edge definitions on dark containers.

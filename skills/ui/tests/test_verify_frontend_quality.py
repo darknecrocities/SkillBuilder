@@ -68,6 +68,16 @@ class TestVerifyFrontendQuality(unittest.TestCase):
         issues = audit_component_content(snippet, "test.tsx")
         self.assertTrue(any(i["rule"] == "UI-GENERIC-CARD-SOUP" for i in issues))
 
+    def test_detects_missing_specular_edge(self):
+        snippet = '<div className="bg-zinc-950 rounded-2xl p-6 text-white">Card</div>'
+        issues = audit_component_content(snippet, "test.tsx")
+        self.assertTrue(any(i["rule"] == "UI-MISSING-SPECULAR-EDGE" for i in issues))
+
+    def test_passes_specular_edge(self):
+        snippet = '<div className="bg-zinc-950 rounded-2xl p-6 border border-zinc-800 text-white">Card</div>'
+        issues = audit_component_content(snippet, "test.tsx")
+        self.assertFalse(any(i["rule"] == "UI-MISSING-SPECULAR-EDGE" for i in issues))
+
 
 if __name__ == "__main__":
     unittest.main()
