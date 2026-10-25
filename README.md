@@ -123,30 +123,35 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 
 ---
 
-## Apple Human Interface & 3D WebGL Craftsmanship
+## Anti-AI-Slop Craftsmanship, Brand Logos & Motion Physics
 
-SkillBuilder rejects generic AI "vibe coding" (neon purple gradients, glowing borders, card soup) in favor of precision physical materials and hardware-accelerated 3D graphics:
+SkillBuilder rejects generic AI "vibe coding" (purple hero gradients, nested card-soup, floaty 3s fades, and blurry raster logo blobs) in favor of mathematical vectors, physical materials, and scientific color theory:
 
 ```mermaid
-flowchart LR
-    subgraph AppleDesign["Apple HIG & Cupertino Acrylic (/ui)"]
-        A["Translucent Dark Tint (zinc-900 @ 65-72%)"]
-        B["Dual-Engine Blur (28px) + Saturation (180%)"]
-        C["Specular Inner Edge Lighting (1px White 15-20%)"]
-        D["Continuous Squircles (Corner Smoothing 60%)"]
+flowchart TD
+    subgraph AntiSlop["1. Anti-AI-Slop & Brand Craftsmanship (/anti-slop)"]
+        A["The 4 Logo Stress Tests: Silhouette (Pure B&W), 16px Favicon, 5s Memory Sketch, Vector Cleanliness"]
+        B["60-30-10 Spatial Color Architecture & OKLCH Perceptual Lightness"]
+        C["Dynamic Optical Tracking Curves (-0.035em Headings, +0.06em Captions)"]
+        D["Tabular Numbers ('tnum' 1, 'zero' 1) for Telemetry Precision"]
     end
-    subgraph WebGL3D["3D WebGL Roadster Showcase (/3d)"]
-        E["Three.js PBR MeshPhysicalMaterial (Clearcoat 1.0)"]
-        F["Studio 3-Point HDR Rig (Key, Fill, Rim)"]
-        G["OrbitControls with Inertial Damping (0.05)"]
-        H["Strict GPU Memory Disposal (Geometries, Materials)"]
+    subgraph AppleDesign["2. Apple HIG & Cupertino Materials (/ui)"]
+        E["Translucent Dark Tint (zinc-900 @ 65-72%) with Specular Inner Lighting (1px)"]
+        F["Continuous Squircles (Corner Smoothing 60%) & Dual-Engine Blur (28px saturate 180%)"]
+        G["Tactile Apple Spring Physics (Mass-Spring-Damper: 380k, 30c) on UI Controls"]
+        H["GPU-Only Composite Transformations (Strictly 'transform' & 'opacity')"]
     end
-    AppleDesign --- WebGL3D
+    subgraph WebGL3D["3. 3D WebGL Roadster Showcase (/3d)"]
+        I["Three.js PBR MeshPhysicalMaterial (Clearcoat 1.0) & Studio 3-Point HDR Rig"]
+        J["OrbitControls with Inertial Damping & Strict GPU Memory Disposal"]
+    end
+    AntiSlop --- AppleDesign --- WebGL3D
 ```
 
-- **Production Cupertino Components**: Ready-to-use in `skills/ui/templates/AppleGlassCard.tsx` and `skills/ui/templates/SpatialControlCenter.tsx`.
+- **Production App Logo Templates**: Ready-to-use vector assets in `skills/anti-slop/templates/CraftedAppLogo.svg` and `skills/anti-slop/templates/CraftedAppLogo.tsx` (passes all 4 stress tests with material & monochrome variants).
+- **Production Cupertino Components**: Ready-to-use in `skills/ui/templates/AppleGlassCard.tsx`, `skills/ui/templates/SpatialControlCenter.tsx`, and `skills/ui/templates/TactileSpringButton.tsx`.
 - **Production 3D Automotive Showcase**: Ready-to-use in `skills/3d/templates/ThreeRoadsterShowcase.tsx`.
-- **Automated 3D Performance Audit**: Checked via `python3 skills/3d/scripts/verify_3d_performance.py --path .` (clamped DPR, Draco loaders, zero render-loop allocations).
+- **Automated Validation Gates**: Checked via `sanitize_ai_slop.py`, `verify_ui_tokens.py`, `verify_frontend_quality.py`, and `verify_3d_performance.py`.
 
 ---
 

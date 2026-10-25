@@ -60,6 +60,18 @@ export async function fetchUser(id: string) {
         violations = scan_file(fp)
         self.assertTrue(any(v["rule"] == "NeonVibeGradient" for v in violations))
 
+    def test_detects_ai_logo_trope(self):
+        code = """<div className="swirling-gradient-sphere" />"""
+        fp = self._write_temp("logo.tsx", code)
+        violations = scan_file(fp)
+        self.assertTrue(any(v["rule"] == "AILogoTrope" for v in violations))
+
+    def test_detects_fuzzy_neon_halo(self):
+        code = """.glow { box-shadow: 0 0 50px rgba(168, 85, 247, 0.8); }"""
+        fp = self._write_temp("styles.css", code)
+        violations = scan_file(fp)
+        self.assertTrue(any(v["rule"] == "FuzzyNeonHalo" for v in violations))
+
 
 if __name__ == "__main__":
     unittest.main()

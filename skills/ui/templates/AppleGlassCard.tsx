@@ -21,7 +21,7 @@ export const AppleGlassCard: React.FC<AppleGlassCardProps> = ({
 }) => {
   return (
     <div
-      className="relative group p-6 rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl"
+      className="relative group p-6 rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-lg"
       style={{
         // Real Cupertino Acrylic formula:
         // Translucent dark tint + heavy blur + specular inner edge lighting

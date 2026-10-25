@@ -62,7 +62,7 @@ export const SpatialControlCenter: React.FC<SpatialControlCenterProps> = ({
   return (
     <section
       aria-label="Spatial Control Center"
-      className="w-full max-w-sm rounded-3xl p-5 text-zinc-100 select-none transition-all duration-300 font-sans shadow-2xl relative overflow-hidden"
+      className="w-full max-w-sm rounded-3xl p-5 text-zinc-100 select-none transition-all duration-300 font-sans shadow-lg relative overflow-hidden"
       style={{
         backgroundColor: "rgba(18, 18, 22, 0.72)",
         backdropFilter: "blur(32px) saturate(190%)",
