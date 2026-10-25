@@ -1,27 +1,33 @@
 # Mandatory Engineering Discipline & Production Etiquette
 
-All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the SkillBuilder suite:
+All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the SkillBuilder suite (20 Modular Skills):
 
-1. **Prompt Polishing First (PPE)**:
-   - Always analyze, refine, and structure incoming prompts into clear, token-efficient engineering specifications before executing modifications.
-2. **Continuous Conversational Learning (CLP)**:
+1. **Prompt Polishing First (PPE - `/prompt-polish`)**:
+   - Analyze, refine, and structure incoming prompts into clear, token-efficient engineering specifications with explicit verification criteria.
+2. **Continuous Conversational Learning (CLP - `/continuous-learning`)**:
    - Immediately absorb user corrections and project conventions. Persist invariants to `.agents/learned_conventions.md` via `scripts/record_learning.py` and never repeat corrected mistakes.
-3. **Anti-Vibe-Coding UI Standards**:
-   - Strictly prohibit neon purple gradients, glowing green borders, card-soup layouts, decorative badges, and synthetic AI marketing copywriting.
-   - Strictly prohibit raw emojis in UI buttons, headings, and navigation. Use semantic SVG vector icons (Lucide Icons) with accessible attributes.
-4. **Token Savings & High-Density Pairing**:
-   - Communicate with high information density. Omit conversational padding. Use targeted diffs and structured markdown tables.
-5. **Anti-Mock / Fully Functional Mandate**:
+3. **Anti-AI-Slop & Clean Craftsmanship (`/anti-slop`)**:
+   - Prohibit decorative badges (`shields.io`), synthetic AI marketing copy, obvious restatement comments (`// set loading to true`), and toy mock arrays.
+   - Prohibit neon purple gradients, glowing borders, and card-soup layouts.
+   - Prohibit raw emojis in interactive UI controls; use semantic Lucide SVG icons with `aria-hidden="true"`.
+4. **Autonomous Deep Research & Fallback Pivots (`/research`)**:
+   - When any library, package, or build tool fails or is deprecated, autonomously research production alternatives, evaluate trade-offs, and implement drop-in replacements.
+5. **Responsiveness QA & Sub-Agent Verification (`/qa`)**:
+   - Enforce 4-tier viewport matrix (Mobile 375px, Tablet 768px, Desktop 1280px, Widescreen 1920px+).
+   - Zero fixed-pixel containers breaking mobile layouts. Enforce minimum 44x44px touch targets and accessible focus rings.
+6. **Anti-Mock / Fully Functional Mandate (`/fullstack`)**:
    - Zero static mock arrays pretending to be databases. Wire up real persistence (PostgreSQL, SQLite, structured file stores), real schema validation, and end-to-end integration.
-6. **Environment & Secret Hygiene**:
-   - Never commit raw credentials. Whenever APIs, databases, or third-party tokens are introduced, maintain `.env.example`, `.env`, and `.gitignore`.
-7. **Standardized Containerization**:
-   - Provide a production-hardened multi-stage Dockerfile (non-root `USER 10001`, minimal base) and `docker-compose.yml` with health checks.
-8. **Network & Request Resilience**:
-   - Enforce explicit connection/read timeouts (3s/15s), in-memory caching with invalidation, debouncing on inputs, and bounded exponential backoff with jitter on retries.
-9. **Continuous Testing, QA & List-an-Error (LaE)**:
-   - Provide automated unit/integration tests for every feature. Whenever an error occurs, catalog its signature, root cause, remediation, and regression test.
-10. **Git Branching, Commit Chunking (< 1k lines), & Ready-to-Review PRs**:
-   - Branch deliberately (`feat/`, `fix/`), decompose changes into cohesive atomic commits within the 1,000-line budget, and author complete, ready-to-merge Pull Requests.
-11. **500-Line Source File Policy**:
-   - Maintain a 500-line physical limit on all source files, verified via `scripts/check_source_line_limits.py`.
+7. **Token Savings & High-Density Pairing**:
+   - Communicate with high information density. Omit conversational padding. Use targeted diffs and structured markdown tables.
+8. **Security & Vulnerability Defense (`/security`)**:
+   - Never commit raw credentials. Enforce parameterization against SQL/command injection, OWASP Top 10 hardening, and secret hygiene (`.env.example`, `.env`, `.gitignore`).
+9. **Standardized Containerization (`/devops`)**:
+   - Provide production-hardened multi-stage Dockerfiles (non-root `USER 10001`, minimal base) and `docker-compose.yml` with health checks.
+10. **Network & Request Resilience (`/production-etiquette`)**:
+    - Enforce explicit connection/read timeouts (3s/15s), in-memory caching with invalidation, debouncing on inputs, and bounded exponential backoff with jitter on retries.
+11. **Continuous Testing, QA & List-an-Error (LaE)**:
+    - Provide automated unit/integration tests for every feature. Catalog failures with signature, root cause, remediation, and regression test.
+12. **Git Branching, Commit Chunking (< 1k lines), & Ready-to-Review PRs (`/git-workflow`)**:
+    - Branch deliberately (`feat/`, `fix/`), decompose changes into cohesive atomic commits within the 1,000-line budget, and author complete, ready-to-merge Pull Requests.
+13. **500-Line Source File Policy (`/world-class-engineering`)**:
+    - Maintain a 500-line physical limit on all source files, verified via `scripts/check_source_line_limits.py`.

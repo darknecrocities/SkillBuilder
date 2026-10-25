@@ -1,78 +1,143 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # Script: verify_all_skills.sh
-# Purpose: Master test runner for all SkillBuilder verification suites & guardrails.
+# Purpose: Master test runner for all 20 SkillBuilder verification suites & guardrails.
 # Author: Arron Kian Parejas (@darknecrocities)
 # ==============================================================================
 
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-echo "=== Running SkillBuilder Master Verification Suite ==="
+echo "=== Running SkillBuilder Master 20-Skill Verification Suite ==="
 echo "Repository: ${REPO_DIR}"
 echo ""
 
 # 1. 500-Line Source File Limit Policy
-echo "[1/12] Checking 500-Line Source File Policy..."
+echo "[1/25] Checking 500-Line Source File Policy..."
 python3 "${REPO_DIR}/skills/world-class-engineering/scripts/check_source_line_limits.py" --path "${REPO_DIR}"
-echo "[PASS] Line limits verified."
+echo "[PASS] Line limits verified across all source files."
 echo ""
 
 # 2. World-Class Engineering Tests
-echo "[2/12] Running world-class-engineering unit tests..."
+echo "[2/25] Running world-class-engineering tests..."
 python3 "${REPO_DIR}/skills/world-class-engineering/tests/test_check_source_line_limits.py"
 echo ""
 
-# 3. Production Etiquette Hygiene Tests
-echo "[3/12] Running production-etiquette project hygiene tests..."
+# 3. Anti-AI-Slop Tests
+echo "[3/25] Running anti-slop sanitizer tests..."
+python3 "${REPO_DIR}/skills/anti-slop/tests/test_sanitize_ai_slop.py"
+echo ""
+
+# 4. Autonomous Research Tests
+echo "[4/25] Running autonomous research & fallback tests..."
+python3 "${REPO_DIR}/skills/research/tests/test_research_alternatives.py"
+echo ""
+
+# 5. Responsiveness QA Tests
+echo "[5/25] Running responsiveness & viewport QA tests..."
+python3 "${REPO_DIR}/skills/qa/tests/test_verify_responsiveness_and_qa.py"
+echo ""
+
+# 6. List-an-Error QA Tests
+echo "[6/25] Running QA error catalog lookup tests..."
+python3 "${REPO_DIR}/skills/qa/tests/test_lookup_error.py"
+echo ""
+
+# 7. UI Design Tokens Tests
+echo "[7/25] Running UI tokens & vector icon tests..."
+python3 "${REPO_DIR}/skills/ui/tests/test_verify_ui_tokens.py"
+echo ""
+
+# 8. UI Frontend Quality Tests
+echo "[8/25] Running UI frontend quality & anti-vibe tests..."
+python3 "${REPO_DIR}/skills/ui/tests/test_verify_frontend_quality.py"
+echo ""
+
+# 9. Frontend Architecture Tests
+echo "[9/25] Running frontend architecture tests..."
+python3 "${REPO_DIR}/skills/frontend/tests/test_verify_frontend_architecture.py"
+echo ""
+
+# 10. Security Defense Tests
+echo "[10/25] Running security hygiene & defense tests..."
+python3 "${REPO_DIR}/skills/security/tests/test_audit_security_hygiene.py"
+echo ""
+
+# 11. Fullstack Anti-Mock Tests
+echo "[11/25] Running fullstack anti-mock integration tests..."
+python3 "${REPO_DIR}/skills/fullstack/tests/test_verify_end_to_end_integration.py"
+echo ""
+
+# 12. Performance & Web Vitals Tests
+echo "[12/25] Running performance & Web Vitals budget tests..."
+python3 "${REPO_DIR}/skills/performance/tests/test_audit_performance_budgets.py"
+echo ""
+
+# 13. API Design OpenAPI Tests
+echo "[13/25] Running API design OpenAPI contract tests..."
+python3 "${REPO_DIR}/skills/api-design/tests/test_validate_openapi_spec.py"
+echo ""
+
+# 14. Observability Telemetry Tests
+echo "[14/25] Running observability telemetry tests..."
+python3 "${REPO_DIR}/skills/observability/tests/test_verify_telemetry_standards.py"
+echo ""
+
+# 15. Safe Refactoring Tests
+echo "[15/25] Running safe refactoring opportunity tests..."
+python3 "${REPO_DIR}/skills/refactor/tests/test_detect_refactor_opportunities.py"
+echo ""
+
+# 16. Git Workflow Commit Chunking Tests
+echo "[16/25] Running git workflow commit chunking tests..."
+python3 "${REPO_DIR}/skills/git-workflow/tests/test_analyze_git_commit_chunks.py"
+echo ""
+
+# 17. Continuous Learning Tests
+echo "[17/25] Running continuous learning protocol tests..."
+python3 "${REPO_DIR}/skills/continuous-learning/tests/test_record_learning.py"
+echo ""
+
+# 18. Backend Contracts Tests
+echo "[18/25] Running backend systems API contract tests..."
+python3 "${REPO_DIR}/skills/backend/tests/test_verify_api_contracts.py"
+echo ""
+
+# 19. Database Hygiene Tests
+echo "[19/25] Running database hygiene & migration tests..."
+python3 "${REPO_DIR}/skills/database/tests/test_verify_database_hygiene.py"
+echo ""
+
+# 20. Container DevOps Security Tests
+echo "[20/25] Running container DevOps security tests..."
+python3 "${REPO_DIR}/skills/devops/tests/test_verify_container_security.py"
+echo ""
+
+# 21. AI Token Budget Tests
+echo "[21/25] Running AI & LLM token budget tests..."
+python3 "${REPO_DIR}/skills/ai/tests/test_calculate_token_budget.py"
+echo ""
+
+# 22. Prompt Polish Tests
+echo "[22/25] Running prompt refinement tests..."
+python3 "${REPO_DIR}/skills/prompt-polish/tests/test_polish_prompt.py"
+echo ""
+
+# 23. Prompt Polish Learning Tests
+echo "[23/25] Running prompt polish convention tests..."
+python3 "${REPO_DIR}/skills/prompt-polish/tests/test_record_learning.py"
+echo ""
+
+# 24. Production Etiquette Project Hygiene Tests
+echo "[24/25] Running production etiquette hygiene tests..."
 python3 "${REPO_DIR}/skills/production-etiquette/tests/test_scaffold_project_hygiene.py"
 echo ""
 
-# 4. Production Etiquette Git Commit Chunking Tests
-echo "[4/12] Running production-etiquette git commit chunking tests..."
+# 25. Production Etiquette Commit Chunk Tests
+echo "[25/25] Running production etiquette git chunk tests..."
 python3 "${REPO_DIR}/skills/production-etiquette/tests/test_analyze_git_commit_chunks.py"
 echo ""
 
-# 5. Prompt Refinement & Metacognition Tests
-echo "[5/12] Running prompt-refinement-and-metacognition tests..."
-python3 "${REPO_DIR}/skills/prompt-refinement-and-metacognition/tests/test_polish_prompt.py"
-echo ""
-
-# 6. Continuous Learning Tests
-echo "[6/12] Running continuous conversational learning tests..."
-python3 "${REPO_DIR}/skills/prompt-refinement-and-metacognition/tests/test_record_learning.py"
-echo ""
-
-# 7. QA Testing & Error Resolution Tests
-echo "[7/12] Running qa-testing-and-error-resolution tests..."
-python3 "${REPO_DIR}/skills/qa-testing-and-error-resolution/tests/test_lookup_error.py"
-echo ""
-
-# 8. UI & Frontend Quality & Anti-Vibe-Coding Tests
-echo "[8/12] Running ui-frontend-engineering tests..."
-python3 "${REPO_DIR}/skills/ui-frontend-engineering/tests/test_verify_frontend_quality.py"
-echo ""
-
-# 9. Backend Systems Contract Tests
-echo "[9/12] Running backend-systems-engineering tests..."
-python3 "${REPO_DIR}/skills/backend-systems-engineering/tests/test_verify_api_contracts.py"
-echo ""
-
-# 10. Database Hygiene Tests
-echo "[10/12] Running database-and-datastore-engineering tests..."
-python3 "${REPO_DIR}/skills/database-and-datastore-engineering/tests/test_verify_database_hygiene.py"
-echo ""
-
-# 11. Container Security Tests
-echo "[11/12] Running cloud-devops-infrastructure tests..."
-python3 "${REPO_DIR}/skills/cloud-devops-infrastructure/tests/test_verify_container_security.py"
-echo ""
-
-# 12. AI Token Budget Tests
-echo "[12/12] Running ai-and-llm-engineering tests..."
-python3 "${REPO_DIR}/skills/ai-and-llm-engineering/tests/test_calculate_token_budget.py"
-echo ""
-
-echo "========================================================"
-echo "[SUCCESS] ALL 12 SKILLBUILDER VERIFICATION SUITES PASSED!"
-echo "========================================================"
+echo "=========================================================="
+echo "[SUCCESS] ALL 25 SKILLBUILDER VERIFICATION SUITES PASSED!"
+echo "=========================================================="
