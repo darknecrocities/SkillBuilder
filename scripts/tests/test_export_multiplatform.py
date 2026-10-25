@@ -31,17 +31,18 @@ class TestExportMultiplatform(unittest.TestCase):
 
     def test_get_all_skills(self):
         skills = get_all_skills(self.repo_dir)
-        self.assertEqual(len(skills), 21, f"Expected 21 skills, found {len(skills)}")
+        self.assertEqual(len(skills), 22, f"Expected 22 skills, found {len(skills)}")
         names = [s[0] for s in skills]
         self.assertIn("3d", names)
         self.assertIn("anti-slop", names)
         self.assertIn("world-class-engineering", names)
+        self.assertIn("full-scale-mode", names)
         self.assertIn("research", names)
         self.assertIn("qa", names)
 
     def test_export_cursor_rules(self):
         created = export_cursor_rules(self.repo_dir, self.temp_path)
-        self.assertTrue(len(created) >= 22)  # 21 .mdc + .cursorrules
+        self.assertTrue(len(created) >= 23)  # 22 .mdc + .cursorrules
         self.assertTrue((self.temp_path / ".cursorrules").exists())
         self.assertTrue((self.temp_path / ".cursor" / "rules" / "anti-slop.mdc").exists())
 

@@ -122,11 +122,11 @@ To produce the highest-quality software architecture, verified test suites, and 
 
 ```mermaid
 flowchart TD
-    INPUT["User: /plan /world-class-engineering <Task>"] --> PPE["Phase 1: Metacognitive Prompt Polishing (/prompt-polish)"]
+    INPUT["User: /plan /full-scale-mode <Task>"] --> PPE["Phase 1: Metacognitive Prompt Polishing (/prompt-polish)"]
     PPE --> PLAN["Phase 2: Interactive Implementation Plan Artifact (/plan)"]
     PLAN --> APPROVE{"User Review & Approval"}
     APPROVE -- "Proceed" --> EXEC["Phase 3: Multi-Discipline Execution (/anti-slop, /research, /security)"]
-    EXEC --> QA["Phase 4: Two-Tier QA & 28-Suite Verification (/qa)"]
+    EXEC --> QA["Phase 4: Two-Tier QA & 29-Suite Verification (/qa)"]
     QA --> CHUNK["Phase 5: Atomic Commit Chunking (< 1k lines) (/git-workflow)"]
     CHUNK --> PR["Phase 6: Ready-to-Merge Pull Request + Walkthrough"]
 ```
@@ -146,10 +146,10 @@ flowchart TD
    - Enforces the disciplined neutral palette (zinc/slate) and semantic Lucide SVG vector icons (zero raw emojis in UI buttons).
 4. **Autonomous Fallback Pivots (`/research`)**:
    - If any library, build tool, or dependency fails to install or is deprecated, autonomously discovers and benchmarks production-grade replacements using the P.A.T.H.S. criteria (Performance, Activity, Type safety, Hygiene, Size).
-5. **Continuous Verification & 500-Line Ceiling (`/world-class-engineering` & `/qa`)**:
+5. **Continuous Verification & 500-Line Ceiling (`/full-scale-mode`, `/world-class-engineering` & `/qa`)**:
    - Audits all source files against the strict **500-line physical limit** (`check_source_line_limits.py`).
    - Executes the **Two-Tier QA Engine**: Full UI/Frontend QA (`/qa ui`) for viewports, 44x44pt touch targets, WCAG AA, and 120Hz GPU compositor, plus Full App Functional QA (`/qa app`) for state machines, real persistence, 3s/15s timeouts, and mobile lifecycles.
-   - Executes the master 28-suite verification test runner.
+   - Executes the master 29-suite verification test runner.
 6. **Atomic Commit Chunking & Ready-to-Review PR (`/git-workflow`)**:
    - Automatically clusters diffs into cohesive commits strictly below the **1,000-line push budget**.
    - Uses Conventional Commits (`feat:`, `fix:`, `refactor:`, `test:`).
@@ -159,7 +159,7 @@ flowchart TD
 
 | Intent | Recommended Command Combination | Outcome |
 | :--- | :--- | :--- |
-| **Enterprise Feature Delivery** | `/plan /world-class-engineering <goal>` | Full technical design doc, multi-discipline implementation, automated testing, and chunked PR. |
+| **Full-Scale Feature Delivery** | `/plan /full-scale-mode <goal>` (or `/world-class-engineering`) | 7-phase EOS lifecycle, multi-agent parallel tracks, token budget ceilings, and chunked PR. |
 | **Fullstack Vertical Slice** | `/plan /fullstack <goal>` | Real database migration, ORM repository, validated API route, and responsive UI without mocks. |
 | **Safe Refactoring** | `/plan /refactor <module>` | Characterization testing, Strangler Fig pattern, and decomposing files approaching 500 lines. |
 | **Two-Tier Full QA Pass** | `/plan /qa <scope>` | Dual-tier verification: Full UI/Frontend QA (`/qa ui`) and Full App Functional QA (`/qa app`). |
@@ -167,12 +167,13 @@ flowchart TD
 
 ---
 
-## The 21-Skill Master Reference Matrix
+## The 22-Skill Master Reference Matrix
 
 Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules in Cursor:
 
 | Command | Skill Name | Domain | Core Capabilities & Focus | Standalone CLI Tool | Primary Guardrail |
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| `/full-scale-mode` | **Full-Scale Mode** | Orchestration | Master Phased Project Orchestration Engine (aliased with `/world-class-engineering`), 7-phase EOS lifecycle, parallel subagent swarms. | `verify_full_scale_orchestration.py` | Strict 7-phase gate compliance & 1,500-token subagent ceilings. |
 | `/world-class-engineering` | **World-Class Engineering** | Architecture | 6-Phase EOS lifecycle (Understand -> Define -> Plan -> Implement -> Verify -> Deliver). | `check_source_line_limits.py` | Strict 500-line physical source file limit. |
 | `/anti-slop` | **Anti-AI-Slop Sanitizer** | Clean Code | Purges decorative badges, fake mock databases, neon gradients, obvious comments, and marketing copy. | `sanitize_ai_slop.py` | Zero `shields.io`, zero fake mock arrays, zero emojis in UI controls. |
 | `/research` | **Autonomous Research & Fallbacks** | Discovery | Autonomous fallback engine; researches alternatives when packages fail or deprecate. | `research_alternatives.py` | P.A.T.H.S. trade-off evaluation & minimal POC validation. |
@@ -381,7 +382,8 @@ SkillBuilder/
 │   └── AGENTS.md                               # Plugin-level rules
 ├── workspace/                                  # Developer Workspace & Presets
 ├── skills/
-│   ├── world-class-engineering/                # Master EOS & 500-line ceiling
+│   ├── full-scale-mode/                        # Master 7-phase EOS & multi-agent swarm
+│   ├── world-class-engineering/                # Master EOS & 500-line ceiling (aliased)
 │   ├── anti-slop/                              # Anti-AI-slop & clean craftsmanship
 │   ├── research/                               # Autonomous research & alternative fallbacks
 │   ├── qa/                                     # Two-Tier QA (Full UI & Full App Functionality)
@@ -404,5 +406,5 @@ SkillBuilder/
 └── scripts/
     ├── install.sh                              # Universal multi-platform installer
     ├── export_multiplatform.py                 # Multi-platform exporter (Cursor, Claude, Codex)
-    └── verify_all_skills.sh                    # Master 28-suite verification test runner
+    └── verify_all_skills.sh                    # Master 29-suite verification test runner
 ```
