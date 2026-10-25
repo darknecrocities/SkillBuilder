@@ -9,7 +9,7 @@
 
 # SkillBuilder: Anti-AI-Slop Dynamic Engineering Ecosystem
 
-SkillBuilder is a production-grade suite of **20 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
+SkillBuilder is a production-grade suite of **21 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
 
 ---
 
@@ -52,7 +52,7 @@ flowchart TD
     PPE --> PLAN["Phase 2: Interactive Implementation Plan Artifact (/plan)"]
     PLAN --> APPROVE{"User Review & Approval"}
     APPROVE -- "Proceed" --> EXEC["Phase 3: Multi-Discipline Execution (/anti-slop, /research, /security)"]
-    EXEC --> QA["Phase 4: Responsiveness & 26-Suite Verification (/qa)"]
+    EXEC --> QA["Phase 4: Responsiveness & 27-Suite Verification (/qa)"]
     QA --> CHUNK["Phase 5: Atomic Commit Chunking (< 1k lines) (/git-workflow)"]
     CHUNK --> PR["Phase 6: Ready-to-Merge Pull Request + Walkthrough"]
 ```
@@ -75,7 +75,7 @@ flowchart TD
 5. **Continuous Verification & 500-Line Ceiling (`/world-class-engineering` & `/qa`)**:
    - Audits all source files against the strict **500-line physical limit** (`check_source_line_limits.py`).
    - Audits mobile (375px), tablet (768px), desktop (1280px), and widescreen viewports for touch targets (>=44px), focus visibility, and fluid layout scaling.
-   - Executes the master 26-suite verification test runner.
+   - Executes the master 27-suite verification test runner.
 6. **Atomic Commit Chunking & Ready-to-Review PR (`/git-workflow`)**:
    - Automatically clusters diffs into cohesive commits strictly below the **1,000-line push budget**.
    - Uses Conventional Commits (`feat:`, `fix:`, `refactor:`, `test:`).
@@ -93,7 +93,7 @@ flowchart TD
 
 ---
 
-## The 20-Skill Master Reference Matrix
+## The 21-Skill Master Reference Matrix
 
 Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules in Cursor:
 
@@ -103,7 +103,8 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 | `/anti-slop` | **Anti-AI-Slop Sanitizer** | Clean Code | Purges decorative badges, fake mock databases, neon gradients, obvious comments, and marketing copy. | `sanitize_ai_slop.py` | Zero `shields.io`, zero fake mock arrays, zero emojis in UI controls. |
 | `/research` | **Autonomous Research & Fallbacks** | Discovery | Autonomous fallback engine; researches alternatives when packages fail or deprecate. | `research_alternatives.py` | P.A.T.H.S. trade-off evaluation & minimal POC validation. |
 | `/qa` | **Responsiveness QA & Sub-Agents** | Quality | 4-tier viewport matrix (375px/768px/1280px+), a11y (WCAG AA), touch targets, Master Error Catalog. | `verify_responsiveness_and_qa.py` | Min 44x44px touch targets, zero fixed-pixel containers. |
-| `/ui` | **UI Design Systems & Tokens** | UI/UX | High-contrast neutral scales (zinc/slate), fluid typography, Lucide SVG icons. | `verify_ui_tokens.py` | Zero raw emojis in buttons/headers; explicit button types. |
+| `/ui` | **UI Design Systems & Tokens** | UI/UX | Apple HIG, Cupertino blur materials, squircle smoothing, high-contrast neutral scales (zinc/slate), Lucide SVGs. | `verify_ui_tokens.py` | Zero raw emojis in buttons/headers; explicit button types. |
+| `/3d` | **3D WebGL & Product Showcase** | 3D/Graphics | Three.js, React Three Fiber, PBR clearcoat shaders, Draco GLTF compression, 60fps budgets, context loss handling. | `verify_3d_performance.py` | DPR clamped to <= 2.0; Draco GLTF loader; WebGL disposal. |
 | `/frontend` | **Frontend Architecture** | Frontend | Pure component isolation, React 19, Next.js App Router, Flutter, memory leak prevention. | `verify_frontend_architecture.py` | AbortController on async `useEffect`; error boundaries. |
 | `/backend` | **Backend Systems Engineering** | Backend | Clean architecture (Hexagonal), domain services, REST/gRPC contracts, idempotency. | `verify_api_contracts.py` | Strict runtime schema validation (Zod, Pydantic v2). |
 | `/security` | **Security Hardening** | Security | OWASP Top 10 defenses, zero hardcoded secrets, SQL injection defense, CORS/CSP policies. | `audit_security_hygiene.py` | Parameterized queries only; zero committed API credentials. |
@@ -122,6 +123,33 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 
 ---
 
+## Apple Human Interface & 3D WebGL Craftsmanship
+
+SkillBuilder rejects generic AI "vibe coding" (neon purple gradients, glowing borders, card soup) in favor of precision physical materials and hardware-accelerated 3D graphics:
+
+```mermaid
+flowchart LR
+    subgraph AppleDesign["Apple HIG & Cupertino Acrylic (/ui)"]
+        A["Translucent Dark Tint (zinc-900 @ 65-72%)"]
+        B["Dual-Engine Blur (28px) + Saturation (180%)"]
+        C["Specular Inner Edge Lighting (1px White 15-20%)"]
+        D["Continuous Squircles (Corner Smoothing 60%)"]
+    end
+    subgraph WebGL3D["3D WebGL Roadster Showcase (/3d)"]
+        E["Three.js PBR MeshPhysicalMaterial (Clearcoat 1.0)"]
+        F["Studio 3-Point HDR Rig (Key, Fill, Rim)"]
+        G["OrbitControls with Inertial Damping (0.05)"]
+        H["Strict GPU Memory Disposal (Geometries, Materials)"]
+    end
+    AppleDesign --- WebGL3D
+```
+
+- **Production Cupertino Components**: Ready-to-use in `skills/ui/templates/AppleGlassCard.tsx` and `skills/ui/templates/SpatialControlCenter.tsx`.
+- **Production 3D Automotive Showcase**: Ready-to-use in `skills/3d/templates/ThreeRoadsterShowcase.tsx`.
+- **Automated 3D Performance Audit**: Checked via `python3 skills/3d/scripts/verify_3d_performance.py --path .` (clamped DPR, Draco loaders, zero render-loop allocations).
+
+---
+
 ## Multi-Platform Installation Guide
 
 ### Option 1: Google Antigravity
@@ -136,7 +164,7 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 
 ### Option 2: Cursor IDE
 
-Convert all 20 skills into native `.cursor/rules/*.mdc` rule files and a consolidated `.cursorrules`:
+Convert all 21 skills into native `.cursor/rules/*.mdc` rule files and a consolidated `.cursorrules`:
 ```bash
 ./scripts/install.sh --cursor /path/to/my-cursor-project
 ```
