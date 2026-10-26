@@ -36,15 +36,15 @@ Experience the unedited engineering workflow of SkillBuilder operating inside **
 </p>
 
 <div align="center">
-  <a href="assets/skillbuilderdemo_cinematic_web.mp4">
+  <a href="assets/skillbuilderdemo_web.mp4">
     <img src="assets/skillbuilderdemo_preview.gif" alt="SkillBuilder Live Demonstration — Click to Play Full Video (1080p 60fps)" width="100%" style="border-radius: 12px; box-shadow: 0 16px 36px rgba(0,0,0,0.6); max-width: 960px;" />
   </a>
   <p>
-    <em>🎬 <strong>Live Demonstration Preview (Looping)</strong> &bull; Click image above to play full 1080p 60fps video with audio (107.35s)</em>
+    <em>🎬 <strong>Live Demonstration (Pure Wide-Angle Edition)</strong> &bull; Click image above to play full 1080p 60fps video with audio (107.35s)</em>
   </p>
   <p>
-    <a href="assets/skillbuilderdemo_cinematic_web.mp4"><strong>▶️ Play Cinematic Edition (1080p 60fps &bull; 34MB)</strong></a> &bull;
-    <a href="assets/skillbuilderdemo_web.mp4"><strong>📺 Play Pure Raw Edition (Wide-Angle &bull; 14MB)</strong></a> &bull;
+    <a href="assets/skillbuilderdemo_web.mp4"><strong>▶️ Play Demonstration Video (1080p 60fps &bull; 14MB)</strong></a> &bull;
+    <a href="assets/skillbuilderdemo_cinematic_web.mp4"><strong>🎬 Watch Cinematic HUD Edition (34MB)</strong></a> &bull;
     <a href="assets/skillbuilderdemo_edited.mp4"><strong>💾 Download 4K Retina Master (2938x1912 &bull; 22MB)</strong></a>
   </p>
 </div>
