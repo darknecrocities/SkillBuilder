@@ -145,7 +145,16 @@ useEffect(() => {
 
 ---
 
-## 5. Frontend Architecture Validator CLI
+## 5. Platform Domain Routing & Token Discipline
+
+To eliminate token quota bloat and maintain sharp agent context fidelity:
+- **Mobile Applications** (React Native, Flutter, Swift, Kotlin): Delegate presentation, touch targets (44x44pt/48x48dp), safe areas, and gesture springs strictly to [`/mobile-ui`](../mobile-ui/SKILL.md). Never inject web DOM CSS or container query rules into native mobile tasks.
+- **Web Applications** (React 19, Next.js, Vue, Tailwind CSS): Delegate responsive layouts, Component-Level Container Queries (`@container`), CSS View Transitions, and fluid `clamp()` curves strictly to [`/web-ui`](../web-ui/SKILL.md). Never inject native SwiftUI or Compose Lookahead rules into web tasks.
+- **Token Quota Rule**: Agents must never mount both `/mobile-ui` and `/web-ui` into the same prompt turn, saving up to ~1,850 tokens per turn.
+
+---
+
+## 6. Frontend Architecture Validator CLI
 
 Scan frontend modules for architecture violations, inline fetches in JSX, and missing cleanup:
 ```bash

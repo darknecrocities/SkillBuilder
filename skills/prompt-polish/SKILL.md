@@ -42,6 +42,7 @@ flowchart TD
 ### Phase 1: Intent Extraction & Scope Boundary
 - State the objective in exactly one active-voice engineering sentence.
 - Identify the target tier: Frontend, Backend, Database, Cloud/DevOps, or Fullstack slice.
+- **Platform Domain Detection**: Explicitly detect whether client deliverables target **Mobile** or **Web**. Inject the single matching skill directive (`/mobile-ui` or `/web-ui`) into the polished RFC and suppress the other, eliminating ~1,850 tokens of cross-platform context overhead.
 - Isolate existing tech stack constraints and learned conventions from `.agents/learned_conventions.md`.
 
 ### Phase 2: Ambiguity & Edge-Case Scan

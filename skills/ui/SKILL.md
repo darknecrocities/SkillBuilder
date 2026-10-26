@@ -141,7 +141,16 @@ Ready-to-use production components in `skills/ui/templates/`:
 
 ---
 
-## 8. Automated Verification CLI
+## 8. Platform Scoping & Token Savings
+
+To preserve token quota and maintain sharp design implementation:
+- **Mobile Platforms**: Invoke [`/mobile-ui`](../mobile-ui/SKILL.md) for SwiftUI `matchedGeometryEffect`, Jetpack Compose `LookaheadScope`, predictive back gestures, spring tokens, and native haptic generators. Suppress web styling skills.
+- **Web Platforms**: Invoke [`/web-ui`](../web-ui/SKILL.md) for Component-Level Container Queries (`@container`), CSS View Transitions, OKLCH color palettes, and fluid `clamp()` typography curves. Suppress native mobile skills.
+- **Rule**: Never pass both mobile and web rule payloads to a single subagent, saving ~1,850 tokens per turn.
+
+---
+
+## 9. Automated Verification CLI
 
 Verify design tokens, prohibited gradients, and icon accessibility automatically:
 ```bash

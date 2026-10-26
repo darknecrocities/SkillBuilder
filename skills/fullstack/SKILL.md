@@ -22,11 +22,12 @@ flowchart LR
     E --> F["6. Interactive UI + Optimistic Rollback"]
 ```
 
-### The 4 Vertical Slice Rules:
+### The 5 Vertical Slice Rules:
 1. **Zero Mock Arrays**: Never ship `const mockUsers = [...]` or in-memory arrays pretending to be durable state. Wire SQLite, PostgreSQL, or structured file stores.
 2. **End-to-End Type Safety**: Share or mirror validation schemas between frontend and backend contracts.
 3. **Optimistic Rollback**: UI mutations must optimistically render the expected state, but roll back cleanly with a toast notification if the network or server rejects the transaction.
 4. **Automated Integration Test**: Every slice must include an integration test verifying the full round-trip from HTTP POST to database persistence.
+5. **Platform Domain Specialization**: In Tier 6 (Interactive UI), bind [`/mobile-ui`](../mobile-ui/SKILL.md) for mobile targets and [`/web-ui`](../web-ui/SKILL.md) for web targets. Never mix cross-platform styling instructions in a single feature slice to conserve token quota.
 
 ---
 
