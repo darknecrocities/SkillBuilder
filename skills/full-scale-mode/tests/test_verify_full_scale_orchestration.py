@@ -93,6 +93,41 @@ class TestVerifyFullScaleOrchestration(unittest.TestCase):
         sample = "a" * 38
         self.assertEqual(estimate_tokens(sample), 10)
 
+    def test_platform_domain_specialization_mobile_only(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td)
+            (p / "pubspec.yaml").write_text("name: mobile_app", encoding="utf-8")
+            res = analyze_skill_resonance(p)
+            self.assertEqual(res["platform_target"], "mobile")
+            self.assertIn("mobile-ui", res["resonant_skills"])
+            self.assertIn("web-ui", res["pruned_skills"])
+            self.assertGreaterEqual(res["token_quota_saved"], 1850)
+
+    def test_platform_domain_specialization_web_only(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td)
+            (p / "next.config.js").write_text("// next config", encoding="utf-8")
+            (p / "tailwind.config.js").write_text("// tailwind", encoding="utf-8")
+            res = analyze_skill_resonance(p)
+            self.assertEqual(res["platform_target"], "web")
+            self.assertIn("web-ui", res["resonant_skills"])
+            self.assertIn("mobile-ui", res["pruned_skills"])
+            self.assertGreaterEqual(res["token_quota_saved"], 1850)
+
+    def test_platform_override_pruning(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td)
+            (p / "app.json").write_text("{}", encoding="utf-8")
+            (p / "tailwind.config.js").write_text("{}", encoding="utf-8")
+            # Force platform to mobile
+            res_mobile = analyze_skill_resonance(p, target_platform="mobile")
+            self.assertIn("mobile-ui", res_mobile["resonant_skills"])
+            self.assertIn("web-ui", res_mobile["pruned_skills"])
+            # Force platform to web
+            res_web = analyze_skill_resonance(p, target_platform="web")
+            self.assertIn("web-ui", res_web["resonant_skills"])
+            self.assertIn("mobile-ui", res_web["pruned_skills"])
+
 
 if __name__ == "__main__":
     unittest.main()

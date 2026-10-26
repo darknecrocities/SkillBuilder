@@ -69,6 +69,12 @@ The primary orchestrator maintains an in-memory index of discovered models, file
 - **Trigger Condition**: If the primary agent's cumulative context exceeds $60\%$ of the active model's context ceiling, initiate compaction.
 - **Compaction Strategy**: Summarize completed Phase 0–3 execution steps into a permanent RFC state snapshot, purge ephemeral intermediate command outputs, and resume cleanly.
 
+### Guardrail 6: Platform Domain Specialization (PDS) & Skill Pruning
+Loading inapplicable platform instructions wastes valuable context and degrades model attention:
+- **Mobile Workflows**: Mounting `/mobile-ui` while suppressing `/web-ui` eliminates container queries, CSS View Transitions, and DOM styling rules, saving **~1,850 tokens per prompt turn** (~40% of Phase 1 budget).
+- **Web Workflows**: Mounting `/web-ui` while suppressing `/mobile-ui` eliminates SwiftUI `matchedGeometry`, Jetpack Compose `LookaheadScope`, predictive back gestures, and CoreHaptics, saving **~1,850 tokens per prompt turn**.
+- **Universal/Monorepos**: Strictly partition subagents (`Track 1A-Web` vs `Track 1A-Mobile`) with isolated token budgets. Never combine mobile and web rules into a single subagent prompt turn.
+
 ---
 
 ## 4. Token Estimation Formula & Heuristics

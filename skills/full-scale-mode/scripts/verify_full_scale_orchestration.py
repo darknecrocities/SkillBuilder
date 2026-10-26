@@ -91,9 +91,41 @@ def audit_skill_registry(repo_root: Path) -> List[Dict[str, Any]]:
     return violations
 
 
-def analyze_skill_resonance(repo_root: Path) -> Dict[str, Any]:
-    """Autonomous Skill Resonance (ASR): Fingerprints repository and activates resonant skills."""
+def detect_platform_target(repo_root: Path) -> str:
+    """Classifies repository into 'mobile', 'web', 'universal', or 'auto'."""
+    has_mobile = (
+        any((repo_root / d).exists() for d in ["ios", "android", "expo"])
+        or any((repo_root / f).exists() for f in ["app.json", "pubspec.yaml", "Podfile"])
+    )
+    has_web = (
+        any((repo_root / f).exists() for f in [
+            "tailwind.config.js", "tailwind.config.ts", "postcss.config.js",
+            "next.config.js", "next.config.ts", "next.config.mjs",
+            "vite.config.js", "vite.config.ts"
+        ])
+        or (repo_root / "styles").exists()
+        or (repo_root / "public").exists()
+    )
+    if has_mobile and has_web:
+        return "universal"
+    if has_mobile:
+        return "mobile"
+    if has_web:
+        return "web"
+    return "auto"
+
+
+def analyze_skill_resonance(repo_root: Path, target_platform: str = "auto") -> Dict[str, Any]:
+    """Autonomous Skill Resonance (ASR): Fingerprints repository and activates resonant skills,
+    applying Platform Domain Specialization (PDS) to prune cross-platform token waste."""
     activated_skills = {"prompt-polish", "qa", "security", "git-workflow", "world-class-engineering"}
+    pruned_skills = set()
+
+    # Determine effective platform
+    if target_platform == "auto":
+        platform = detect_platform_target(repo_root)
+    else:
+        platform = target_platform
 
     # Cloud & Serverless Ingress
     if any((repo_root / f).exists() for f in ["cloudbuild.yaml", "app.yaml"]) or (repo_root / "Dockerfile").exists():
@@ -117,21 +149,55 @@ def analyze_skill_resonance(repo_root: Path) -> Dict[str, Any]:
     if any((repo_root / f).exists() for f in ["duckdb", "pipeline", "pipelines"]):
         activated_skills.add("data-pipelines")
 
-    # Mobile Architecture
-    if any((repo_root / d).exists() for d in ["ios", "android", "expo"]) or any((repo_root / f).exists() for f in ["app.json", "pubspec.yaml", "Podfile"]):
-        activated_skills.add("mobile-ui")
-
-    # Modern Web UI & Design Systems
-    if any((repo_root / f).exists() for f in ["tailwind.config.js", "tailwind.config.ts", "postcss.config.js"]) or (repo_root / "styles").exists():
-        activated_skills.add("web-ui")
-
     # Local LLM & Quantized Inference
     if any((repo_root / f).exists() for f in ["Modelfile", "modelfile"]) or any((repo_root / d).exists() for d in ["models", "gguf"]):
         activated_skills.add("local-llm")
 
+    # Platform Domain Specialization (PDS) & Token Quota Preservation (TQP)
+    has_mobile_files = (
+        any((repo_root / d).exists() for d in ["ios", "android", "expo"])
+        or any((repo_root / f).exists() for f in ["app.json", "pubspec.yaml", "Podfile"])
+    )
+    has_web_files = (
+        any((repo_root / f).exists() for f in [
+            "tailwind.config.js", "tailwind.config.ts", "postcss.config.js",
+            "next.config.js", "next.config.ts", "next.config.mjs",
+            "vite.config.js", "vite.config.ts"
+        ])
+        or (repo_root / "styles").exists()
+        or (repo_root / "public").exists()
+    )
+
+    if platform == "mobile":
+        activated_skills.add("mobile-ui")
+        if "web-ui" in activated_skills:
+            activated_skills.remove("web-ui")
+        pruned_skills.add("web-ui")
+    elif platform == "web":
+        activated_skills.add("web-ui")
+        if "mobile-ui" in activated_skills:
+            activated_skills.remove("mobile-ui")
+        pruned_skills.add("mobile-ui")
+    elif platform == "universal":
+        if has_mobile_files:
+            activated_skills.add("mobile-ui")
+        if has_web_files:
+            activated_skills.add("web-ui")
+    else:  # auto / fallback
+        if has_mobile_files:
+            activated_skills.add("mobile-ui")
+        if has_web_files:
+            activated_skills.add("web-ui")
+
+    # Token savings estimate: ~1,850 tokens per pruned specialized skill (~7,000 characters)
+    token_quota_saved = len(pruned_skills) * 1850
+
     return {
+        "platform_target": platform,
         "resonant_skills_count": len(activated_skills),
-        "resonant_skills": sorted(list(activated_skills))
+        "resonant_skills": sorted(list(activated_skills)),
+        "pruned_skills": sorted(list(pruned_skills)),
+        "token_quota_saved": token_quota_saved
     }
 
 
@@ -179,6 +245,17 @@ def main() -> int:
     parser.add_argument("--path", "-p", default=".", help="Root repository path")
     parser.add_argument("--prompt", type=str, help="Subagent prompt string to audit for token budget")
     parser.add_argument("--plan", type=str, help="Path to implementation plan markdown to audit")
+    parser.add_argument(
+        "--platform",
+        choices=["auto", "mobile", "web", "universal"],
+        default="auto",
+        help="Specify or override target platform for Platform Domain Specialization (PDS)"
+    )
+    parser.add_argument(
+        "--strict-platform",
+        action="store_true",
+        help="Enforce strict platform isolation (flags cross-platform skill bleed)"
+    )
     parser.add_argument("--asr", action="store_true", help="Run Autonomous Skill Resonance analysis")
     parser.add_argument("--json", action="store_true", help="Output findings in JSON format")
     parser.add_argument("--strict", action="store_true", help="Exit with non-zero code on violations")
@@ -193,19 +270,32 @@ def main() -> int:
     # 2. Audit prompt if provided
     if args.prompt:
         all_violations.extend(audit_subagent_prompt(args.prompt))
+        if args.strict_platform:
+            if "mobile-ui" in args.prompt and "web-ui" in args.prompt:
+                all_violations.append({
+                    "rule": "CROSS-PLATFORM-SKILL-BLEED",
+                    "message": "Prompt mixes both /mobile-ui and /web-ui. Isolate tracks to prevent token waste."
+                })
 
     # 3. Audit plan if provided
     if args.plan:
         plan_path = Path(args.plan).resolve()
         if plan_path.exists():
-            all_violations.extend(audit_phased_plan(plan_path.read_text(encoding="utf-8")))
+            plan_text = plan_path.read_text(encoding="utf-8")
+            all_violations.extend(audit_phased_plan(plan_text))
+            if args.strict_platform:
+                if "/mobile-ui" in plan_text and "/web-ui" in plan_text and "Universal" not in plan_text:
+                    all_violations.append({
+                        "rule": "CROSS-PLATFORM-SKILL-BLEED",
+                        "message": "Plan references both /mobile-ui and /web-ui without universal track partitioning."
+                    })
         else:
             all_violations.append({
                 "rule": "PLAN-NOT-FOUND",
                 "message": f"Specified plan file not found: {plan_path}"
             })
 
-    asr_data = analyze_skill_resonance(repo_root)
+    asr_data = analyze_skill_resonance(repo_root, target_platform=args.platform)
 
     if args.json:
         print(json.dumps({
@@ -218,9 +308,15 @@ def main() -> int:
         print(f"=== Full-Scale Mode Orchestration Audit: {repo_root} ===")
         print(f"Verified Skills in Registry: {len(REQUIRED_SKILLS)} required skills")
         if args.asr:
+            print(f"Platform Domain Specialization: Target = [{asr_data['platform_target'].upper()}]")
             print(f"Autonomous Skill Resonance (ASR): Activated {asr_data['resonant_skills_count']} skills:")
             for s in asr_data['resonant_skills']:
                 print(f"  • /{s}")
+            if asr_data.get('pruned_skills'):
+                print(f"Token Quota Preservation (TQP): Pruned {len(asr_data['pruned_skills'])} inapplicable skill(s):")
+                for p in asr_data['pruned_skills']:
+                    print(f"  ✕ /{p} (pruned to conserve context)")
+                print(f"Estimated Token Savings: ~{asr_data['token_quota_saved']} tokens per subagent turn")
         if not all_violations:
             print("[PASS] Workspace and orchestration inputs comply with Full-Scale standards.")
         else:

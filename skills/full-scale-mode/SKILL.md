@@ -32,16 +32,25 @@ flowchart TD
 
 | Phase | Core Objective | Triad Gateway Focus | Active Phase Skill Cluster (PSC) |
 | :--- | :--- | :--- | :--- |
-| **Phase 1: Frontend & Interface** | Apple HIG design tokens, file-based routing, client state machines, 3D WebGL, i18n, and prompt refinement. | Client & Experience Gate | `/frontend`, `/ui`, `/3d`, `/routing`, `/state-management`, `/i18n`, `/anti-slop`, `/prompt-polish` |
-| **Phase 2: Backend & Infrastructure** | Hexagonal services, API contracts, real persistence, cloud runtimes, streaming pipelines, and security hardening. | Engine & Security Gate | `/backend`, `/fullstack`, `/api-design`, `/database`, `/gcp`, `/aws`, `/firebase`, `/supabase`, `/data-pipelines`, `/devops`, `/security`, `/ai`, `/research` |
-| **Phase 3: Testing & Verifiable Release** | TDD test suites, Two-Tier QA (viewports & app resilience), Web Vitals, OpenTelemetry tracing, and atomic PR release. | Verification & Release Gate | `/testing`, `/qa`, `/performance`, `/observability`, `/production-etiquette`, `/git-workflow`, `/refactor`, `/continuous-learning`, `/project-skills`, `/world-class-engineering` |
+| **Phase 1: Frontend & Interface** | Apple HIG design tokens, file-based routing, client state machines, 3D WebGL, i18n, and prompt refinement. | Client & Experience Gate | `/frontend`, `/ui`, `/mobile-ui`, `/web-ui`, `/3d`, `/routing`, `/state-management`, `/i18n`, `/anti-slop`, `/prompt-polish` |
+| **Phase 2: Backend & Infrastructure** | Hexagonal services, API contracts, real persistence, cloud runtimes, streaming pipelines, and security hardening. | Engine & Security Gate | `/backend`, `/fullstack`, `/api-design`, `/database`, `/gcp`, `/aws`, `/firebase`, `/supabase`, `/data-pipelines`, `/devops`, `/security`, `/ai`, `/local-llm`, `/research` |
+| **Phase 3: Testing & Verifiable Release** | TDD test suites, Two-Tier QA (viewports & app resilience), Web Vitals, OpenTelemetry tracing, and atomic PR release. | Verification & Release Gate | `/testing`, `/qa`, `/performance`, `/observability`, `/production-etiquette`, `/git-workflow`, `/refactor`, `/continuous-learning`, `/project-skills`, `/world-class-engineering`, `/full-scale-mode` |
+
+### Platform Domain Specialization (PDS) & Token Quota Preservation (TQP)
+In Phase 1, the orchestrator classifies the target into **Mobile-First**, **Web-First**, or **Universal/Cross-Platform** to eliminate cross-platform token waste:
+- **Mobile Targets** (iOS, Android, React Native, Expo, Flutter): Mounts `/mobile-ui` (SwiftUI `matchedGeometry`, Compose `LookaheadScope`, predictive back, springs, haptics) and **prunes** `/web-ui`, eliminating inapplicable CSS container queries and DOM view transitions to save $\approx 1,850$ tokens per subagent turn.
+- **Web Targets** (React 19, Next.js, Vue, Tailwind, CSS): Mounts `/web-ui` (container queries `@container`, View Transitions API, OKLCH, `clamp()`) and **prunes** `/mobile-ui`, eliminating native mobile motion rules and CoreHaptics to save $\approx 1,850$ tokens per subagent turn.
+- **Universal / Monorepos**: Partitions client delivery into decoupled subagent tracks (`Track 1A-Web` with `/web-ui` and `Track 1A-Mobile` with `/mobile-ui`), preventing mixed context bloat.
 
 ---
 
 ## 2. Autonomous Skill Resonance (ASR)
 
-When invoking `/full-scale-mode`, the **Autonomous Skill Resonance (ASR)** engine scans project manifests to automatically sense and activate the relevant skills:
+When invoking `/full-scale-mode`, the **Autonomous Skill Resonance (ASR)** engine scans project manifests to automatically sense and activate the relevant skills, while dynamically pruning cross-platform bloat:
 
+- **Mobile Targets (`ios/`, `android/`, `app.json`, `pubspec.yaml`)** $\rightarrow$ Activates `/mobile-ui`, prunes `/web-ui`.
+- **Web Targets (`tailwind.config.*`, `next.config.*`, `vite.config.*`, `styles/`)** $\rightarrow$ Activates `/web-ui`, prunes `/mobile-ui`.
+- **Local LLM & Edge AI (`Modelfile`, `gguf`, `mlx`, `ollama`)** $\rightarrow$ Activates `/local-llm`.
 - **Next.js / Remix / Flutter** $\rightarrow$ Activates `/routing`, `/frontend`, `/state-management`.
 - **Google Cloud Run / GCS** $\rightarrow$ Activates `/gcp`, `/devops`.
 - **AWS CDK / S3 / Lambda** $\rightarrow$ Activates `/aws`, `/devops`.

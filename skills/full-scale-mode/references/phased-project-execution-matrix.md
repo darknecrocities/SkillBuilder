@@ -23,8 +23,12 @@ flowchart TD
 ## 2. Phase-by-Phase Execution Specifications
 
 ### Phase 1: Frontend & Interface Architecture (Client Tier)
-- **Governing Skills**: `/frontend`, `/ui`, `/3d`, `/routing`, `/state-management`, `/i18n`, `/anti-slop`, `/prompt-polish`
+- **Governing Skills**: `/frontend`, `/ui`, `/mobile-ui`, `/web-ui`, `/3d`, `/routing`, `/state-management`, `/i18n`, `/anti-slop`, `/prompt-polish`
 - **Subagent Roles**: `Frontend & Routing Architect` (Track 1A) and `UI/UX & Sensory Specialist` (Track 1B).
+- **Platform Domain Specialization (PDS)**:
+  - **Mobile Workflows**: Mounts `/mobile-ui` and prunes `/web-ui`. Track 1B enforces SwiftUI `matchedGeometryEffect`, Jetpack Compose `LookaheadScope`, predictive back gestures, spring tokens, and system haptics.
+  - **Web Workflows**: Mounts `/web-ui` and prunes `/mobile-ui`. Track 1B enforces Component-Level Container Queries (`@container`), CSS View Transitions, OKLCH color spaces, and fluid `clamp()` curves.
+  - **Universal Workflows**: Partitions into parallel decoupled subagents (`Track 1A-Web` vs `Track 1A-Mobile`) to eliminate token quota bleed.
 - **Entry Criteria**: User goal received and refined via `/prompt-polish` (PPE).
 - **Track 1A (Layouts, Routing & State)**:
   - Scaffolds file-based layouts, parallel/intercepting routes, and typed search params (`/routing`).
