@@ -76,6 +76,110 @@ The single greatest source of AI-generated bugs, unmaintainable "vibe coding", a
 
 ---
 
+## Real-World Prompting Mastery: Skill Combos & Prompt Strategies
+
+SkillBuilder transforms natural language requests into deterministic engineering workflows by **stacking modular skills directly in the chat bar**. By combining the native `/plan` gate with domain skills (`/full-scale-mode`, `/qa`, `/research`, `/anti-slop`, `/fullstack`), you provide unambiguous execution boundaries while preserving token efficiency.
+
+Below is an in-depth breakdown of authentic real-world prompts captured directly inside **Google Antigravity**, illustrating proper skill invocation, prompt anatomy, and battle-tested prompting strategies:
+
+---
+
+### Case Study 1: The Full-Scale Project Orchestration Combo (`/plan` + `/full-scale-mode`)
+
+<p align="center">
+  <img src="assets/promptdemo/antigravity_plan_full_scale_mode.png" alt="Real Antigravity Prompt: /plan /full-scale-mode portfolio" width="100%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 12px 28px rgba(0,0,0,0.5); max-width: 940px;" />
+</p>
+
+#### Prompt Anatomy & Dissection
+```text
+/plan /full-scale-mode i want you to create me a portfolio with minimalistic design two tone color of white and black and use google fonts, i want also a 1 page
+```
+
+| Element | Component | Engineering Function & Impact |
+| :--- | :--- | :--- |
+| **Pill 1** | `• plan` | Activates Antigravity's interactive planning phase; pauses execution for RFC review and explicit `Proceed` approval. |
+| **Pill 2** | `• full-scale-mode` | Engages the 7-Phase EOS master project engine, orchestrating prompt refinement, architecture, and parallel subagents. |
+| **Constraint 1** | `minimalistic design two tone color of white and black` | Locks the palette to disciplined monochrome neutrals (`#0A0A0B` / `#FFFFFF`), eliminating neon AI gradients and card soup. |
+| **Constraint 2** | `use google fonts` | Enforces typographic hierarchy using clean variable web fonts (e.g., Inter, Space Grotesk) rather than generic system fallbacks. |
+| **Constraint 3** | `1 page` | Sets a strict physical layout boundary, preventing bloated multi-page navigation or unfinished routes. |
+
+#### Why This Strategy Works:
+1. **Explicit Constraint Anchoring**: Rather than saying *"make a cool modern portfolio"* (which leads to generic AI slop with floating blobs and neon purple gradients), specifying `two tone color of white and black` and `1 page` gives the model crisp design parameters.
+2. **Master Orchestrator Delegation**: Passing `/full-scale-mode` instructs the agent to automatically enforce the 500-line file limit, scaffold real component slices, and run QA verification gates without manual intervention.
+
+---
+
+### Case Study 2: The Contextual Remediation & Error Audit Combo (`/plan` + `/qa this`)
+
+<p align="center">
+  <img src="assets/promptdemo/antigravity_plan_qa.png" alt="Real Antigravity Prompt: /plan /qa this" width="100%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 12px 28px rgba(0,0,0,0.5); max-width: 940px;" />
+</p>
+
+#### Prompt Anatomy & Dissection
+```text
+/plan /qa this
+```
+
+| Element | Component | Engineering Function & Impact |
+| :--- | :--- | :--- |
+| **Pill 1** | `• plan` | Demands a structured root-cause remediation RFC with before/after diffs before modifying active code. |
+| **Pill 2** | `‹› qa` | Triggers the Two-Tier Quality Assurance engine: 4-tier viewports (375px/768px/1280px) and Full App Functional QA. |
+| **Target** | `this` | Contextual semantic pointer directing the agent to audit the active repository, active screen, or latest rendered output. |
+
+#### Why This Strategy Works:
+1. **Zero-Token Waste / Maximum Information Density**: You don't need to write a 500-word explanation of bugs. `/qa this` commands the agent to autonomously execute its comprehensive audit checklist:
+   - Check for mobile layout clipping (`ERR-MOB-001`) and fixed-width pixel containers breaking on 375px viewports.
+   - Audit WCAG 2.2 AA contrast ratios and minimum 44x44pt touch target ergonomics.
+   - Inspect state machines (idle, loading, success, error, empty) and network timeouts (3s connection / 15s read).
+2. **Deterministic Remediation**: Because `/plan` is prepended, the agent catalogs every discovered failure into a remediation matrix and presents the solution plan first.
+
+---
+
+### Case Study 3: The Technical Discovery & Fullstack Slice Combo (`/plan` + `/research`)
+
+<p align="center">
+  <img src="assets/promptdemo/antigravity_plan_research.png" alt="Real Antigravity Prompt: /plan /research local LLM website" width="100%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 12px 28px rgba(0,0,0,0.5); max-width: 940px;" />
+</p>
+
+#### Prompt Anatomy & Dissection
+```text
+/plan /research research me a Local LLM and build me a website that has minimalistic frontend and rigorous backend for the budget tracker app
+```
+*(Runtime: Powered by **Gemini 3.8 Flash High** with **Turbo** extended thinking)*
+
+| Element | Component | Engineering Function & Impact |
+| :--- | :--- | :--- |
+| **Pill 1** | `• plan` | Requires architectural blueprint with API contract specifications (RFC 7807) and migration schema before coding. |
+| **Pill 2** | `• research` | Triggers autonomous discovery to evaluate production local LLM runtimes (e.g. Ollama, ONNX, WebLLM) and licensing. |
+| **Constraint 1** | `minimalistic frontend` | Demands restrained typography, zero decorative clutter, and semantic Lucide SVG icons. |
+| **Constraint 2** | `rigorous backend` | Invokes Clean Architecture, parameterization, and strict input validation (Zod / Pydantic). |
+| **Domain Scope** | `budget tracker app` | Sets concrete functional boundaries: transaction ledger, category schema, and real SQLite/PostgreSQL persistence. |
+
+#### Why This Strategy Works:
+1. **Research Before Architecture**: Prevents hallucinated or deprecated NPM packages. The agent discovers viable local runtimes, benchmarks memory footprints, and presents trade-offs in the plan.
+2. **Dual-Boundary Architectural Separation**: Specifying *"minimalistic frontend and rigorous backend"* prompts the agent to cleanly decouple domain entities from UI presentation layers.
+
+---
+
+### The SkillBuilder Prompting Playbook (5 High-Yield Strategies)
+
+| Strategy | Rule / Formula | Example Prompt | Expected Outcome |
+| :--- | :--- | :--- | :--- |
+| **1. The Golden Foundation** | `/plan` + `[Domain Skill]` + `[Task]` | `/plan /fullstack Add Stripe webhook handler with idempotent processing` | RFC implementation plan with problem details and idempotency keys before writing code. |
+| **2. Contextual Audit** | `/plan /qa this` | `/plan /qa this` | Comprehensive 4-tier responsive and functional audit of current work with zero fluff. |
+| **3. Proactive Research** | `/plan /research [Tech Question]` | `/plan /research Benchmark SQLite vs DuckDB for local analytics and implement` | Evaluates tradeoffs, selects production-grade package, and produces working integration. |
+| **4. Anti-Slop UI Elevation** | `/anti-slop /ui [Feature]` | `/anti-slop /ui Build a spatial control center with Cupertino materials` | Sub-pixel directional lighting, micro-click acoustics, and semantic SVG icons. |
+| **5. Clean Refactoring** | `/plan /refactor [Target]` | `/plan /refactor Split monolithic server.ts into hexagonal domain services` | Strangler Fig refactor decomposing files to comply with the 500-line ceiling. |
+
+#### Golden Rules for Crafting High-Yield Prompts:
+1. **Never Skip `/plan`**: Jumping directly into raw generation forces the model to guess dependencies and schemas, causing rework.
+2. **Anchor with Negative Constraints**: Proactively state what *not* to do (*"zero mock data", "two-tone monochrome", "no fixed-pixel containers"*).
+3. **Specify Real Persistence**: Always demand SQLite, PostgreSQL, or real file stores to prevent mock arrays.
+4. **Use Semantic Context (`this`)**: Refer to active files or errors rather than pasting redundant code walls.
+5. **Close with Verification**: Demand test runs (`./scripts/verify_all_skills.sh`) and line-limit audits as mandatory deliverables.
+
+---
+
 ## Universal AI Platform Guide (Using SkillBuilder on ANY AI Platform)
 
 SkillBuilder is engineered to run seamlessly across all modern AI environments. Whether you are using Google Antigravity, Cursor, Claude Code, or web-based ChatGPT / OpenAI Codex, follow these platform-specific execution protocols:
