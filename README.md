@@ -7,9 +7,9 @@
   ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 ```
 
-# SkillBuilder: Anti-AI-Slop Dynamic Engineering Ecosystem
+# SkillBuilder: Agentic Engineering Skills
 
-SkillBuilder is a production-grade suite of **21 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
+SkillBuilder is a production-grade suite of **22 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
 
 <p align="center">
   <img src="assets/skillbuilder-workflow-animation.svg" alt="SkillBuilder Universal AI Workflow Animation" width="100%" />
@@ -76,88 +76,91 @@ The single greatest source of AI-generated bugs, unmaintainable "vibe coding", a
 
 ---
 
-## Real-World Prompting Mastery: Skill Combos & Prompt Strategies
+## How to Strategize Your Prompts with SkillBuilder
 
-SkillBuilder transforms natural language requests into deterministic engineering workflows by **stacking modular skills directly in the chat bar**. By combining the native `/plan` gate with domain skills (`/full-scale-mode`, `/qa`, `/research`, `/anti-slop`, `/fullstack`), you provide unambiguous execution boundaries while preserving token efficiency.
+SkillBuilder transforms natural language instructions into deterministic, production-grade software by **stacking modular skill pills directly in the chat input**. By combining the native `/plan` command with specialized domain skills (`/full-scale-mode`, `/qa`, `/research`, `/anti-slop`, `/fullstack`, `/security`), you enforce strict architectural guardrails, eliminate AI slop, and optimize token efficiency from the very first turn.
 
-Below is an in-depth breakdown of authentic real-world prompts captured directly inside **Google Antigravity**, illustrating proper skill invocation, prompt anatomy, and battle-tested prompting strategies:
+Here is how you can strategically formulate and stack your prompts for maximum engineering precision:
 
 ---
 
-### Case Study 1: The Full-Scale Project Orchestration Combo (`/plan` + `/full-scale-mode`)
+### Strategy 1: Orchestrating Full-Scale Builds from Scratch (`/plan` + `/full-scale-mode`)
+
+When starting a project or a major feature from zero, stack `/plan` with `/full-scale-mode` and anchor your visual, technical, and structural boundaries in a single concise sentence.
 
 <p align="center">
-  <img src="assets/promptdemo/antigravity_plan_full_scale_mode.png" alt="Real Antigravity Prompt: /plan /full-scale-mode portfolio" width="100%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 12px 28px rgba(0,0,0,0.5); max-width: 940px;" />
+  <img src="assets/promptdemo/antigravity_plan_full_scale_mode.png" alt="Prompt Strategy: /plan /full-scale-mode portfolio" width="100%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 12px 28px rgba(0,0,0,0.5); max-width: 940px;" />
 </p>
 
-#### Prompt Anatomy & Dissection
+#### Prompt Pattern & Breakdown
 ```text
 /plan /full-scale-mode i want you to create me a portfolio with minimalistic design two tone color of white and black and use google fonts, i want also a 1 page
 ```
 
-| Element | Component | Engineering Function & Impact |
+| Prompt Component | Role in Strategy | Strategic Value & Agent Impact |
 | :--- | :--- | :--- |
-| **Pill 1** | `• plan` | Activates Antigravity's interactive planning phase; pauses execution for RFC review and explicit `Proceed` approval. |
-| **Pill 2** | `• full-scale-mode` | Engages the 7-Phase EOS master project engine, orchestrating prompt refinement, architecture, and parallel subagents. |
-| **Constraint 1** | `minimalistic design two tone color of white and black` | Locks the palette to disciplined monochrome neutrals (`#0A0A0B` / `#FFFFFF`), eliminating neon AI gradients and card soup. |
-| **Constraint 2** | `use google fonts` | Enforces typographic hierarchy using clean variable web fonts (e.g., Inter, Space Grotesk) rather than generic system fallbacks. |
-| **Constraint 3** | `1 page` | Sets a strict physical layout boundary, preventing bloated multi-page navigation or unfinished routes. |
+| `• plan` | Planning Gate | Halts unguided generation; compels the agent to author an interactive RFC plan with file trees and milestones before code is touched. |
+| `• full-scale-mode` | Master Orchestrator | Activates the 7-Phase EOS lifecycle: enforces 500-line file limits, decomposes modules, and coordinates subagent execution. |
+| `two tone color of white and black` | Palette Boundary | Eliminates generic AI gradients and vibrant slop; anchors styling to disciplined monochrome tokens (`#0A0A0B` / `#FFFFFF`). |
+| `use google fonts` | Typographic Guardrail | Enforces clean web font imports (Inter, Roboto Mono) instead of uncontrolled generic CSS fallbacks. |
+| `1 page` | Scope Ceiling | Imposes a hard boundary preventing premature routing bloat, incomplete sub-pages, or runaway token consumption. |
 
-#### Why This Strategy Works:
-1. **Explicit Constraint Anchoring**: Rather than saying *"make a cool modern portfolio"* (which leads to generic AI slop with floating blobs and neon purple gradients), specifying `two tone color of white and black` and `1 page` gives the model crisp design parameters.
-2. **Master Orchestrator Delegation**: Passing `/full-scale-mode` instructs the agent to automatically enforce the 500-line file limit, scaffold real component slices, and run QA verification gates without manual intervention.
+#### How to Strategize This Prompt:
+1. **Lead with Intent & Architecture**: Combine `/plan` and `/full-scale-mode` so the agent takes full responsibility for architecture, test suites, and git etiquette without needing micro-management.
+2. **Anchor Negative Constraints Early**: Explicitly state visual and scope limits (`two tone`, `1 page`) upfront to eliminate assumptions.
 
 ---
 
-### Case Study 2: The Contextual Remediation & Error Audit Combo (`/plan` + `/qa this`)
+### Strategy 2: Auditing & Fixing Active Code Contextually (`/plan` + `/qa this`)
+
+When reviewing an existing codebase, PR, or failing screen, stack `/plan` with `/qa this` instead of copying and pasting lengthy error logs or code walls.
 
 <p align="center">
-  <img src="assets/promptdemo/antigravity_plan_qa.png" alt="Real Antigravity Prompt: /plan /qa this" width="100%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 12px 28px rgba(0,0,0,0.5); max-width: 940px;" />
+  <img src="assets/promptdemo/antigravity_plan_qa.png" alt="Prompt Strategy: /plan /qa this" width="100%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 12px 28px rgba(0,0,0,0.5); max-width: 940px;" />
 </p>
 
-#### Prompt Anatomy & Dissection
+#### Prompt Pattern & Breakdown
 ```text
 /plan /qa this
 ```
 
-| Element | Component | Engineering Function & Impact |
+| Prompt Component | Role in Strategy | Strategic Value & Agent Impact |
 | :--- | :--- | :--- |
-| **Pill 1** | `• plan` | Demands a structured root-cause remediation RFC with before/after diffs before modifying active code. |
-| **Pill 2** | `‹› qa` | Triggers the Two-Tier Quality Assurance engine: 4-tier viewports (375px/768px/1280px) and Full App Functional QA. |
-| **Target** | `this` | Contextual semantic pointer directing the agent to audit the active repository, active screen, or latest rendered output. |
+| `• plan` | Solution RFC | Requires the agent to present an actionable defect matrix and remediation diff before applying edits. |
+| `‹› qa` | Two-Tier QA Engine | Executes dual audits: Full UI QA (375px–1920px viewports, 44x44pt touch targets, WCAG 2.2 AA) and Full App QA (state machines, 3s/15s timeouts). |
+| `this` | Deictic Context Pointer | Points directly to the active file, screen, or repository in focus, maximizing token savings and eliminating duplicate context. |
 
-#### Why This Strategy Works:
-1. **Zero-Token Waste / Maximum Information Density**: You don't need to write a 500-word explanation of bugs. `/qa this` commands the agent to autonomously execute its comprehensive audit checklist:
-   - Check for mobile layout clipping (`ERR-MOB-001`) and fixed-width pixel containers breaking on 375px viewports.
-   - Audit WCAG 2.2 AA contrast ratios and minimum 44x44pt touch target ergonomics.
-   - Inspect state machines (idle, loading, success, error, empty) and network timeouts (3s connection / 15s read).
-2. **Deterministic Remediation**: Because `/plan` is prepended, the agent catalogs every discovered failure into a remediation matrix and presents the solution plan first.
+#### How to Strategize This Prompt:
+1. **Leverage Semantic Pointers**: Use concise deictic terms (`this`, `here`, `current screen`)—the agent's MCP tools inspect the active environment directly.
+2. **Require Pre-Flight Audit Plans**: Prepending `/plan` ensures bugs are cataloged with root cause, remediation steps, and regression tests before code changes occur.
 
 ---
 
-### Case Study 3: The Technical Discovery & Fullstack Slice Combo (`/plan` + `/research`)
+### Strategy 3: Deep Technical Discovery Before Implementation (`/plan` + `/research`)
+
+When working with novel runtimes, emerging AI frameworks, or external APIs, stack `/plan` with `/research` to evaluate trade-offs before committing to an architecture.
 
 <p align="center">
-  <img src="assets/promptdemo/antigravity_plan_research.png" alt="Real Antigravity Prompt: /plan /research local LLM website" width="100%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 12px 28px rgba(0,0,0,0.5); max-width: 940px;" />
+  <img src="assets/promptdemo/antigravity_plan_research.png" alt="Prompt Strategy: /plan /research local LLM website" width="100%" style="border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 12px 28px rgba(0,0,0,0.5); max-width: 940px;" />
 </p>
 
-#### Prompt Anatomy & Dissection
+#### Prompt Pattern & Breakdown
 ```text
 /plan /research research me a Local LLM and build me a website that has minimalistic frontend and rigorous backend for the budget tracker app
 ```
 *(Runtime: Powered by **Gemini 3.8 Flash High** with **Turbo** extended thinking)*
 
-| Element | Component | Engineering Function & Impact |
+| Prompt Component | Role in Strategy | Strategic Value & Agent Impact |
 | :--- | :--- | :--- |
-| **Pill 1** | `• plan` | Requires architectural blueprint with API contract specifications (RFC 7807) and migration schema before coding. |
-| **Pill 2** | `• research` | Triggers autonomous discovery to evaluate production local LLM runtimes (e.g. Ollama, ONNX, WebLLM) and licensing. |
-| **Constraint 1** | `minimalistic frontend` | Demands restrained typography, zero decorative clutter, and semantic Lucide SVG icons. |
-| **Constraint 2** | `rigorous backend` | Invokes Clean Architecture, parameterization, and strict input validation (Zod / Pydantic). |
-| **Domain Scope** | `budget tracker app` | Sets concrete functional boundaries: transaction ledger, category schema, and real SQLite/PostgreSQL persistence. |
+| `• plan` | Architecture Blueprint | Delivers an end-to-end plan covering schema migrations, API contracts (RFC 7807), and component hierarchy. |
+| `• research` | Pre-Flight Investigation | Triggers autonomous web and repository research into runtimes (e.g., Ollama, ONNX, WebLLM), licenses, and memory budgets. |
+| `minimalistic frontend` | UI Constraint | Restrains layout complexity to Apple HIG principles, clean cards, and semantic Lucide SVG icons. |
+| `rigorous backend` | Engineering Standard | Demands Clean Architecture, parameterization, and strict runtime validation (Zod / Pydantic v2). |
+| `budget tracker app` | Functional Domain | Defines concrete business models: financial ledger, categorization schema, and persistent database storage. |
 
-#### Why This Strategy Works:
-1. **Research Before Architecture**: Prevents hallucinated or deprecated NPM packages. The agent discovers viable local runtimes, benchmarks memory footprints, and presents trade-offs in the plan.
-2. **Dual-Boundary Architectural Separation**: Specifying *"minimalistic frontend and rigorous backend"* prompts the agent to cleanly decouple domain entities from UI presentation layers.
+#### How to Strategize This Prompt:
+1. **Force Discovery Before Delivery**: Avoid hallucinated or obsolete libraries by pairing `/research` with `/plan`—the agent benchmarks options and validates compatibility first.
+2. **Define Boundaries Across Layers**: Explicitly qualify both ends of the stack (`minimalistic frontend` vs. `rigorous backend`) to enforce clean separation of concerns.
 
 ---
 
@@ -331,7 +334,7 @@ flowchart LR
 | **Fullstack Vertical Slice** | `/plan /fullstack <goal>` | Real database migration, ORM repository, validated API route, and responsive UI without mocks. |
 | **Safe Refactoring** | `/plan /refactor <module>` | Characterization testing, Strangler Fig pattern, and decomposing files approaching 500 lines. |
 | **Two-Tier Full QA Pass** | `/plan /qa <scope>` | Dual-tier verification: Full UI/Frontend QA (`/qa ui`) and Full App Functional QA (`/qa app`). |
-| **Security Hardening** | `/plan /security <surface>` | OWASP Top 10 remediation, SQL query parameterization, and secret scanning. |
+| **Security Hardening** | `/plan /security <surface>` | OWASP Top 10 remediation, defensive error handling (RFC 7807), auth token rotation, DDoS rate limiting, SSRF defense, and secret scanning. |
 
 ---
 
@@ -350,7 +353,7 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 | `/3d` | **3D WebGL & Product Showcase** | 3D/Graphics | Three.js, React Three Fiber, PBR clearcoat shaders, Draco GLTF compression, 60fps budgets, context loss handling. | `verify_3d_performance.py` | DPR clamped to <= 2.0; Draco GLTF loader; WebGL disposal. |
 | `/frontend` | **Frontend Architecture** | Frontend | Pure component isolation, React 19, Next.js App Router, Flutter, memory leak prevention. | `verify_frontend_architecture.py` | AbortController on async `useEffect`; error boundaries. |
 | `/backend` | **Backend Systems Engineering** | Backend | Clean architecture (Hexagonal), domain services, REST/gRPC contracts, idempotency. | `verify_api_contracts.py` | Strict runtime schema validation (Zod, Pydantic v2). |
-| `/security` | **Security Hardening** | Security | OWASP Top 10 defenses, zero hardcoded secrets, SQL injection defense, CORS/CSP policies. | `audit_security_hygiene.py` | Parameterized queries only; zero committed API credentials. |
+| `/security` | **Security Hardening** | Security | OWASP Top 10 defenses, zero silent error swallowing, RFC 7807 problem details, refresh token family rotation, DDoS rate limits, SSRF validation, SQL parameterization. | `audit_security_hygiene.py` | Parameterized queries only; zero committed API credentials; zero silent catches. |
 | `/fullstack` | **Fullstack Anti-Mock Delivery** | Fullstack | Complete vertical slices from UI to database (PostgreSQL/SQLite) with zero mock arrays. | `verify_end_to_end_integration.py` | Anti-mock mandate: real persistence on every feature. |
 | `/database` | **Database & Datastores** | Data | Zero-downtime migrations (expand/contract), index optimization, ACID transactional integrity. | `verify_database_hygiene.py` | Non-blocking index creation; reversible migrations. |
 | `/devops` | **Cloud & Container DevOps** | DevOps | Hardened multi-stage Dockerfiles (`USER 10001`), docker-compose, CI/CD pipelines. | `verify_container_security.py` | Non-root containers only; health checks on services. |
@@ -558,7 +561,7 @@ SkillBuilder/
 │   ├── ui/                                     # Design tokens, neutral scales & Lucide icons
 │   ├── frontend/                               # React 19, Next.js, Flutter & effect cleanup
 │   ├── backend/                                # Clean architecture & Zod/Pydantic validation
-│   ├── security/                               # OWASP Top 10, SQL parameterization & secrets
+│   ├── security/                               # OWASP Top 10, RFC 7807, auth rotation, DDoS & SSRF
 │   ├── fullstack/                              # Anti-mock vertical slices & real persistence
 │   ├── database/                               # Zero-downtime migrations & ACID integrity
 │   ├── devops/                                 # Multi-stage non-root containers & CI/CD
