@@ -21,6 +21,10 @@ All software architecture, implementation, refactoring, and pair-programming tas
    - Communicate with high information density. Omit conversational padding. Use targeted diffs and structured markdown tables.
 8. **Security & Vulnerability Defense (`/security`)**:
    - Never commit raw credentials. Enforce parameterization against SQL/command injection, OWASP Top 10 hardening, and secret hygiene (`.env.example`, `.env`, `.gitignore`).
+   - Zero silent error swallowing (`catch (e) {}` / `except: pass`). Sanitize unhandled exceptions into RFC 7807 Problem Details with correlation IDs (`X-Correlation-ID`) and zero production stack leaks.
+   - Enforce refresh token family rotation with reuse detection, constant-time comparison (`crypto.timingSafeEqual`, `hmac.compare_digest`), and strict cookie flags (`Secure; HttpOnly; SameSite=Lax`).
+   - Guard against application-layer DDoS: sliding-window/token-bucket rate limits, Slowloris timeouts (3s handshake / 15s body), 100KB payload caps, and ReDoS catastrophic backtracking prevention.
+   - Validate outbound URLs post-DNS (SSRF defense), strictly blocking RFC 1918 private subnets and cloud metadata (`169.254.169.254`). Enforce tenant-scoped database queries (`WHERE id = $1 AND tenant_id = $2`) against BOLA/IDOR.
 9. **Standardized Containerization (`/devops`)**:
    - Provide production-hardened multi-stage Dockerfiles (non-root `USER 10001`, minimal base) and `docker-compose.yml` with health checks.
 10. **Network & Request Resilience (`/production-etiquette`)**:

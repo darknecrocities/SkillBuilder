@@ -331,7 +331,7 @@ flowchart LR
 | **Fullstack Vertical Slice** | `/plan /fullstack <goal>` | Real database migration, ORM repository, validated API route, and responsive UI without mocks. |
 | **Safe Refactoring** | `/plan /refactor <module>` | Characterization testing, Strangler Fig pattern, and decomposing files approaching 500 lines. |
 | **Two-Tier Full QA Pass** | `/plan /qa <scope>` | Dual-tier verification: Full UI/Frontend QA (`/qa ui`) and Full App Functional QA (`/qa app`). |
-| **Security Hardening** | `/plan /security <surface>` | OWASP Top 10 remediation, SQL query parameterization, and secret scanning. |
+| **Security Hardening** | `/plan /security <surface>` | OWASP Top 10 remediation, defensive error handling (RFC 7807), auth token rotation, DDoS rate limiting, SSRF defense, and secret scanning. |
 
 ---
 
@@ -350,7 +350,7 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 | `/3d` | **3D WebGL & Product Showcase** | 3D/Graphics | Three.js, React Three Fiber, PBR clearcoat shaders, Draco GLTF compression, 60fps budgets, context loss handling. | `verify_3d_performance.py` | DPR clamped to <= 2.0; Draco GLTF loader; WebGL disposal. |
 | `/frontend` | **Frontend Architecture** | Frontend | Pure component isolation, React 19, Next.js App Router, Flutter, memory leak prevention. | `verify_frontend_architecture.py` | AbortController on async `useEffect`; error boundaries. |
 | `/backend` | **Backend Systems Engineering** | Backend | Clean architecture (Hexagonal), domain services, REST/gRPC contracts, idempotency. | `verify_api_contracts.py` | Strict runtime schema validation (Zod, Pydantic v2). |
-| `/security` | **Security Hardening** | Security | OWASP Top 10 defenses, zero hardcoded secrets, SQL injection defense, CORS/CSP policies. | `audit_security_hygiene.py` | Parameterized queries only; zero committed API credentials. |
+| `/security` | **Security Hardening** | Security | OWASP Top 10 defenses, zero silent error swallowing, RFC 7807 problem details, refresh token family rotation, DDoS rate limits, SSRF validation, SQL parameterization. | `audit_security_hygiene.py` | Parameterized queries only; zero committed API credentials; zero silent catches. |
 | `/fullstack` | **Fullstack Anti-Mock Delivery** | Fullstack | Complete vertical slices from UI to database (PostgreSQL/SQLite) with zero mock arrays. | `verify_end_to_end_integration.py` | Anti-mock mandate: real persistence on every feature. |
 | `/database` | **Database & Datastores** | Data | Zero-downtime migrations (expand/contract), index optimization, ACID transactional integrity. | `verify_database_hygiene.py` | Non-blocking index creation; reversible migrations. |
 | `/devops` | **Cloud & Container DevOps** | DevOps | Hardened multi-stage Dockerfiles (`USER 10001`), docker-compose, CI/CD pipelines. | `verify_container_security.py` | Non-root containers only; health checks on services. |
@@ -558,7 +558,7 @@ SkillBuilder/
 │   ├── ui/                                     # Design tokens, neutral scales & Lucide icons
 │   ├── frontend/                               # React 19, Next.js, Flutter & effect cleanup
 │   ├── backend/                                # Clean architecture & Zod/Pydantic validation
-│   ├── security/                               # OWASP Top 10, SQL parameterization & secrets
+│   ├── security/                               # OWASP Top 10, RFC 7807, auth rotation, DDoS & SSRF
 │   ├── fullstack/                              # Anti-mock vertical slices & real persistence
 │   ├── database/                               # Zero-downtime migrations & ACID integrity
 │   ├── devops/                                 # Multi-stage non-root containers & CI/CD
