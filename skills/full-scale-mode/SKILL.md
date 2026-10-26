@@ -59,13 +59,15 @@ Through the **Skill Synthesis Protocol (SSP)** (`/project-skills`), the orchestr
 
 ---
 
-## 4. The 32-Skill Execution Catalogue
+## 4. The 35-Skill Execution Catalogue
 
 | Skill Command | Domain Category | Primary Phase | Role in Full-Scale Mode |
 | :--- | :--- | :--- | :--- |
 | `/prompt-polish` | Metacognition | Phase 1 | Structures ambiguous prompts into unambiguous technical RFC specifications. |
 | `/anti-slop` | Craftsmanship | Phase 1 | Eliminates decorative badges, neon gradients, obvious comments, and raw emojis. |
 | `/ui` | Design Systems | Phase 1 | Apple HIG, Cupertino materials, sub-pixel lighting, and semantic Lucide SVGs. |
+| `/mobile-ui` | Native Mobile | Phase 1 | iOS 18/19 HIG, SwiftUI matchedGeometry, Material 3 Expressive, and haptics. |
+| `/web-ui` | Modern Web | Phase 1 | Container queries (@container), CSS View Transitions, OKLCH, and fluid clamp(). |
 | `/3d` | Spatial Web | Phase 1 | Three.js and React Three Fiber with PBR shaders and 60fps frame budgets. |
 | `/frontend` | Client Engine | Phase 1 | React 19, Next.js App Router, Flutter, and asynchronous effect cleanup. |
 | `/routing` | Web Architecture | Phase 1 | Deep layout hierarchies, dynamic route boundaries, and pure page entrypoints. |
@@ -83,6 +85,7 @@ Through the **Skill Synthesis Protocol (SSP)** (`/project-skills`), the orchestr
 | `/devops` | Infrastructure | Phase 2 | Hardened multi-stage non-root Dockerfiles (`USER 10001`) and CI/CD pipelines. |
 | `/security` | Hardening | Phase 2 | OWASP Top 10, SSRF IP validation, token family rotation, and rate limits. |
 | `/ai` | GenAI Systems | Phase 2 | Production Gemini SDK, structured JSON outputs, and defensive tool calling. |
+| `/local-llm` | Edge AI | Phase 2 | Quantized local inference (GGUF Q4_K_M), MLX, WebLLM, GBNF, and hybrid routing. |
 | `/research` | Discovery | Phase 2 | Autonomous deep research and package benchmarking via P.A.T.H.S. |
 | `/testing` | Verification | Phase 3 | TDD discipline, Vitest, and Playwright E2E with accessible locators. |
 | `/qa` | Quality Assurance | Phase 3 | Two-Tier QA: Full UI viewports (375px–1920px) and Full App Functional QA. |
@@ -94,7 +97,7 @@ Through the **Skill Synthesis Protocol (SSP)** (`/project-skills`), the orchestr
 | `/continuous-learning` | Memory | Phase 3 | Persists project invariants and user corrections to `.agents/learned_conventions.md`. |
 | `/project-skills` | Meta-Learning | Phase 3 | Mints persistent, tailored project skills into `.agents/skills/<repo>/SKILL.md`. |
 | `/world-class-engineering` | Standards | Phase 3 | Strict 500-line physical ceiling, cognitive hygiene, and Triad Gateway sweeps. |
-| `/full-scale-mode` | Orchestration | Phase 3 | Master Orchestration Engine unifying all 32 skills across the 3-Phase Cadence. |
+| `/full-scale-mode` | Orchestration | Phase 3 | Master Orchestration Engine unifying all 35 skills across the 3-Phase Cadence. |
 
 ---
 
@@ -106,6 +109,6 @@ Audit workspace orchestration readiness, verify Autonomous Skill Resonance, and 
 # Validate workspace orchestration and check ASR detected skills
 python3 skills/full-scale-mode/scripts/verify_full_scale_orchestration.py --path .
 
-# Verify 500-line source file limit across all 32 skills
+# Verify 500-line source file limit across all 35 skills
 python3 skills/world-class-engineering/scripts/check_source_line_limits.py --path . --show-tiers
 ```

@@ -31,7 +31,7 @@ class TestExportMultiplatform(unittest.TestCase):
 
     def test_get_all_skills(self):
         skills = get_all_skills(self.repo_dir)
-        self.assertEqual(len(skills), 32, f"Expected 32 skills, found {len(skills)}")
+        self.assertEqual(len(skills), 35, f"Expected 35 skills, found {len(skills)}")
         names = [s[0] for s in skills]
         self.assertIn("3d", names)
         self.assertIn("anti-slop", names)
@@ -49,10 +49,13 @@ class TestExportMultiplatform(unittest.TestCase):
         self.assertIn("testing", names)
         self.assertIn("i18n", names)
         self.assertIn("data-pipelines", names)
+        self.assertIn("mobile-ui", names)
+        self.assertIn("web-ui", names)
+        self.assertIn("local-llm", names)
 
     def test_export_cursor_rules(self):
         created = export_cursor_rules(self.repo_dir, self.temp_path)
-        self.assertTrue(len(created) >= 33)  # 32 .mdc + .cursorrules
+        self.assertTrue(len(created) >= 36)  # 35 .mdc + .cursorrules
         self.assertTrue((self.temp_path / ".cursorrules").exists())
         self.assertTrue((self.temp_path / ".cursor" / "rules" / "anti-slop.mdc").exists())
 

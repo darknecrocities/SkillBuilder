@@ -49,7 +49,11 @@ REQUIRED_SKILLS: Set[str] = {
     "routing",
     "state-management",
     "supabase",
-    "testing"
+    "testing",
+    # Mobile, Web UI & Local LLM Skills
+    "local-llm",
+    "mobile-ui",
+    "web-ui"
 }
 
 BLOATED_FILLER_PATTERNS = re.compile(
@@ -112,6 +116,18 @@ def analyze_skill_resonance(repo_root: Path) -> Dict[str, Any]:
     # Data Pipelines
     if any((repo_root / f).exists() for f in ["duckdb", "pipeline", "pipelines"]):
         activated_skills.add("data-pipelines")
+
+    # Mobile Architecture
+    if any((repo_root / d).exists() for d in ["ios", "android", "expo"]) or any((repo_root / f).exists() for f in ["app.json", "pubspec.yaml", "Podfile"]):
+        activated_skills.add("mobile-ui")
+
+    # Modern Web UI & Design Systems
+    if any((repo_root / f).exists() for f in ["tailwind.config.js", "tailwind.config.ts", "postcss.config.js"]) or (repo_root / "styles").exists():
+        activated_skills.add("web-ui")
+
+    # Local LLM & Quantized Inference
+    if any((repo_root / f).exists() for f in ["Modelfile", "modelfile"]) or any((repo_root / d).exists() for d in ["models", "gguf"]):
+        activated_skills.add("local-llm")
 
     return {
         "resonant_skills_count": len(activated_skills),
