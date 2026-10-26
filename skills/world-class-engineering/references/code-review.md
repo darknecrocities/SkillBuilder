@@ -33,7 +33,7 @@ Priority 7: Readability & Style Conventions
 - **MAJOR (Must Fix Before Merge)**:
   - Unhandled error cases, missing database indexes on queried columns.
   - Memory leak, unclosed database connection or file handle.
-  - Violation of the 500-line source file policy without an architectural justification.
+  - Violation of the 500-line source file policy, functions $>40$ lines, or nesting $>3$ levels without architectural justification.
 - **MINOR (Improvement / Nit)**:
   - Code style inconsistency, minor naming improvements, missing docstrings.
   - Must not block release unless it directly impairs readability or maintainability.

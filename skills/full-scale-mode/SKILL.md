@@ -82,7 +82,7 @@ flowchart TD
 3. **Phase 2 (Research & Benchmark)**: Evaluate dependencies using P.A.T.H.S.; build minimal working proof-of-concept.
 4. **Phase 3 (Concurrent Build)**: Dispatch parallel subagents for Track 3A (Backend/DB) and Track 3B (UI/UX/3D).
 5. **Phase 4 (Harden & Contain)**: Dispatch parallel subagents for Track 4A (Security/Resilience) and Track 4B (DevOps/Telemetry).
-6. **Phase 5 (Verify & Catalog)**: Execute Two-Tier QA sweeps (`/qa ui` and `/qa app`) and 500-line source file checks.
+6. **Phase 5 (Verify & Catalog)**: Execute Two-Tier QA sweeps (`/qa ui` and `/qa app`), cognitive complexity checks, and the multi-tiered 500-line source file audit (`check_source_line_limits.py --show-tiers`).
 7. **Phase 6 (Ship & Persist)**: Split commits under 1,000 lines with mandatory Conventional Title AND structured Description body, push to remote tracking branch, open/update ready-to-merge GitHub PR, tag release (`vX.Y.Z`), and record learnings.
 
 ---
@@ -142,9 +142,9 @@ Audit workspace readiness and orchestration integrity:
 ```bash
 python3 skills/full-scale-mode/scripts/verify_full_scale_orchestration.py --path .
 ```
-Verify the 500-line physical source limit across all files:
+Verify the multi-tiered 500-line physical source limit and maintainability tiers across all files:
 ```bash
-python3 skills/world-class-engineering/scripts/check_source_line_limits.py --path .
+python3 skills/world-class-engineering/scripts/check_source_line_limits.py --path . --show-tiers
 ```
 Verify token budget for any prompt or file:
 ```bash

@@ -32,5 +32,7 @@ All software architecture, implementation, refactoring, and pair-programming tas
     - Mandatory multi-line commits with Conventional title AND structured description body explaining *Why*, *What*, and *Verification*. Zero lazy commits.
     - Always push commits immediately to the remote branch (`git push origin <branch>`).
     - Always author or update an active, ready-to-merge GitHub Pull Request with complete context, verification evidence, and rollback plans.
-13. **500-Line Source File Policy & Full-Scale Orchestration (`/full-scale-mode`, `/world-class-engineering`)**:
-    - Maintain a 500-line physical limit on all source files, verified via `scripts/check_source_line_limits.py`.
+13. **Multi-Tiered Code Quality, 500-Line Limit & Full-Scale Orchestration (`/full-scale-mode`, `/world-class-engineering`, `/refactor`)**:
+    - Maintain a strict 500-line physical ceiling on all source files, verified via `check_source_line_limits.py --show-tiers`.
+    - Proactively decompose modules entering the 350-line warning zone into cohesive domain slices (target sweet spot: 150–250 lines).
+    - Enforce cognitive hygiene: maximum 40 physical lines per function, maximum 3 nesting levels with early return guard clauses, and cyclomatic complexity $\le 10$. Zero arbitrary file-shredding.

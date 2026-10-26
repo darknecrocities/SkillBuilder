@@ -89,6 +89,11 @@ Every outgoing network request, API client, and authentication workflow must imp
 - **Green State Rule**: Every commit must compile, pass static types, and pass tests independently.
 - **Always Open or Update a PR**: Always author or update an active, ready-to-merge GitHub Pull Request with structured titles, technical summaries, verification logs, and rollback procedures.
 
+### Pillar 8: The Multi-Tiered Code Quality Standard (The Double Mandate)
+- **Human Maintainability (Empirical Defect Density)**: Files over 500 lines experience non-linear climbs in defect density and hidden coupling. Adhere to the 4-Tier Maintainability Matrix: Sweet Spot (150–250 lines), Nominal (251–350 lines), Warning Zone (351–499 lines), and Hard Ceiling (500 lines).
+- **AI Context Fidelity**: Modular files preserve attention focus, eliminate "Lost-in-the-Middle" context rot, and ensure precise, reliable tool-call diff replacements during pair-programming turns.
+- **Cognitive Hygiene**: Maintain functions $\le 40$ physical lines, nesting depth $\le 3$ levels with early return guard clauses, and Cyclomatic Complexity $\le 10$. Zero arbitrary file-shredding.
+
 ---
 
 ## 3. Automation Tools

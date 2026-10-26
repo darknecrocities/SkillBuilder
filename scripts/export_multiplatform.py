@@ -115,7 +115,7 @@ def export_claude_rules(repo_dir: Path, target_dir: Path) -> List[str]:
 {skills_summary}
 
 ## Code Generation & Review Instructions
-- Enforce the 500-line physical limit on all generated source files.
+- Enforce the multi-tiered 500-line physical limit (target sweet spot: 150–250 lines; warning: 350 lines).
 - Zero fake mock databases: use SQLite, PostgreSQL, or structured file stores.
 - Prohibit neon purple gradients, glowing borders, card-soup layouts, and raw emojis in UI buttons.
 - Keep commits under 1,000 changed lines.
@@ -145,7 +145,7 @@ def export_codex_rules(repo_dir: Path, target_dir: Path) -> List[str]:
 {skills_summary}
 
 ## Developer Directives
-1. Strict 500-line maximum on all source files.
+1. Multi-tiered maintainability: strict 500-line ceiling, 350-line warning threshold, and 150–250 line sweet spot.
 2. Never interpolate variables into SQL queries (prevent SQL injection).
 3. Zero decorative badges, shields.io icons, or synthetic AI marketing copy.
 4. Autonomous research: when a library is broken, evaluate and recommend drop-in replacements.

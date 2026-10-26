@@ -29,9 +29,9 @@ flowchart TD
 
 ---
 
-## 2. Decomposing God Files (The 500-Line Policy)
+## 2. Decomposing God Files (The Multi-Tiered Maintainability Standard)
 
-When any source file (`.ts`, `.tsx`, `.py`, `.go`) exceeds **350–400 lines**, decompose it before it violates the 500-line physical limit:
+SkillBuilder enforces the **4-Tier Maintainability Matrix** (Sweet Spot $150-250$, Nominal $251-350$, Warning $351-499$, Hard Ceiling $500$). When any source file (`.ts`, `.tsx`, `.py`, `.go`, `.dart`, `.kt`, `.swift`) reaches the **350-line warning zone**, decompose it proactively before it violates the 500-line physical ceiling:
 
 | File Type | Extraction Target | Destination Path |
 | :--- | :--- | :--- |
@@ -40,6 +40,11 @@ When any source file (`.ts`, `.tsx`, `.py`, `.go`) exceeds **350–400 lines**, 
 | **Inline Database Calls** | Repository query methods | `repositories/<feature>Repository.ts` |
 | **Complex Pure Functions** | Mathematical or string formatting logic | `utils/<domain>Utils.ts` |
 | **State & Effects** | Custom React hooks or store slices | `hooks/use<Feature>State.ts` |
+
+### Cognitive Hygiene & Refactoring Rules:
+1. **The 40-Line Function Ceiling**: Any function exceeding 40 lines must be decomposed into focused sub-helpers or extracted into a domain utility.
+2. **The 3-Level Nesting Ceiling**: Any block nested $>3$ levels deep must be refactored with early returns and guard clauses (`if (!condition) return;`).
+3. **Anti-Shotgun Surgery Principle**: Never chop files arbitrarily just to satisfy line counts. Every split must represent a clean cohesive boundary (presentation, domain logic, persistence, or contracts).
 
 ---
 

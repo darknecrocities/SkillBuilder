@@ -137,12 +137,33 @@ flowchart LR
 
 ---
 
-## 3. The 500-Line Source File Policy
+## 3. The Multi-Tiered Code Quality & 500-Line Maintainability Matrix
 
-### The Guardrail
-All source code files must have a **maximum of 500 physical lines** (including comments and blank lines). 
+### The Double Mandate (Human Maintainability + AI Attention Fidelity)
+In modern software engineering, file size limits are driven by a dual necessity:
+1. **Human Maintainability (Empirical Defect Density)**: Historical research (Ostrand/Weyuker/Bell, McConnell's *Code Complete*) demonstrates that defect density climbs non-linearly when files exceed 400–500 physical lines. Files crossing this threshold routinely violate the **Single Responsibility Principle (SRP)**, accumulating hidden coupling and mutative side effects.
+2. **AI Agent Reliability & Context Fidelity**: In agentic pair-programming (Google Antigravity, Gemini 3.8 Flash High, Claude, Cursor), bloated files trigger **Context Rot** and "Lost-in-the-Middle" degradation. When files exceed 600 lines, token costs spike, attention weights stretch, and tool-call diff replacements (`edit_file`) become fragile due to repeated ambiguous boilerplate.
 
-This is an architectural ceiling to enforce single responsibility, modularity, and high cohesion. Most well-designed modules should naturally stay well below this limit (typically 100–300 lines).
+### The 4-Tier Maintainability Matrix
+
+| Tier | Physical Line Range | Architectural Classification | Action Required |
+| :--- | :--- | :--- | :--- |
+| **Tier 1: Sweet Spot** | **$150 - 250$ lines** | Optimal Cohesion | Ideal target for UI components, custom hooks, and domain services. Maximum readability and AI attention. |
+| **Tier 2: Nominal** | **$251 - 350$ lines** | Acceptable Complexity | Typical for rich services, data repositories, and state machines with comprehensive type safety. |
+| **Tier 3: Warning Zone** | **$351 - 499$ lines** | Approaching Ceiling | Proactive `/refactor` flag. Review for subcomponent extraction, helper delegation, or hook isolation. |
+| **Tier 4: Hard Ceiling** | **$\le 500$ lines** | Non-Negotiable Gate | Strict CI/CD build barrier (`check_source_line_limits.py`). Zero files $>500$ lines permitted in production. |
+
+### Domain-Specific Target Ceilings
+- **UI / Presentation Components (React, Flutter, Compose, SwiftUI)**: **$\le 250$ lines**. Extract subviews, styled wrappers, and custom hooks.
+- **Domain Services / Use Cases**: **$\le 300$ lines**. Pure business rules; zero HTTP transport or database leaks.
+- **Repositories & Data Access**: **$\le 350$ lines**. Focused queries, schema mapping, and expand/contract migration steps.
+- **Declarative Schemas & Contracts (OpenAPI, Prisma, Types)**: **$\le 500$ lines**. Group related types into modular domain slices.
+
+### Cognitive Complexity & Function Hygiene Guardrails
+- **Function / Method Length**: Maximum **$40$ physical lines**. Functions must do one cohesive task.
+- **Nesting Depth**: Maximum **$3$ levels**. Enforce guard clauses and early returns (`if (!valid) return;`).
+- **Cyclomatic Complexity**: Maximum **$10$** independent execution paths per function. Eliminate complex cascading ternary ladders.
+- **Function Parameters**: Maximum **$3$ positional parameters**. Use typed option/config interfaces for 4+.
 
 ### In-Scope Extensions
 - TypeScript / JavaScript (`.ts`, `.tsx`, `.js`, `.jsx`)
@@ -150,21 +171,21 @@ This is an architectural ceiling to enforce single responsibility, modularity, a
 - Go (`.go`)
 - Rust (`.rs`)
 - Java / C# (`.java`, `.cs`)
-- Application modules: controllers, services, repositories, domain entities, React components, hooks, AI wrappers, and tests (when splitting preserves clarity).
+- Dart / Kotlin / Swift (`.dart`, `.kt`, `.swift`)
 
 ### Exclusions & Legitimate Exceptions
 - Auto-generated code, lockfiles (`package-lock.json`, `poetry.lock`), migrations, snapshots, database schemas/DDL dumps, minified assets, datasets, and static configuration/documentation.
 - When an exception is necessary due to external framework constraints or generated code, document the rationale in the pull request or delivery report.
 
 ### 7-Step Refactoring Protocol
-When a source file exceeds or approaches 500 lines:
+When a source file exceeds 350 lines or approaches the 500-line ceiling:
 1. **Identify Cohesive Responsibilities**: Deconstruct the file into distinct concerns (e.g., business logic, data persistence, HTTP parsing, validation).
 2. **Determine Module Boundaries**: Design clean, cohesive target modules with intuitive names.
 3. **Extract Modules**: Move sub-responsibilities into focused sibling files or subpackages.
 4. **Preserve Public Contracts**: Maintain the existing public API via re-exports or facade modules to avoid breaking downstream consumers.
 5. **Update References**: Update import statements, export manifests, and test fixtures.
 6. **Execute Verification**: Run the project's test suite and lint checks to confirm behavioral equivalence.
-7. **Validate Line Count**: Run `scripts/check_source_line_limits.py` to confirm all resulting files are compliant.
+7. **Validate Line Count**: Run `scripts/check_source_line_limits.py --show-tiers` to confirm all resulting files are compliant.
 
 ---
 

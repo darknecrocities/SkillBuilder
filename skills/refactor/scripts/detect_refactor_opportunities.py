@@ -14,9 +14,9 @@ from typing import Any, Dict, List
 IGNORED_DIRS = {".git", "node_modules", "dist", "build", ".agents", "__pycache__", "venv"}
 CHECKED_EXTENSIONS = {".py", ".ts", ".tsx", ".js", ".jsx", ".go", ".dart"}
 
-MAX_FILE_WARNING_THRESHOLD = 400
-MAX_FUNCTION_LINES = 50
-MAX_NESTING_LEVEL = 4
+MAX_FILE_WARNING_THRESHOLD = 350
+MAX_FUNCTION_LINES = 40
+MAX_NESTING_LEVEL = 3
 
 
 def audit_file_complexity(file_path: str) -> List[Dict[str, Any]]:

@@ -126,6 +126,22 @@ class TestSourceLineLimitChecker(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 2)
 
+    def test_tier_classification_and_warning(self) -> None:
+        warn_file = self.temp_dir / "warning_zone.py"
+        warn_file.write_text("\n".join(f"# line {i}" for i in range(380)), encoding="utf-8")
+
+        result = subprocess.run(
+            [sys.executable, str(self.script_path), "--path", str(self.temp_dir), "--json"],
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 0)
+        payload = json.loads(result.stdout)
+        self.assertEqual(payload["status"], "pass")
+        self.assertEqual(payload["warning_count"], 1)
+        self.assertEqual(payload["warnings"][0]["lines"], 380)
+        self.assertEqual(payload["tiers"]["warning_count"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -287,8 +287,9 @@ flowchart TD
    - Enforces the disciplined neutral palette (zinc/slate) and semantic Lucide SVG vector icons (zero raw emojis in UI buttons).
 4. **Autonomous Fallback Pivots (`/research`)**:
    - If any library, build tool, or dependency fails to install or is deprecated, autonomously discovers and benchmarks production-grade replacements using the P.A.T.H.S. criteria (Performance, Activity, Type safety, Hygiene, Size).
-5. **Continuous Verification & 500-Line Ceiling (`/full-scale-mode`, `/world-class-engineering` & `/qa`)**:
-   - Audits all source files against the strict **500-line physical limit** (`check_source_line_limits.py`).
+5. **Continuous Verification & Multi-Tiered Line Limits (`/full-scale-mode`, `/world-class-engineering`, `/refactor` & `/qa`)**:
+   - Enforces the **Multi-Tiered Maintainability Standard**: Sweet Spot (150–250 lines), Nominal (251–350 lines), Warning Zone (351–499 lines), and Hard Ceiling (500 lines) via `check_source_line_limits.py --show-tiers`.
+   - Enforces cognitive complexity hygiene: $\le 40$ lines per function, $\le 3$ nesting levels with early returns, and Cyclomatic Complexity $\le 10$.
    - Executes the **Two-Tier QA Engine**: Full UI/Frontend QA (`/qa ui`) for viewports, 44x44pt touch targets, WCAG AA, and 120Hz GPU compositor, plus Full App Functional QA (`/qa app`) for state machines, real persistence, 3s/15s timeouts, and mobile lifecycles.
    - Executes the master 30-suite verification test runner.
 6. **Meaningful Commits (Title + Description), Push to Branch & Ready-to-Review PR (`/git-workflow`, `/full-scale-mode`)**:
@@ -296,6 +297,31 @@ flowchart TD
    - Enforces **mandatory multi-line Conventional Commits** with a clear title AND a structured description body (Why, What, Verification).
    - **Always pushes immediately to remote branch** (`git push origin <branch>`).
    - **Always authors or updates a ready-to-merge GitHub Pull Request** via `gh pr create` / `gh pr edit` with test receipts, walkthrough diffs, and semantic release tags.
+
+### The Multi-Tiered Code Quality & 500-Line Maintainability Matrix
+
+SkillBuilder rejects naive, flat line-counting in favor of a scientifically grounded, multi-dimensional code quality architecture. Based on seminal empirical studies (Ostrand/Weyuker/Bell at AT&T Labs, Steve McConnell's *Code Complete*, and Robert C. Martin's *Clean Code*), defect density scales non-linearly once files cross 400–500 physical lines.
+
+In autonomous AI pair-programming, file size also drives **The Double Mandate**:
+1. **Human Maintainability**: Files must be comprehended within a single 60-second scan.
+2. **AI Context Fidelity**: Files over 500 lines induce transformer **Context Rot** ("Lost-in-the-Middle"), inflate token consumption, and cause tool-calling diff failures (`edit_file`) on repeated boilerplate.
+
+```mermaid
+flowchart LR
+    A["Sweet Spot<br/><b>150–250 lines</b><br/>Optimal AI & Human Comprehension"] --> B["Nominal Range<br/><b>251–350 lines</b><br/>Cohesive Services & Repositories"]
+    B --> C["Warning Zone<br/><b>351–499 lines</b><br/>Proactive /refactor Trigger"]
+    C --> D["Hard Ceiling<br/><b>500 lines</b><br/>Strict CI/CD Build Failure"]
+```
+
+| Dimension | Target Metric | Engineering Purpose |
+| :--- | :--- | :--- |
+| **Hard Physical Ceiling** | **$\le 500$ lines** | Non-negotiable CI/CD build gate via `check_source_line_limits.py`. Zero exceptions. |
+| **Proactive Refactor Trigger** | **$\ge 350$ lines** | Warning threshold in `/refactor` to decompose before breaching the ceiling. |
+| **Ideal Sweet Spot** | **$150 - 250$ lines** | Target length for UI components, custom hooks, and domain services. |
+| **Function Length** | **$\le 40$ lines** | Single responsibility per function; extract sub-helpers. |
+| **Nesting Depth** | **$\le 3$ levels** | Mandatory early return guard clauses (`if (!valid) return;`). |
+| **Cyclomatic Complexity** | **$\le 10$ per function** | Eliminates complex cascading conditionals and fragile state machines. |
+| **Cohesive Separation** | **Anti-Shredding** | Never chop files arbitrarily; separate UI, Domain, Repository, and Contracts cleanly. |
 
 ### Specialized Slash Command Combos
 
@@ -316,7 +342,7 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 | Command | Skill Name | Domain | Core Capabilities & Focus | Standalone CLI Tool | Primary Guardrail |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `/full-scale-mode` | **Full-Scale Mode** | Orchestration | Master Phased Project Orchestration Engine (aliased with `/world-class-engineering`), 7-phase EOS lifecycle, parallel subagent swarms. | `verify_full_scale_orchestration.py` | Strict 7-phase gate compliance & 1,500-token subagent ceilings. |
-| `/world-class-engineering` | **World-Class Engineering** | Architecture | 6-Phase EOS lifecycle (Understand -> Define -> Plan -> Implement -> Verify -> Deliver). | `check_source_line_limits.py` | Strict 500-line physical source file limit. |
+| `/world-class-engineering` | **World-Class Engineering** | Architecture | 6-Phase EOS lifecycle (Understand -> Define -> Plan -> Implement -> Verify -> Deliver). | `check_source_line_limits.py` | Multi-tiered maintainability matrix & 500-line physical ceiling. |
 | `/anti-slop` | **Anti-AI-Slop Sanitizer** | Clean Code | Purges decorative badges, fake mock databases, neon gradients, obvious comments, and marketing copy. | `sanitize_ai_slop.py` | Zero `shields.io`, zero fake mock arrays, zero emojis in UI controls. |
 | `/research` | **Autonomous Research & Fallbacks** | Discovery | Autonomous fallback engine; researches alternatives when packages fail or deprecate. | `research_alternatives.py` | P.A.T.H.S. trade-off evaluation & minimal POC validation. |
 | `/qa` | **Two-Tier Quality Assurance** | Quality | Full UI/Frontend QA (viewports, touch targets, WCAG, sub-pixel lighting) and Full App Functional QA (state machines, persistence, timeouts, mobile lifecycle, Master Error Catalog). | `verify_responsiveness_and_qa.py` & `verify_app_functionality.py` | Min 44x44pt touch targets, 3s/15s network timeouts, zero mocks. |

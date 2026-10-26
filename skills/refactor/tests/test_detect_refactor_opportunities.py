@@ -49,10 +49,16 @@ class TestDetectRefactorOpportunities(unittest.TestCase):
         self.assertTrue(any(v["rule"] == "DEEP-LOGICAL-NESTING" for v in violations))
 
     def test_detects_file_nearing_limit(self):
-        code = "\n".join(["# line" for _ in range(420)])
+        code = "\n".join(["# line" for _ in range(360)])
         fp = self._write_temp("large.py", code)
         violations = audit_file_complexity(fp)
         self.assertTrue(any(v["rule"] == "FILE-NEARING-LINE-LIMIT" for v in violations))
+
+    def test_detects_oversized_function(self):
+        code = "def big_function():\n" + "\n".join(["    x = 1" for _ in range(45)]) + "\n" + "def next_func():\n    pass\n"
+        fp = self._write_temp("oversized.py", code)
+        violations = audit_file_complexity(fp)
+        self.assertTrue(any(v["rule"] == "OVERSIZED-FUNCTION" for v in violations))
 
 
 if __name__ == "__main__":

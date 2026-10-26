@@ -17,11 +17,12 @@ This checklist must be audited and verified before declaring any non-trivial eng
 - [ ] No circular dependencies exist across packages or modules.
 - [ ] Any introduced dependency is strictly necessary and justified.
 
-### Gate 3: Implementation & 500-Line Policy
-- [ ] All modified and newly created source files adhere to the **500-line physical limit**.
+### Gate 3: Implementation & Multi-Tiered Line Policy
+- [ ] All modified and newly created source files adhere to the **500-line physical limit** and target the **150–250 line sweet spot**.
+- [ ] No functions exceed 40 physical lines; nesting depth stays within $\le 3$ levels with early return guard clauses.
 - [ ] Verification script has been executed:
   ```bash
-  python3 scripts/check_source_line_limits.py --path .
+  python3 skills/world-class-engineering/scripts/check_source_line_limits.py --path . --show-tiers
   ```
 - [ ] Variable and function names clearly communicate domain intent.
 - [ ] No dead, unreachable, or commented-out code remains.
