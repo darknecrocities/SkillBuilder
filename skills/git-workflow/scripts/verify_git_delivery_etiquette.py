@@ -69,7 +69,8 @@ def validate_commit_message(msg: str) -> List[Dict[str, Any]]:
         })
 
     # 2. Check for lazy message
-    if LAZY_MESSAGE_PATTERN.match(title) or REDUNDANT_TITLE_PATTERN.match(title):
+    subject = title.split(":", 1)[1].strip() if ":" in title else title
+    if LAZY_MESSAGE_PATTERN.match(subject) or REDUNDANT_TITLE_PATTERN.match(title):
         violations.append({
             "rule": "LAZY-COMMIT-TITLE",
             "message": f"Commit title uses lazy or non-descriptive keyword: '{title}'.",
