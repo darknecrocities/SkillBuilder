@@ -7,9 +7,9 @@
   ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 ```
 
-# SkillBuilder: Anti-AI-Slop Dynamic Engineering Ecosystem
+# SkillBuilder: Agentic Engineering Skills
 
-SkillBuilder is a production-grade suite of **21 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
+SkillBuilder is a production-grade suite of **22 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
 
 <p align="center">
   <img src="assets/skillbuilder-workflow-animation.svg" alt="SkillBuilder Universal AI Workflow Animation" width="100%" />
