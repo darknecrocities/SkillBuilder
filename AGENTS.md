@@ -41,8 +41,8 @@ All software architecture, implementation, refactoring, and pair-programming tas
     - Maintain a strict 500-line physical ceiling on all source files, verified via `check_source_line_limits.py --show-tiers`.
     - Proactively decompose modules entering the 350-line warning zone into cohesive domain slices (target sweet spot: 150–250 lines).
     - Enforce cognitive hygiene: maximum 40 physical lines per function, maximum 3 nesting levels with early return guard clauses, and cyclomatic complexity $\le 10$. Zero arbitrary file-shredding.
-14. **Omni-Phase Cadence (OPC) & Autonomous Skill Resonance (ASR) (`/full-scale-mode`)**:
-    - Orchestrate complex deliverables through the 6-Phase Omni-Phase Cadence (Discover -> Architecture -> Core Construction -> Hardening -> Integration & QA -> Release & Verification).
+14. **3-Phase Triad Cadence & Autonomous Skill Resonance (`/full-scale-mode`)**:
+    - Orchestrate complex deliverables through the 3-Phase Triad Cadence (Phase 1: Frontend & Interface Architecture -> Phase 2: Backend, Cloud & Data Infrastructure -> Phase 3: Testing, QA & Verifiable Release).
     - Leverage Autonomous Skill Resonance (ASR) to detect project fingerprints and automatically bind relevant domain skills.
 15. **Autonomous Project Skill Minting (`/project-skills`)**:
     - When establishing unique, project-specific architectures, agents mint self-contained project skills under `.agents/skills/<skill-name>/SKILL.md` using the Skill Synthesis Protocol (SSP).

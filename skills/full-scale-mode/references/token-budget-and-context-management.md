@@ -19,24 +19,16 @@ Every non-trivial engineering task operates under a planned **Token Budget Alloc
 
 ```mermaid
 pie title Token Budget Allocation by Phase (Standard 64k Context Ceiling)
-    "Phase 0: Ingestion & Polish" : 5
-    "Phase 1: Planning & RFC" : 15
-    "Phase 2: Deep Research" : 10
-    "Phase 3: Domain Execution (Parallel)" : 35
-    "Phase 4: Security & DevOps" : 15
-    "Phase 5: Two-Tier QA" : 10
-    "Phase 6: Release & Delivery" : 10
+    "Phase 1: Frontend & Interface" : 30
+    "Phase 2: Backend & Infrastructure" : 45
+    "Phase 3: Testing & Verifiable Release" : 25
 ```
 
 | Project Phase | Budget Share | Target Token Range | Primary Token Deliverable |
 | :--- | :--- | :--- | :--- |
-| **Phase 0: Ingestion & Polish** | 5% | 500 – 1,500 tokens | Polished RFC specification matrix. |
-| **Phase 1: Planning & RFC** | 15% | 2,000 – 4,000 tokens | Implementation plan artifact with Mermaid diagrams. |
-| **Phase 2: Deep Research** | 10% | 1,000 – 2,500 tokens | P.A.T.H.S. dependency matrix & POC benchmark. |
-| **Phase 3: Domain Execution** | 35% | 6,000 – 12,000 tokens | Production code (partitioned across subagents). |
-| **Phase 4: Security & Infra** | 15% | 2,500 – 5,000 tokens | Security patches, Dockerfile, telemetry instrumentation. |
-| **Phase 5: Two-Tier QA** | 10% | 2,000 – 4,000 tokens | Test execution logs, error catalog lookups. |
-| **Phase 6: Release & Delivery** | 10% | 1,500 – 3,000 tokens | Conventional commits, PR body, and walkthrough. |
+| **Phase 1: Frontend & Interface** | 30% | 5,000 – 8,000 tokens | Layout contracts, UI components, state stores, i18n dictionaries. |
+| **Phase 2: Backend & Infrastructure** | 45% | 8,000 – 14,000 tokens | Domain services, database schemas, cloud manifests, security hardening. |
+| **Phase 3: Testing & Release** | 25% | 4,000 – 6,000 tokens | Test suites (TDD), Two-Tier QA logs, git chunk commits, and PR body. |
 
 ---
 

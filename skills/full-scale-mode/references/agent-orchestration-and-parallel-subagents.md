@@ -15,14 +15,15 @@ In Full-Scale Mode, the primary agent operates as the **Master Conductor**:
 flowchart TD
     Orchestrator["Master Orchestrator (Primary Agent)"]
     
-    Orchestrator -->|Track 3A| S1["Subagent: Backend & Database Engine"]
-    Orchestrator -->|Track 3B| S2["Subagent: UI/UX & 3D Sensory Engine"]
+    Orchestrator -->|Track 1A| S1["Subagent: Frontend & Routing Architect"]
+    Orchestrator -->|Track 1B| S2["Subagent: UI/UX & Sensory Specialist"]
     
-    Orchestrator -->|Track 4A| S3["Subagent: Security & Resilience Hardener"]
-    Orchestrator -->|Track 4B| S4["Subagent: DevOps & Containerization Engine"]
+    Orchestrator -->|Track 2A| S3["Subagent: Backend & Persistence Specialist"]
+    Orchestrator -->|Track 2B| S4["Subagent: Cloud & DevOps Specialist"]
+    Orchestrator -->|Track 2C| S5["Subagent: Security Hardener"]
     
-    Orchestrator -->|Track 5A| S5["Subagent: Full UI / Viewport Auditor"]
-    Orchestrator -->|Track 5B| S6["Subagent: Full App Functional Auditor"]
+    Orchestrator -->|Track 3A| S6["Subagent: QA & Test Automation Specialist"]
+    Orchestrator -->|Track 3B| S7["Subagent: Telemetry & Release Orchestrator"]
     
     S1 -.->|Structured JSON Receipt| Orchestrator
     S2 -.->|Structured JSON Receipt| Orchestrator
@@ -30,6 +31,7 @@ flowchart TD
     S4 -.->|Structured JSON Receipt| Orchestrator
     S5 -.->|Structured JSON Receipt| Orchestrator
     S6 -.->|Structured JSON Receipt| Orchestrator
+    S7 -.->|Structured JSON Receipt| Orchestrator
 ```
 
 ---
@@ -38,15 +40,13 @@ flowchart TD
 
 | Archetype | Governing Phase | Primary Responsibilities & Tooling | Boundary Restrictions |
 | :--- | :--- | :--- | :--- |
-| **System Architect** | Phase 0 & 1 | Requirements analysis, prompt polishing, RFC planning, and ADR authoring. | Read-only analysis; no production code edits. |
-| **Research Engine** | Phase 2 | P.A.T.H.S. dependency evaluation, alternative package benchmarking, POC testing. | Sandboxed scratch files only; no production commits. |
-| **Backend & Persistence** | Track 3A | Database schemas, ACID transactions, migrations, Zod/Pydantic validation, API routes. | Owns `server/`, `api/`, `db/`, `models/`. Never touches UI components. |
-| **UI/UX & Sensory** | Track 3B | Apple HIG tokens, Cupertino materials, hairline lighting, 120Hz compositor, 3D shaders. | Owns `components/`, `styles/`, `views/`. Never touches database schemas. |
-| **Security Hardener** | Track 4A | OWASP Top 10 defense, SQL parameterization, secret hygiene (`.env.example`), network timeouts. | Read & patch security surfaces across client and server. |
-| **DevOps Specialist** | Track 4B | Non-root multi-stage Dockerfiles (`USER 10001`), docker-compose, CI/CD, OpenTelemetry. | Owns `Dockerfile`, `docker-compose.yml`, `.github/workflows/`. |
-| **UI QA Auditor** | Track 5A | 4-tier viewports (375-1920px), safe areas, 44x44pt touch targets, WCAG AA contrast. | Read-only verification via DevTools and responsiveness scripts. |
-| **Functional QA Auditor** | Track 5B | State machines, network timeouts, mobile OS lifecycle, memory leaks, Master Error Catalog. | Read-only verification via test suites and functional scripts. |
-| **Release Orchestrator** | Phase 6 | Convention recording, commit chunking (<1k lines), semantic tagging, PR generation. | Git tree operations and final walkthrough authoring. |
+| **Frontend & Routing Architect** | Track 1A | Layout hierarchies, parallel/intercepting routes, state machines, i18n, typed params. | Owns `app/`, `routes/`, `stores/`, `locales/`. |
+| **UI/UX & Sensory Specialist** | Track 1B | Apple HIG tokens, Cupertino materials, hairline lighting, 120Hz compositor, 3D WebGL. | Owns `components/`, `styles/`, `assets/`. Never modifies backend schemas. |
+| **Backend & Persistence** | Track 2A | Clean architecture, database schemas, expand/contract migrations, Zod/Pydantic validation. | Owns `server/`, `api/`, `db/`, `models/`. Never touches UI components. |
+| **Cloud & DevOps Specialist** | Track 2B | Multi-stage Dockerfiles (`USER 10001`), GCP Cloud Run, AWS S3/Lambda, Supabase RLS, pipelines. | Owns `Dockerfile`, `docker-compose.yml`, cloud manifests, ETL pipelines. |
+| **Security Hardener** | Track 2C | OWASP Top 10 defense, SQL parameterization, secret hygiene (`.env.example`), DDoS rate limits. | Read & patch security surfaces across client and server. |
+| **QA & Test Specialist** | Track 3A | TDD unit/integration tests, 4-tier viewports (375-1920px), safe areas, 44x44pt touch targets, Web Vitals. | Read-only verification via test suites and DevTools scripts. |
+| **Release Orchestrator** | Track 3B | Convention recording, OpenTelemetry tracing, commit chunking (<1k lines), PR generation, skill minting. | Git tree operations, telemetry configs, and final walkthrough. |
 
 ---
 

@@ -145,7 +145,7 @@ def audit_subagent_prompt(prompt_text: str, budget_limit: int = 1500) -> List[Di
 def audit_phased_plan(plan_content: str) -> List[Dict[str, Any]]:
     violations: List[Dict[str, Any]] = []
     required_phases = [
-        "Phase 1", "Phase 2", "Phase 3", "Phase 4", "Phase 5", "Phase 6"
+        "Phase 1", "Phase 2", "Phase 3"
     ]
     for phase in required_phases:
         if not re.search(rf"\b{re.escape(phase)}\b", plan_content, re.IGNORECASE):

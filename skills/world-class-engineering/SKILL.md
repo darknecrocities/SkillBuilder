@@ -42,8 +42,8 @@ The SkillBuilder ecosystem decomposes into 22 focused, highly-actionable skills 
 
 | Command | Skill Name | Scope & Core Responsibility |
 | :--- | :--- | :--- |
-| `/full-scale-mode` | **Full-Scale Mode** | Master Phased Project Orchestration Engine (aliased with `/world-class-engineering`), 7-phase EOS lifecycle, parallel subagent swarms. |
-| `/world-class-engineering` | **World-Class Engineering** | Master EOS orchestrator, 6-phase lifecycle, 500-line source file policy (aliased with `/full-scale-mode`). |
+| `/full-scale-mode` | **Full-Scale Mode** | Master Phased Project Orchestration Engine (aliased with `/world-class-engineering`), 3-phase Triad Cadence (Frontend, Backend, Testing), parallel subagent swarms. |
+| `/world-class-engineering` | **World-Class Engineering** | Master architecture orchestrator, 3-phase Triad Cadence, 500-line source file policy (aliased with `/full-scale-mode`). |
 | `/anti-slop` | **Anti-AI-Slop & Craftsmanship** | Strips decorative badges, generic marketing fluff, neon gradients, and mock arrays. |
 | `/research` | **Autonomous Research & Fallbacks** | Discovers and evaluates production-grade library alternatives when packages fail. |
 | `/qa` | **Responsiveness QA & Sub-Agents** | Viewport audit (375px/768px/1280px+), a11y, touch targets (>=44px), sub-agent QA. |
@@ -72,7 +72,7 @@ The SkillBuilder ecosystem decomposes into 22 focused, highly-actionable skills 
 To achieve maximum output quality, combine Antigravity native commands with specialized modular skills in a single prompt:
 
 - **Full-Scale Feature Planning**: `/plan /full-scale-mode` (or `/plan /world-class-engineering`)
-  - Activates Antigravity's interactive planning engine while strictly enforcing the 7-phase EOS lifecycle, token budget ceilings, and subagent orchestration.
+  - Activates Antigravity's interactive planning engine while strictly enforcing the 3-phase Triad Cadence, token budget ceilings, and subagent orchestration.
 - **Modern Luxury UI & Apple Craftsmanship**: `/plan /ui /3d <product showcase>`
   - Combines Cupertino blur acrylic materials with WebGL PBR clearcoat 3D rendering for Tesla/Apple caliber interactive experiences.
 - **Full-Stack Vertical Slice**: `/plan /fullstack /database /backend <feature>`

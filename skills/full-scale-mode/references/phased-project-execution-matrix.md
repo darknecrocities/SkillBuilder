@@ -1,132 +1,87 @@
-# Phased Project Execution Matrix
+# Phased Project Execution Matrix: The 3-Phase Triad Cadence
 
-> **Scope**: End-to-end phased delivery lifecycle for Full-Scale Mode (`/full-scale-mode` / `/world-class-engineering`), integrating all 22 SkillBuilder skills across seven sequential phases and parallel subagent execution tracks.
+> **Scope**: End-to-end phased delivery lifecycle for Full-Scale Mode (`/full-scale-mode` / `/world-class-engineering`), organizing all 32 SkillBuilder skills across three sequential, synchronized tiers with parallel subagent execution tracks.
 
 ---
 
-## 1. Lifecycle Overview & Phase Map
+## 1. Lifecycle Overview & Triad Phase Map
 
-Every non-trivial software engineering initiative must advance through seven discrete phases. Advancing to the next phase requires satisfying formal exit criteria:
+Every software engineering initiative executed under Full-Scale Mode advances through three discrete, synchronized phases. Advancing past each phase boundary requires satisfying the corresponding Triad Gateway:
 
 ```mermaid
 flowchart TD
-    P0["Phase 0: Ingestion & Prompt Polishing (/prompt-polish, /continuous-learning)"] --> P1["Phase 1: Architectural Technical Plan (/plan, /api-design, /database)"]
-    P1 --> P2["Phase 2: Deep Research & Benchmarking (/research, /ai, /performance)"]
-    P2 --> P3["Phase 3: Parallel Domain Execution (/fullstack, /ui, /3d, /backend, /frontend)"]
-    P3 --> P4["Phase 4: Security, Resilience & Infra (/security, /devops, /observability, /production-etiquette)"]
-    P4 --> P5["Phase 5: Two-Tier QA & Guardrails (/qa ui, /qa app, /qa lae, 500-line limit)"]
-    P5 --> P6["Phase 6: Learning, Git Chunking & Release (/continuous-learning, /git-workflow, /refactor)"]
+    P1["Phase 1: Frontend & Interface Architecture<br/><b>Cluster PSC-1: Client & Experience Gate</b><br/>/frontend • /ui • /3d • /routing • /state-management • /i18n • /anti-slop • /prompt-polish"]
+    P2["Phase 2: Backend, Cloud & Data Infrastructure<br/><b>Cluster PSC-2: Engine & Security Gate</b><br/>/backend • /fullstack • /api-design • /database • /gcp • /aws • /firebase • /supabase • /data-pipelines • /devops • /security • /ai • /research"]
+    P3["Phase 3: Testing, QA, Telemetry & Verifiable Release<br/><b>Cluster PSC-3: Verification & Release Gate</b><br/>/testing • /qa • /performance • /observability • /production-etiquette • /git-workflow • /refactor • /continuous-learning • /project-skills • /world-class-engineering"]
+
+    P1 -->|Client Gate Passed| P2
+    P2 -->|Engine Gate Passed| P3
 ```
 
 ---
 
 ## 2. Phase-by-Phase Execution Specifications
 
-### Phase 0: Ingestion & Metacognitive Prompt Polishing
-- **Governing Skills**: `/prompt-polish`, `/continuous-learning`
-- **Subagent Role**: `Prompt Architect`
-- **Entry Criteria**: Raw user prompt received.
-- **Actions**:
-  1. Check `.agents/learned_conventions.md` to load project-specific rules and avoid repeated errors.
-  2. Parse the user request to extract implicit constraints, eliminate ambiguity, and strip conversational padding.
-  3. Formulate an RFC-style specification matrix with explicit inputs, outputs, error conditions, and acceptance criteria.
-  4. Estimate total token budget using the character heuristic ($chars / 3.8$).
-- **Exit Criteria**: Polished engineering specification agreed upon; zero unstated assumptions.
+### Phase 1: Frontend & Interface Architecture (Client Tier)
+- **Governing Skills**: `/frontend`, `/ui`, `/3d`, `/routing`, `/state-management`, `/i18n`, `/anti-slop`, `/prompt-polish`
+- **Subagent Roles**: `Frontend & Routing Architect` (Track 1A) and `UI/UX & Sensory Specialist` (Track 1B).
+- **Entry Criteria**: User goal received and refined via `/prompt-polish` (PPE).
+- **Track 1A (Layouts, Routing & State)**:
+  - Scaffolds file-based layouts, parallel/intercepting routes, and typed search params (`/routing`).
+  - Implements declarative client state machines, TanStack Query key factories, and signals (`/state-management`).
+  - Sets up internationalization dictionaries, ICU MessageFormat, and RTL layout mirroring (`/i18n`).
+  - Enforces React 19 / Next.js / Flutter lifecycle memory safety and AbortController cleanup (`/frontend`).
+- **Track 1B (Design Systems, Materials & Motion)**:
+  - Establishes Apple HIG tokens, Cupertino blur materials, and squircle corner radii (`/ui`).
+  - Applies sub-pixel directional lighting (hairline borders, physical shadow falloff).
+  - Enforces 120Hz GPU compositor compliance (`transform` and `opacity` only).
+  - Eliminates AI slop: zero decorative shields, zero glowing borders, zero raw emojis in UI buttons (`/anti-slop`).
+  - Integrates Three.js / R3F PBR shaders with Draco compression where 3D is requested (`/3d`).
+- **Exit Gate (Client & Experience Gate)**: Layout renders responsively across 375px–1920px; 44x44pt touch targets; zero raw emojis; zero console layout errors.
 
 ---
 
-### Phase 1: Phased Architectural Technical Plan & User Alignment
-- **Governing Skills**: `/plan`, `/api-design`, `/database`
-- **Subagent Role**: `System Architect`
-- **Entry Criteria**: Polished specification from Phase 0.
-- **Actions**:
-  1. Author a structured implementation plan artifact in `<appDataDir>/brain/<conversation-id>/`.
-  2. Map component boundaries, data flow, API contracts (OpenAPI 3.1 / RFC 7807), and database migrations (expand/contract).
-  3. Include Mermaid diagrams for state machines and component relationships.
-  4. Set `RequestFeedback: true` in artifact metadata and halt execution.
-- **Exit Criteria**: User reviews the plan and clicks **Proceed** (or issues textual approval). Never modify project code before this gate passes.
+### Phase 2: Backend, Cloud & Data Infrastructure (Engine Tier)
+- **Governing Skills**: `/backend`, `/fullstack`, `/api-design`, `/database`, `/gcp`, `/aws`, `/firebase`, `/supabase`, `/data-pipelines`, `/devops`, `/security`, `/ai`, `/research`
+- **Subagent Roles**: `Backend & Persistence Specialist` (Track 2A), `Cloud & DevOps Engineer` (Track 2B), and `Security Hardener` (Track 2C).
+- **Entry Criteria**: Client architecture, route boundaries, and UI contracts established from Phase 1.
+- **Track 2A (Core Services, Contracts & Persistence)**:
+  - Builds Hexagonal clean architecture with strict domain boundaries and runtime validation (`/backend`).
+  - Authors OpenAPI 3.1 contracts and RFC 7807 Problem Details envelopes (`/api-design`).
+  - Wires up real persistence (PostgreSQL/SQLite) with zero-downtime expand/contract migrations (`/database`).
+  - Anti-mock mandate: Builds complete vertical slices with zero fake static arrays (`/fullstack`).
+  - Autonomously benchmarks novel dependencies using P.A.T.H.S. criteria (`/research`).
+  - Implements Gemini SDK structured JSON outputs and token budgeting (`/ai`).
+- **Track 2B (Cloud Platforms & Data Pipelines)**:
+  - Provisions GCP Cloud Run containers, Pub/Sub, and Secret Manager (`/gcp`).
+  - Hardens AWS serverless Lambda, S3 public access blocks, and DynamoDB single-table designs (`/aws`).
+  - Configures Firebase Firestore security rules v2 and Auth (`/firebase`).
+  - Implements Supabase Postgres Row-Level Security (RLS) and pgvector semantic search (`/supabase`).
+  - Builds streaming batch ETL pipelines with backpressure flow control and DuckDB OLAP (`/data-pipelines`).
+  - Produces multi-stage Dockerfiles running as unprivileged non-root user (`USER 10001`) (`/devops`).
+- **Track 2C (Security Defense & Network Resilience)**:
+  - Mitigates OWASP Top 10 vulnerabilities; parameterizes 100% of SQL queries and shell commands (`/security`).
+  - Implements refresh token family rotation, constant-time auth comparisons, and SSRF post-DNS validation.
+  - Enforces explicit 3s connection and 15s body timeouts, exponential backoff with jitter, and DDoS rate limits.
+- **Exit Gate (Engine & Security Gate)**: Real database persistence verified; zero unhandled errors; non-root Docker builds succeed; cloud IAM least-privilege policies enforced.
 
 ---
 
-### Phase 2: Autonomous Deep Research & Dependency Benchmarking
-- **Governing Skills**: `/research`, `/ai`, `/performance`
-- **Subagent Role**: `Research Engine`
-- **Entry Criteria**: Approved implementation plan from Phase 1.
-- **Actions**:
-  1. When introducing any new library or tool, benchmark candidates using the **P.A.T.H.S.** rubric (Performance, Activity, Type safety, Hygiene, Size).
-  2. If a package fails installation or is deprecated, autonomously locate and evaluate production drop-in replacements.
-  3. Verify runtime compatibility against target node/python/go/swift runtime before importing.
-- **Exit Criteria**: Dependency stack verified with working minimal POC; zero unvetted packages.
-
----
-
-### Phase 3: Parallel Domain Execution (Subagent Swarm)
-- **Governing Skills**: `/fullstack`, `/database`, `/backend`, `/api-design`, `/ui`, `/3d`, `/frontend`, `/anti-slop`
-- **Subagent Roles**: `Backend Specialist` (Track 3A) and `UI/UX Specialist` (Track 3B) running concurrently.
-- **Entry Criteria**: Research verified from Phase 2.
-- **Track 3A (Backend & Persistence)**:
-  - Wire up real database persistence (PostgreSQL, SQLite, Room, CoreData) with foreign key constraints.
-  - Implement zero-downtime schema migrations.
-  - Enforce strict runtime schema validation (Zod, Pydantic v2).
-  - Anti-mock mandate: Zero static arrays simulating state.
-- **Track 3B (UI/UX, 3D Canvas & Sensory Materials)**:
-  - Implement Apple HIG design tokens and Cupertino blur materials.
-  - Apply sub-pixel directional lighting (hairline borders, physical shadow falloff).
-  - Enforce 120Hz GPU compositor compliance (`transform` and `opacity` only).
-  - Use semantic Lucide SVG vector icons (`aria-hidden="true"`); zero raw emojis in buttons.
-  - Integrate Three.js / R3F PBR shaders with Draco compression where 3D is requested.
-- **Exit Criteria**: Both tracks complete, compile cleanly, and hand off compact JSON receipts to parent orchestrator.
-
----
-
-### Phase 4: Parallel Security, Resilience & Infrastructure
-- **Governing Skills**: `/security`, `/production-etiquette`, `/devops`, `/observability`
-- **Subagent Roles**: `Security Hardener` (Track 4A) and `DevOps Specialist` (Track 4B).
-- **Entry Criteria**: Core code implemented from Phase 3.
-- **Track 4A (Security & Resilience)**:
-  - Audit OWASP Top 10 vulnerabilities; parameterize 100% of SQL queries and shell commands.
-  - Ensure zero hardcoded credentials; provide `.env.example` templates.
-  - Configure resilient networking: explicit 3s connection and 15s execution timeouts, exponential backoff with full jitter, and 300ms input debouncing.
-- **Track 4B (DevOps & Telemetry)**:
-  - Generate hardened multi-stage Dockerfile running as non-root unprivileged user (`USER 10001`).
-  - Provide `docker-compose.yml` with health checks.
-  - Instrument distributed OpenTelemetry tracing and structured JSON logging with correlation IDs.
-- **Exit Criteria**: Security audit passes with 0 critical findings; Docker build succeeds; telemetry operational.
-
----
-
-### Phase 5: Two-Tier Quality Assurance & Guardrail Sweep
-- **Governing Skills**: `/qa` (`/qa ui`, `/qa app`, `/qa lae`), `check_source_line_limits.py`, `sanitize_ai_slop.py`
-- **Subagent Roles**: `UI Auditor` (Track 5A), `App Functional Auditor` (Track 5B), and `Guardrail Enforcer` (Track 5C).
-- **Entry Criteria**: Hardening complete from Phase 4.
-- **Track 5A (Full UI / Frontend QA)**:
-  - Audit 4-tier viewports (375px SE to 1920px+ widescreen) and safe-area insets.
-  - Verify minimum 44x44pt interactive touch targets.
-  - Verify WCAG 2.2 AA contrast (4.5:1 body, 3:1 large text) and visible focus rings.
-  - Verify tabular typography (`tabular-nums`) and layout stability ($\text{CLS} < 0.05$).
-- **Track 5B (Full App Functional QA & Error Catalog)**:
-  - Validate state machine exhaustiveness and race condition prevention.
-  - Verify mobile OS lifecycle resilience (background state preservation, low-memory cache trimming, cold-start deep links).
-  - Check for resource and memory leaks (uncleaned listeners, orphan timers).
-  - Log any discovered defects into `master-error-catalog.md` (LaE protocol).
-- **Track 5C (Physical Line Limits & Anti-Slop Audit)**:
-  - Run `check_source_line_limits.py --path .`: Enforce strict 500-line physical limit across all source files.
-  - Run `sanitize_ai_slop.py --strict`: Verify zero decorative shields, neon gradients, or marketing buzzwords.
-- **Exit Criteria**: 100% test suites pass; 0 line limit violations; 0 anti-slop violations.
-
----
-
-### Phase 6: Continuous Learning, Git Chunking & Delivery
-- **Governing Skills**: `/continuous-learning`, `/refactor`, `/git-workflow`
-- **Subagent Role**: `Release Orchestrator`
-- **Entry Criteria**: All verification suites pass from Phase 5.
-- **Actions**:
-  1. Record any new project conventions or user corrections to `.agents/learned_conventions.md`.
-  2. If any source file approaches 500 lines, execute the 7-step safe refactoring protocol.
-  3. Run `analyze_git_commit_chunks.py`: Decompose changes into cohesive commits strictly below the **1,000-line review budget**.
-  4. Author Conventional Commits with **mandatory Title AND structured Description body** explaining *Why*, *What*, and *Verification*. Zero lazy commits.
-  5. **Always push to remote tracking branch**: Execute `git push origin <branch-name>`.
-  6. **Always open or update GitHub Pull Request**: Author or update active PR via `gh pr create` / `gh pr edit` with complete architectural context, test receipts, and rollback instructions.
-  7. Tag semantic release version (`vX.Y.Z`) and push tag (`git push origin vX.Y.Z`).
-  8. Author comprehensive walkthrough artifact in the conversation directory.
-- **Exit Criteria**: Working tree clean and synchronized with remote, active PR ready to merge, release tag pushed, walkthrough presented.
+### Phase 3: Testing, Quality Assurance, Telemetry & Verifiable Release (Verification & Release Tier)
+- **Governing Skills**: `/testing`, `/qa`, `/performance`, `/observability`, `/production-etiquette`, `/git-workflow`, `/refactor`, `/continuous-learning`, `/project-skills`, `/world-class-engineering`
+- **Subagent Roles**: `QA & Test Automation Specialist` (Track 3A) and `Release & Telemetry Orchestrator` (Track 3B).
+- **Entry Criteria**: Functional client and backend infrastructure deployed from Phase 1 and Phase 2.
+- **Track 3A (TDD, Two-Tier QA & Performance Audits)**:
+  - Writes comprehensive unit and integration tests using semantic ARIA locators and MSW mocking (`/testing`).
+  - Executes Two-Tier QA: Full UI viewports (375px SE to 1920px+ widescreen) and Full App Functional QA (`/qa`).
+  - Logs defects into `master-error-catalog.md` using the List-an-Error (LaE) protocol.
+  - Profiles Core Web Vitals ($\text{LCP} < 2.5\text{s}$, $\text{CLS} < 0.1$, $\text{INP} < 200\text{ms}$) and eliminates N+1 queries (`/performance`).
+  - Enforces the strict 500-line physical ceiling across all source files; triggers `/refactor` on files $\ge 350$ lines.
+- **Track 3B (Observability, Skill Minting & Release Delivery)**:
+  - Instruments OpenTelemetry distributed tracing and structured JSON logs with correlation IDs (`/observability`).
+  - Scaffolds `.env.example`, `.gitignore`, and verifies production secret hygiene (`/production-etiquette`).
+  - Mints custom project skills under `.agents/skills/<repo>/SKILL.md` via Skill Synthesis Protocol (`/project-skills`).
+  - Persists learned project invariants to `.agents/learned_conventions.md` (`/continuous-learning`).
+  - Decomposes commits into cohesive diffs strictly under the 1,000-line review budget (`/git-workflow`).
+  - Pushes remote tracking branch (`git push origin <branch>`) and authors ready-to-merge GitHub Pull Request (`gh pr create`).
+- **Exit Gate (Verification & Release Gate)**: 100% green test suites across all 40 runners; 0 line limit violations; clean working tree pushed to remote; active PR ready to review.

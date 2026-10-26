@@ -70,12 +70,9 @@ class TestVerifyFullScaleOrchestration(unittest.TestCase):
     def test_complete_phased_plan_passes(self):
         plan = """
         # Project Plan
-        - Phase 1: Inception and Metacognitive Blueprint
-        - Phase 2: Architecture and Contract Scaffolding
-        - Phase 3: Domain Synthesis and Visual Craftsmanship
-        - Phase 4: Cloud Infrastructure and Defensive Hardening
-        - Phase 5: Two-Tier Fortification and Web Vitals Audit
-        - Phase 6: Atomic Git Release and Evolutionary Learning
+        - Phase 1: Frontend & Interface Architecture
+        - Phase 2: Backend, Cloud & Data Infrastructure
+        - Phase 3: Testing, Quality Assurance & Verifiable Release
         """
         violations = audit_phased_plan(plan)
         self.assertEqual(len(violations), 0)

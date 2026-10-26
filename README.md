@@ -100,7 +100,7 @@ When starting a project or a major feature from zero, stack `/plan` with `/full-
 | Prompt Component | Role in Strategy | Strategic Value & Agent Impact |
 | :--- | :--- | :--- |
 | `• plan` | Planning Gate | Halts unguided generation; compels the agent to author an interactive RFC plan with file trees and milestones before code is touched. |
-| `• full-scale-mode` | Master Orchestrator | Activates the 7-Phase EOS lifecycle: enforces 500-line file limits, decomposes modules, and coordinates subagent execution. |
+| `• full-scale-mode` | Master Orchestrator | Activates the 3-Phase Triad Cadence (Frontend, Backend, Testing): enforces 500-line file limits, decomposes modules, and coordinates subagent execution. |
 | `two tone color of white and black` | Palette Boundary | Eliminates generic AI gradients and vibrant slop; anchors styling to disciplined monochrome tokens (`#0A0A0B` / `#FFFFFF`). |
 | `use google fonts` | Typographic Guardrail | Enforces clean web font imports (Inter, Roboto Mono) instead of uncontrolled generic CSS fallbacks. |
 | `1 page` | Scope Ceiling | Imposes a hard boundary preventing premature routing bloat, incomplete sub-pages, or runaway token consumption. |
@@ -266,44 +266,41 @@ To produce the highest-quality software architecture, verified test suites, and 
 
 ```mermaid
 flowchart TD
-    INPUT["User: /plan /full-scale-mode <Task>"] --> P1["Phase 1: Metacognitive Discovery & Alignment (PSC-1)"]
-    P1 --> P2["Phase 2: Architectural Blueprints & Triad Synthesis (PSC-2)"]
-    P2 --> APPROVE{"User Review & Approval Gate"}
-    APPROVE -- "Proceed" --> P3["Phase 3: Core Construction & Anti-Mock Delivery (PSC-3)"]
-    P3 --> P4["Phase 4: Production Hardening, Cloud & Security (PSC-4)"]
-    P4 --> P5["Phase 5: Resilient Integration, Telemetry & Two-Tier QA (PSC-5)"]
-    P5 --> P6["Phase 6: Verifiable Release, PR Authoring & Skill Minting (PSC-6)"]
+    INPUT["User: /plan /full-scale-mode <Task>"] --> P1["Phase 1: Frontend & Interface Architecture (PSC-1)<br/>Tokens • Routing • State • 3D • i18n • Anti-Slop"]
+    P1 --> P2["Phase 2: Backend, Cloud & Data Infrastructure (PSC-2)<br/>Clean Arch • DB • Cloud Platforms • Pipelines • Security"]
+    P2 --> P3["Phase 3: Testing, QA, Telemetry & Verifiable Release (PSC-3)<br/>TDD • Two-Tier QA • Tracing • Atomic Git PR • Skill Minting"]
+    P3 --> RELEASE["Ready-to-Merge PR + Walkthrough + Minted Skills"]
 ```
 
-### The 6-Phase Omni-Phase Cadence (OPC)
+### The 3-Phase Triad Cadence (Frontend, Backend, Testing/Release)
 
-SkillBuilder orchestrates complex multi-agent engineering workflows through the **Omni-Phase Cadence (OPC)**. Rather than treating prompts as single-pass code generators, OPC organizes delivery into 6 disciplined phases backed by dedicated **Phase Skill Clusters (PSC-1 through PSC-6)**:
+SkillBuilder orchestrates complex multi-agent engineering workflows through the **3-Phase Triad Cadence**. Rather than fragmenting work into disconnected passes, the Triad Cadence organizes the entire 32-skill ecosystem into 3 synchronized tiers backed by **Phase Skill Clusters (PSC-1 through PSC-3)**:
 
-1. **Phase 1: Metacognitive Discovery & Alignment (PSC-1: `/prompt-polish`, `/continuous-learning`)**:
-   - Ingests user intent and checks `.agents/learned_conventions.md` to prevent repeating previously corrected mistakes.
-   - Extracts hidden assumptions, strips conversational padding, and structures requirements into an RFC-style specification matrix.
-2. **Phase 2: Architectural Blueprints & Triad Synthesis (PSC-2: `/world-class-engineering`, `/api-design`, `/database`, `/routing`, `/research`)**:
-   - Generates a formal technical implementation plan artifact in the Antigravity conversation directory.
-   - Maps out component boundaries, data flows, database schemas, and verification strategies with mermaid diagrams.
-   - Halts execution and presents an interactive **Proceed** button for user review.
-3. **Phase 3: Core Construction & Anti-Mock Vertical Delivery (PSC-3: `/fullstack`, `/frontend`, `/backend`, `/state-management`, `/ui`, `/anti-slop`, `/3d`, `/i18n`)**:
-   - Zero decorative badges (`shields.io`), zero obvious comments (`// set loading to true`), zero fake mock arrays.
-   - Builds complete vertical slices wired to real persistence (SQLite, PostgreSQL, Cloud SQL) with strict Zod/Pydantic validation.
-   - Enforces the disciplined neutral palette (zinc/slate) and semantic Lucide SVG vector icons (zero raw emojis in UI buttons).
-4. **Phase 4: Production Hardening, Cloud & Security Defense (PSC-4: `/security`, `/devops`, `/gcp`, `/aws`, `/firebase`, `/supabase`, `/observability`)**:
-   - Hardens cloud runtimes (Cloud Run, Lambda, Firestore, Supabase RLS) and container manifests with non-root security (`USER 10001`).
-   - Mitigates OWASP Top 10 vulnerabilities, enforces constant-time auth comparisons, refresh token family rotation, and SSRF URL post-DNS validation.
-5. **Phase 5: Resilient Integration, Telemetry & Two-Tier QA (PSC-5: `/qa`, `/testing`, `/data-pipelines`, `/performance`, `/production-etiquette`)**:
-   - Enforces the **Multi-Tiered Maintainability Standard**: Sweet Spot (150–250 lines), Nominal (251–350 lines), Warning Zone (351–499 lines), and Hard Ceiling (500 lines) via `check_source_line_limits.py --show-tiers`.
-   - Enforces cognitive complexity hygiene: $\le 40$ lines per function, $\le 3$ nesting levels with early returns, and Cyclomatic Complexity $\le 10$.
-   - Executes the **Two-Tier QA Engine**: Full UI/Frontend QA (`/qa ui`) for viewports, 44x44pt touch targets, WCAG AA, and 120Hz GPU compositor, plus Full App Functional QA (`/qa app`) for state machines, real persistence, 3s/15s timeouts, and mobile lifecycles.
-   - Executes the master 40-suite verification test runner.
-6. **Phase 6: Verifiable Release, PR Authoring & Project Skill Minting (PSC-6: `/git-workflow`, `/project-skills`)**:
-   - Decomposes diffs into cohesive commits strictly below the **1,000-line push budget**.
-   - Enforces **mandatory multi-line Conventional Commits** with a clear title AND a structured description body (Why, What, Verification).
-   - **Always pushes immediately to remote branch** (`git push origin <branch>`).
-   - **Always authors or updates a ready-to-merge GitHub Pull Request** via `gh pr create` / `gh pr edit` with test receipts, walkthrough diffs, and semantic release tags.
-   - Executes **Project Skill Minting (PSM)**: when encountering novel project conventions or specialized architectural patterns, synthesizes reusable `.agents/skills/<skill-name>/SKILL.md` definitions for future autonomous sessions.
+1. **Phase 1: Frontend & Interface Architecture (PSC-1: Client & Experience Gate)**:
+   - **Governing Skills**: `/frontend`, `/ui`, `/3d`, `/routing`, `/state-management`, `/i18n`, `/anti-slop`, `/prompt-polish`.
+   - Ingests user intent and refines specifications through Prompt Polishing (PPE).
+   - Establishes Apple HIG tokens, Cupertino blur materials, sub-pixel lighting, and semantic Lucide SVG icons.
+   - Builds file-based routing hierarchies, parallel/intercepting layouts, and typed search params.
+   - Implements declarative client state machines, TanStack Query key factories, and signals.
+   - Enforces React 19 / Next.js / Flutter lifecycle safety, internationalization (ICU MessageFormat), and RTL layout mirroring.
+2. **Phase 2: Backend, Cloud & Data Infrastructure (PSC-2: Engine & Security Gate)**:
+   - **Governing Skills**: `/backend`, `/fullstack`, `/api-design`, `/database`, `/gcp`, `/aws`, `/firebase`, `/supabase`, `/data-pipelines`, `/devops`, `/security`, `/ai`, `/research`.
+   - Builds Hexagonal clean architecture with strict domain boundaries and runtime validation.
+   - Authors OpenAPI 3.1 contracts and RFC 7807 Problem Details envelopes.
+   - Wires up real persistence (PostgreSQL/SQLite) with zero-downtime expand/contract migrations (Anti-Mock mandate).
+   - Provisions enterprise cloud infrastructure (GCP Cloud Run, AWS Lambda/S3, Firebase rules v2, Supabase Postgres RLS).
+   - Builds streaming batch ETL pipelines with backpressure flow control and DuckDB in-process OLAP.
+   - Hardens system against OWASP Top 10 vulnerabilities, enforces refresh token family rotation, SSRF post-DNS validation, and non-root Docker builds (`USER 10001`).
+3. **Phase 3: Testing, Quality Assurance, Telemetry & Verifiable Release (PSC-3: Verification & Release Gate)**:
+   - **Governing Skills**: `/testing`, `/qa`, `/performance`, `/observability`, `/production-etiquette`, `/git-workflow`, `/refactor`, `/continuous-learning`, `/project-skills`, `/world-class-engineering`.
+   - Executes TDD test automation with semantic ARIA queries and MSW network mocking.
+   - Runs the Two-Tier QA Engine: Full UI viewports (375px–1920px) and Full App Functional QA with Master Error Catalog logging.
+   - Audits Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms) and eliminates N+1 query cascades.
+   - Instruments OpenTelemetry distributed tracing and structured JSON logs with correlation IDs.
+   - Enforces the strict 500-line physical ceiling via `check_source_line_limits.py --show-tiers`.
+   - Decomposes commits into cohesive diffs under the 1,000-line review budget (`/git-workflow`).
+   - Pushes remote tracking branch (`git push origin <branch>`) and authors ready-to-merge GitHub Pull Request.
+   - Mints custom project skills under `.agents/skills/<repo>/SKILL.md` via Skill Synthesis Protocol (SSP).
 
 ### Autonomous Skill Resonance (ASR)
 
@@ -351,7 +348,7 @@ flowchart LR
 
 | Intent | Recommended Command Combination | Outcome |
 | :--- | :--- | :--- |
-| **Full-Scale Feature Delivery** | `/plan /full-scale-mode <goal>` (or `/world-class-engineering`) | 6-phase OPC lifecycle, Autonomous Skill Resonance, token budget ceilings, and chunked PR. |
+| **Full-Scale Feature Delivery** | `/plan /full-scale-mode <goal>` (or `/world-class-engineering`) | 3-phase Triad Cadence (Frontend, Backend, Testing), Autonomous Skill Resonance, token budget ceilings, and chunked PR. |
 | **Fullstack Vertical Slice** | `/plan /fullstack <goal>` | Real database migration, ORM repository, validated API route, and responsive UI without mocks. |
 | **Safe Refactoring** | `/plan /refactor <module>` | Characterization testing, Strangler Fig pattern, and decomposing files approaching 500 lines. |
 | **Two-Tier Full QA Pass** | `/plan /qa <scope>` | Dual-tier verification: Full UI/Frontend QA (`/qa ui`) and Full App Functional QA (`/qa app`). |
@@ -365,7 +362,7 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 
 | Command | Skill Name | Domain | Core Capabilities & Focus | Standalone CLI Tool | Primary Guardrail |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `/full-scale-mode` | **Full-Scale Mode** | Orchestration | Master Phased Project Orchestration Engine (aliased with `/world-class-engineering`), 6-phase Omni-Phase Cadence (OPC), Autonomous Skill Resonance (ASR). | `verify_full_scale_orchestration.py` | Strict 6-phase gate compliance & 1,500-token subagent ceilings. |
+| `/full-scale-mode` | **Full-Scale Mode** | Orchestration | Master Phased Project Orchestration Engine (aliased with `/world-class-engineering`), 3-phase Triad Cadence (Frontend, Backend, Testing), Autonomous Skill Resonance (ASR). | `verify_full_scale_orchestration.py` | Strict 3-phase gate compliance & 1,500-token subagent ceilings. |
 | `/world-class-engineering` | **World-Class Engineering** | Architecture | 6-Phase EOS lifecycle (Understand -> Define -> Plan -> Implement -> Verify -> Deliver). | `check_source_line_limits.py` | Multi-tiered maintainability matrix & 500-line physical ceiling. |
 | `/anti-slop` | **Anti-AI-Slop Sanitizer** | Clean Code | Purges decorative badges, fake mock databases, neon gradients, obvious comments, and marketing copy. | `sanitize_ai_slop.py` | Zero `shields.io`, zero fake mock arrays, zero emojis in UI controls. |
 | `/research` | **Autonomous Research & Fallbacks** | Discovery | Autonomous fallback engine; researches alternatives when packages fail or deprecate. | `research_alternatives.py` | P.A.T.H.S. trade-off evaluation & minimal POC validation. |
@@ -598,7 +595,7 @@ SkillBuilder/
 │   └── AGENTS.md                               # Plugin-level rules
 ├── workspace/                                  # Developer Workspace & Presets
 ├── skills/
-│   ├── full-scale-mode/                        # Master 6-phase OPC & Autonomous Skill Resonance (ASR)
+│   ├── full-scale-mode/                        # Master 3-phase Triad Cadence & Autonomous Skill Resonance (ASR)
 │   ├── world-class-engineering/                # Master EOS & 500-line ceiling (aliased)
 │   ├── anti-slop/                              # Anti-AI-slop & clean craftsmanship
 │   ├── research/                               # Autonomous research & alternative fallbacks
