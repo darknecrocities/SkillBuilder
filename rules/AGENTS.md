@@ -1,6 +1,6 @@
 # Mandatory Engineering Discipline & Production Etiquette
 
-All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the SkillBuilder suite (32 Modular Skills):
+All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the SkillBuilder suite (35 Modular Skills):
 
 1. **Prompt Polishing First (PPE - `/prompt-polish`)**:
    - Analyze, refine, and structure incoming prompts into clear, token-efficient engineering specifications with explicit verification criteria.

@@ -9,7 +9,7 @@
 
 # SkillBuilder: Agentic Engineering Skills
 
-SkillBuilder is a production-grade suite of **32 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
+SkillBuilder is a production-grade suite of **35 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
 
 <p align="center">
   <img src="assets/skillbuilder-workflow-animation.svg" alt="SkillBuilder Universal AI Workflow Animation" width="100%" />
@@ -261,25 +261,28 @@ flowchart TD
 
 ### The 3-Phase Triad Cadence (Frontend, Backend, Testing/Release)
 
-SkillBuilder orchestrates complex multi-agent engineering workflows through the **3-Phase Triad Cadence**. Rather than fragmenting work into disconnected passes, the Triad Cadence organizes the entire 32-skill ecosystem into 3 synchronized tiers backed by **Phase Skill Clusters (PSC-1 through PSC-3)**:
+SkillBuilder orchestrates complex multi-agent engineering workflows through the **3-Phase Triad Cadence**. Rather than fragmenting work into disconnected passes, the Triad Cadence organizes the entire 35-skill ecosystem into 3 synchronized tiers backed by **Phase Skill Clusters (PSC-1 through PSC-3)**:
 
 1. **Phase 1: Frontend & Interface Architecture (PSC-1: Client & Experience Gate)**:
-   - **Governing Skills**: `/frontend`, `/ui`, `/3d`, `/routing`, `/state-management`, `/i18n`, `/anti-slop`, `/prompt-polish`.
+   - **Governing Skills**: `/frontend`, `/ui`, `/mobile-ui`, `/web-ui`, `/3d`, `/routing`, `/state-management`, `/i18n`, `/anti-slop`, `/prompt-polish`.
    - Ingests user intent and refines specifications through Prompt Polishing (PPE).
    - Establishes Apple HIG tokens, Cupertino blur materials, sub-pixel lighting, and semantic Lucide SVG icons.
+   - Enforces iOS 18/19 SwiftUI `matchedGeometryEffect`, Material 3 Expressive `LookaheadScope`, predictive back gestures, and system haptics (`/mobile-ui`).
+   - Implements Component-Level Container Queries (`@container`), CSS View Transitions API, OKLCH perceptual colors, and fluid `clamp()` curves (`/web-ui`).
    - Builds file-based routing hierarchies, parallel/intercepting layouts, and typed search params.
    - Implements declarative client state machines, TanStack Query key factories, and signals.
    - Enforces React 19 / Next.js / Flutter lifecycle safety, internationalization (ICU MessageFormat), and RTL layout mirroring.
 2. **Phase 2: Backend, Cloud & Data Infrastructure (PSC-2: Engine & Security Gate)**:
-   - **Governing Skills**: `/backend`, `/fullstack`, `/api-design`, `/database`, `/gcp`, `/aws`, `/firebase`, `/supabase`, `/data-pipelines`, `/devops`, `/security`, `/ai`, `/research`.
+   - **Governing Skills**: `/backend`, `/fullstack`, `/api-design`, `/database`, `/gcp`, `/aws`, `/firebase`, `/supabase`, `/data-pipelines`, `/devops`, `/security`, `/ai`, `/local-llm`, `/research`.
    - Builds Hexagonal clean architecture with strict domain boundaries and runtime validation.
    - Authors OpenAPI 3.1 contracts and RFC 7807 Problem Details envelopes.
    - Wires up real persistence (PostgreSQL/SQLite) with zero-downtime expand/contract migrations (Anti-Mock mandate).
    - Provisions enterprise cloud infrastructure (GCP Cloud Run, AWS Lambda/S3, Firebase rules v2, Supabase Postgres RLS).
    - Builds streaming batch ETL pipelines with backpressure flow control and DuckDB in-process OLAP.
+   - Architects on-device and private quantized local models (`llama.cpp`, `Ollama`, Apple Silicon `MLX`, `WebLLM`), GBNF grammars, and 3-tier hybrid edge-cloud routing (`/local-llm`).
    - Hardens system against OWASP Top 10 vulnerabilities, enforces refresh token family rotation, SSRF post-DNS validation, and non-root Docker builds (`USER 10001`).
 3. **Phase 3: Testing, Quality Assurance, Telemetry & Verifiable Release (PSC-3: Verification & Release Gate)**:
-   - **Governing Skills**: `/testing`, `/qa`, `/performance`, `/observability`, `/production-etiquette`, `/git-workflow`, `/refactor`, `/continuous-learning`, `/project-skills`, `/world-class-engineering`.
+   - **Governing Skills**: `/testing`, `/qa`, `/performance`, `/observability`, `/production-etiquette`, `/git-workflow`, `/refactor`, `/continuous-learning`, `/project-skills`, `/world-class-engineering`, `/full-scale-mode`.
    - Executes TDD test automation with semantic ARIA queries and MSW network mocking.
    - Runs the Two-Tier QA Engine: Full UI viewports (375px–1920px) and Full App Functional QA with Master Error Catalog logging.
    - Audits Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms) and eliminates N+1 query cascades.
@@ -291,15 +294,18 @@ SkillBuilder orchestrates complex multi-agent engineering workflows through the 
 
 ### Autonomous Skill Resonance (ASR)
 
-SkillBuilder does not require manual micro-management of all 32 skills. During **Phase 1 & Phase 2**, the **Autonomous Skill Resonance (ASR)** engine scans the repository environment for technical fingerprints and dynamically activates matching skills:
+SkillBuilder does not require manual micro-management of all 35 skills. During **Phase 1 & Phase 2**, the **Autonomous Skill Resonance (ASR)** engine scans the repository environment for technical fingerprints and dynamically activates matching skills:
 
 | Fingerprint / Indicator | Resonant Skills Mounted | Activated Capabilities |
 | :--- | :--- | :--- |
 | `app/`, `pages/`, `routes/`, `router` | `/routing` | Deep URL layouts, loading/error states, typed search params. |
+| `ios/`, `android/`, `app.json`, `pubspec.yaml` | `/mobile-ui` | SwiftUI matchedGeometry, Jetpack Compose LookaheadScope, predictive back, haptics. |
+| `@container`, `view-transition`, `tailwind.config` | `/web-ui` | Component-level container queries, CSS View Transitions, OKLCH, fluid typography. |
 | `cloudbuild.yaml`, `app.yaml`, `gcp` | `/gcp` | Cloud Run, Pub/Sub, Secret Manager, Cloud SQL IAM proxy. |
 | `serverless.yml`, `cdk.json`, `aws-sdk` | `/aws` | AWS Lambda, S3 public block, KMS encryption, DynamoDB single-table. |
 | `firebase.json`, `firestore.rules` | `/firebase` | Firestore security rules, Firebase Auth, zero wildcards. |
 | `supabase/`, `@supabase/supabase-js` | `/supabase` | Postgres Row-Level Security (RLS), Edge Functions, pgvector. |
+| `Modelfile`, `gguf`, `mlx`, `ollama` | `/local-llm` | Quantized local inference (Q4_K_M), MLX Metal execution, GBNF grammars, local RAG. |
 | `vitest.config`, `jest.config`, `playwright` | `/testing` | TDD red-green cycle, MSW network mocking, semantic ARIA locators. |
 | `@tanstack/react-query`, `zustand`, `xstate` | `/state-management` | Query key factories, sliced stores, deterministic transitions. |
 | `locales/`, `messages/`, `i18n.ts` | `/i18n` | ICU MessageFormat, RTL layout mirroring, localized formatters. |
@@ -343,7 +349,7 @@ flowchart LR
 
 ---
 
-## The 32-Skill Master Reference Matrix
+## The 35-Skill Master Reference Matrix
 
 Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules in Cursor:
 
@@ -355,6 +361,8 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 | `/research` | **Autonomous Research & Fallbacks** | Discovery | Autonomous fallback engine; researches alternatives when packages fail or deprecate. | `research_alternatives.py` | P.A.T.H.S. trade-off evaluation & minimal POC validation. |
 | `/qa` | **Two-Tier Quality Assurance** | Quality | Full UI/Frontend QA (viewports, touch targets, WCAG, sub-pixel lighting) and Full App Functional QA (state machines, persistence, timeouts, mobile lifecycle, Master Error Catalog). | `verify_responsiveness_and_qa.py` & `verify_app_functionality.py` | Min 44x44pt touch targets, 3s/15s network timeouts, zero mocks. |
 | `/ui` | **UI Design Systems & Tokens** | UI/UX | Apple HIG, Cupertino blur materials, squircle smoothing, high-contrast neutral scales (zinc/slate), Lucide SVGs. | `verify_ui_tokens.py` | Zero raw emojis in buttons/headers; explicit button types. |
+| `/mobile-ui` | **Native Mobile UI/UX Craftsmanship** | UI/Mobile | iOS 18/19 HIG, SwiftUI matchedGeometry, Material 3 Expressive, LookaheadScope, predictive back, spring physics, and haptics. | `verify_mobile_ui_hygiene.py` | Min 44x44pt touch targets, safe area insets, calibrated spring physics. |
+| `/web-ui` | **Modern Web Design Systems** | UI/Web | Component-Level Container Queries (@container), CSS View Transitions, OKLCH perceptual colors, fluid clamp() typography curves. | `verify_web_ui_hygiene.py` | Accessible :focus-visible rings, fluid typography bounds, non-linear timing. |
 | `/3d` | **3D WebGL & Product Showcase** | 3D/Graphics | Three.js, React Three Fiber, PBR clearcoat shaders, Draco GLTF compression, 60fps budgets, context loss handling. | `verify_3d_performance.py` | DPR clamped to <= 2.0; Draco GLTF loader; WebGL disposal. |
 | `/frontend` | **Frontend Architecture** | Frontend | Pure component isolation, React 19, Next.js App Router, Flutter, memory leak prevention. | `verify_frontend_architecture.py` | AbortController on async `useEffect`; error boundaries. |
 | `/backend` | **Backend Systems Engineering** | Backend | Clean architecture (Hexagonal), domain services, REST/gRPC contracts, idempotency. | `verify_api_contracts.py` | Strict runtime schema validation (Zod, Pydantic v2). |
@@ -363,6 +371,7 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 | `/database` | **Database & Datastores** | Data | Zero-downtime migrations (expand/contract), index optimization, ACID transactional integrity. | `verify_database_hygiene.py` | Non-blocking index creation; reversible migrations. |
 | `/devops` | **Cloud & Container DevOps** | DevOps | Hardened multi-stage Dockerfiles (`USER 10001`), docker-compose, CI/CD pipelines. | `verify_container_security.py` | Non-root containers only; health checks on services. |
 | `/ai` | **AI & LLM Engineering** | AI / GenAI | Production Gemini SDK, structured JSON outputs (`response_schema`), defensive tool calling. | `calculate_token_budget.py` | Schema-enforced outputs; token context window limits. |
+| `/local-llm` | **Local LLM & Quantized Inference** | AI / Edge | Quantized inference (GGUF Q4_K_M/Q8_0), Ollama, llama.cpp, Apple Silicon MLX, WebLLM, GBNF grammars, in-process local RAG, and 3-tier hybrid routing. | `verify_local_llm_hygiene.py` | Validated quantization profiles (Q4_K_M+), GPU layer offload, explicit timeouts. |
 | `/prompt-polish` | **Prompt Refinement (PPE)** | Metacognition | 5-phase Prompt Polishing Engine transforming raw requests into token-efficient specifications. | `polish_prompt.py` | Token compression and explicit acceptance criteria. |
 | `/production-etiquette` | **Production Etiquette** | Reliability | Secret hygiene (`.env.example`), resilient network client (timeouts 3s/15s, retry with jitter). | `scaffold_project_hygiene.py` | Mandatory `.env.example` and timeout configs. |
 | `/performance` | **Performance & Web Vitals** | Optimization | Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms), N+1 query elimination, bundle budgets. | `audit_performance_budgets.py` | Zero N+1 query cascades; explicit image dimensions. |
@@ -557,7 +566,7 @@ All 40 suites run and pass in under 1.5s:
 28. **Security Auth Rotation & DDoS Tests**: Validates token rotation and rate limiters.
 29. **Security SSRF Post-DNS Defense Tests**: Validates IP parsing and cloud metadata blocks.
 30. **Git Delivery Etiquette & PR Tests**: Validates commit description bodies and push mandates.
-31. **Full-Scale Orchestration & ASR Resonance Tests**: Validates 32-skill catalogue and dynamic resonance.
+31. **Full-Scale Orchestration & ASR Resonance Tests**: Validates 35-skill catalogue and dynamic resonance.
 32. **Google Cloud Platform (GCP) Tests**: Validates Cloud Run timeouts, non-root, and IAM proxies.
 33. **Amazon Web Services (AWS) Tests**: Validates S3 public blocks, KMS encryption, and IAM wildcards.
 34. **Firebase Serverless & Rules Tests**: Validates version 2 rules and unrestricted read/write bans.
@@ -567,6 +576,9 @@ All 40 suites run and pass in under 1.5s:
 38. **Autonomous Project Skill Minting Tests**: Validates Skill Synthesis Protocol frontmatter and tools.
 39. **Testing & TDD Automation Tests**: Validates semantic ARIA queries and MSW network mocking.
 40. **i18n & Resilient Pipeline Integrity Tests**: Validates ICU MessageFormat and backpressure flow control.
+41. **Mobile UI Native Craftsmanship Tests**: Validates touch target ergonomics, spring kinematics, and safe area insets.
+42. **Web UI Container Queries & Fluid Styling Tests**: Validates @container queries, OKLCH colors, fluid clamp() typography, and accessible focus rings.
+43. **Local LLM Quantized Inference & Hybrid Routing Tests**: Validates GGUF quantization profiles (Q4_K_M+), MLX acceleration, and GBNF grammars.
 
 ---
 
@@ -588,6 +600,8 @@ SkillBuilder/
 │   ├── research/                               # Autonomous research & alternative fallbacks
 │   ├── qa/                                     # Two-Tier QA (Full UI & Full App Functionality)
 │   ├── ui/                                     # Design tokens, neutral scales & Lucide icons
+│   ├── mobile-ui/                              # iOS 18/19 HIG, SwiftUI matchedGeometry, M3 Expressive & haptics
+│   ├── web-ui/                                 # Container queries (@container), CSS View Transitions & OKLCH
 │   ├── frontend/                               # React 19, Next.js, Flutter & effect cleanup
 │   ├── backend/                                # Clean architecture & Zod/Pydantic validation
 │   ├── security/                               # OWASP Top 10, RFC 7807, auth rotation, DDoS & SSRF
@@ -595,6 +609,7 @@ SkillBuilder/
 │   ├── database/                               # Zero-downtime migrations & ACID integrity
 │   ├── devops/                                 # Multi-stage non-root containers & CI/CD
 │   ├── ai/                                     # Gemini SDK, structured JSON & token budgets
+│   ├── local-llm/                              # Quantized inference (GGUF), MLX, WebLLM, GBNF & hybrid routing
 │   ├── prompt-polish/                          # Prompt Polishing Engine (PPE)
 │   ├── production-etiquette/                   # Resilient network clients & secret hygiene
 │   ├── performance/                            # Core Web Vitals & N+1 query elimination
@@ -616,5 +631,5 @@ SkillBuilder/
 └── scripts/
     ├── install.sh                              # Universal multi-platform installer
     ├── export_multiplatform.py                 # Multi-platform exporter (Cursor, Claude, Codex)
-    └── verify_all_skills.sh                    # Master 40-suite verification test runner
+    └── verify_all_skills.sh                    # Master 43-suite verification test runner
 ```
