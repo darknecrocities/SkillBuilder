@@ -138,7 +138,7 @@ def get_template_content(relative_path: str, fallback_content: str) -> str:
         try:
             return candidate.read_text(encoding="utf-8")
         except OSError:
-            pass
+            return fallback_content
     return fallback_content
 
 

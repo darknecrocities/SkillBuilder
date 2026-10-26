@@ -51,6 +51,51 @@ class TestAuditSecurityHygiene(unittest.TestCase):
         violations = audit_file(fp)
         self.assertTrue(any(v["rule"] == "UNSAFE-EVAL-EXEC" for v in violations))
 
+    def test_detects_silent_error_swallowing_js(self):
+        code = """
+        try {
+            await doOperation();
+        } catch (err) {}
+        """
+        fp = self._write_temp("worker.ts", code)
+        violations = audit_file(fp)
+        self.assertTrue(any(v["rule"] == "SILENT-ERROR-SWALLOWING" for v in violations))
+
+    def test_detects_silent_error_swallowing_py(self):
+        code = """
+try:
+    compute()
+except Exception:
+    pass
+        """
+        fp = self._write_temp("worker.py", code)
+        violations = audit_file(fp)
+        self.assertTrue(any(v["rule"] == "SILENT-ERROR-SWALLOWING" for v in violations))
+
+    def test_detects_sensitive_stack_leak(self):
+        code = 'res.status(500).json({ error: err.message, stack: err.stack });'
+        fp = self._write_temp("routes.ts", code)
+        violations = audit_file(fp)
+        self.assertTrue(any(v["rule"] == "SENSITIVE-STACK-LEAK" for v in violations))
+
+    def test_detects_insecure_cors_wildcard(self):
+        code = 'app.use(cors({ origin: "*", credentials: true }));'
+        fp = self._write_temp("server.ts", code)
+        violations = audit_file(fp)
+        self.assertTrue(any(v["rule"] == "INSECURE-CORS-WILDCARD" for v in violations))
+
+    def test_detects_vulnerable_redos(self):
+        code = 'const emailRe = /^([a-zA-Z0-9_.-]+)+@/;'
+        fp = self._write_temp("validator.ts", code)
+        violations = audit_file(fp)
+        self.assertTrue(any(v["rule"] == "VULNERABLE-REDOS" for v in violations))
+
+    def test_detects_unsanitized_html_injection(self):
+        code = '<div dangerouslySetInnerHTML={{ __html: content }} />'
+        fp = self._write_temp("display.tsx", code)
+        violations = audit_file(fp)
+        self.assertTrue(any(v["rule"] == "UNSANITIZED-HTML-INJECTION" for v in violations))
+
 
 if __name__ == "__main__":
     unittest.main()
