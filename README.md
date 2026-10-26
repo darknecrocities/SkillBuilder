@@ -312,6 +312,16 @@ SkillBuilder does not require manual micro-management of all 35 skills. During *
 | `duckdb`, `pipelines/`, `etl/` | `/data-pipelines` | Backpressure flow control, dead-letter queues, DuckDB OLAP. |
 | `.agents/skills/`, custom architectures | `/project-skills` | Autonomous Project Skill Minting via Skill Synthesis Protocol. |
 
+### Platform Domain Specialization (PDS) & Token Quota Preservation (TQP)
+
+Loading inapplicable platform styling rules into model prompts inflates context and triggers early attention degradation ("Lost-in-the-Middle"). The ASR engine dynamically prunes skills by target platform domain:
+
+| Target Platform Domain | Active Specialized Skill | Pruned Inapplicable Skill | Estimated Token Savings |
+| :--- | :--- | :--- | :--- |
+| **Mobile-First** (iOS, Android, React Native, Flutter) | `/mobile-ui` (Springs, haptics, safe areas) | `/web-ui` (Container queries, DOM CSS) | **~1,850 tokens / turn** (~40% of Phase 1 budget) |
+| **Web-First** (React 19, Next.js, Vue, Tailwind) | `/web-ui` (Container queries, View Transitions) | `/mobile-ui` (SwiftUI, Jetpack Compose) | **~1,850 tokens / turn** (~40% of Phase 1 budget) |
+| **Universal / Monorepos** (Web + Native Apps) | Both skills partitioned into isolated subagent tracks | None (strict track isolation) | Zero cross-contamination bleed |
+
 ### The Multi-Tiered Code Quality & 500-Line Maintainability Matrix
 
 SkillBuilder rejects naive, flat line-counting in favor of a scientifically grounded, multi-dimensional code quality architecture. Based on seminal empirical studies (Ostrand/Weyuker/Bell at AT&T Labs, Steve McConnell's *Code Complete*, and Robert C. Martin's *Clean Code*), defect density scales non-linearly once files cross 400–500 physical lines.

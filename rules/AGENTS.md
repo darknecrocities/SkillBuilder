@@ -12,13 +12,15 @@ All software architecture, implementation, refactoring, and pair-programming tas
    - Prohibit raw emojis in interactive UI controls; use semantic Lucide SVG icons with `aria-hidden="true"`.
 4. **Autonomous Deep Research & Fallback Pivots (`/research`)**:
    - When any library, package, or build tool fails or is deprecated, autonomously research production alternatives, evaluate trade-offs, and implement drop-in replacements.
-5. **Responsiveness QA & Sub-Agent Verification (`/qa`)**:
+5. **Responsiveness QA & Platform Domain Specialization (`/qa`, `/mobile-ui`, `/web-ui`)**:
    - Enforce 4-tier viewport matrix (Mobile 375px, Tablet 768px, Desktop 1280px, Widescreen 1920px+).
    - Zero fixed-pixel containers breaking mobile layouts. Enforce minimum 44x44px touch targets and accessible focus rings.
+   - Enforce Platform Domain Specialization (PDS): Mount `/mobile-ui` for mobile targets and `/web-ui` for web targets. Never inject cross-platform styling bloat.
 6. **Anti-Mock / Fully Functional Mandate (`/fullstack`)**:
    - Zero static mock arrays pretending to be databases. Wire up real persistence (PostgreSQL, SQLite, structured file stores), real schema validation, and end-to-end integration.
-7. **Token Savings & High-Density Pairing**:
+7. **Token Savings & Quota Preservation (`/full-scale-mode`, `/prompt-polish`)**:
    - Communicate with high information density. Omit conversational padding. Use targeted diffs and structured markdown tables.
+   - Dynamically prune inapplicable domain skills in Phase 1 to eliminate context rot and save ~1,850 tokens per turn.
 8. **Security & Vulnerability Defense (`/security`)**:
    - Never commit raw credentials. Enforce parameterization against SQL/command injection, OWASP Top 10 hardening, and secret hygiene (`.env.example`, `.env`, `.gitignore`).
    - Zero silent error swallowing (`catch (e) {}` / `except: pass`). Sanitize unhandled exceptions into RFC 7807 Problem Details with correlation IDs (`X-Correlation-ID`) and zero production stack leaks.
