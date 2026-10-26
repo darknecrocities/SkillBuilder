@@ -9,7 +9,7 @@
 
 # SkillBuilder: Agentic Engineering Skills
 
-SkillBuilder is a production-grade suite of **22 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
+SkillBuilder is a production-grade suite of **32 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
 
 <p align="center">
   <img src="assets/skillbuilder-workflow-animation.svg" alt="SkillBuilder Universal AI Workflow Animation" width="100%" />
@@ -100,7 +100,7 @@ When starting a project or a major feature from zero, stack `/plan` with `/full-
 | Prompt Component | Role in Strategy | Strategic Value & Agent Impact |
 | :--- | :--- | :--- |
 | `• plan` | Planning Gate | Halts unguided generation; compels the agent to author an interactive RFC plan with file trees and milestones before code is touched. |
-| `• full-scale-mode` | Master Orchestrator | Activates the 7-Phase EOS lifecycle: enforces 500-line file limits, decomposes modules, and coordinates subagent execution. |
+| `• full-scale-mode` | Master Orchestrator | Activates the 3-Phase Triad Cadence (Frontend, Backend, Testing): enforces 500-line file limits, decomposes modules, and coordinates subagent execution. |
 | `two tone color of white and black` | Palette Boundary | Eliminates generic AI gradients and vibrant slop; anchors styling to disciplined monochrome tokens (`#0A0A0B` / `#FFFFFF`). |
 | `use google fonts` | Typographic Guardrail | Enforces clean web font imports (Inter, Roboto Mono) instead of uncontrolled generic CSS fallbacks. |
 | `1 page` | Scope Ceiling | Imposes a hard boundary preventing premature routing bloat, incomplete sub-pages, or runaway token consumption. |
@@ -261,45 +261,63 @@ SkillBuilder runs natively across the entire modern AI coding ecosystem:
 To produce the highest-quality software architecture, verified test suites, and clean, ready-to-merge GitHub Pull Requests on **Google Antigravity**, combine slash commands into the **Power Combo Workflow**:
 
 ```text
-/plan /world-class-engineering <your feature or refactoring goal>
+/plan /full-scale-mode <your feature or refactoring goal>
 ```
 
 ```mermaid
 flowchart TD
-    INPUT["User: /plan /full-scale-mode <Task>"] --> PPE["Phase 1: Metacognitive Prompt Polishing (/prompt-polish)"]
-    PPE --> PLAN["Phase 2: Interactive Implementation Plan Artifact (/plan)"]
-    PLAN --> APPROVE{"User Review & Approval"}
-    APPROVE -- "Proceed" --> EXEC["Phase 3: Multi-Discipline Execution (/anti-slop, /research, /security)"]
-    EXEC --> QA["Phase 4: Two-Tier QA & 30-Suite Verification (/qa)"]
-    QA --> CHUNK["Phase 5: Atomic Commit Chunking (< 1k lines) (/git-workflow)"]
-    CHUNK --> PR["Phase 6: Ready-to-Merge Pull Request + Walkthrough"]
+    INPUT["User: /plan /full-scale-mode <Task>"] --> P1["Phase 1: Frontend & Interface Architecture (PSC-1)<br/>Tokens • Routing • State • 3D • i18n • Anti-Slop"]
+    P1 --> P2["Phase 2: Backend, Cloud & Data Infrastructure (PSC-2)<br/>Clean Arch • DB • Cloud Platforms • Pipelines • Security"]
+    P2 --> P3["Phase 3: Testing, QA, Telemetry & Verifiable Release (PSC-3)<br/>TDD • Two-Tier QA • Tracing • Atomic Git PR • Skill Minting"]
+    P3 --> RELEASE["Ready-to-Merge PR + Walkthrough + Minted Skills"]
 ```
 
-### The 6-Stage Power Delivery Lifecycle
+### The 3-Phase Triad Cadence (Frontend, Backend, Testing/Release)
 
-1. **Metacognitive Ingestion & Prompt Polishing (`/prompt-polish`)**:
-   - Ingests user intent and checks `.agents/learned_conventions.md` to prevent repeating previously corrected mistakes.
-   - Extracts hidden assumptions, strips conversational padding, and structures requirements into an RFC-style specification matrix.
-2. **Interactive Design Artifact (`/plan`)**:
-   - Generates a formal technical implementation plan artifact in the Antigravity conversation directory.
-   - Maps out component boundaries, data flows, database schemas, and verification strategies with mermaid diagrams.
-   - Halts execution and presents an interactive **Proceed** button for user review.
-3. **Anti-Slop Sanitized Implementation (`/anti-slop` & `/fullstack`)**:
-   - Zero decorative badges (`shields.io`), zero obvious comments (`// set loading to true`), zero fake mock arrays.
-   - Builds complete vertical slices wired to real persistence (SQLite, PostgreSQL, Cloud SQL) with strict Zod/Pydantic validation.
-   - Enforces the disciplined neutral palette (zinc/slate) and semantic Lucide SVG vector icons (zero raw emojis in UI buttons).
-4. **Autonomous Fallback Pivots (`/research`)**:
-   - If any library, build tool, or dependency fails to install or is deprecated, autonomously discovers and benchmarks production-grade replacements using the P.A.T.H.S. criteria (Performance, Activity, Type safety, Hygiene, Size).
-5. **Continuous Verification & Multi-Tiered Line Limits (`/full-scale-mode`, `/world-class-engineering`, `/refactor` & `/qa`)**:
-   - Enforces the **Multi-Tiered Maintainability Standard**: Sweet Spot (150–250 lines), Nominal (251–350 lines), Warning Zone (351–499 lines), and Hard Ceiling (500 lines) via `check_source_line_limits.py --show-tiers`.
-   - Enforces cognitive complexity hygiene: $\le 40$ lines per function, $\le 3$ nesting levels with early returns, and Cyclomatic Complexity $\le 10$.
-   - Executes the **Two-Tier QA Engine**: Full UI/Frontend QA (`/qa ui`) for viewports, 44x44pt touch targets, WCAG AA, and 120Hz GPU compositor, plus Full App Functional QA (`/qa app`) for state machines, real persistence, 3s/15s timeouts, and mobile lifecycles.
-   - Executes the master 30-suite verification test runner.
-6. **Meaningful Commits (Title + Description), Push to Branch & Ready-to-Review PR (`/git-workflow`, `/full-scale-mode`)**:
-   - Decomposes diffs into cohesive commits strictly below the **1,000-line push budget**.
-   - Enforces **mandatory multi-line Conventional Commits** with a clear title AND a structured description body (Why, What, Verification).
-   - **Always pushes immediately to remote branch** (`git push origin <branch>`).
-   - **Always authors or updates a ready-to-merge GitHub Pull Request** via `gh pr create` / `gh pr edit` with test receipts, walkthrough diffs, and semantic release tags.
+SkillBuilder orchestrates complex multi-agent engineering workflows through the **3-Phase Triad Cadence**. Rather than fragmenting work into disconnected passes, the Triad Cadence organizes the entire 32-skill ecosystem into 3 synchronized tiers backed by **Phase Skill Clusters (PSC-1 through PSC-3)**:
+
+1. **Phase 1: Frontend & Interface Architecture (PSC-1: Client & Experience Gate)**:
+   - **Governing Skills**: `/frontend`, `/ui`, `/3d`, `/routing`, `/state-management`, `/i18n`, `/anti-slop`, `/prompt-polish`.
+   - Ingests user intent and refines specifications through Prompt Polishing (PPE).
+   - Establishes Apple HIG tokens, Cupertino blur materials, sub-pixel lighting, and semantic Lucide SVG icons.
+   - Builds file-based routing hierarchies, parallel/intercepting layouts, and typed search params.
+   - Implements declarative client state machines, TanStack Query key factories, and signals.
+   - Enforces React 19 / Next.js / Flutter lifecycle safety, internationalization (ICU MessageFormat), and RTL layout mirroring.
+2. **Phase 2: Backend, Cloud & Data Infrastructure (PSC-2: Engine & Security Gate)**:
+   - **Governing Skills**: `/backend`, `/fullstack`, `/api-design`, `/database`, `/gcp`, `/aws`, `/firebase`, `/supabase`, `/data-pipelines`, `/devops`, `/security`, `/ai`, `/research`.
+   - Builds Hexagonal clean architecture with strict domain boundaries and runtime validation.
+   - Authors OpenAPI 3.1 contracts and RFC 7807 Problem Details envelopes.
+   - Wires up real persistence (PostgreSQL/SQLite) with zero-downtime expand/contract migrations (Anti-Mock mandate).
+   - Provisions enterprise cloud infrastructure (GCP Cloud Run, AWS Lambda/S3, Firebase rules v2, Supabase Postgres RLS).
+   - Builds streaming batch ETL pipelines with backpressure flow control and DuckDB in-process OLAP.
+   - Hardens system against OWASP Top 10 vulnerabilities, enforces refresh token family rotation, SSRF post-DNS validation, and non-root Docker builds (`USER 10001`).
+3. **Phase 3: Testing, Quality Assurance, Telemetry & Verifiable Release (PSC-3: Verification & Release Gate)**:
+   - **Governing Skills**: `/testing`, `/qa`, `/performance`, `/observability`, `/production-etiquette`, `/git-workflow`, `/refactor`, `/continuous-learning`, `/project-skills`, `/world-class-engineering`.
+   - Executes TDD test automation with semantic ARIA queries and MSW network mocking.
+   - Runs the Two-Tier QA Engine: Full UI viewports (375px–1920px) and Full App Functional QA with Master Error Catalog logging.
+   - Audits Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms) and eliminates N+1 query cascades.
+   - Instruments OpenTelemetry distributed tracing and structured JSON logs with correlation IDs.
+   - Enforces the strict 500-line physical ceiling via `check_source_line_limits.py --show-tiers`.
+   - Decomposes commits into cohesive diffs under the 1,000-line review budget (`/git-workflow`).
+   - Pushes remote tracking branch (`git push origin <branch>`) and authors ready-to-merge GitHub Pull Request.
+   - Mints custom project skills under `.agents/skills/<repo>/SKILL.md` via Skill Synthesis Protocol (SSP).
+
+### Autonomous Skill Resonance (ASR)
+
+SkillBuilder does not require manual micro-management of all 32 skills. During **Phase 1 & Phase 2**, the **Autonomous Skill Resonance (ASR)** engine scans the repository environment for technical fingerprints and dynamically activates matching skills:
+
+| Fingerprint / Indicator | Resonant Skills Mounted | Activated Capabilities |
+| :--- | :--- | :--- |
+| `app/`, `pages/`, `routes/`, `router` | `/routing` | Deep URL layouts, loading/error states, typed search params. |
+| `cloudbuild.yaml`, `app.yaml`, `gcp` | `/gcp` | Cloud Run, Pub/Sub, Secret Manager, Cloud SQL IAM proxy. |
+| `serverless.yml`, `cdk.json`, `aws-sdk` | `/aws` | AWS Lambda, S3 public block, KMS encryption, DynamoDB single-table. |
+| `firebase.json`, `firestore.rules` | `/firebase` | Firestore security rules, Firebase Auth, zero wildcards. |
+| `supabase/`, `@supabase/supabase-js` | `/supabase` | Postgres Row-Level Security (RLS), Edge Functions, pgvector. |
+| `vitest.config`, `jest.config`, `playwright` | `/testing` | TDD red-green cycle, MSW network mocking, semantic ARIA locators. |
+| `@tanstack/react-query`, `zustand`, `xstate` | `/state-management` | Query key factories, sliced stores, deterministic transitions. |
+| `locales/`, `messages/`, `i18n.ts` | `/i18n` | ICU MessageFormat, RTL layout mirroring, localized formatters. |
+| `duckdb`, `pipelines/`, `etl/` | `/data-pipelines` | Backpressure flow control, dead-letter queues, DuckDB OLAP. |
+| `.agents/skills/`, custom architectures | `/project-skills` | Autonomous Project Skill Minting via Skill Synthesis Protocol. |
 
 ### The Multi-Tiered Code Quality & 500-Line Maintainability Matrix
 
@@ -330,7 +348,7 @@ flowchart LR
 
 | Intent | Recommended Command Combination | Outcome |
 | :--- | :--- | :--- |
-| **Full-Scale Feature Delivery** | `/plan /full-scale-mode <goal>` (or `/world-class-engineering`) | 7-phase EOS lifecycle, multi-agent parallel tracks, token budget ceilings, and chunked PR. |
+| **Full-Scale Feature Delivery** | `/plan /full-scale-mode <goal>` (or `/world-class-engineering`) | 3-phase Triad Cadence (Frontend, Backend, Testing), Autonomous Skill Resonance, token budget ceilings, and chunked PR. |
 | **Fullstack Vertical Slice** | `/plan /fullstack <goal>` | Real database migration, ORM repository, validated API route, and responsive UI without mocks. |
 | **Safe Refactoring** | `/plan /refactor <module>` | Characterization testing, Strangler Fig pattern, and decomposing files approaching 500 lines. |
 | **Two-Tier Full QA Pass** | `/plan /qa <scope>` | Dual-tier verification: Full UI/Frontend QA (`/qa ui`) and Full App Functional QA (`/qa app`). |
@@ -338,13 +356,13 @@ flowchart LR
 
 ---
 
-## The 22-Skill Master Reference Matrix
+## The 32-Skill Master Reference Matrix
 
 Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules in Cursor:
 
 | Command | Skill Name | Domain | Core Capabilities & Focus | Standalone CLI Tool | Primary Guardrail |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `/full-scale-mode` | **Full-Scale Mode** | Orchestration | Master Phased Project Orchestration Engine (aliased with `/world-class-engineering`), 7-phase EOS lifecycle, parallel subagent swarms. | `verify_full_scale_orchestration.py` | Strict 7-phase gate compliance & 1,500-token subagent ceilings. |
+| `/full-scale-mode` | **Full-Scale Mode** | Orchestration | Master Phased Project Orchestration Engine (aliased with `/world-class-engineering`), 3-phase Triad Cadence (Frontend, Backend, Testing), Autonomous Skill Resonance (ASR). | `verify_full_scale_orchestration.py` | Strict 3-phase gate compliance & 1,500-token subagent ceilings. |
 | `/world-class-engineering` | **World-Class Engineering** | Architecture | 6-Phase EOS lifecycle (Understand -> Define -> Plan -> Implement -> Verify -> Deliver). | `check_source_line_limits.py` | Multi-tiered maintainability matrix & 500-line physical ceiling. |
 | `/anti-slop` | **Anti-AI-Slop Sanitizer** | Clean Code | Purges decorative badges, fake mock databases, neon gradients, obvious comments, and marketing copy. | `sanitize_ai_slop.py` | Zero `shields.io`, zero fake mock arrays, zero emojis in UI controls. |
 | `/research` | **Autonomous Research & Fallbacks** | Discovery | Autonomous fallback engine; researches alternatives when packages fail or deprecate. | `research_alternatives.py` | P.A.T.H.S. trade-off evaluation & minimal POC validation. |
@@ -366,6 +384,16 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 | `/continuous-learning` | **Conversational Learning (CLP)** | Memory | Persists project invariants to `.agents/learned_conventions.md` to prevent repeated errors. | `record_learning.py` | Immediate recording of corrections; zero repeated mistakes. |
 | `/refactor` | **Safe Refactoring** | Refactoring | Strangler Fig pattern, characterization testing, decomposing god files approaching 500 lines. | `detect_refactor_opportunities.py` | Proactive decomposition when files reach 350-400 lines. |
 | `/git-workflow` | **Git Delivery & PR Engine** | Release | Conventional Commits (Title + Description), 1,000-line budget, remote branch push, and GitHub PR authoring. | `analyze_git_commit_chunks.py` & `verify_git_delivery_etiquette.py` | Mandatory Title + Description body; always push & open PR. |
+| `/routing` | **File-Based Routing & Deep URL Layouts** | Routing | Next.js App Router, TanStack Router, Flutter declarative nested layouts, parallel/intercepting routes. | `verify_routing_architecture.py` | Strict layout boundaries, loading/error boundary pairs, typed search params. |
+| `/gcp` | **Google Cloud Platform Architecture** | Cloud | Cloud Run, Pub/Sub, Secret Manager, Cloud SQL IAM proxy, Workload Identity federation. | `verify_gcp_hygiene.py` | Zero committed service account keys, explicit timeouts, non-root Cloud Run containers. |
+| `/aws` | **Amazon Web Services Architecture** | Cloud | AWS Lambda, S3 security policies, DynamoDB single-table design, EventBridge, IAM least privilege. | `verify_aws_hygiene.py` | S3 Block Public Access, KMS customer-managed keys, zero wildcard IAM policies (`"Action": "*"`). |
+| `/firebase` | **Firebase Serverless & Realtime** | Serverless | Cloud Firestore, Firebase Auth, Security Rules, Firebase Storage, Cloud Functions. | `verify_firebase_rules.py` | Granular Firestore security rules; explicit rule version 2; zero unrestricted reads/writes. |
+| `/supabase` | **Supabase Fullstack Engineering** | Serverless | Postgres Row-Level Security (RLS), Supabase Auth, Edge Functions, pgvector semantic search. | `verify_supabase_rls.py` | Mandatory RLS enabled on all public tables; authenticated tenant scoping. |
+| `/project-skills` | **Autonomous Project Skill Minting** | Meta-Skill | Skill Synthesis Protocol (SSP) enabling agents to author and mint project-specific skills in `.agents/skills/`. | `synthesize_project_skill.py` | Validates YAML frontmatter, executable verification scripts, strict 500-line ceiling. |
+| `/state-management` | **Declarative State Machines & Stores** | State | TanStack Query v5 key factories, Zustand sliced stores, XState state machines, signals. | `verify_state_hygiene.py` | Centralized query key factories, immutable mutations, explicit state machine transitions. |
+| `/testing` | **Test-Driven Development & Automation** | Testing | TDD red-green-refactor, Vitest/Jest unit & integration tests, Playwright accessible locators, MSW mocking. | `verify_testing_hygiene.py` | Semantic ARIA locators only (no XPath/testId soup), network mocking via MSW, zero flaky timers. |
+| `/i18n` | **Internationalization & Localization** | Globalization | ICU MessageFormat, RTL bidirectional layout mirroring, locale-aware date/currency/number formatting. | `verify_i18n_hygiene.py` | Zero raw hardcoded strings in JSX/templates; symmetrical key sets across locales. |
+| `/data-pipelines` | **Resilient Data Pipelines & ETL** | Data Engineering | Streaming batch ingestion with backpressure, DuckDB local OLAP analytics, dead-letter queue (DLQ) retry topologies. | `verify_pipeline_integrity.py` | Backpressure flow control, DLQ error isolation, idempotent ETL execution. |
 
 ---
 
@@ -503,15 +531,15 @@ python3 skills/continuous-learning/scripts/record_learning.py --list
 
 ---
 
-## Automated Verification Suites (26 Suites)
+## Automated Verification Suites (40 Suites)
 
-SkillBuilder includes a master test runner executing 26 independent verification suites:
+SkillBuilder includes a master test runner executing 40 independent verification suites:
 
 ```bash
 ./scripts/verify_all_skills.sh
 ```
 
-All 26 suites run and pass in under 0.5s:
+All 40 suites run and pass in under 1.5s:
 1. **500-Line Source File Policy**: Verifies all source files adhere to the 500-line ceiling.
 2. **World-Class Engineering Unit Tests**: Validates line-checking and EOS extraction logic.
 3. **Anti-AI-Slop Tests**: Validates badge, mock array, and obvious comment sanitization.
@@ -538,6 +566,20 @@ All 26 suites run and pass in under 0.5s:
 24. **Production Etiquette Hygiene Tests**: Validates `.env.example`, `.gitignore`, and scaffolding.
 25. **Production Etiquette Git Chunk Tests**: Validates git diff partitioning.
 26. **Multi-Platform Exporter Tests**: Validates Cursor, Claude, Codex, Windsurf, and Cline rule exports.
+27. **Security RFC 7807 Problem Details Tests**: Validates error sanitization and correlation IDs.
+28. **Security Auth Rotation & DDoS Tests**: Validates token rotation and rate limiters.
+29. **Security SSRF Post-DNS Defense Tests**: Validates IP parsing and cloud metadata blocks.
+30. **Git Delivery Etiquette & PR Tests**: Validates commit description bodies and push mandates.
+31. **Full-Scale Orchestration & ASR Resonance Tests**: Validates 32-skill catalogue and dynamic resonance.
+32. **Google Cloud Platform (GCP) Tests**: Validates Cloud Run timeouts, non-root, and IAM proxies.
+33. **Amazon Web Services (AWS) Tests**: Validates S3 public blocks, KMS encryption, and IAM wildcards.
+34. **Firebase Serverless & Rules Tests**: Validates version 2 rules and unrestricted read/write bans.
+35. **Supabase Postgres RLS Tests**: Validates table RLS enforcement and tenant isolation.
+36. **Routing & Deep URL Layout Tests**: Validates route boundaries, layouts, and typed params.
+37. **Declarative State Hygiene Tests**: Validates TanStack Query key factories and store immutability.
+38. **Autonomous Project Skill Minting Tests**: Validates Skill Synthesis Protocol frontmatter and tools.
+39. **Testing & TDD Automation Tests**: Validates semantic ARIA queries and MSW network mocking.
+40. **i18n & Resilient Pipeline Integrity Tests**: Validates ICU MessageFormat and backpressure flow control.
 
 ---
 
@@ -553,7 +595,7 @@ SkillBuilder/
 │   └── AGENTS.md                               # Plugin-level rules
 ├── workspace/                                  # Developer Workspace & Presets
 ├── skills/
-│   ├── full-scale-mode/                        # Master 7-phase EOS & multi-agent swarm
+│   ├── full-scale-mode/                        # Master 3-phase Triad Cadence & Autonomous Skill Resonance (ASR)
 │   ├── world-class-engineering/                # Master EOS & 500-line ceiling (aliased)
 │   ├── anti-slop/                              # Anti-AI-slop & clean craftsmanship
 │   ├── research/                               # Autonomous research & alternative fallbacks
@@ -573,9 +615,19 @@ SkillBuilder/
 │   ├── observability/                          # OpenTelemetry tracing & structured JSON logs
 │   ├── continuous-learning/                    # Persistent conventions (CLP)
 │   ├── refactor/                               # Safe debt remediation & file decomposition
-│   └── git-workflow/                           # Atomic commit chunking (<1k lines) & releases
+│   ├── git-workflow/                           # Atomic commit chunking (<1k lines) & releases
+│   ├── routing/                                # File-based routing, nested layouts & search params
+│   ├── gcp/                                    # Google Cloud Platform, Cloud Run & Secret Manager
+│   ├── aws/                                    # Amazon Web Services, Lambda, S3 & IAM least privilege
+│   ├── firebase/                               # Firebase Firestore security rules & auth
+│   ├── supabase/                               # Supabase Postgres Row-Level Security & pgvector
+│   ├── project-skills/                         # Autonomous Project Skill Minting (SSP)
+│   ├── state-management/                       # TanStack Query factories, Zustand & XState
+│   ├── testing/                                # TDD red-green cycles, Vitest, Playwright & MSW
+│   ├── i18n/                                   # Internationalization, ICU formats & RTL layouts
+│   └── data-pipelines/                         # Resilient ETL, backpressure & DuckDB analytics
 └── scripts/
     ├── install.sh                              # Universal multi-platform installer
     ├── export_multiplatform.py                 # Multi-platform exporter (Cursor, Claude, Codex)
-    └── verify_all_skills.sh                    # Master 30-suite verification test runner
+    └── verify_all_skills.sh                    # Master 40-suite verification test runner
 ```

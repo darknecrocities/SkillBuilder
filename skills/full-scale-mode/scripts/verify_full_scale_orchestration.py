@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 verify_full_scale_orchestration.py - Audits repository readiness for Full-Scale Mode,
-verifying skill registry completeness, phase planning standards, and subagent token budgeting.
+verifying the 32-skill registry, Autonomous Skill Resonance (ASR), and token budgeting.
 
 Author: Arron Kian Parejas (@darknecrocities)
 Part of SkillBuilder Full-Scale Mode Engine
@@ -13,31 +13,43 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
 
-REQUIRED_SKILLS = {
-    "world-class-engineering",
-    "full-scale-mode",
-    "anti-slop",
-    "research",
-    "qa",
-    "ui",
+REQUIRED_SKILLS: Set[str] = {
+    # Original 22 Skills
     "3d",
-    "frontend",
+    "ai",
+    "anti-slop",
+    "api-design",
     "backend",
-    "security",
-    "fullstack",
+    "continuous-learning",
     "database",
     "devops",
-    "ai",
-    "prompt-polish",
-    "production-etiquette",
-    "performance",
-    "api-design",
+    "frontend",
+    "full-scale-mode",
+    "fullstack",
+    "git-workflow",
     "observability",
-    "continuous-learning",
+    "performance",
+    "production-etiquette",
+    "prompt-polish",
+    "qa",
     "refactor",
-    "git-workflow"
+    "research",
+    "security",
+    "ui",
+    "world-class-engineering",
+    # 10 Expanded Skills
+    "aws",
+    "data-pipelines",
+    "firebase",
+    "gcp",
+    "i18n",
+    "project-skills",
+    "routing",
+    "state-management",
+    "supabase",
+    "testing"
 }
 
 BLOATED_FILLER_PATTERNS = re.compile(
@@ -68,11 +80,43 @@ def audit_skill_registry(repo_root: Path) -> List[Dict[str, Any]]:
     if missing_skills:
         violations.append({
             "rule": "INCOMPLETE-SKILL-REGISTRY",
-            "message": f"Missing required skill(s) in registry: {sorted(list(missing_skills))}",
+            "message": f"Missing required skill(s) in registry ({len(missing_skills)} missing): {sorted(list(missing_skills))}",
             "file": str(skills_dir)
         })
 
     return violations
+
+
+def analyze_skill_resonance(repo_root: Path) -> Dict[str, Any]:
+    """Autonomous Skill Resonance (ASR): Fingerprints repository and activates resonant skills."""
+    activated_skills = {"prompt-polish", "qa", "security", "git-workflow", "world-class-engineering"}
+
+    # Cloud & Serverless Ingress
+    if any((repo_root / f).exists() for f in ["cloudbuild.yaml", "app.yaml"]) or (repo_root / "Dockerfile").exists():
+        activated_skills.update(["gcp", "devops"])
+    if any((repo_root / f).exists() for f in ["cdk.json", "template.yaml"]) or (repo_root / "terraform").exists():
+        activated_skills.update(["aws", "devops"])
+    if (repo_root / "firebase.json").exists() or (repo_root / "firestore.rules").exists():
+        activated_skills.add("firebase")
+    if (repo_root / "supabase").exists():
+        activated_skills.update(["supabase", "database"])
+
+    # Routing & Client Architecture
+    if (repo_root / "app").exists() or (repo_root / "src" / "app").exists() or (repo_root / "routes").exists():
+        activated_skills.update(["routing", "frontend", "state-management", "ui"])
+
+    # Internationalization
+    if any((repo_root / d).exists() for d in ["messages", "locales", "translations"]):
+        activated_skills.add("i18n")
+
+    # Data Pipelines
+    if any((repo_root / f).exists() for f in ["duckdb", "pipeline", "pipelines"]):
+        activated_skills.add("data-pipelines")
+
+    return {
+        "resonant_skills_count": len(activated_skills),
+        "resonant_skills": sorted(list(activated_skills))
+    }
 
 
 def audit_subagent_prompt(prompt_text: str, budget_limit: int = 1500) -> List[Dict[str, Any]]:
@@ -101,7 +145,7 @@ def audit_subagent_prompt(prompt_text: str, budget_limit: int = 1500) -> List[Di
 def audit_phased_plan(plan_content: str) -> List[Dict[str, Any]]:
     violations: List[Dict[str, Any]] = []
     required_phases = [
-        "Phase 0", "Phase 1", "Phase 2", "Phase 3", "Phase 4", "Phase 5", "Phase 6"
+        "Phase 1", "Phase 2", "Phase 3"
     ]
     for phase in required_phases:
         if not re.search(rf"\b{re.escape(phase)}\b", plan_content, re.IGNORECASE):
@@ -119,6 +163,7 @@ def main() -> int:
     parser.add_argument("--path", "-p", default=".", help="Root repository path")
     parser.add_argument("--prompt", type=str, help="Subagent prompt string to audit for token budget")
     parser.add_argument("--plan", type=str, help="Path to implementation plan markdown to audit")
+    parser.add_argument("--asr", action="store_true", help="Run Autonomous Skill Resonance analysis")
     parser.add_argument("--json", action="store_true", help="Output findings in JSON format")
     parser.add_argument("--strict", action="store_true", help="Exit with non-zero code on violations")
     args = parser.parse_args()
@@ -144,15 +189,22 @@ def main() -> int:
                 "message": f"Specified plan file not found: {plan_path}"
             })
 
+    asr_data = analyze_skill_resonance(repo_root)
+
     if args.json:
         print(json.dumps({
             "total_violations": len(all_violations),
             "violations": all_violations,
-            "required_skills_count": len(REQUIRED_SKILLS)
+            "required_skills_count": len(REQUIRED_SKILLS),
+            "asr": asr_data
         }, indent=2))
     else:
         print(f"=== Full-Scale Mode Orchestration Audit: {repo_root} ===")
         print(f"Verified Skills in Registry: {len(REQUIRED_SKILLS)} required skills")
+        if args.asr:
+            print(f"Autonomous Skill Resonance (ASR): Activated {asr_data['resonant_skills_count']} skills:")
+            for s in asr_data['resonant_skills']:
+                print(f"  • /{s}")
         if not all_violations:
             print("[PASS] Workspace and orchestration inputs comply with Full-Scale standards.")
         else:

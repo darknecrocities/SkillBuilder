@@ -31,7 +31,7 @@ class TestExportMultiplatform(unittest.TestCase):
 
     def test_get_all_skills(self):
         skills = get_all_skills(self.repo_dir)
-        self.assertEqual(len(skills), 22, f"Expected 22 skills, found {len(skills)}")
+        self.assertEqual(len(skills), 32, f"Expected 32 skills, found {len(skills)}")
         names = [s[0] for s in skills]
         self.assertIn("3d", names)
         self.assertIn("anti-slop", names)
@@ -39,10 +39,20 @@ class TestExportMultiplatform(unittest.TestCase):
         self.assertIn("full-scale-mode", names)
         self.assertIn("research", names)
         self.assertIn("qa", names)
+        self.assertIn("gcp", names)
+        self.assertIn("aws", names)
+        self.assertIn("firebase", names)
+        self.assertIn("supabase", names)
+        self.assertIn("routing", names)
+        self.assertIn("state-management", names)
+        self.assertIn("project-skills", names)
+        self.assertIn("testing", names)
+        self.assertIn("i18n", names)
+        self.assertIn("data-pipelines", names)
 
     def test_export_cursor_rules(self):
         created = export_cursor_rules(self.repo_dir, self.temp_path)
-        self.assertTrue(len(created) >= 23)  # 22 .mdc + .cursorrules
+        self.assertTrue(len(created) >= 33)  # 32 .mdc + .cursorrules
         self.assertTrue((self.temp_path / ".cursorrules").exists())
         self.assertTrue((self.temp_path / ".cursor" / "rules" / "anti-slop.mdc").exists())
 
