@@ -26,7 +26,7 @@ flowchart TD
 2. **Gate 2: Strict Record Boundary Validation**: Validate all incoming payloads against typed schemas before executing transformations.
 3. **Gate 3: Dead-Letter Queue (DLQ) Isolation**: When an individual record fails transformation, route it with failure metadata to a DLQ table or storage path rather than terminating the entire pipeline batch.
 4. **Gate 4: High-Performance In-Process Analytics**: Use **DuckDB** or **Apache Arrow** zero-copy columnar buffers for local aggregations, filtering, and analytical queries.
-5. **Gate 5: Idempotent Delivery**: Every pipeline batch run must use an idempotency key (`batch_id` / `hash(data)`) to prevent duplicate writes during retries.
+5. **Gate 5: Idempotent Delivery & Deduplicated Pre-Sink Snapshot**: Every pipeline batch run must use an idempotency key (`batch_id` / `hash(data)`) to prevent duplicate writes during retries, and maintain a single SHA-256 deduplicated backup slot (`manage_deduplicated_backup.py`) before overwriting analytical tables. Never purge Dead-Letter Queues (DLQ) or target sinks without notifying the user first.
 
 ---
 

@@ -20,6 +20,7 @@ flowchart TD
     C --> D["Gate 3: Policy Enforcement (auth.uid() == user_id)"]
     D --> E["Gate 4: Edge Functions Isolation (Deno Runtime & Service Role)"]
     E --> F["Gate 5: Vector Similarity (HNSW / IVFFlat Indexing with pgvector)"]
+    F --> G["Gate 6: Single-Slot Schema/Data Snapshot & Pre-Deletion Gate"]
 ```
 
 1. **Gate 1: PKCE Authentication**: Implement Proof Key for Code Exchange (PKCE) for browser/mobile clients.
@@ -27,6 +28,9 @@ flowchart TD
 3. **Gate 3: Tenant Isolation Policies**: Policies must scope rows to `auth.uid()` or verified JWT custom claims (`auth.jwt() ->> 'tenant_id'`).
 4. **Gate 4: Service Role Quarantine**: The `service_role` secret key must only be used in secure server environments or Supabase Edge Functions, never client-side.
 5. **Gate 5: Vector Indexing**: Multi-dimensional embeddings (`pgvector`) must use `HNSW` or `IVFFlat` indexes with cosine distance (`<=>`).
+6. **Gate 6: Deduplicated Pre-Migration Snapshot & Sensitive Deletion Gate**:
+   - Before running `supabase db push`, migration scripts, or Supabase Storage bucket mutations, verify or create a single canonical backup keyed by SHA-256 state digest in `.backups/backup_manifest.json` (`manage_deduplicated_backup.py`). Never create spammy duplicate SQL dumps across concurrent agents.
+   - Always halt and inform the user first before executing `DROP TABLE`, `TRUNCATE`, or deleting objects/buckets in `storage.objects` / `storage.buckets`.
 
 ---
 
@@ -105,3 +109,4 @@ Audited Rules:
 - `SUPABASE-MISSING-RLS`: Flags `CREATE TABLE` without corresponding `ENABLE ROW LEVEL SECURITY`.
 - `SUPABASE-EXPOSED-SERVICE-KEY`: Flags client code importing or referencing `SUPABASE_SERVICE_ROLE_KEY`.
 - `SUPABASE-PERMISSIVE-POLICY`: Flags insecure open policies like `USING (true)`.
+- `SUPABASE-UNSAFE-DESTRUCTIVE-SQL`: Flags `DROP TABLE`, `TRUNCATE`, or `storage.objects` / `storage.buckets` purges lacking `-- @user-approved-deletion` and `-- @verified-backup-sha256`.

@@ -62,6 +62,21 @@ class TestVerifyFirebaseRules(unittest.TestCase):
         violations = audit_firebase_file(fp)
         self.assertTrue(any(v["rule"] == "FIREBASE-EXPOSED-ADMIN-KEY" for v in violations))
 
+    def test_detects_unscoped_delete_rule(self):
+        content = """
+        rules_version = '2';
+        service cloud.firestore {
+          match /databases/{db}/documents {
+            match /invoices/{docId} {
+              allow delete: if request.auth != null;
+            }
+          }
+        }
+        """
+        fp = self._write_file("firestore.rules", content)
+        violations = audit_firebase_file(fp)
+        self.assertTrue(any(v["rule"] == "FIREBASE-UNSAFE-DELETE-RULE" for v in violations))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -14,20 +14,45 @@ import sys
 from typing import Dict, List
 
 
+SPAM_BACKUP_FILENAME_PATTERN = re.compile(
+    r"(?:\.bak\.\d+|(?:^|[_.-])(?:backup|dump)[_-]?(?:copy|\d+)(?:[_.-]|$))",
+    re.IGNORECASE,
+)
+
+
+def has_deletion_approval(content: str) -> bool:
+    """Checks if the SQL migration includes explicit user-approved deletion and verified backup tags."""
+    lower = content.lower()
+    return "@user-approved-deletion" in lower and "@verified-backup-sha256" in lower
+
+
 def audit_sql_file(content: str, filepath: str) -> List[Dict[str, str]]:
     issues = []
+    approved = has_deletion_approval(content)
+
+    # 0. Check for spammy duplicate backup file naming
+    base_name = os.path.basename(filepath)
+    if SPAM_BACKUP_FILENAME_PATTERN.search(base_name):
+        issues.append({
+            "file": filepath,
+            "line": "1",
+            "rule": "DB-SPAM-DUPLICATE-BACKUP",
+            "severity": "WARNING",
+            "message": "Duplicate/numbered backup file detected. Use single-slot SHA-256 deduplicated backup (.canonical.bak)."
+        })
 
     # 1. Check for DROP TABLE
     drop_table_matches = re.finditer(r"\bDROP\s+TABLE\b", content, re.IGNORECASE)
     for match in drop_table_matches:
-        line_no = content[:match.start()].count("\n") + 1
-        issues.append({
-            "file": filepath,
-            "line": str(line_no),
-            "rule": "DB-HAZARD-DROP-TABLE",
-            "severity": "CRITICAL",
-            "message": "DROP TABLE detected. Breaches zero-downtime expand-and-contract policy."
-        })
+        if not approved:
+            line_no = content[:match.start()].count("\n") + 1
+            issues.append({
+                "file": filepath,
+                "line": str(line_no),
+                "rule": "DB-HAZARD-DROP-TABLE",
+                "severity": "CRITICAL",
+                "message": "DROP TABLE detected without user disclosure/approval (-- @user-approved-deletion & -- @verified-backup-sha256)."
+            })
 
     # 2. Check for CREATE INDEX without CONCURRENTLY (in PostgreSQL migrations)
     create_idx_matches = re.finditer(r"\bCREATE\s+INDEX\b", content, re.IGNORECASE)
@@ -46,14 +71,41 @@ def audit_sql_file(content: str, filepath: str) -> List[Dict[str, str]]:
     # 3. Check for ALTER TABLE DROP COLUMN
     drop_col_matches = re.finditer(r"\bALTER\s+TABLE\b[^\;]+?\bDROP\s+COLUMN\b", content, re.IGNORECASE)
     for match in drop_col_matches:
-        line_no = content[:match.start()].count("\n") + 1
-        issues.append({
-            "file": filepath,
-            "line": str(line_no),
-            "rule": "DB-HAZARD-DROP-COLUMN",
-            "severity": "WARNING",
-            "message": "ALTER TABLE DROP COLUMN requires prior deprecation phase in code."
-        })
+        if not approved:
+            line_no = content[:match.start()].count("\n") + 1
+            issues.append({
+                "file": filepath,
+                "line": str(line_no),
+                "rule": "DB-HAZARD-DROP-COLUMN",
+                "severity": "WARNING",
+                "message": "ALTER TABLE DROP COLUMN requires user notification, backup hash, and prior deprecation phase."
+            })
+
+    # 4. Check for TRUNCATE TABLE
+    truncate_matches = re.finditer(r"\bTRUNCATE\s+(?:TABLE\s+)?[a-zA-Z0-9_\.]+", content, re.IGNORECASE)
+    for match in truncate_matches:
+        if not approved:
+            line_no = content[:match.start()].count("\n") + 1
+            issues.append({
+                "file": filepath,
+                "line": str(line_no),
+                "rule": "DB-HAZARD-TRUNCATE-TABLE",
+                "severity": "CRITICAL",
+                "message": "TRUNCATE detected on sensitive data without prior user confirmation and verified backup SHA-256."
+            })
+
+    # 5. Check for unconditioned DELETE FROM <table>; (missing WHERE clause)
+    delete_matches = re.finditer(r"\bDELETE\s+FROM\s+[a-zA-Z0-9_\.]+\s*;", content, re.IGNORECASE)
+    for match in delete_matches:
+        if not approved:
+            line_no = content[:match.start()].count("\n") + 1
+            issues.append({
+                "file": filepath,
+                "line": str(line_no),
+                "rule": "DB-HAZARD-UNBOUNDED-DELETE",
+                "severity": "CRITICAL",
+                "message": "Unbounded DELETE FROM without WHERE clause detected. Notify user first and verify canonical backup."
+            })
 
     return issues
 

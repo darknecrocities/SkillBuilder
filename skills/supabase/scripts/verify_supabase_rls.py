@@ -16,6 +16,10 @@ IGNORED_DIRS = {".git", "node_modules", "dist", "build", ".agents", "__pycache__
 CREATE_TABLE_PATTERN = re.compile(r'CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(?:public\.)?([a-zA-Z0-9_]+)', re.IGNORECASE)
 ENABLE_RLS_PATTERN = re.compile(r'ALTER\s+TABLE\s+(?:public\.)?([a-zA-Z0-9_]+)\s+ENABLE\s+ROW\s+LEVEL\s+SECURITY', re.IGNORECASE)
 PERMISSIVE_POLICY_PATTERN = re.compile(r'CREATE\s+POLICY\s+.*?USING\s*\(\s*true\s*\)', re.IGNORECASE)
+DESTRUCTIVE_SUPABASE_SQL_PATTERN = re.compile(
+    r'\b(?:DROP\s+TABLE|TRUNCATE\s+(?:TABLE\s+)?[a-zA-Z0-9_\.]+|DELETE\s+FROM\s+storage\.(?:objects|buckets))\b',
+    re.IGNORECASE,
+)
 SERVICE_ROLE_CLIENT_PATTERN = re.compile(r'(?:NEXT_PUBLIC_SUPABASE_SERVICE_ROLE|supabaseServiceRoleKey|service_role_key|service_role\b)', re.IGNORECASE)
 
 
@@ -63,6 +67,17 @@ def audit_supabase_file(file_path: str) -> List[Dict[str, Any]]:
                 "rule": "SUPABASE-PERMISSIVE-POLICY",
                 "message": "Insecure permissive RLS policy with 'USING (true)' detected."
             })
+
+        approved_delete = "@user-approved-deletion" in content.lower() and "@verified-backup-sha256" in content.lower()
+        if not approved_delete:
+            for match in DESTRUCTIVE_SUPABASE_SQL_PATTERN.finditer(content):
+                line_num = content[:match.start()].count("\n") + 1
+                violations.append({
+                    "file": file_path,
+                    "line": line_num,
+                    "rule": "SUPABASE-UNSAFE-DESTRUCTIVE-SQL",
+                    "message": "Destructive Supabase SQL (DROP/TRUNCATE/storage purge) requires prior user confirmation and verified backup SHA-256."
+                })
 
     # 2. Client-side service role exposure
     if file_path.endswith((".ts", ".tsx", ".js", ".jsx")) and ("client" in file_path.lower() or "components" in file_path.lower()):
