@@ -11,7 +11,17 @@ This skill establishes defensive engineering standards for data pipelines, batch
 
 ---
 
-## 1. The Core Pipeline Architecture Gates
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/streaming-etl-and-arrow.md](references/streaming-etl-and-arrow.md) | Columnar memory, zero-copy RecordBatches, bounded queue backpressure. |
+| **Reference** | [references/duckdb-and-dlq-patterns.md](references/duckdb-and-dlq-patterns.md) | Vectorized in-process analytics, Parquet queries, DLQ quarantine schemas. |
+| **Utility** | [scripts/verify_pipeline_integrity.py](scripts/verify_pipeline_integrity.py) | Scans pipeline code for unbounded reads, missing DLQ handling, and unindexed joins. |
+
+---
+
+## 2. The Core Pipeline Architecture Gates
 
 ```mermaid
 flowchart TD

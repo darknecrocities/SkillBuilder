@@ -11,7 +11,17 @@ This skill establishes defensive engineering standards for designing, deploying,
 
 ---
 
-## 1. The Core AWS Architecture Gates
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/aws-well-architected-serverless.md](references/aws-well-architected-serverless.md) | Lambda memory allocations, timeout bounds, S3 public block and encryption. |
+| **Reference** | [references/dynamodb-and-iam-least-privilege.md](references/dynamodb-and-iam-least-privilege.md) | Single-table PK/SK patterns, GSI projections, scoped IAM policy conditions. |
+| **Utility** | [scripts/verify_aws_hygiene.py](scripts/verify_aws_hygiene.py) | Scans IaC templates and code for static credentials, S3 public leaks, and IAM wildcards. |
+
+---
+
+## 2. The Core AWS Architecture Gates
 
 ```mermaid
 flowchart TD

@@ -11,7 +11,17 @@ This skill governs the Conversational Learning Protocol (CLP). It turns user cor
 
 ---
 
-## 1. The Continuous Learning Cycle
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/continuous-learning-protocol.md](references/continuous-learning-protocol.md) | Signal detection, invariant extraction criteria, zero repeated mistakes. |
+| **Reference** | [references/convention-persistence.md](references/convention-persistence.md) | File schema for `.agents/learned_conventions.md`, programmatic recording CLI. |
+| **Utility** | [scripts/record_learning.py](scripts/record_learning.py) | CLI utility to append formatted invariants with timestamps and duplicate checks. |
+
+---
+
+## 2. The Continuous Learning Cycle
 
 ```mermaid
 flowchart TD

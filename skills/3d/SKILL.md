@@ -11,7 +11,18 @@ This skill establishes production engineering standards for interactive 3D web a
 
 ---
 
-## 1. Core 3D Architecture & The Roadster Pattern
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/threejs-performance-optimization.md](references/threejs-performance-optimization.md) | 60fps/120fps frame budgets, geometry instancing, frustum culling, texture mipmapping. |
+| **Reference** | [references/pbr-materials-and-draco.md](references/pbr-materials-and-draco.md) | Physically-based materials, clearcoat setups, Draco glTF compression. |
+| **Utility** | [scripts/verify_3d_performance.py](scripts/verify_3d_performance.py) | Audits Three.js source code for DPR clamping, disposal routines, and Draco decoders. |
+| **Template** | [templates/ThreeRoadsterShowcase.tsx](templates/ThreeRoadsterShowcase.tsx) | Complete production Three.js automotive showcase component. |
+
+---
+
+## 2. Core 3D Architecture & The Roadster Pattern
 
 ```mermaid
 flowchart TD

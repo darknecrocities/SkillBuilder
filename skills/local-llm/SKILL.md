@@ -9,7 +9,17 @@ The `local-llm` skill governs private, resilient, and cost-efficient on-device a
 
 ---
 
-## 1. Heterogeneous Inference Runtime Matrix
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/quantized-inference-and-gguf.md](references/quantized-inference-and-gguf.md) | Quantization trade-offs, GGUF Q4_K_M vs Q8_0 benchmarks, runtime engines. |
+| **Reference** | [references/gbnf-grammars-and-local-rag.md](references/gbnf-grammars-and-local-rag.md) | GBNF grammar constraints for guaranteed JSON, in-process local vector retrieval. |
+| **Utility** | [scripts/verify_local_llm_hygiene.py](scripts/verify_local_llm_hygiene.py) | Scans code for unquantized model imports, missing GBNF validation, and unbuffered context allocations. |
+
+---
+
+## 2. Heterogeneous Inference Runtime Matrix
 
 | Runtime Engine | Target Architecture | Formats | Optimal Deployment | Key Capabilities |
 | :--- | :--- | :--- | :--- | :--- |
