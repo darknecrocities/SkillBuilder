@@ -28,6 +28,7 @@ flowchart LR
 3. **Optimistic Rollback**: UI mutations must optimistically render the expected state, but roll back cleanly with a toast notification if the network or server rejects the transaction.
 4. **Automated Integration Test**: Every slice must include an integration test verifying the full round-trip from HTTP POST to database persistence.
 5. **Platform Domain Specialization**: In Tier 6 (Interactive UI), bind [`/mobile-ui`](../mobile-ui/SKILL.md) for mobile targets and [`/web-ui`](../web-ui/SKILL.md) for web targets. Never mix cross-platform styling instructions in a single feature slice to conserve token quota.
+6. **Single-Slot Deduplicated Backups & Sensitive Deletion Gate**: Before migrating persistent schemas or altering storage buckets, verify a single SHA-256 content-hashed backup via `manage_deduplicated_backup.py` (zero duplicate `.bak.1`, `.bak.2` spam). Always warn the user first and await explicit confirmation before deleting tables, columns, or sensitive user records.
 
 ---
 

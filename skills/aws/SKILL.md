@@ -20,6 +20,7 @@ flowchart TD
     C --> D["Gate 3: Serverless Execution (Lambda Bounded Timeouts <= 30s)"]
     D --> E["Gate 4: Decoupled Messaging (SQS/SNS with DLQ & Idempotency)"]
     E --> F["Gate 5: Distributed Telemetry (CloudWatch Embedded Metric Format)"]
+    F --> G["Gate 6: Single-Slot Snapshot Deduplication & Retain Deletion Policy"]
 ```
 
 1. **Gate 1: IAM Identity & Zero Static Keys**: Prohibit long-lived `AKIA...` keys. Use **IAM Roles for Service Accounts (IRSA)** or **ECS Task Roles**.
@@ -27,6 +28,10 @@ flowchart TD
 3. **Gate 3: Bounded Lambda Execution**: Lambda execution timeouts must be bounded ($\le 30\text{s}$ for API-facing functions). Functions must handle errors without hanging sockets.
 4. **Gate 4: Asynchronous Messaging & DLQ**: SQS queues must configure a Dead-Letter Queue (DLQ) with max receive count $\le 5$ and message deduplication IDs (FIFO).
 5. **Gate 5: Structured Telemetry**: Emit CloudWatch metrics using the Embedded Metric Format (EMF) rather than synchronous PutMetricData calls.
+6. **Gate 6: Deduplicated Storage Backups & Sensitive Deletion Gate**:
+   - Enforce `RemovalPolicy.RETAIN`, S3 `versioned: true`, and RDS/DynamoDB `deletionProtection: true` on all stateful constructs.
+   - Coordinate backups via `.backups/backup_manifest.json` (`StateSha256` tag) so concurrent agents never create duplicate RDS/DynamoDB/S3 backup spam when state is unchanged.
+   - Always halt and notify the user first before configuring `RemovalPolicy.DESTROY`, `force_destroy = true`, or deleting S3 buckets/DynamoDB tables.
 
 ---
 
@@ -110,3 +115,4 @@ Audited Rules:
 - `AWS-S3-PUBLIC-EXPOSURE`: Flags S3 buckets missing explicit public access blocks.
 - `AWS-S3-UNENCRYPTED`: Flags S3 bucket declarations without server-side encryption.
 - `AWS-LAMBDA-UNBOUNDED-TIMEOUT`: Warns on Lambda functions with timeouts $> 60\text{s}$ on API routes.
+- `AWS-DESTRUCTIVE-REMOVAL-POLICY`: Flags `RemovalPolicy.DESTROY` or `force_destroy = true` on storage/database constructs without explicit user approval (`@user-approved-deletion`).

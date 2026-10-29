@@ -20,6 +20,7 @@ flowchart TD
     C --> D["Gate 3: Identity & Secrets (Workload Identity, Secret Manager)"]
     D --> E["Gate 4: Serverless Deployment (Cloud Run, Cloud Functions v2)"]
     E --> F["Gate 5: Managed Telemetry (Cloud Logging, Cloud Trace)"]
+    F --> G["Gate 6: Single-Slot Cloud SQL/GCS Backup & Deletion Protection"]
 ```
 
 1. **Gate 1: Container Hardening**: Cloud Run workloads must execute in multi-stage, scratch/distroless or alpine base containers running as non-root (`USER 10001`).
@@ -27,6 +28,10 @@ flowchart TD
 3. **Gate 3: Secret & Identity Hygiene**: Prohibit static service account JSON keys. Enforce **Workload Identity Federation** and retrieve sensitive runtime secrets from **GCP Secret Manager**.
 4. **Gate 4: Graceful Drainage**: Handle `SIGTERM` signals cleanly with a 10-second drain window before Cloud Run instance scale-down.
 5. **Gate 5: Managed Telemetry**: Emit structured JSON logs with `logging.googleapis.com/trace` correlation fields for Cloud Logging.
+6. **Gate 6: Deduplicated Cloud SQL / GCS Backups & Deletion Protection**:
+   - Enforce `deletion_protection = true` on Cloud SQL / Spanner instances and soft-delete retention on GCS buckets.
+   - Maintain a single SHA-256 content-hashed backup entry in `.backups/backup_manifest.json` (`manage_deduplicated_backup.py`) before schema migrations so concurrent agents never trigger duplicate export spam.
+   - Always halt and warn the user first before setting `deletion_protection = false`, `force_destroy = true`, or deleting GCS buckets/Cloud SQL databases.
 
 ---
 
@@ -121,3 +126,4 @@ Audited Rules:
 - `GCP-MISSING-HEALTH-CHECK`: Warns if service entrypoints lack `/healthz` or liveness probes.
 - `GCP-CONTAINER-ROOT-USER`: Flags Dockerfiles missing non-root `USER` directives.
 - `GCP-HARDCODED-PROJECT-ID`: Detects hardcoded GCP project numbers or IDs in code.
+- `GCP-DISABLED-DELETION-PROTECTION`: Flags `deletion_protection = false` or `force_destroy = true` on Cloud SQL/GCS resources without explicit user confirmation (`@user-approved-deletion`).

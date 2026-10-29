@@ -59,6 +59,17 @@ class TestVerifyAwsHygiene(unittest.TestCase):
         violations = audit_aws_file(fp)
         self.assertTrue(any(v["rule"] == "AWS-S3-MISSING-PUBLIC-BLOCK" for v in violations))
 
+    def test_detects_destructive_removal_policy(self):
+        content = """
+        const bucket = new s3.Bucket(this, "TempBucket", {
+            blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+            removalPolicy: cdk.RemovalPolicy.DESTROY
+        });
+        """
+        fp = self._write_file("destroy_stack.ts", content)
+        violations = audit_aws_file(fp)
+        self.assertTrue(any(v["rule"] == "AWS-DESTRUCTIVE-REMOVAL-POLICY" for v in violations))
+
 
 if __name__ == "__main__":
     unittest.main()

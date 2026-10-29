@@ -66,6 +66,22 @@ class TestVerifySupabaseRls(unittest.TestCase):
         violations = audit_supabase_file(fp)
         self.assertTrue(any(v["rule"] == "SUPABASE-EXPOSED-SERVICE-KEY" for v in violations))
 
+    def test_detects_unsafe_destructive_supabase_sql(self):
+        content = "DELETE FROM storage.objects;\nDROP TABLE public.projects;"
+        fp = self._write_file("004_purge.sql", content)
+        violations = audit_supabase_file(fp)
+        self.assertTrue(any(v["rule"] == "SUPABASE-UNSAFE-DESTRUCTIVE-SQL" for v in violations))
+
+    def test_passes_approved_destructive_supabase_sql(self):
+        content = (
+            "-- @user-approved-deletion\n"
+            "-- @verified-backup-sha256: 9f86d081884c7d659a2feaa0c55ad015\n"
+            "DROP TABLE public.legacy_items;\n"
+        )
+        fp = self._write_file("005_approved_drop.sql", content)
+        violations = audit_supabase_file(fp)
+        self.assertEqual(len(violations), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

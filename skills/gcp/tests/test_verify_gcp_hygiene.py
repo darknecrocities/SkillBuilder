@@ -60,6 +60,12 @@ class TestVerifyGcpHygiene(unittest.TestCase):
         violations = audit_gcp_file(fp)
         self.assertTrue(any(v["rule"] == "GCP-HARDCODED-PROJECT-ID" for v in violations))
 
+    def test_disabled_deletion_protection_flags_violation(self):
+        content = 'resource "google_sql_database_instance" "db" {\n  deletion_protection = false\n}'
+        fp = self._write_file("main.tf", content)
+        violations = audit_gcp_file(fp)
+        self.assertTrue(any(v["rule"] == "GCP-DISABLED-DELETION-PROTECTION" for v in violations))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -20,6 +20,7 @@ flowchart TD
     C --> D["Gate 3: Composite Indexing (Pre-defined index declarations)"]
     D --> E["Gate 4: Atomic Transactions & Batched Writes (<= 500 ops)"]
     E --> F["Gate 5: Admin SDK Privilege Isolation (Zero client credentials)"]
+    F --> G["Gate 6: Single-Slot Firestore Backup & Soft-Delete Protection"]
 ```
 
 1. **Gate 1: Authentication & Custom Claims**: Verify identity on every client call. Use custom claims (`role`, `tenantId`) in JWT tokens for RBAC.
@@ -27,6 +28,9 @@ flowchart TD
 3. **Gate 3: Composite Indexing**: Declare multi-field queries in `firestore.indexes.json` before deployment to prevent runtime query rejections.
 4. **Gate 4: Atomic Transactions & Batch Caps**: Mutating related balances or counters must use `db.runTransaction()`. Batched writes must never exceed the 500 document ceiling.
 5. **Gate 5: Admin SDK Privilege Isolation**: Never bundle Firebase Admin SDK service account credentials in client or edge bundles.
+6. **Gate 6: Deduplicated Single-Slot Exports & Sensitive Deletion Gate**:
+   - Before deploying breaking `firestore.rules`, `storage.rules`, or bulk collection migrations, verify or update the single canonical backup slot via `manage_deduplicated_backup.py` or `gcloud firestore export gs://<bucket>/canonical-snapshot` keyed by the SHA-256 state hash in `.backups/backup_manifest.json` (zero spammy duplicate exports across concurrent agents).
+   - Enforce `allow delete: if false;` (soft-deletes via `deletedAt` timestamp) on sensitive collections. Always halt and notify the user first before purging any Firestore collection or Firebase Storage bucket.
 
 ---
 
@@ -121,3 +125,4 @@ Audited Rules:
 - `FIREBASE-MISSING-AUTH-CHECK`: Flags mutation rules without `request.auth` checks.
 - `FIREBASE-EXPOSED-ADMIN-KEY`: Flags committed `firebase-adminsdk` service account JSON keys.
 - `FIREBASE-OVERSIZED-BATCH`: Flags unchunked batch operations exceeding 500 writes.
+- `FIREBASE-UNSAFE-DELETE-RULE`: Flags unscoped `allow delete: if request.auth != null;` rules lacking owner/role verification or soft-delete protection.

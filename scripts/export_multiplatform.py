@@ -81,7 +81,7 @@ alwaysApply: false
 
 {core_rules}
 
-## 20 Modular Skills Available
+## {len(skills)} Modular Skills Available
 Detailed rules are loaded from `.cursor/rules/*.mdc`.
 """
     cursorrules_path.write_text(cursorrules_content, encoding="utf-8")
@@ -110,13 +110,16 @@ def export_claude_rules(repo_dir: Path, target_dir: Path) -> List[str]:
 
 {core_rules}
 
-## Available SkillBuilder Disciplines (20 Skills)
+## Available SkillBuilder Disciplines ({len(skills)} Skills)
 
 {skills_summary}
 
-## Code Generation & Review Instructions
+## Code Generation, Multi-Agent Sync & Storage Safety Instructions
 - Enforce the multi-tiered 500-line physical limit (target sweet spot: 150–250 lines; warning: 350 lines).
 - Zero fake mock databases: use SQLite, PostgreSQL, or structured file stores.
+- Idempotent Single-Slot Backups (Zero Spam): Maintain one canonical backup per resource state keyed by SHA-256 digest in `.backups/backup_manifest.json`. Never create duplicate `.bak.1`, `.bak.2` copies when state is unchanged.
+- Sensitive Deletion Human-in-the-Loop Gate: Halt and warn the user first before executing any `DROP`, `TRUNCATE`, unconditioned `DELETE`, bucket/collection purge, or sensitive file removal.
+- Simultaneous Multi-Agent Coordination: Partition file ownership across tracks and share `.backups/backup_manifest.json` locks across all {len(skills)} synchronized skills.
 - Prohibit neon purple gradients, glowing borders, card-soup layouts, and raw emojis in UI buttons.
 - Keep commits under 1,000 changed lines.
 """
@@ -141,7 +144,7 @@ def export_codex_rules(repo_dir: Path, target_dir: Path) -> List[str]:
 
 {core_rules}
 
-## Skill Index (20 Skills)
+## Skill Index ({len(skills)} Skills)
 {skills_summary}
 
 ## Developer Directives
@@ -149,6 +152,8 @@ def export_codex_rules(repo_dir: Path, target_dir: Path) -> List[str]:
 2. Never interpolate variables into SQL queries (prevent SQL injection).
 3. Zero decorative badges, shields.io icons, or synthetic AI marketing copy.
 4. Autonomous research: when a library is broken, evaluate and recommend drop-in replacements.
+5. Idempotent Single-Slot Backups: maintain a single SHA-256 content-hashed backup per resource state; never spam duplicate backup files across concurrent agent runs.
+6. Sensitive Deletion Gate: always notify the user with impact scope and backup hash before deleting tables, columns, buckets, collections, or sensitive files.
 """
     codex_path.write_text(content, encoding="utf-8")
     return [str(codex_path)]

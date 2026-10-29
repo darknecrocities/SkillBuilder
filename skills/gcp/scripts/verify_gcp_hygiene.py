@@ -18,6 +18,7 @@ HARDCODED_GCP_PROJECT = re.compile(r'\bprojects/(?:\d{10,14}|[a-z][a-z0-9-]{5,28
 ROOT_USER_PATTERN = re.compile(r'^\s*USER\s+(?:root|0)\b', re.IGNORECASE)
 NON_ROOT_USER_PATTERN = re.compile(r'^\s*USER\s+(?!(?:root|0)\b)\w+', re.IGNORECASE)
 HEALTHZ_PROBE_PATTERN = re.compile(r'/(?:healthz|health|status)\b')
+GCP_DESTRUCTIVE_STORAGE_PATTERN = re.compile(r'(?:deletion_protection\s*=\s*false|force_destroy\s*=\s*true)', re.IGNORECASE)
 
 
 def is_test_file(path: str) -> bool:
@@ -59,7 +60,8 @@ def audit_gcp_file(file_path: str) -> List[Dict[str, Any]]:
                 "message": "Cloud Run container must specify a non-root user (e.g., USER 10001)."
             })
 
-    # 3. Hardcoded GCP project IDs in source
+    # 3. Hardcoded GCP project IDs and disabled deletion protection in source/IaC
+    approved_delete = "@user-approved-deletion" in content.lower()
     for idx, line in enumerate(content.splitlines(), start=1):
         if HARDCODED_GCP_PROJECT.search(line) and not line.strip().startswith("//") and not line.strip().startswith("#"):
             violations.append({
@@ -67,6 +69,14 @@ def audit_gcp_file(file_path: str) -> List[Dict[str, Any]]:
                 "line": idx,
                 "rule": "GCP-HARDCODED-PROJECT-ID",
                 "message": "Hardcoded GCP project identifier detected. Read from process.env or metadata server.",
+                "snippet": line.strip()[:80]
+            })
+        if GCP_DESTRUCTIVE_STORAGE_PATTERN.search(line) and not approved_delete:
+            violations.append({
+                "file": file_path,
+                "line": idx,
+                "rule": "GCP-DISABLED-DELETION-PROTECTION",
+                "message": "Cloud SQL/GCS deletion protection disabled (deletion_protection=false / force_destroy=true) without @user-approved-deletion.",
                 "snippet": line.strip()[:80]
             })
 

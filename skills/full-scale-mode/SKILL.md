@@ -1,6 +1,6 @@
 ---
 name: full-scale-mode
-description: Master Project Orchestration Engine (aliased as /world-class-engineering). Unifies all 32 SkillBuilder skills across the 3-Phase Triad Cadence (Frontend, Backend, Testing) with Autonomous Skill Resonance (ASR) and Project Skill Minting.
+description: Master Project Orchestration Engine (aliased as /world-class-engineering). Unifies all 35 SkillBuilder skills across the 3-Phase Triad Cadence (Frontend, Backend, Testing) with Autonomous Skill Resonance (ASR), Deduplicated Storage Locks, and Project Skill Minting.
 ---
 
 # Full-Scale Mode: Master Project Orchestration Engine (`/full-scale-mode`)
@@ -8,7 +8,7 @@ description: Master Project Orchestration Engine (aliased as /world-class-engine
 > **Role**: Master AI Systems Architect & Multi-Agent Conductor  
 > **Philosophy**: *Understand deeply. Plan deliberately. Dispatch concurrently. Budget tokens relentlessly. Verify thoroughly. Deliver atomically.*
 
-**Full-Scale Mode (`/full-scale-mode`)** is the apex orchestrator of the SkillBuilder ecosystem. It unifies all **32 modular engineering skills** into a streamlined, 3-phase project delivery lifecycle: the **3-Phase Triad Cadence (Frontend, Backend, Testing)**. It features **Autonomous Skill Resonance (ASR)** for contextual auto-activation and the **Skill Synthesis Protocol (SSP)** for minting custom project skills.
+**Full-Scale Mode (`/full-scale-mode`)** is the apex orchestrator of the SkillBuilder ecosystem. It unifies all **35 modular engineering skills** into a streamlined, 3-phase project delivery lifecycle: the **3-Phase Triad Cadence (Frontend, Backend, Testing)**. It features **Autonomous Skill Resonance (ASR)** for contextual auto-activation, **Multi-Agent Single-Slot Backup Synchronization**, and the **Skill Synthesis Protocol (SSP)** for minting custom project skills.
 
 > ℹ️ **Backward Compatibility**: `/full-scale-mode` and `/world-class-engineering` are co-equal, fully interchangeable aliases. Both trigger the complete 3-Phase Triad Cadence.
 
@@ -59,6 +59,20 @@ When invoking `/full-scale-mode`, the **Autonomous Skill Resonance (ASR)** engin
 - **ETL / DuckDB / Parquet** $\rightarrow$ Activates `/data-pipelines`.
 - **Multi-Locale / RTL** $\rightarrow$ Activates `/i18n`.
 - **All Projects** $\rightarrow$ Automatically engage Core Gates: `/prompt-polish`, `/qa`, `/security`, `/git-workflow`.
+
+---
+
+## 2.5 Simultaneous Multi-Agent Synchronization, Deduplicated Backups & Sensitive Deletion Gate
+
+When concurrent subagents execute in parallel across Phase 2 (`/database`, `/firebase`, `/supabase`, `/aws`, `/gcp`, `/data-pipelines`, `/fullstack`), they MUST enforce these synchronization invariants:
+
+1. **Idempotent Single-Slot Backups (Zero Duplicate Spam)**:
+   - Concurrent agents share `.backups/backup_manifest.json` (`skills/database/scripts/manage_deduplicated_backup.py`).
+   - Before any schema migration, bulk seed, or cloud storage rule update, the agent computes the SHA-256 digest of the current state. If the digest matches the canonical slot in `backup_manifest.json`, the agent skips creating a redundant backup (`SKIPPED_DUPLICATE_HASH`), eliminating `.bak.1`, `.bak.2` clutter.
+2. **Sensitive Deletion Human-in-the-Loop Gate (Tell the User First)**:
+   - Any subagent encountering a destructive operation (`DROP TABLE`, `DROP COLUMN`, `TRUNCATE`, unconditioned `DELETE`, Firestore/Supabase collection or bucket purge, `RemovalPolicy.DESTROY`, `force_destroy = true`, or sensitive file deletion) MUST halt and surface a **Sensitive Deletion Disclosure** (Target Resource, Sensitivity Tier, Affected Scope, and Verified Backup SHA-256) for explicit user approval before execution.
+3. **100% Cross-Skill Registry Synchronization**:
+   - All 35 skills, `AGENTS.md`, `rules/AGENTS.md`, `plugin.json`, and multi-platform exports (`CLAUDE.md`, `CODEX.md`, `.cursorrules`, `.windsurfrules`, `.clinerules`) are verified in lockstep by `verify_full_scale_orchestration.py`.
 
 ---
 

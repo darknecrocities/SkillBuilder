@@ -18,6 +18,7 @@ PUBLIC_S3_ACL = re.compile(r'acl\s*=\s*["\']public-read(?:-write)?["\']', re.IGN
 S3_BUCKET_CONSTRUCT = re.compile(r'(?:new\s+s3\.Bucket|resource\s+["\']aws_s3_bucket["\'])', re.IGNORECASE)
 BLOCK_PUBLIC_ACCESS = re.compile(r'(?:blockPublicAccess|block_public_acls|BlockPublicAccess\.BLOCK_ALL)', re.IGNORECASE)
 LAMBDA_HIGH_TIMEOUT = re.compile(r'(?:timeout|Duration\.seconds)\s*[:=]\s*(?:cdk\.Duration\.seconds\()?([6-9]\d{2,}|\d{4,})\b')
+DESTRUCTIVE_AWS_POLICY = re.compile(r'(?:RemovalPolicy\.DESTROY|force_destroy\s*=\s*true|deletionProtection\s*:\s*false)', re.IGNORECASE)
 
 
 def is_test_file(path: str) -> bool:
@@ -71,6 +72,16 @@ def audit_aws_file(file_path: str) -> List[Dict[str, Any]]:
                     "message": f"Lambda timeout ({seconds}s) exceeds recommended bounds. Cap timeouts to prevent resource starvation.",
                     "snippet": line.strip()[:80]
                 })
+
+        # 4. Destructive storage/database removal policy without user approval
+        if DESTRUCTIVE_AWS_POLICY.search(line) and "@user-approved-deletion" not in content.lower():
+            violations.append({
+                "file": file_path,
+                "line": idx,
+                "rule": "AWS-DESTRUCTIVE-REMOVAL-POLICY",
+                "message": "Destructive storage policy (RemovalPolicy.DESTROY / force_destroy=true) requires user disclosure and @user-approved-deletion.",
+                "snippet": line.strip()[:80]
+            })
 
     # 4. S3 Bucket construct missing BlockPublicAccess
     if S3_BUCKET_CONSTRUCT.search(content) and not BLOCK_PUBLIC_ACCESS.search(content):

@@ -473,7 +473,7 @@ flowchart TD
 
 ### Option 2: Cursor IDE
 
-Convert all 21 skills into native `.cursor/rules/*.mdc` rule files and a consolidated `.cursorrules`:
+Convert all 35 skills into native `.cursor/rules/*.mdc` rule files and a consolidated `.cursorrules`:
 ```bash
 ./scripts/install.sh --cursor /path/to/my-cursor-project
 ```
@@ -537,15 +537,15 @@ python3 skills/continuous-learning/scripts/record_learning.py --list
 
 ---
 
-## Automated Verification Suites (40 Suites)
+## Automated Verification Suites (44 Suites)
 
-SkillBuilder includes a master test runner executing 40 independent verification suites:
+SkillBuilder includes a master test runner executing 44 independent verification suites:
 
 ```bash
 ./scripts/verify_all_skills.sh
 ```
 
-All 40 suites run and pass in under 1.5s:
+All 44 suites run and pass in under 1.5s:
 1. **500-Line Source File Policy**: Verifies all source files adhere to the 500-line ceiling.
 2. **World-Class Engineering Unit Tests**: Validates line-checking and EOS extraction logic.
 3. **Anti-AI-Slop Tests**: Validates badge, mock array, and obvious comment sanitization.
@@ -589,6 +589,7 @@ All 40 suites run and pass in under 1.5s:
 41. **Mobile UI Native Craftsmanship Tests**: Validates touch target ergonomics, spring kinematics, and safe area insets.
 42. **Web UI Container Queries & Fluid Styling Tests**: Validates @container queries, OKLCH colors, fluid clamp() typography, and accessible focus rings.
 43. **Local LLM Quantized Inference & Hybrid Routing Tests**: Validates GGUF quantization profiles (Q4_K_M+), MLX acceleration, and GBNF grammars.
+44. **Deduplicated Single-Slot Backups & Sensitive Deletion Guardrail Tests**: Validates SHA-256 content-hashed single-slot backups (`manage_deduplicated_backup.py`), multi-agent manifest deduplication, and mandatory pre-deletion user confirmation gates.
 
 ---
 
@@ -596,7 +597,7 @@ All 40 suites run and pass in under 1.5s:
 
 ```text
 SkillBuilder/
-├── plugin.json                                 # Antigravity plugin manifest (v3.0.0)
+├── plugin.json                                 # Antigravity plugin manifest (v3.1.0)
 ├── README.md                                   # Comprehensive documentation & slash command index
 ├── INTEGRATION_GUIDE.md                        # Step-by-step setup guide for Antigravity
 ├── AGENTS.md                                   # Root rules enforced on all projects
@@ -612,11 +613,12 @@ SkillBuilder/
 │   ├── ui/                                     # Design tokens, neutral scales & Lucide icons
 │   ├── mobile-ui/                              # iOS 18/19 HIG, SwiftUI matchedGeometry, M3 Expressive & haptics
 │   ├── web-ui/                                 # Container queries (@container), CSS View Transitions & OKLCH
+│   ├── 3d/                                     # Three.js, React Three Fiber, PBR shaders & Draco compression
 │   ├── frontend/                               # React 19, Next.js, Flutter & effect cleanup
 │   ├── backend/                                # Clean architecture & Zod/Pydantic validation
 │   ├── security/                               # OWASP Top 10, RFC 7807, auth rotation, DDoS & SSRF
 │   ├── fullstack/                              # Anti-mock vertical slices & real persistence
-│   ├── database/                               # Zero-downtime migrations & ACID integrity
+│   ├── database/                               # Zero-downtime migrations, SHA-256 single-slot backups & deletion gate
 │   ├── devops/                                 # Multi-stage non-root containers & CI/CD
 │   ├── ai/                                     # Gemini SDK, structured JSON & token budgets
 │   ├── local-llm/                              # Quantized inference (GGUF), MLX, WebLLM, GBNF & hybrid routing
@@ -629,10 +631,10 @@ SkillBuilder/
 │   ├── refactor/                               # Safe debt remediation & file decomposition
 │   ├── git-workflow/                           # Atomic commit chunking (<1k lines) & releases
 │   ├── routing/                                # File-based routing, nested layouts & search params
-│   ├── gcp/                                    # Google Cloud Platform, Cloud Run & Secret Manager
-│   ├── aws/                                    # Amazon Web Services, Lambda, S3 & IAM least privilege
-│   ├── firebase/                               # Firebase Firestore security rules & auth
-│   ├── supabase/                               # Supabase Postgres Row-Level Security & pgvector
+│   ├── gcp/                                    # Google Cloud Platform, Cloud Run & deletion protection
+│   ├── aws/                                    # Amazon Web Services, Lambda, S3 & RemovalPolicy.RETAIN
+│   ├── firebase/                               # Firebase Firestore security rules, single-slot exports & soft-deletes
+│   ├── supabase/                               # Supabase Postgres RLS, pre-migration snapshots & pgvector
 │   ├── project-skills/                         # Autonomous Project Skill Minting (SSP)
 │   ├── state-management/                       # TanStack Query factories, Zustand & XState
 │   ├── testing/                                # TDD red-green cycles, Vitest, Playwright & MSW
@@ -641,5 +643,5 @@ SkillBuilder/
 └── scripts/
     ├── install.sh                              # Universal multi-platform installer
     ├── export_multiplatform.py                 # Multi-platform exporter (Cursor, Claude, Codex)
-    └── verify_all_skills.sh                    # Master 43-suite verification test runner
+    └── verify_all_skills.sh                    # Master 44-suite verification test runner
 ```

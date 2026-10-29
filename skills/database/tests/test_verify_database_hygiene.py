@@ -22,6 +22,27 @@ class TestVerifyDatabaseHygiene(unittest.TestCase):
         issues = audit_sql_file(sql, "migration.sql")
         self.assertEqual(len(issues), 0)
 
+    def test_detects_truncate_and_unbounded_delete(self):
+        sql = "TRUNCATE TABLE invoices;\nDELETE FROM users;"
+        issues = audit_sql_file(sql, "purge.sql")
+        rules = {i["rule"] for i in issues}
+        self.assertIn("DB-HAZARD-TRUNCATE-TABLE", rules)
+        self.assertIn("DB-HAZARD-UNBOUNDED-DELETE", rules)
+
+    def test_passes_approved_deletion_with_verified_backup_hash(self):
+        sql = (
+            "-- @user-approved-deletion\n"
+            "-- @verified-backup-sha256: e3b0c44298fc1c149afbf4c8996fb924\n"
+            "DROP TABLE legacy_users;"
+        )
+        issues = audit_sql_file(sql, "approved_migration.sql")
+        self.assertEqual(len(issues), 0)
+
+    def test_detects_spam_duplicate_backup_filename(self):
+        sql = "SELECT 1;"
+        issues = audit_sql_file(sql, "db_backup_2.sql")
+        self.assertTrue(any(i["rule"] == "DB-SPAM-DUPLICATE-BACKUP" for i in issues))
+
 
 if __name__ == "__main__":
     unittest.main()

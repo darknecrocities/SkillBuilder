@@ -14,6 +14,10 @@ from typing import Any, Dict, List
 IGNORED_DIRS = {".git", "node_modules", "dist", "build", ".agents", "__pycache__", "venv"}
 
 OPEN_RULE_PATTERN = re.compile(r'allow\s+(?:read\s*,\s*write|write|create|update|delete|read)\s*:\s*if\s+true\s*;', re.IGNORECASE)
+UNSCOPED_DELETE_RULE_PATTERN = re.compile(
+    r'allow\s+delete\s*:\s*if\s+(?:request\.auth\s*!=\s*null|isAuthenticated\(\))\s*;',
+    re.IGNORECASE,
+)
 ADMIN_SDK_KEY_PATTERN = re.compile(r'firebase-adminsdk-[0-9a-z]+')
 PRIVATE_KEY_JSON_PATTERN = re.compile(r'"private_key"\s*:\s*"-----BEGIN')
 
@@ -43,8 +47,9 @@ def audit_firebase_file(file_path: str) -> List[Dict[str, Any]]:
             "message": "Committed Firebase Admin SDK private key detected. Store credentials in Secret Manager."
         })
 
-    # 2. Open wildcard permissions in .rules files
+    # 2. Open wildcard permissions or unscoped delete rules in .rules files
     if file_path.endswith(".rules") or "firestore.rules" in file_path or "storage.rules" in file_path:
+        approved_delete = "@user-approved-deletion" in content.lower()
         lines = content.splitlines()
         for idx, line in enumerate(lines, start=1):
             if OPEN_RULE_PATTERN.search(line):
@@ -53,6 +58,14 @@ def audit_firebase_file(file_path: str) -> List[Dict[str, Any]]:
                     "line": idx,
                     "rule": "FIREBASE-OPEN-WILDCARD-RULE",
                     "message": "Insecure open wildcard permission ('allow ...: if true;'). Restrict to authenticated users.",
+                    "snippet": line.strip()[:80]
+                })
+            elif UNSCOPED_DELETE_RULE_PATTERN.search(line) and not approved_delete:
+                violations.append({
+                    "file": file_path,
+                    "line": idx,
+                    "rule": "FIREBASE-UNSAFE-DELETE-RULE",
+                    "message": "Unscoped hard delete ('allow delete: if request.auth != null;') allows any user to delete records. Use soft-deletes or strict owner/admin scoping.",
                     "snippet": line.strip()[:80]
                 })
 

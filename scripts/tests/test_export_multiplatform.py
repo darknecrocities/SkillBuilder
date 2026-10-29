@@ -56,7 +56,11 @@ class TestExportMultiplatform(unittest.TestCase):
     def test_export_cursor_rules(self):
         created = export_cursor_rules(self.repo_dir, self.temp_path)
         self.assertTrue(len(created) >= 36)  # 35 .mdc + .cursorrules
-        self.assertTrue((self.temp_path / ".cursorrules").exists())
+        cursorrules_file = self.temp_path / ".cursorrules"
+        self.assertTrue(cursorrules_file.exists())
+        content = cursorrules_file.read_text(encoding="utf-8")
+        self.assertIn("35 Modular Skills Available", content)
+        self.assertNotIn("20 Modular Skills", content)
         self.assertTrue((self.temp_path / ".cursor" / "rules" / "anti-slop.mdc").exists())
 
     def test_export_claude_rules(self):
@@ -67,6 +71,10 @@ class TestExportMultiplatform(unittest.TestCase):
         content = claude_file.read_text(encoding="utf-8")
         self.assertIn("SkillBuilder", content)
         self.assertIn("/anti-slop", content)
+        self.assertIn("(35 Skills)", content)
+        self.assertNotIn("(20 Skills)", content)
+        self.assertIn("Idempotent Single-Slot Backups", content)
+        self.assertIn("Sensitive Deletion Human-in-the-Loop Gate", content)
 
     def test_export_codex_rules(self):
         created = export_codex_rules(self.repo_dir, self.temp_path)
@@ -75,6 +83,9 @@ class TestExportMultiplatform(unittest.TestCase):
         self.assertTrue(codex_file.exists())
         content = codex_file.read_text(encoding="utf-8")
         self.assertIn("CODEX.md", content)
+        self.assertIn("(35 Skills)", content)
+        self.assertNotIn("(20 Skills)", content)
+        self.assertIn("Sensitive Deletion Gate", content)
 
 
 if __name__ == "__main__":
