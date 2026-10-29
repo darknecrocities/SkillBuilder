@@ -11,7 +11,17 @@ This skill governs fullstack feature implementation, ensuring every feature is d
 
 ---
 
-## 1. The Anti-Mock Vertical Slice Architecture
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/anti-mock-persistence-patterns.md](references/anti-mock-persistence-patterns.md) | Anti-mock persistence rules, in-memory SQLite patterns, zero toy arrays. |
+| **Reference** | [references/vertical-slice-architecture.md](references/vertical-slice-architecture.md) | Vertical feature slicing, folder organization, co-located integration tests. |
+| **Utility** | [scripts/verify_end_to_end_integration.py](scripts/verify_end_to_end_integration.py) | Scans vertical slices for toy arrays, missing repositories, and unvalidated payloads. |
+
+---
+
+## 2. The Anti-Mock Vertical Slice Architecture
 
 ```mermaid
 flowchart LR

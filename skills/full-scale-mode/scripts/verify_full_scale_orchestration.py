@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 verify_full_scale_orchestration.py - Audits repository readiness for Full-Scale Mode,
-verifying the 35-skill registry, cross-agent sync, Autonomous Skill Resonance (ASR), and token budgeting.
+verifying the 36-skill registry, cross-agent sync, Autonomous Skill Resonance (ASR),
+Orchestration Memory, and Harness Engineering standards.
 
 Author: Arron Kian Parejas (@darknecrocities)
 Part of SkillBuilder Full-Scale Mode Engine
@@ -10,13 +11,13 @@ Part of SkillBuilder Full-Scale Mode Engine
 import argparse
 import json
 import os
+from pathlib import Path
 import re
 import sys
-from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
 REQUIRED_SKILLS: Set[str] = {
-    "3d", "ai", "anti-slop", "api-design", "aws", "backend", "continuous-learning",
+    "3d", "ai", "anti-slop", "antigravity-automation", "api-design", "aws", "backend", "continuous-learning",
     "data-pipelines", "database", "devops", "firebase", "frontend", "full-scale-mode",
     "fullstack", "gcp", "git-workflow", "i18n", "local-llm", "mobile-ui", "observability",
     "performance", "production-etiquette", "project-skills", "prompt-polish", "qa",
@@ -73,9 +74,9 @@ def audit_cross_skill_sync(repo_root: Path) -> List[Dict[str, Any]]:
             })
 
     sync_checks = [
-        (repo_root / "plugin.json", "35 modular skills"),
-        (repo_root / "skills" / "full-scale-mode" / "SKILL.md", "35 modular engineering skills"),
-        (repo_root / "skills" / "world-class-engineering" / "SKILL.md", "The 35 Modular Engineering Skills"),
+        (repo_root / "plugin.json", "36 modular skills"),
+        (repo_root / "skills" / "full-scale-mode" / "SKILL.md", "36 modular engineering skills"),
+        (repo_root / "skills" / "world-class-engineering" / "SKILL.md", "The 36 Modular Engineering Skills"),
     ]
     for fpath, expected_phrase in sync_checks:
         if fpath.exists() and expected_phrase.lower() not in fpath.read_text(encoding="utf-8").lower():
@@ -84,6 +85,39 @@ def audit_cross_skill_sync(repo_root: Path) -> List[Dict[str, Any]]:
                 "message": f"{fpath.name} is missing synchronized registry phrase '{expected_phrase}'.",
                 "file": str(fpath),
             })
+    return violations
+
+
+def audit_orchestration_memory(repo_root: Path) -> List[Dict[str, Any]]:
+    """Audits .agents/memory/orchestration_state.json for schema compliance if present."""
+    violations: List[Dict[str, Any]] = []
+    mem_file = repo_root / ".agents" / "memory" / "orchestration_state.json"
+    if not mem_file.exists():
+        return violations
+
+    try:
+        data = json.loads(mem_file.read_text(encoding="utf-8"))
+        required_fields = ["version", "session_id", "current_stage", "triad_phase", "milestones", "file_registry"]
+        for rf in required_fields:
+            if rf not in data:
+                violations.append({
+                    "rule": "INVALID-ORCHESTRATION-MEMORY",
+                    "message": f"Memory state missing required field: '{rf}'",
+                    "file": str(mem_file)
+                })
+        valid_stages = ["DISCOVER", "PLAN", "BUILD", "VERIFY", "LOOP", "RELEASE"]
+        if data.get("current_stage") not in valid_stages:
+            violations.append({
+                "rule": "INVALID-ORCHESTRATION-STAGE",
+                "message": f"Unknown orchestration stage: '{data.get('current_stage')}'",
+                "file": str(mem_file)
+            })
+    except json.JSONDecodeError:
+        violations.append({
+            "rule": "CORRUPT-ORCHESTRATION-MEMORY",
+            "message": "orchestration_state.json contains invalid JSON syntax.",
+            "file": str(mem_file)
+        })
     return violations
 
 
@@ -117,11 +151,7 @@ def analyze_skill_resonance(repo_root: Path, target_platform: str = "auto") -> D
     activated_skills = {"prompt-polish", "qa", "security", "git-workflow", "world-class-engineering"}
     pruned_skills = set()
 
-    # Determine effective platform
-    if target_platform == "auto":
-        platform = detect_platform_target(repo_root)
-    else:
-        platform = target_platform
+    platform = detect_platform_target(repo_root) if target_platform == "auto" else target_platform
 
     # Cloud & Serverless Ingress
     if any((repo_root / f).exists() for f in ["cloudbuild.yaml", "app.yaml"]) or (repo_root / "Dockerfile").exists():
@@ -137,11 +167,9 @@ def analyze_skill_resonance(repo_root: Path, target_platform: str = "auto") -> D
     if (repo_root / "app").exists() or (repo_root / "src" / "app").exists() or (repo_root / "routes").exists():
         activated_skills.update(["routing", "frontend", "state-management", "ui"])
 
-    # Internationalization
+    # Internationalization & Pipelines
     if any((repo_root / d).exists() for d in ["messages", "locales", "translations"]):
         activated_skills.add("i18n")
-
-    # Data Pipelines
     if any((repo_root / f).exists() for f in ["duckdb", "pipeline", "pipelines"]):
         activated_skills.add("data-pipelines")
 
@@ -149,7 +177,7 @@ def analyze_skill_resonance(repo_root: Path, target_platform: str = "auto") -> D
     if any((repo_root / f).exists() for f in ["Modelfile", "modelfile"]) or any((repo_root / d).exists() for d in ["models", "gguf"]):
         activated_skills.add("local-llm")
 
-    # Platform Domain Specialization (PDS) & Token Quota Preservation (TQP)
+    # PDS Platform Domain Specialization
     has_mobile_files = (
         any((repo_root / d).exists() for d in ["ios", "android", "expo"])
         or any((repo_root / f).exists() for f in ["app.json", "pubspec.yaml", "Podfile"])
@@ -166,26 +194,18 @@ def analyze_skill_resonance(repo_root: Path, target_platform: str = "auto") -> D
 
     if platform == "mobile":
         activated_skills.add("mobile-ui")
-        if "web-ui" in activated_skills:
-            activated_skills.remove("web-ui")
+        activated_skills.discard("web-ui")
         pruned_skills.add("web-ui")
     elif platform == "web":
         activated_skills.add("web-ui")
-        if "mobile-ui" in activated_skills:
-            activated_skills.remove("mobile-ui")
+        activated_skills.discard("mobile-ui")
         pruned_skills.add("mobile-ui")
-    elif platform == "universal":
-        if has_mobile_files:
-            activated_skills.add("mobile-ui")
-        if has_web_files:
-            activated_skills.add("web-ui")
-    else:  # auto / fallback
+    else:  # universal or auto
         if has_mobile_files:
             activated_skills.add("mobile-ui")
         if has_web_files:
             activated_skills.add("web-ui")
 
-    # Token savings estimate: ~1,850 tokens per pruned specialized skill (~7,000 characters)
     token_quota_saved = len(pruned_skills) * 1850
 
     return {
@@ -221,20 +241,20 @@ def audit_subagent_prompt(prompt_text: str, budget_limit: int = 1500) -> List[Di
 
 
 def audit_phased_plan(plan_content: str) -> List[Dict[str, Any]]:
+    """Validates that implementation plan covers either the 3-Phase Triad or 5-Stage Lifecycle."""
     violations: List[Dict[str, Any]] = []
-    required_phases = [
-        "Phase 1", "Phase 2", "Phase 3"
-    ]
-    for phase in required_phases:
-        if not re.search(rf"\b{re.escape(phase)}\b", plan_content, re.IGNORECASE):
-            violations.append({
-                "rule": "MISSING-PROJECT-PHASE",
-                "message": f"Implementation plan lacks required phase definition: '{phase}'."
-            })
+    has_3phases = all(re.search(rf"\bPhase {i}\b", plan_content, re.IGNORECASE) for i in [1, 2, 3])
+    has_5stages = all(re.search(rf"\bStage {i}\b", plan_content, re.IGNORECASE) for i in range(1, 6))
+
+    if not (has_3phases or has_5stages):
+        violations.append({
+            "rule": "MISSING-PROJECT-PHASE",
+            "message": "Plan must define either 3 Triad Phases (Phase 1-3) or 5 Orchestration Stages (Stage 1-5)."
+        })
     return violations
 
 
-def main() -> int:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Audit workspace for Full-Scale Mode orchestration & token standards."
     )
@@ -253,10 +273,16 @@ def main() -> int:
         help="Enforce strict platform isolation (flags cross-platform skill bleed)"
     )
     parser.add_argument("--asr", action="store_true", help="Run Autonomous Skill Resonance analysis")
+    parser.add_argument("--memory", action="store_true", help="Audit orchestration memory hygiene")
+    parser.add_argument("--harness", action="store_true", help="Run multi-tier evaluation harness")
     parser.add_argument("--json", action="store_true", help="Output findings in JSON format")
     parser.add_argument("--strict", action="store_true", help="Exit with non-zero code on violations")
-    args = parser.parse_args()
+    return parser
 
+
+def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
     repo_root = Path(args.path).resolve()
     all_violations: List[Dict[str, Any]] = []
 
@@ -264,32 +290,48 @@ def main() -> int:
     all_violations.extend(audit_skill_registry(repo_root))
     all_violations.extend(audit_cross_skill_sync(repo_root))
 
-    # 2. Audit prompt if provided
+    # 2. Audit orchestration memory if requested or present
+    if args.memory or (repo_root / ".agents" / "memory" / "orchestration_state.json").exists():
+        all_violations.extend(audit_orchestration_memory(repo_root))
+
+    # 3. Audit prompt if provided
     if args.prompt:
         all_violations.extend(audit_subagent_prompt(args.prompt))
-        if args.strict_platform:
-            if "mobile-ui" in args.prompt and "web-ui" in args.prompt:
-                all_violations.append({
-                    "rule": "CROSS-PLATFORM-SKILL-BLEED",
-                    "message": "Prompt mixes both /mobile-ui and /web-ui. Isolate tracks to prevent token waste."
-                })
+        if args.strict_platform and "mobile-ui" in args.prompt and "web-ui" in args.prompt:
+            all_violations.append({
+                "rule": "CROSS-PLATFORM-SKILL-BLEED",
+                "message": "Prompt mixes both /mobile-ui and /web-ui. Isolate tracks to prevent token waste."
+            })
 
-    # 3. Audit plan if provided
+    # 4. Audit plan if provided
     if args.plan:
         plan_path = Path(args.plan).resolve()
         if plan_path.exists():
             plan_text = plan_path.read_text(encoding="utf-8")
             all_violations.extend(audit_phased_plan(plan_text))
-            if args.strict_platform:
-                if "/mobile-ui" in plan_text and "/web-ui" in plan_text and "Universal" not in plan_text:
-                    all_violations.append({
-                        "rule": "CROSS-PLATFORM-SKILL-BLEED",
-                        "message": "Plan references both /mobile-ui and /web-ui without universal track partitioning."
-                    })
+            if args.strict_platform and "/mobile-ui" in plan_text and "/web-ui" in plan_text and "Universal" not in plan_text:
+                all_violations.append({
+                    "rule": "CROSS-PLATFORM-SKILL-BLEED",
+                    "message": "Plan references both /mobile-ui and /web-ui without universal track partitioning."
+                })
         else:
             all_violations.append({
                 "rule": "PLAN-NOT-FOUND",
                 "message": f"Specified plan file not found: {plan_path}"
+            })
+
+    # 5. Run evaluation harness if requested
+    if args.harness:
+        sys.path.insert(0, str(repo_root / "skills" / "full-scale-mode" / "scripts"))
+        try:
+            from orchestration_harness import run_harness_suite
+            harness_res = run_harness_suite(repo_root)
+            all_violations.extend(harness_res.get("violations", []))
+        except ImportError:
+            all_violations.append({
+                "rule": "HARNESS-IMPORT-ERROR",
+                "message": "Could not import orchestration_harness runner.",
+                "file": str(repo_root)
             })
 
     asr_data = analyze_skill_resonance(repo_root, target_platform=args.platform)

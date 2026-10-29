@@ -31,10 +31,11 @@ class TestExportMultiplatform(unittest.TestCase):
 
     def test_get_all_skills(self):
         skills = get_all_skills(self.repo_dir)
-        self.assertEqual(len(skills), 35, f"Expected 35 skills, found {len(skills)}")
+        self.assertEqual(len(skills), 36, f"Expected 36 skills, found {len(skills)}")
         names = [s[0] for s in skills]
         self.assertIn("3d", names)
         self.assertIn("anti-slop", names)
+        self.assertIn("antigravity-automation", names)
         self.assertIn("world-class-engineering", names)
         self.assertIn("full-scale-mode", names)
         self.assertIn("research", names)
@@ -55,13 +56,14 @@ class TestExportMultiplatform(unittest.TestCase):
 
     def test_export_cursor_rules(self):
         created = export_cursor_rules(self.repo_dir, self.temp_path)
-        self.assertTrue(len(created) >= 36)  # 35 .mdc + .cursorrules
+        self.assertTrue(len(created) >= 37)  # 36 .mdc + .cursorrules
         cursorrules_file = self.temp_path / ".cursorrules"
         self.assertTrue(cursorrules_file.exists())
         content = cursorrules_file.read_text(encoding="utf-8")
-        self.assertIn("35 Modular Skills Available", content)
+        self.assertIn("36 Modular Skills Available", content)
         self.assertNotIn("20 Modular Skills", content)
         self.assertTrue((self.temp_path / ".cursor" / "rules" / "anti-slop.mdc").exists())
+        self.assertTrue((self.temp_path / ".cursor" / "rules" / "antigravity-automation.mdc").exists())
 
     def test_export_claude_rules(self):
         created = export_claude_rules(self.repo_dir, self.temp_path)
@@ -71,7 +73,8 @@ class TestExportMultiplatform(unittest.TestCase):
         content = claude_file.read_text(encoding="utf-8")
         self.assertIn("SkillBuilder", content)
         self.assertIn("/anti-slop", content)
-        self.assertIn("(35 Skills)", content)
+        self.assertIn("/antigravity-automation", content)
+        self.assertIn("(36 Skills)", content)
         self.assertNotIn("(20 Skills)", content)
         self.assertIn("Idempotent Single-Slot Backups", content)
         self.assertIn("Sensitive Deletion Human-in-the-Loop Gate", content)
@@ -83,7 +86,8 @@ class TestExportMultiplatform(unittest.TestCase):
         self.assertTrue(codex_file.exists())
         content = codex_file.read_text(encoding="utf-8")
         self.assertIn("CODEX.md", content)
-        self.assertIn("(35 Skills)", content)
+        self.assertIn("/antigravity-automation", content)
+        self.assertIn("(36 Skills)", content)
         self.assertNotIn("(20 Skills)", content)
         self.assertIn("Sensitive Deletion Gate", content)
 

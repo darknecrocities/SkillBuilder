@@ -11,7 +11,17 @@ This skill establishes defensive engineering standards for building and deployin
 
 ---
 
-## 1. The Core Firebase Architecture Gates
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/firestore-schema-and-rules.md](references/firestore-schema-and-rules.md) | Subcollection design, denormalization patterns, hardened firestore.rules. |
+| **Reference** | [references/firebase-auth-and-admin-sdk.md](references/firebase-auth-and-admin-sdk.md) | Session cookie validation, Admin SDK privilege isolation, ADC authentication. |
+| **Utility** | [scripts/verify_firebase_rules.py](scripts/verify_firebase_rules.py) | Audits security rules for open access vulnerabilities, unbounded collections, and missing auth. |
+
+---
+
+## 2. The Core Firebase Architecture Gates
 
 ```mermaid
 flowchart TD

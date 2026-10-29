@@ -11,7 +11,17 @@ This skill establishes production engineering standards for deploying scalable, 
 
 ---
 
-## 1. The Core GCP Architecture Gates
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/cloud-run-production-standards.md](references/cloud-run-production-standards.md) | Non-root containers, concurrency tuning, liveness/startup probes. |
+| **Reference** | [references/gcp-iam-and-secret-manager.md](references/gcp-iam-and-secret-manager.md) | Secret Manager mounting, least-privilege service accounts, Workload Identity. |
+| **Utility** | [scripts/verify_gcp_hygiene.py](scripts/verify_gcp_hygiene.py) | Audits Dockerfiles, Terraform configs, and scripts for GCP credential leaks and root users. |
+
+---
+
+## 2. The Core GCP Architecture Gates
 
 ```mermaid
 flowchart TD

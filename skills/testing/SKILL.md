@@ -11,7 +11,17 @@ This skill establishes automated testing discipline across **Vitest**, **Jest**,
 
 ---
 
-## 1. The Core Testing Discipline Gates
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/playwright-accessible-locators.md](references/playwright-accessible-locators.md) | Accessible locator hierarchy, web-first assertions, zero sleep timeouts. |
+| **Reference** | [references/tdd-and-msw-contracts.md](references/tdd-and-msw-contracts.md) | Red-Green-Refactor cycle, MSW network interception handlers, fixture isolation. |
+| **Utility** | [scripts/verify_testing_hygiene.py](scripts/verify_testing_hygiene.py) | Audits tests for brittle XPath/class selectors, hardcoded sleep calls, and unisolated state. |
+
+---
+
+## 2. The Core Testing Discipline Gates
 
 ```mermaid
 flowchart TD

@@ -11,7 +11,17 @@ This skill enforces high-performance client architecture across React 19, Next.j
 
 ---
 
-## 1. Architecture Tiers & Component Separation
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/rsc-and-action-boundaries.md](references/rsc-and-action-boundaries.md) | RSC rules, leaf client boundaries, Server Actions with Zod validation. |
+| **Reference** | [references/client-state-lifecycle.md](references/client-state-lifecycle.md) | State scope matrix, optimistic UI updates via useOptimistic, URL state. |
+| **Utility** | [scripts/verify_frontend_architecture.py](scripts/verify_frontend_architecture.py) | Scans components for inline fetch calls, bloated client boundaries, and missing error boundaries. |
+
+---
+
+## 2. Architecture Tiers & Component Separation
 
 ```mermaid
 flowchart TD

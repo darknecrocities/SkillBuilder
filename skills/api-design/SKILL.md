@@ -11,7 +11,17 @@ This skill establishes API contract standards, RESTful resource modeling, OpenAP
 
 ---
 
-## 1. RESTful Contract Architecture
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/rfc-7807-problem-details.md](references/rfc-7807-problem-details.md) | Standardized error schemas, type URIs, problem detail envelopes. |
+| **Reference** | [references/idempotency-and-versioning.md](references/idempotency-and-versioning.md) | Idempotency keys, state caching, URI versioning, deprecation headers. |
+| **Utility** | [scripts/validate_openapi_spec.py](scripts/validate_openapi_spec.py) | CLI linter auditing OpenAPI specs for RFC 7807 compliance and security schemes. |
+
+---
+
+## 2. RESTful Contract Architecture
 
 ```mermaid
 flowchart LR

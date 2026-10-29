@@ -11,7 +11,17 @@ This skill establishes production architecture for global applications across **
 
 ---
 
-## 1. The Core i18n Architecture Gates
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/icu-messageformat-guide.md](references/icu-messageformat-guide.md) | ICU plural categories, parameter interpolation, number and date formatting. |
+| **Reference** | [references/rtl-layout-mirroring.md](references/rtl-layout-mirroring.md) | CSS logical properties matrix, directional icon flipping, RTL typography. |
+| **Utility** | [scripts/verify_i18n_hygiene.py](scripts/verify_i18n_hygiene.py) | Scans UI code for hardcoded English strings, physical CSS left/right properties, and broken plural syntax. |
+
+---
+
+## 2. The Core i18n Architecture Gates
 
 ```mermaid
 flowchart TD

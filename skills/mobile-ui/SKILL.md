@@ -9,7 +9,17 @@ The `mobile-ui` skill enforces ultra-premium craftsmanship across native iOS, An
 
 ---
 
-## 1. Apple iOS 18/19 HIG & SwiftUI Craftsmanship
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/apple-hig-and-material3.md](references/apple-hig-and-material3.md) | Apple HIG 44pt touch targets, Material 3 48dp metrics, dynamic type, safe areas. |
+| **Reference** | [references/native-motion-and-gestures.md](references/native-motion-and-gestures.md) | Damped spring physics, matchedGeometryEffect, tactile haptic feedback levels. |
+| **Utility** | [scripts/verify_mobile_ui_hygiene.py](scripts/verify_mobile_ui_hygiene.py) | Audits mobile code for missing safe area wrappers, hardcoded touch target violations, and linear animations. |
+
+---
+
+## 2. Apple iOS 18/19 HIG & SwiftUI Craftsmanship
 
 ### Spatial Layout Morphing (`matchedGeometryEffect`)
 Eliminate jarring navigation pushes and abrupt modal takeovers. Coordinate seamless geometry morphs between compact card surfaces and fullscreen viewports:

@@ -11,7 +11,17 @@ This skill establishes the **Skill Synthesis Protocol (SSP)**, enabling AI agent
 
 ---
 
-## 1. The Skill Synthesis Protocol (SSP) Workflow
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/skill-synthesis-protocol.md](references/skill-synthesis-protocol.md) | 4-stage synthesis lifecycle, structural requirements for minted skills. |
+| **Reference** | [references/project-architecture-sensing.md](references/project-architecture-sensing.md) | Fingerprint detection matrix for Cargo, Go, Flutter, Hardhat, dbt. |
+| **Utility** | [scripts/synthesize_project_skill.py](scripts/synthesize_project_skill.py) | CLI utility to introspect project manifests and mint persistent `.agents/skills/`. |
+
+---
+
+## 2. The Skill Synthesis Protocol (SSP) Workflow
 
 ```mermaid
 flowchart TD
