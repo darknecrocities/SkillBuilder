@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillBuilder • Swiss Kinetic Motion Showcase</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #050505;
+      color: #f0f0f0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Mono", "Menlo", monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid #222;
+      padding-bottom: 16px;
+    }
+    .title-block h1 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .title-block p {
+      font-size: 13px;
+      color: #888;
+      font-family: "SF Mono", "Menlo", monospace;
+      margin-top: 4px;
+    }
+    .meta-badges {
+      display: flex;
+      gap: 10px;
+    }
+    .badge {
+      font-family: "SF Mono", "Menlo", monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      border: 1px solid #333;
+      background: #111;
+      border-radius: 4px;
+      color: #ccc;
+    }
+    .badge.active {
+      border-color: #fff;
+      color: #fff;
+    }
+    .video-viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border: 1px solid #282828;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 1px rgba(255,255,255,0.2);
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .hud-overlay {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      font-family: "SF Mono", "Menlo", monospace;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .controls-panel {
+      background: #0d0d0d;
+      border: 1px solid #222;
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .scrubber-bar {
+      width: 100%;
+      height: 6px;
+      background: #222;
+      border-radius: 3px;
+      position: relative;
+      cursor: pointer;
+    }
+    .scrubber-fill {
+      height: 100%;
+      width: 0%;
+      background: #fff;
+      border-radius: 3px;
+    }
+    .buttons-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    button {
+      background: #161616;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: "SF Mono", "Menlo", monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    button:hover {
+      background: #252525;
+      border-color: #555;
+    }
+    .time-display {
+      font-family: "SF Mono", "Menlo", monospace;
+      font-size: 12px;
+      color: #aaa;
+    }
+    .scene-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .scene-card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 4px;
+      padding: 10px;
+      cursor: pointer;
+      font-family: "SF Mono", "Menlo", monospace;
+      font-size: 11px;
+      transition: all 0.15s ease;
+    }
+    .scene-card:hover {
+      border-color: #555;
+      background: #181818;
+    }
+    .scene-card .scene-time {
+      color: #666;
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+    .scene-card .scene-title {
+      color: #fff;
+      font-weight: 600;
+    }
+    .scene-card .scene-trans {
+      color: #888;
+      font-size: 10px;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="title-block">
+        <h1>SkillBuilder • Product Marketing Film</h1>
+        <p>Swiss Grid & Kinetic Type • Pure High-Contrast Monochrome • Natural Male Voiceover</p>
+      </div>
+      <div class="meta-badges">
+        <span class="badge active">1080P • 30 FPS</span>
+        <span class="badge">48kHz STEREO</span>
+        <span class="badge">TIGHT ZOOM & WORD TRACKING</span>
+        <span class="badge">HUD LOCK-ON BRACKETS</span>
+        <span class="badge">SWISS GRID</span>
+      </div>
+    </div>
+
+    <div class="video-viewport">
+      <video id="player" src="skillbuilder_showcase_cinematic.mp4" playsinline></video>
+      <div class="hud-overlay">
+        <span>SKILLBUILDER AGENTIC HARNESS • MASTER TIMECODE</span>
+        <span id="hud-time">00:00:00:00</span>
+      </div>
+    </div>
+
+    <div class="controls-panel">
+      <div class="scrubber-bar" id="scrubber">
+        <div class="scrubber-fill" id="scrubber-fill"></div>
+      </div>
+      <div class="buttons-row">
+        <div class="btn-group">
+          <button id="play-btn">PLAY / PAUSE</button>
+          <button id="restart-btn">REPLAY</button>
+          <button id="mute-btn">MUTE / UNMUTE</button>
+        </div>
+        <div class="time-display" id="time-text">00:00 / 00:46</div>
+        <div class="btn-group">
+          <button id="fs-btn">FULLSCREEN</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene-grid">
+      <div class="scene-card" onclick="seekTo(0.0)">
+        <div class="scene-time">00:00 - 03:75</div>
+        <div class="scene-title">01. WHAT IF...</div>
+        <div class="scene-trans">Prompt Roulette & Razor Wipe</div>
+      </div>
+      <div class="scene-card" onclick="seekTo(3.75)">
+        <div class="scene-time">03:75 - 07:60</div>
+        <div class="scene-title">02. ZERO MOCK SLOP</div>
+        <div class="scene-trans">Feathered Iris & Strike Slashes</div>
+      </div>
+      <div class="scene-card" onclick="seekTo(7.60)">
+        <div class="scene-time">07:60 - 11:40</div>
+        <div class="scene-title">03. SENIOR DISCIPLINE</div>
+        <div class="scene-trans">Shutter Grid & Cryptographic Glyph Flicker</div>
+      </div>
+      <div class="scene-card" onclick="seekTo(11.40)">
+        <div class="scene-time">11:40 - 15:30</div>
+        <div class="scene-title">04. ENTER SKILLBUILDER</div>
+        <div class="scene-trans">Specular Light Sweep & 36 Skills Counter</div>
+      </div>
+      <div class="scene-card" onclick="seekTo(15.30)">
+        <div class="scene-time">15:30 - 19:40</div>
+        <div class="scene-title">05. FULL-SCALE MODE</div>
+        <div class="scene-trans">Drafting Blade & Paper White Inversion</div>
+      </div>
+      <div class="scene-card" onclick="seekTo(19.40)">
+        <div class="scene-time">19:40 - 23:80</div>
+        <div class="scene-title">06. REAL PERSISTENCE</div>
+        <div class="scene-trans">Fluid Capsule Dissolve & Schemas</div>
+      </div>
+      <div class="scene-card" onclick="seekTo(23.80)">
+        <div class="scene-time">23:80 - 27:60</div>
+        <div class="scene-title">07. 500-LINE CEILING</div>
+        <div class="scene-trans">Concentric Ripple & Gauge Charging</div>
+      </div>
+      <div class="scene-card" onclick="seekTo(27.60)">
+        <div class="scene-time">27:60 - 31:80</div>
+        <div class="scene-title">08. 5-TIER VERIFICATION</div>
+        <div class="scene-trans">Curtain Split & Sonar Radar Reticle</div>
+      </div>
+      <div class="scene-card" onclick="seekTo(31.80)">
+        <div class="scene-time">31:80 - 35:80</div>
+        <div class="scene-title">09. ANTIGRAVITY AGENTS</div>
+        <div class="scene-trans">Diagonal Laser Cut & Synced Conduits</div>
+      </div>
+      <div class="scene-card" onclick="seekTo(35.80)">
+        <div class="scene-time">35:80 - 40:00</div>
+        <div class="scene-title">10. CONVENTIONAL PRS</div>
+        <div class="scene-trans">Aperture Scale-Down & Git Workflow</div>
+      </div>
+      <div class="scene-card" onclick="seekTo(40.00)">
+        <div class="scene-time">40:00 - 46:00</div>
+        <div class="scene-title">11. SKILLBUILDER APEX</div>
+        <div class="scene-trans">Particle Dissolve into Monolith Emblem</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const player = document.getElementById('player');
+    const playBtn = document.getElementById('play-btn');
+    const restartBtn = document.getElementById('restart-btn');
+    const muteBtn = document.getElementById('mute-btn');
+    const fsBtn = document.getElementById('fs-btn');
+    const scrubber = document.getElementById('scrubber');
+    const scrubberFill = document.getElementById('scrubber-fill');
+    const timeText = document.getElementById('time-text');
+    const hudTime = document.getElementById('hud-time');
+
+    playBtn.addEventListener('click', () => {
+      if (player.paused) {
+        player.play();
+        playBtn.textContent = 'PAUSE';
+      } else {
+        player.pause();
+        playBtn.textContent = 'PLAY';
+      }
+    });
+
+    restartBtn.addEventListener('click', () => {
+      player.currentTime = 0;
+      player.play();
+      playBtn.textContent = 'PAUSE';
+    });
+
+    muteBtn.addEventListener('click', () => {
+      player.muted = !player.muted;
+      muteBtn.textContent = player.muted ? 'UNMUTE' : 'MUTE';
+    });
+
+    fsBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        player.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    });
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function formatHUDTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      const f = Math.floor((sec * 30) % 30);
+      return `00:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}:${String(f).padStart(2, '0')}`;
+    }
+
+    player.addEventListener('timeupdate', () => {
+      const prog = (player.currentTime / (player.duration || 46.0)) * 100;
+      scrubberFill.style.width = `${prog}%`;
+      timeText.textContent = `${formatTime(player.currentTime)} / ${formatTime(player.duration || 46.0)}`;
+      hudTime.textContent = formatHUDTime(player.currentTime);
+    });
+
+    scrubber.addEventListener('click', (e) => {
+      const rect = scrubber.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      player.currentTime = pos * (player.duration || 46.0);
+    });
+
+    function seekTo(seconds) {
+      player.currentTime = seconds;
+      player.play();
+      playBtn.textContent = 'PAUSE';
+    }
+  </script>
+</body>
+</html>
