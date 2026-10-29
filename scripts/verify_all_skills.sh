@@ -8,7 +8,7 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-echo "=== Running SkillBuilder Master 43-Suite Verification Runner ==="
+echo "=== Running SkillBuilder Master 44-Suite Verification Runner ==="
 echo "Repository: ${REPO_DIR}"
 echo ""
 
@@ -225,9 +225,14 @@ python3 "${REPO_DIR}/skills/web-ui/tests/test_verify_web_ui_hygiene.py"
 echo ""
 
 # 43. Local LLM Quantized Inference & Routing Tests
-echo "[43/43] Running local-llm quantized inference & hybrid routing tests..."
+echo "[43/44] Running local-llm quantized inference & hybrid routing tests..."
 python3 "${REPO_DIR}/skills/local-llm/tests/test_verify_local_llm_hygiene.py"
 echo ""
+
+# 44. Deduplicated Single-Slot Backup & Sensitive Deletion Gate Tests
+echo "[44/44] Running deduplicated backup & sensitive deletion guardrail tests..."
+python3 "${REPO_DIR}/skills/database/tests/test_manage_deduplicated_backup.py"
+echo ""
 echo "=========================================================="
-echo "[SUCCESS] ALL 43 SKILLBUILDER VERIFICATION SUITES PASSED!"
+echo "[SUCCESS] ALL 44 SKILLBUILDER VERIFICATION SUITES PASSED!"
 echo "=========================================================="

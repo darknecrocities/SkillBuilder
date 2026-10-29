@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 verify_full_scale_orchestration.py - Audits repository readiness for Full-Scale Mode,
-verifying the 32-skill registry, Autonomous Skill Resonance (ASR), and token budgeting.
+verifying the 35-skill registry, cross-agent sync, Autonomous Skill Resonance (ASR), and token budgeting.
 
 Author: Arron Kian Parejas (@darknecrocities)
 Part of SkillBuilder Full-Scale Mode Engine
@@ -16,44 +16,12 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
 REQUIRED_SKILLS: Set[str] = {
-    # Original 22 Skills
-    "3d",
-    "ai",
-    "anti-slop",
-    "api-design",
-    "backend",
-    "continuous-learning",
-    "database",
-    "devops",
-    "frontend",
-    "full-scale-mode",
-    "fullstack",
-    "git-workflow",
-    "observability",
-    "performance",
-    "production-etiquette",
-    "prompt-polish",
-    "qa",
-    "refactor",
-    "research",
-    "security",
-    "ui",
-    "world-class-engineering",
-    # 10 Expanded Skills
-    "aws",
-    "data-pipelines",
-    "firebase",
-    "gcp",
-    "i18n",
-    "project-skills",
-    "routing",
-    "state-management",
-    "supabase",
-    "testing",
-    # Mobile, Web UI & Local LLM Skills
-    "local-llm",
-    "mobile-ui",
-    "web-ui"
+    "3d", "ai", "anti-slop", "api-design", "aws", "backend", "continuous-learning",
+    "data-pipelines", "database", "devops", "firebase", "frontend", "full-scale-mode",
+    "fullstack", "gcp", "git-workflow", "i18n", "local-llm", "mobile-ui", "observability",
+    "performance", "production-etiquette", "project-skills", "prompt-polish", "qa",
+    "refactor", "research", "routing", "security", "state-management", "supabase",
+    "testing", "ui", "web-ui", "world-class-engineering",
 }
 
 BLOATED_FILLER_PATTERNS = re.compile(
@@ -88,6 +56,34 @@ def audit_skill_registry(repo_root: Path) -> List[Dict[str, Any]]:
             "file": str(skills_dir)
         })
 
+    return violations
+
+
+def audit_cross_skill_sync(repo_root: Path) -> List[Dict[str, Any]]:
+    """Verifies that AGENTS.md, rules/AGENTS.md, plugin.json, and core orchestrators stay synchronized."""
+    violations: List[Dict[str, Any]] = []
+    root_agents = repo_root / "AGENTS.md"
+    rules_agents = repo_root / "rules" / "AGENTS.md"
+    if root_agents.exists() and rules_agents.exists():
+        if root_agents.read_text(encoding="utf-8") != rules_agents.read_text(encoding="utf-8"):
+            violations.append({
+                "rule": "CROSS-SKILL-SYNC-DRIFT",
+                "message": "AGENTS.md and rules/AGENTS.md have drifted out of sync.",
+                "file": str(rules_agents),
+            })
+
+    sync_checks = [
+        (repo_root / "plugin.json", "35 modular skills"),
+        (repo_root / "skills" / "full-scale-mode" / "SKILL.md", "35 modular engineering skills"),
+        (repo_root / "skills" / "world-class-engineering" / "SKILL.md", "The 35 Modular Engineering Skills"),
+    ]
+    for fpath, expected_phrase in sync_checks:
+        if fpath.exists() and expected_phrase.lower() not in fpath.read_text(encoding="utf-8").lower():
+            violations.append({
+                "rule": "CROSS-SKILL-SYNC-DRIFT",
+                "message": f"{fpath.name} is missing synchronized registry phrase '{expected_phrase}'.",
+                "file": str(fpath),
+            })
     return violations
 
 
@@ -264,8 +260,9 @@ def main() -> int:
     repo_root = Path(args.path).resolve()
     all_violations: List[Dict[str, Any]] = []
 
-    # 1. Audit registry
+    # 1. Audit registry & cross-skill synchronization
     all_violations.extend(audit_skill_registry(repo_root))
+    all_violations.extend(audit_cross_skill_sync(repo_root))
 
     # 2. Audit prompt if provided
     if args.prompt:

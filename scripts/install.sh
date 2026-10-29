@@ -48,8 +48,10 @@ install_global() {
   mkdir -p "$(dirname "${GLOBAL_PLUGIN_DIR}")"
 
   if [ -d "${GLOBAL_PLUGIN_DIR}" ] && [ ! -L "${GLOBAL_PLUGIN_DIR}" ]; then
-    BACKUP_DIR="${GLOBAL_PLUGIN_DIR}.bak.$(date +%s)"
-    echo "Backing up existing directory to: ${BACKUP_DIR}"
+    BACKUP_DIR="${GLOBAL_PLUGIN_DIR}.bak"
+    echo "[SAFEGUARD] Existing directory detected at ${GLOBAL_PLUGIN_DIR}."
+    echo "Maintaining single canonical backup slot (zero duplicate backup spam): ${BACKUP_DIR}"
+    rm -rf "${BACKUP_DIR}"
     mv "${GLOBAL_PLUGIN_DIR}" "${BACKUP_DIR}"
   elif [ -L "${GLOBAL_PLUGIN_DIR}" ]; then
     echo "Removing existing symlink..."

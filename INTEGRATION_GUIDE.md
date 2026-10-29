@@ -18,7 +18,7 @@ Antigravity discovers skills and plugins hierarchically. Choose the method that 
 
 ## 2. Method 1: Global Plugin Setup (Recommended)
 
-Installing SkillBuilder as a global plugin ensures that **any** Antigravity session on your workstation automatically inherits all 9 skills without requiring project-by-project setup.
+Installing SkillBuilder as a global plugin ensures that **any** Antigravity session on your workstation automatically inherits all 35 skills without requiring project-by-project setup.
 
 ### Step 1: Clone or Copy SkillBuilder
 ```bash
@@ -112,9 +112,10 @@ bash scripts/install.sh --project /path/to/my-project
 Once installed, Antigravity leverages **Progressive Disclosure** to prevent context window bloat:
 
 1. **Lightweight Skill Discovery**: Antigravity initially injects only the skill name and 1-line description into the agent's context.
-2. **On-Demand Activation**: When you ask for frontend UI, backend APIs, database schemas, prompt refinement, or debugging, the agent automatically activates the relevant skill (e.g. `ui-frontend-engineering`, `backend-systems-engineering`, or `prompt-refinement-and-metacognition`).
+2. **On-Demand Activation & Autonomous Skill Resonance (ASR)**: When you ask for frontend UI, backend APIs, database schemas, cloud deployments, or debugging, the agent automatically activates the relevant skill (e.g. `/web-ui`, `/mobile-ui`, `/backend`, `/database`, `/firebase`, `/supabase`, `/aws`, `/gcp`, `/full-scale-mode`).
 3. **Prompt Polishing First**: The agent will parse, polish, and structure your raw prompt before modifying source code.
-4. **Mandatory Verification**: Before reporting completion, the agent will run tests, linters, and the 500-line source check.
+4. **Deduplicated Backups & Sensitive Deletion Disclosures**: Before migrating schemas or mutating cloud storage, the agent verifies a single SHA-256 content-hashed backup (`.backups/backup_manifest.json`) without creating duplicate backup spam, and always warns you first before deleting sensitive tables, buckets, or files.
+5. **Mandatory Verification**: Before reporting completion, the agent will run tests, linters, and the 500-line source check.
 
 ---
 
@@ -122,18 +123,15 @@ Once installed, Antigravity leverages **Progressive Disclosure** to prevent cont
 
 ### How to Confirm Skills are Active in Chat
 Open any conversation in Antigravity and type:
-> *"What skills do you have available for backend and prompt polishing?"*
+> *"What skills do you have available for database, cloud storage, and full-scale orchestration?"*
 
-The agent should confirm awareness of:
-- `prompt-refinement-and-metacognition`
-- `backend-systems-engineering`
-- `ui-frontend-engineering`
-- `database-and-datastore-engineering`
-- `cloud-devops-infrastructure`
-- `ai-and-llm-engineering`
-- `qa-testing-and-error-resolution`
-- `world-class-engineering`
-- `production-etiquette`
+The agent should confirm awareness of the **35 synchronized skills**, including:
+- `/full-scale-mode` & `/world-class-engineering`
+- `/prompt-polish` & `/anti-slop`
+- `/ui`, `/web-ui`, `/mobile-ui`, `/3d`, `/frontend`, `/routing`, `/state-management`, `/i18n`
+- `/backend`, `/fullstack`, `/api-design`, `/database`, `/firebase`, `/supabase`, `/aws`, `/gcp`, `/data-pipelines`, `/devops`
+- `/security`, `/ai`, `/local-llm`, `/research`
+- `/testing`, `/qa`, `/performance`, `/observability`, `/production-etiquette`, `/refactor`, `/git-workflow`, `/continuous-learning`, `/project-skills`
 
 ### Troubleshooting Common Issues
 

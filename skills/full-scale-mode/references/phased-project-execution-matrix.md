@@ -1,6 +1,6 @@
 # Phased Project Execution Matrix: The 3-Phase Triad Cadence
 
-> **Scope**: End-to-end phased delivery lifecycle for Full-Scale Mode (`/full-scale-mode` / `/world-class-engineering`), organizing all 32 SkillBuilder skills across three sequential, synchronized tiers with parallel subagent execution tracks.
+> **Scope**: End-to-end phased delivery lifecycle for Full-Scale Mode (`/full-scale-mode` / `/world-class-engineering`), organizing all 35 SkillBuilder skills across three sequential, synchronized tiers with parallel subagent execution tracks.
 
 ---
 
@@ -88,4 +88,4 @@ flowchart TD
   - Persists learned project invariants to `.agents/learned_conventions.md` (`/continuous-learning`).
   - Decomposes commits into cohesive diffs strictly under the 1,000-line review budget (`/git-workflow`).
   - Pushes remote tracking branch (`git push origin <branch>`) and authors ready-to-merge GitHub Pull Request (`gh pr create`).
-- **Exit Gate (Verification & Release Gate)**: 100% green test suites across all 40 runners; 0 line limit violations; clean working tree pushed to remote; active PR ready to review.
+- **Exit Gate (Verification & Release Gate)**: 100% green test suites across all 44 runners; 0 line limit violations; clean working tree pushed to remote; active PR ready to review.

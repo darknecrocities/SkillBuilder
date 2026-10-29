@@ -16,6 +16,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../s
 from verify_full_scale_orchestration import (
     REQUIRED_SKILLS,
     analyze_skill_resonance,
+    audit_cross_skill_sync,
     audit_phased_plan,
     audit_skill_registry,
     audit_subagent_prompt,
@@ -31,6 +32,10 @@ class TestVerifyFullScaleOrchestration(unittest.TestCase):
         self.assertEqual(len(REQUIRED_SKILLS), 35)
         violations = audit_skill_registry(self.repo_root)
         self.assertEqual(len(violations), 0, f"Expected clean registry, got: {violations}")
+
+    def test_cross_skill_sync_is_clean(self):
+        violations = audit_cross_skill_sync(self.repo_root)
+        self.assertEqual(len(violations), 0, f"Expected 0 cross-skill sync drift, got: {violations}")
 
     def test_detects_missing_skill_in_temp_registry(self):
         violations = audit_skill_registry(Path(__file__).parent)

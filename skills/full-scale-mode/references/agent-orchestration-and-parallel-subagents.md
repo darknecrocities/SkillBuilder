@@ -78,6 +78,8 @@ To prevent token waste and conversational ambiguity, subagents communicate findi
     },
     "tests_passed": { "type": "integer" },
     "tests_failed": { "type": "integer" },
+    "backup_manifest_sha256": { "type": "string" },
+    "sensitive_deletions_disclosed": { "type": "boolean" },
     "blockers_or_risks": {
       "type": "array",
       "items": { "type": "string" }
@@ -128,7 +130,7 @@ flowchart TD
     end
 
     subgraph Stage3 ["Stage 3: Integration & Global Verification"]
-        Master["Master Orchestrator: Wire Route with View & Run 29-Suite QA"]
+        Master["Master Orchestrator: Wire Route with View & Run 44-Suite QA"]
     end
 
     BE_Contract --> BE_Impl
@@ -141,6 +143,7 @@ flowchart TD
 1. **Contract-First Stabilization**: The backend/data contract (types, interfaces, DTOs) must be committed or written before the UI subagent begins consuming them.
 2. **Zero Overlapping Edits**: Never permit Subagent A and Subagent B to write to the same file. If a file requires modifications from both domains (e.g. `App.tsx` or `index.ts`), the primary orchestrator performs the merge after both subagents finish.
 3. **Sandbox Workspaces for Exploratory Work**: When a subagent performs deep research or prototype benchmarks, assign it a temporary branch or scratch workspace.
+4. **Shared Single-Slot Storage Backup Lock & Sensitive Deletion Gate**: Concurrent backend/cloud subagents (`Track 2A` and `Track 2B`) coordinate database, Firebase, Supabase, AWS, and GCP snapshots through `.backups/backup_manifest.json` (`manage_deduplicated_backup.py`). If the state SHA-256 is unchanged, agents reuse the single canonical backup without creating duplicate files. Any destructive deletion MUST halt and ask the user for confirmation first.
 
 ---
 

@@ -36,9 +36,9 @@ Consult the specialized references and reusable templates for detailed execution
 
 ---
 
-## 1.5 The 22 Modular Engineering Skills (`/`)
+## 1.5 The 35 Modular Engineering Skills (`/`)
 
-The SkillBuilder ecosystem decomposes into 22 focused, highly-actionable skills directly callable via `/`:
+The SkillBuilder ecosystem decomposes into 35 focused, synchronized skills directly callable via `/`:
 
 | Command | Skill Name | Scope & Core Responsibility |
 | :--- | :--- | :--- |
@@ -48,20 +48,33 @@ The SkillBuilder ecosystem decomposes into 22 focused, highly-actionable skills 
 | `/research` | **Autonomous Research & Fallbacks** | Discovers and evaluates production-grade library alternatives when packages fail. |
 | `/qa` | **Responsiveness QA & Sub-Agents** | Viewport audit (375px/768px/1280px+), a11y, touch targets (>=44px), sub-agent QA. |
 | `/ui` | **UI Design Systems & Tokens** | Apple HIG, Cupertino blur materials, squircle smoothing, high-contrast neutrals, Lucide SVGs. |
+| `/mobile-ui` | **Native Mobile UI/UX** | iOS 18/19 HIG, SwiftUI matchedGeometry, Material 3 Expressive, safe areas, and haptics. |
+| `/web-ui` | **Modern Web Design Systems** | Container queries (`@container`), CSS View Transitions, OKLCH colors, fluid `clamp()` curves. |
 | `/3d` | **3D WebGL & Product Showcase** | Three.js, React Three Fiber, PBR clearcoat shaders, Draco GLTF compression, 60fps budgets. |
 | `/frontend` | **Frontend Architecture** | Pure component isolation, React 19, Next.js App Router, Flutter, effect cleanup. |
+| `/routing` | **File-Based Routing** | Deep layout hierarchies, parallel/intercepting routes, and typed search params. |
+| `/state-management` | **Declarative State Machines** | TanStack Query key factories, Zustand sliced stores, XState machines, and signals. |
+| `/i18n` | **Internationalization** | Multi-locale dictionaries, ICU MessageFormat, and bidirectional RTL layout mirroring. |
 | `/backend` | **Backend Systems Engineering** | Clean architecture, domain boundaries, strict schema validation (Zod, Pydantic v2). |
 | `/security` | **Security Hardening** | OWASP Top 10 defenses, zero hardcoded secrets, SQL injection defense, CORS/CSP. |
 | `/fullstack` | **Fullstack Anti-Mock Delivery** | Complete vertical slices from UI to real database (PostgreSQL/SQLite) with zero mock arrays. |
-| `/database` | **Database & Datastores** | Zero-downtime migrations (expand/contract), index optimization, ACID integrity. |
+| `/database` | **Database & Datastores** | Zero-downtime migrations (expand/contract), single-slot SHA-256 backups, pre-deletion user gate. |
+| `/gcp` | **Google Cloud Platform** | Cloud Run serverless deployment, Workload Identity, Cloud SQL/GCS deletion protection. |
+| `/aws` | **Amazon Web Services** | Resilient Lambda, S3 public blocks, KMS encryption, `RemovalPolicy.RETAIN` backup hygiene. |
+| `/firebase` | **Firebase & Firestore** | Firestore Security Rules v2, atomic transactions, single-slot exports, soft-delete guards. |
+| `/supabase` | **Supabase & Postgres RLS** | Mandatory Row Level Security (RLS), Edge Functions, pgvector, pre-migration snapshots. |
+| `/data-pipelines` | **Resilient Data Pipelines** | Streaming ETL with backpressure, DuckDB in-process analytics, and Dead-Letter Queues (DLQ). |
 | `/devops` | **Cloud & Container DevOps** | Hardened multi-stage Dockerfiles (`USER 10001`), docker-compose, CI/CD pipelines. |
 | `/ai` | **AI & LLM Engineering** | Production Gemini SDK, structured JSON outputs, defensive tool calling, token budgets. |
+| `/local-llm` | **Local LLM & Edge AI** | Quantized inference (GGUF Q4_K_M), Ollama, MLX, WebLLM, GBNF grammars, hybrid routing. |
 | `/prompt-polish` | **Prompt Refinement (PPE)** | Transforms raw prompts into token-efficient engineering specifications. |
 | `/production-etiquette` | **Production Etiquette** | Secret hygiene (`.env.example`), resilient network client (timeouts, retry with jitter). |
 | `/performance` | **Performance & Web Vitals** | Core Web Vitals (LCP, CLS, INP), N+1 query elimination, bundle size budgets. |
 | `/api-design` | **API Contract Design** | OpenAPI 3.1 specifications, RFC 7807 problem details, idempotency headers. |
 | `/observability` | **Distributed Telemetry** | OpenTelemetry tracing, structured JSON logs with correlation IDs, health probes. |
+| `/testing` | **TDD & Test Automation** | TDD red-green-refactor, Vitest/Jest, Playwright accessible ARIA locators, MSW mocking. |
 | `/continuous-learning` | **Conversational Learning (CLP)** | Persists project invariants to `.agents/learned_conventions.md` to prevent repeated errors. |
+| `/project-skills` | **Autonomous Skill Minting** | Skill Synthesis Protocol (SSP) minting repository-specific skills in `.agents/skills/`. |
 | `/refactor` | **Safe Refactoring** | Strangler Fig pattern, decomposing god files approaching the 500-line ceiling. |
 | `/git-workflow` | **Git Workflow & Releases** | Git branching, commit chunking (< 1,000 lines), Conventional Commits, release tagging. |
 
@@ -210,6 +223,11 @@ When orchestrating multi-agent workflows or subagent delegations, assign clear, 
 4. **Security Reviewer**: Analyzes trust boundaries, input validation, authentication, and secret hygiene.
 5. **Code Reviewer**: Evaluates code against the prioritized rubric in [references/code-review.md](references/code-review.md).
 6. **Documentation Reviewer**: Ensures setup guides, ADRs, and API contracts reflect reality.
+
+### Simultaneous Multi-Agent Synchronization & Storage Safety Rules:
+- **Zero Overlapping File Edits**: Concurrent subagents must never modify the same file simultaneously; partition ownership strictly by domain track.
+- **Idempotent Single-Slot Backups (Zero Spam)**: When multiple subagents interact with databases, Firebase, Supabase, AWS, or GCP storage, they coordinate through `.backups/backup_manifest.json` (`manage_deduplicated_backup.py`). If the resource's SHA-256 state digest is unchanged, agents reuse the existing canonical backup without creating duplicate `.bak.1`, `.bak.2` copies.
+- **Sensitive Deletion Human-in-the-Loop Gate**: Subagents must halt and notify the user first (disclosing target resource, sensitivity tier, affected scope, and verified backup SHA-256 hash) before executing any hard delete, `DROP`, `TRUNCATE`, or bucket/collection purge.
 
 *Rule*: Do not spawn subagents for trivial tasks. The primary agent retains final accountability for integrating, verifying, and reporting all work.
 
