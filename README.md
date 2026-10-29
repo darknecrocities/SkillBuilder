@@ -9,7 +9,7 @@
 
 # SkillBuilder: Agentic Engineering Skills
 
-SkillBuilder is a production-grade suite of **36 specialized Agent Skills**, architectural guardrails, native Antigravity lifecycle hooks, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
+SkillBuilder is a production-grade suite of **36 specialized Agent Skills**, the **5-Stage Orchestration Lifecycle**, the **Orchestration Memory Subsystem**, **Multi-Tier Harness Engineering**, native Antigravity lifecycle hooks, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
 
 <p align="center">
   <img src="assets/skillbuilder-workflow-animation.svg" alt="SkillBuilder Universal AI Workflow Animation" width="100%" />
@@ -87,7 +87,7 @@ When starting a project or a major feature from zero, stack `/plan` with `/full-
 | Prompt Component | Role in Strategy | Strategic Value & Agent Impact |
 | :--- | :--- | :--- |
 | `• plan` | Planning Gate | Halts unguided generation; compels the agent to author an interactive RFC plan with file trees and milestones before code is touched. |
-| `• full-scale-mode` | Master Orchestrator | Activates the 3-Phase Triad Cadence (Frontend, Backend, Testing): enforces 500-line file limits, decomposes modules, and coordinates subagent execution. |
+| `• full-scale-mode` | Master Orchestrator | Activates the 5-Stage Orchestration Lifecycle (Discover, Plan, Build, Harness Loop, Release) & Triad Cadence: manages active session memory (`.agents/memory/`), enforces 500-line file limits, and runs closed-loop verification. |
 | `two tone color of white and black` | Palette Boundary | Eliminates generic AI gradients and vibrant slop; anchors styling to disciplined monochrome tokens (`#0A0A0B` / `#FFFFFF`). |
 | `use google fonts` | Typographic Guardrail | Enforces clean web font imports (Inter, Roboto Mono) instead of uncontrolled generic CSS fallbacks. |
 | `1 page` | Scope Ceiling | Imposes a hard boundary preventing premature routing bloat, incomplete sub-pages, or runaway token consumption. |
@@ -245,23 +245,118 @@ SkillBuilder runs natively across the entire modern AI coding ecosystem:
 
 ## The Antigravity Power Combo Strategy (`/plan` + `/world-class-engineering`)
 
-To produce the highest-quality software architecture, verified test suites, and clean, ready-to-merge GitHub Pull Requests on **Google Antigravity**, combine slash commands into the **Power Combo Workflow**:
+To produce the highest-quality software architecture, verified test suites, persistent memory, and clean, ready-to-merge GitHub Pull Requests on **Google Antigravity**, combine slash commands into the **Power Combo Workflow**:
 
 ```text
 /plan /full-scale-mode <your feature or refactoring goal>
 ```
 
 ```mermaid
-flowchart TD
-    INPUT["User: /plan /full-scale-mode <Task>"] --> P1["Phase 1: Frontend & Interface Architecture (PSC-1)<br/>Tokens • Routing • State • 3D • i18n • Anti-Slop"]
-    P1 --> P2["Phase 2: Backend, Cloud & Data Infrastructure (PSC-2)<br/>Clean Arch • DB • Cloud Platforms • Pipelines • Security"]
-    P2 --> P3["Phase 3: Testing, QA, Telemetry & Verifiable Release (PSC-3)<br/>TDD • Two-Tier QA • Tracing • Atomic Git PR • Skill Minting"]
-    P3 --> RELEASE["Ready-to-Merge PR + Walkthrough + Minted Skills"]
+flowchart LR
+    S1["Stage 1: Discover & Recall<br/><b>Manifests • Invariants • ASR</b>"]
+    S2["Stage 2: Plan & Blueprint<br/><b>RFC • Boundaries • Contracts</b>"]
+    S3["Stage 3: Build & Execution<br/><b>Triad Cadence (P1 • P2 • P3)</b>"]
+    S4["Stage 4: Harness & Loop<br/><b>5 Tiers • Self-Healing Loop</b>"]
+    S5["Stage 5: Release & Consolidate<br/><b>Memory • PR • Walkthrough</b>"]
+
+    S1 --> S2 --> S3 --> S4 --> S5
+    S4 -.->|Loop on Failure (Max 3x)| S3
 ```
 
-### The 3-Phase Triad Cadence (Frontend, Backend, Testing/Release)
+### The 5-Stage Orchestration Lifecycle
 
-SkillBuilder orchestrates complex multi-agent engineering workflows through the **3-Phase Triad Cadence**. Rather than fragmenting work into disconnected passes, the Triad Cadence organizes the entire 36-skill ecosystem into 3 synchronized tiers backed by **Phase Skill Clusters (PSC-1 through PSC-3)**:
+Every project executed under Full-Scale Mode advances through five discrete, verifiable stages:
+
+1. **Stage 1: Discover & Memory Recall (`stage:discover`)**:
+   - Introspects repository manifests, runs **Autonomous Skill Resonance (ASR)**, detects platform targets (`mobile`, `web`, `universal`), and recalls architectural invariants from `.agents/learned_conventions.md`.
+   - Initializes active session memory in `.agents/memory/orchestration_state.json`.
+2. **Stage 2: Plan & Architectural Blueprint (`stage:plan`)**:
+   - Structures ambiguous requests into token-efficient RFC technical specifications (`/prompt-polish`).
+   - Defines non-overlapping file boundaries per subagent track, data models, and API contracts (`/api-design`).
+3. **Stage 3: Build & Atomic Execution (`stage:build`)**:
+   - Executes domain tracks across the **3-Phase Triad Cadence** (Frontend, Backend, Testing).
+   - Strict Anti-Slop mandate: zero fake mocks, real persistence (`/fullstack`), and 500-line physical file limits.
+   - Idempotent single-slot SHA-256 deduplicated backups before mutating storage (`manage_deduplicated_backup.py`).
+4. **Stage 4: Verify & Multi-Tier Harness Loop (`stage:verify` / `stage:loop`)**:
+   - Executes the 5-Tier Evaluation Harness (`orchestration_harness.py`).
+   - If checks fail, triggers the **Autonomous Self-Healing Loop**: diagnoses error signature $\rightarrow$ applies targeted atomic patch $\rightarrow$ re-runs full harness (max 3 iterations).
+5. **Stage 5: Release & Memory Consolidation (`stage:release`)**:
+   - Consolidates session memory into `.agents/memory/orchestration_state.json` and records learned invariants.
+   - Mints project skills via the Skill Synthesis Protocol (`/project-skills`).
+   - Commits within the 1,000-line budget, pushes tracking branch, and authors ready-to-merge GitHub Pull Request.
+
+---
+
+### Orchestration Memory Subsystem (`.agents/memory/`)
+
+Full-Scale Mode maintains active execution memory in `.agents/memory/orchestration_state.json` to coordinate subagents and resume sessions across multi-turn handoffs:
+
+```mermaid
+flowchart LR
+    Turn1["Turn 1: Discover & Plan"] -->|Init & Checkpoint| Memory[".agents/memory/orchestration_state.json"]
+    Turn2["Turn 2: Build & Execution"] -->|Update Registry & Phase| Memory
+    Turn3["Turn 3: Harness & Loop"] -->|Log Iterations & Tiers| Memory
+    Turn4["Turn 4: Release & Invariants"] -->|Consolidate & Complete| Memory
+```
+
+```bash
+# Initialize and view active session memory
+python3 skills/full-scale-mode/scripts/manage_orchestration_memory.py init --session-id "task-01" --goal "Build feature"
+python3 skills/full-scale-mode/scripts/manage_orchestration_memory.py status
+
+# Update stage checkpoints and advance
+python3 skills/full-scale-mode/scripts/manage_orchestration_memory.py checkpoint --stage BUILD --phase PHASE_2_BACKEND
+python3 skills/full-scale-mode/scripts/manage_orchestration_memory.py advance
+```
+
+---
+
+### Multi-Tier Harness Engineering & Autonomous Self-Healing Loop
+
+The evaluation harness (`skills/full-scale-mode/scripts/orchestration_harness.py`) enforces 5 multi-tiered quality and security gates:
+
+```mermaid
+flowchart TD
+    Build["Stage 3: Build & Atomic Execution"] --> H1["Tier 1: Static & Architectural Hygiene"]
+    H1 -->|Pass| H2["Tier 2: Contracts & Schema Validation"]
+    H2 -->|Pass| H3["Tier 3: Functional & TDD Test Suites"]
+    H3 -->|Pass| H4["Tier 4: Security, Resilience & Storage Backups"]
+    H4 -->|Pass| H5["Tier 5: Commit & Git Delivery Hygiene"]
+
+    H1 -.->|Fail| Loop["Autonomous Self-Healing Loop<br/>(Max 3 Iterations)"]
+    H2 -.->|Fail| Loop
+    H3 -.->|Fail| Loop
+    H4 -.->|Fail| Loop
+    H5 -.->|Fail| Loop
+
+    Loop --> Diagnose["1. Diagnose Error Signature"]
+    Diagnose --> Patch["2. Apply Targeted Atomic Patch"]
+    Patch --> Recheck["3. Re-run Full Harness (Regression Guard)"]
+    Recheck -->|Pass| H5
+    Recheck -->|Fail & Iteration < 3| Loop
+    Recheck -->|Fail & Iteration >= 3| Escalate["Halt & Escalate to Human with Failure Report"]
+
+    H5 -->|All 5 Tiers Pass| Release["Stage 5: Release & Memory Consolidation"]
+```
+
+| Harness Tier | Evaluation Scope | Non-Negotiable Invariants |
+| :--- | :--- | :--- |
+| **Tier 1: Static Hygiene** | Architecture | 500-line physical ceiling, anti-slop patterns (shields, neon gradients, obvious comments), prompt token budgets. |
+| **Tier 2: Contracts** | Interfaces | OpenAPI 3.1 contracts, RFC 7807 problem details, Python/TypeScript syntax integrity. |
+| **Tier 3: Functional** | TDD Suites | Automated unit & integration tests, semantic ARIA locators, 100% green test assertions. |
+| **Tier 4: Security** | Hardening | Zero hardcoded secrets, SQL parameterization, SSRF protection, non-root Docker (`USER 10001`), backup digests. |
+| **Tier 5: Git Delivery** | Releases | Conventional branch prefixes (`feat/`, `fix/`, `refactor/`), commit line budget (<1,000 lines). |
+
+```bash
+# Run all 5 harness tiers with bounded self-healing loop
+python3 skills/full-scale-mode/scripts/orchestration_harness.py --path . --loop --max-iterations 3 --strict
+```
+
+---
+
+### The 3-Phase Triad Cadence (Execution Core)
+
+Within **Stage 3 (Build)**, work executes across the 3 synchronized domain tiers backed by **Phase Skill Clusters (PSC-1 through PSC-3)**:
 
 1. **Phase 1: Frontend & Interface Architecture (PSC-1: Client & Experience Gate)**:
    - **Governing Skills**: `/frontend`, `/ui`, `/mobile-ui`, `/web-ui`, `/3d`, `/routing`, `/state-management`, `/i18n`, `/anti-slop`, `/prompt-polish`.
@@ -353,7 +448,7 @@ flowchart LR
 
 | Intent | Recommended Command Combination | Outcome |
 | :--- | :--- | :--- |
-| **Full-Scale Feature Delivery** | `/plan /full-scale-mode <goal>` (or `/world-class-engineering`) | 3-phase Triad Cadence (Frontend, Backend, Testing), Autonomous Skill Resonance, token budget ceilings, and chunked PR. |
+| **Full-Scale Feature Delivery** | `/plan /full-scale-mode <goal>` (or `/world-class-engineering`) | 5-Stage Lifecycle (Discover, Plan, Build, Harness Loop, Release), active session memory (`.agents/memory/`), 5-tier evaluation harness, and ready-to-merge PR. |
 | **Fullstack Vertical Slice** | `/plan /fullstack <goal>` | Real database migration, ORM repository, validated API route, and responsive UI without mocks. |
 | **Safe Refactoring** | `/plan /refactor <module>` | Characterization testing, Strangler Fig pattern, and decomposing files approaching 500 lines. |
 | **Two-Tier Full QA Pass** | `/plan /qa <scope>` | Dual-tier verification: Full UI/Frontend QA (`/qa ui`) and Full App Functional QA (`/qa app`). |
@@ -540,15 +635,15 @@ python3 skills/continuous-learning/scripts/record_learning.py --list
 
 ---
 
-## Automated Verification Suites (44 Suites)
+## Automated Verification Suites (48 Suites)
 
-SkillBuilder includes a master test runner executing 44 independent verification suites:
+SkillBuilder includes a master test runner executing 48 independent verification suites:
 
 ```bash
 ./scripts/verify_all_skills.sh
 ```
 
-All 44 suites run and pass in under 1.5s:
+All 48 suites run and pass in under 1.5s:
 1. **500-Line Source File Policy**: Verifies all source files adhere to the 500-line ceiling.
 2. **World-Class Engineering Unit Tests**: Validates line-checking and EOS extraction logic.
 3. **Anti-AI-Slop Tests**: Validates badge, mock array, and obvious comment sanitization.
@@ -605,6 +700,7 @@ All 44 suites run and pass in under 1.5s:
 ```text
 SkillBuilder/
 ├── plugin.json                                 # Antigravity plugin manifest (v3.2.0)
+├── hooks.json                                  # Antigravity native lifecycle safety hooks
 ├── README.md                                   # Comprehensive documentation & slash command index
 ├── INTEGRATION_GUIDE.md                        # Step-by-step setup guide for Antigravity
 ├── AGENTS.md                                   # Root rules enforced on all projects
@@ -612,7 +708,8 @@ SkillBuilder/
 │   └── AGENTS.md                               # Plugin-level rules
 ├── workspace/                                  # Developer Workspace & Presets
 ├── skills/
-│   ├── full-scale-mode/                        # Master 3-phase Triad Cadence & Autonomous Skill Resonance (ASR)
+│   ├── full-scale-mode/                        # Master 5-Stage Lifecycle, Orchestration Memory & Harness Loop
+│   ├── antigravity-automation/                 # Scheduled sidecars, in-session timers & lifecycle hooks
 │   ├── world-class-engineering/                # Master EOS & 500-line ceiling (aliased)
 │   ├── anti-slop/                              # Anti-AI-slop & clean craftsmanship
 │   ├── research/                               # Autonomous research & alternative fallbacks
@@ -648,7 +745,9 @@ SkillBuilder/
 │   ├── i18n/                                   # Internationalization, ICU formats & RTL layouts
 │   └── data-pipelines/                         # Resilient ETL, backpressure & DuckDB analytics
 └── scripts/
+    ├── hooks/                                  # Pre/Post-tool safety & line guard hook scripts
+    ├── skill_linter.py                         # Quality, link integrity & token budget linter
     ├── install.sh                              # Universal multi-platform installer
     ├── export_multiplatform.py                 # Multi-platform exporter (Cursor, Claude, Codex)
-    └── verify_all_skills.sh                    # Master 44-suite verification test runner
+    └── verify_all_skills.sh                    # Master 48-suite verification test runner
 ```
