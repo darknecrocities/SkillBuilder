@@ -9,7 +9,7 @@
 
 # SkillBuilder: Agentic Engineering Skills
 
-SkillBuilder is a production-grade suite of **35 specialized Agent Skills**, architectural guardrails, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
+SkillBuilder is a production-grade suite of **36 specialized Agent Skills**, architectural guardrails, native Antigravity lifecycle hooks, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
 
 <p align="center">
   <img src="assets/skillbuilder-workflow-animation.svg" alt="SkillBuilder Universal AI Workflow Animation" width="100%" />
@@ -261,7 +261,7 @@ flowchart TD
 
 ### The 3-Phase Triad Cadence (Frontend, Backend, Testing/Release)
 
-SkillBuilder orchestrates complex multi-agent engineering workflows through the **3-Phase Triad Cadence**. Rather than fragmenting work into disconnected passes, the Triad Cadence organizes the entire 35-skill ecosystem into 3 synchronized tiers backed by **Phase Skill Clusters (PSC-1 through PSC-3)**:
+SkillBuilder orchestrates complex multi-agent engineering workflows through the **3-Phase Triad Cadence**. Rather than fragmenting work into disconnected passes, the Triad Cadence organizes the entire 36-skill ecosystem into 3 synchronized tiers backed by **Phase Skill Clusters (PSC-1 through PSC-3)**:
 
 1. **Phase 1: Frontend & Interface Architecture (PSC-1: Client & Experience Gate)**:
    - **Governing Skills**: `/frontend`, `/ui`, `/mobile-ui`, `/web-ui`, `/3d`, `/routing`, `/state-management`, `/i18n`, `/anti-slop`, `/prompt-polish`.
@@ -272,12 +272,13 @@ SkillBuilder orchestrates complex multi-agent engineering workflows through the 
    - Builds file-based routing hierarchies, parallel/intercepting layouts, and typed search params.
    - Implements declarative client state machines, TanStack Query key factories, and signals.
    - Enforces React 19 / Next.js / Flutter lifecycle safety, internationalization (ICU MessageFormat), and RTL layout mirroring.
-2. **Phase 2: Backend, Cloud & Data Infrastructure (PSC-2: Engine & Security Gate)**:
-   - **Governing Skills**: `/backend`, `/fullstack`, `/api-design`, `/database`, `/gcp`, `/aws`, `/firebase`, `/supabase`, `/data-pipelines`, `/devops`, `/security`, `/ai`, `/local-llm`, `/research`.
+2. **Phase 2: Backend, Cloud, Automation & Data Infrastructure (PSC-2: Engine & Security Gate)**:
+   - **Governing Skills**: `/backend`, `/fullstack`, `/api-design`, `/database`, `/gcp`, `/aws`, `/firebase`, `/supabase`, `/data-pipelines`, `/devops`, `/security`, `/ai`, `/local-llm`, `/research`, `/antigravity-automation`.
    - Builds Hexagonal clean architecture with strict domain boundaries and runtime validation.
    - Authors OpenAPI 3.1 contracts and RFC 7807 Problem Details envelopes.
    - Wires up real persistence (PostgreSQL/SQLite) with zero-downtime expand/contract migrations (Anti-Mock mandate).
    - Provisions enterprise cloud infrastructure (GCP Cloud Run, AWS Lambda/S3, Firebase rules v2, Supabase Postgres RLS).
+   - Crafts Antigravity scheduled sidecars (`sidecar.json`), in-session timer automations, lifecycle safety gates (`hooks.json`), and reactive subagent mesh pipelines (`/antigravity-automation`).
    - Builds streaming batch ETL pipelines with backpressure flow control and DuckDB in-process OLAP.
    - Architects on-device and private quantized local models (`llama.cpp`, `Ollama`, Apple Silicon `MLX`, `WebLLM`), GBNF grammars, and 3-tier hybrid edge-cloud routing (`/local-llm`).
    - Hardens system against OWASP Top 10 vulnerabilities, enforces refresh token family rotation, SSRF post-DNS validation, and non-root Docker builds (`USER 10001`).
@@ -294,10 +295,11 @@ SkillBuilder orchestrates complex multi-agent engineering workflows through the 
 
 ### Autonomous Skill Resonance (ASR)
 
-SkillBuilder does not require manual micro-management of all 35 skills. During **Phase 1 & Phase 2**, the **Autonomous Skill Resonance (ASR)** engine scans the repository environment for technical fingerprints and dynamically activates matching skills:
+SkillBuilder does not require manual micro-management of all 36 skills. During **Phase 1 & Phase 2**, the **Autonomous Skill Resonance (ASR)** engine scans the repository environment for technical fingerprints and dynamically activates matching skills:
 
 | Fingerprint / Indicator | Resonant Skills Mounted | Activated Capabilities |
 | :--- | :--- | :--- |
+| `sidecars/`, `hooks.json`, `jetski` | `/antigravity-automation` | Scheduled sidecars, in-session timers, lifecycle safety gates, daemon monitoring. |
 | `app/`, `pages/`, `routes/`, `router` | `/routing` | Deep URL layouts, loading/error states, typed search params. |
 | `ios/`, `android/`, `app.json`, `pubspec.yaml` | `/mobile-ui` | SwiftUI matchedGeometry, Jetpack Compose LookaheadScope, predictive back, haptics. |
 | `@container`, `view-transition`, `tailwind.config` | `/web-ui` | Component-level container queries, CSS View Transitions, OKLCH, fluid typography. |
@@ -359,13 +361,14 @@ flowchart LR
 
 ---
 
-## The 35-Skill Master Reference Matrix
+## The 36-Skill Master Reference Matrix
 
 Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules in Cursor:
 
 | Command | Skill Name | Domain | Core Capabilities & Focus | Standalone CLI Tool | Primary Guardrail |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `/full-scale-mode` | **Full-Scale Mode** | Orchestration | Master Phased Project Orchestration Engine (aliased with `/world-class-engineering`), 3-phase Triad Cadence (Frontend, Backend, Testing), Autonomous Skill Resonance (ASR). | `verify_full_scale_orchestration.py` | Strict 3-phase gate compliance & 1,500-token subagent ceilings. |
+| `/full-scale-mode` | **Full-Scale Mode** | Orchestration | Master 5-Stage Orchestration Engine (`Discover` -> `Plan` -> `Build` -> `Verify/Loop` -> `Release`), Orchestration Memory (`.agents/memory/`), Multi-Tier Harness Engineering, and 3-Phase Triad Cadence. | `verify_full_scale_orchestration.py`, `manage_orchestration_memory.py`, `orchestration_harness.py` | Strict 5-stage lifecycle, 5-tier harness convergence, and bounded self-healing loops. |
+| `/antigravity-automation` | **Antigravity Automation** | Automation | Scheduled background sidecars (`sidecar.json`), in-session timers, lifecycle safety hooks (`hooks.json`), reactive subagent swarms. | `generate_sidecar_automation.py` & `verify_antigravity_hooks.py` | Mandatory `CRON_TZ` naming, zero busy-wait loops, pre-tool safety gates. |
 | `/world-class-engineering` | **World-Class Engineering** | Architecture | 6-Phase EOS lifecycle (Understand -> Define -> Plan -> Implement -> Verify -> Deliver). | `check_source_line_limits.py` | Multi-tiered maintainability matrix & 500-line physical ceiling. |
 | `/anti-slop` | **Anti-AI-Slop Sanitizer** | Clean Code | Purges decorative badges, fake mock databases, neon gradients, obvious comments, and marketing copy. | `sanitize_ai_slop.py` | Zero `shields.io`, zero fake mock arrays, zero emojis in UI controls. |
 | `/research` | **Autonomous Research & Fallbacks** | Discovery | Autonomous fallback engine; researches alternatives when packages fail or deprecate. | `research_alternatives.py` | P.A.T.H.S. trade-off evaluation & minimal POC validation. |
@@ -473,7 +476,7 @@ flowchart TD
 
 ### Option 2: Cursor IDE
 
-Convert all 35 skills into native `.cursor/rules/*.mdc` rule files and a consolidated `.cursorrules`:
+Convert all 36 skills into native `.cursor/rules/*.mdc` rule files and a consolidated `.cursorrules`:
 ```bash
 ./scripts/install.sh --cursor /path/to/my-cursor-project
 ```
@@ -576,7 +579,7 @@ All 44 suites run and pass in under 1.5s:
 28. **Security Auth Rotation & DDoS Tests**: Validates token rotation and rate limiters.
 29. **Security SSRF Post-DNS Defense Tests**: Validates IP parsing and cloud metadata blocks.
 30. **Git Delivery Etiquette & PR Tests**: Validates commit description bodies and push mandates.
-31. **Full-Scale Orchestration & ASR Resonance Tests**: Validates 35-skill catalogue and dynamic resonance.
+31. **Full-Scale Orchestration & ASR Resonance Tests**: Validates 36-skill catalogue and dynamic resonance.
 32. **Google Cloud Platform (GCP) Tests**: Validates Cloud Run timeouts, non-root, and IAM proxies.
 33. **Amazon Web Services (AWS) Tests**: Validates S3 public blocks, KMS encryption, and IAM wildcards.
 34. **Firebase Serverless & Rules Tests**: Validates version 2 rules and unrestricted read/write bans.
@@ -590,6 +593,10 @@ All 44 suites run and pass in under 1.5s:
 42. **Web UI Container Queries & Fluid Styling Tests**: Validates @container queries, OKLCH colors, fluid clamp() typography, and accessible focus rings.
 43. **Local LLM Quantized Inference & Hybrid Routing Tests**: Validates GGUF quantization profiles (Q4_K_M+), MLX acceleration, and GBNF grammars.
 44. **Deduplicated Single-Slot Backups & Sensitive Deletion Guardrail Tests**: Validates SHA-256 content-hashed single-slot backups (`manage_deduplicated_backup.py`), multi-agent manifest deduplication, and mandatory pre-deletion user confirmation gates.
+45. **Antigravity Automation & Scheduled Execution Tests**: Validates scheduled sidecar generation, cron expression parsing, timezone validation, and hooks schema auditing.
+46. **SkillBuilder Quality & Token Efficiency Linter Tests**: Validates YAML frontmatter, link integrity, file line ceilings, anti-slop rules, and progressive disclosure token savings.
+47. **Orchestration Memory Subsystem Tests**: Validates session initialization, lifecycle state transitions, milestone progress tracking, and checkpoint persistence (`manage_orchestration_memory.py`).
+48. **Orchestration Evaluation Harness & Self-Healing Loop Tests**: Validates 5-tier evaluation suites, failure diagnostics, regression checks, and bounded loop convergence (`orchestration_harness.py`).
 
 ---
 
@@ -597,7 +604,7 @@ All 44 suites run and pass in under 1.5s:
 
 ```text
 SkillBuilder/
-├── plugin.json                                 # Antigravity plugin manifest (v3.1.0)
+├── plugin.json                                 # Antigravity plugin manifest (v3.2.0)
 ├── README.md                                   # Comprehensive documentation & slash command index
 ├── INTEGRATION_GUIDE.md                        # Step-by-step setup guide for Antigravity
 ├── AGENTS.md                                   # Root rules enforced on all projects

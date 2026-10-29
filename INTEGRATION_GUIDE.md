@@ -18,7 +18,7 @@ Antigravity discovers skills and plugins hierarchically. Choose the method that 
 
 ## 2. Method 1: Global Plugin Setup (Recommended)
 
-Installing SkillBuilder as a global plugin ensures that **any** Antigravity session on your workstation automatically inherits all 35 skills without requiring project-by-project setup.
+Installing SkillBuilder as a global plugin ensures that **any** Antigravity session on your workstation automatically inherits all 36 skills without requiring project-by-project setup.
 
 ### Step 1: Clone or Copy SkillBuilder
 ```bash
@@ -125,8 +125,9 @@ Once installed, Antigravity leverages **Progressive Disclosure** to prevent cont
 Open any conversation in Antigravity and type:
 > *"What skills do you have available for database, cloud storage, and full-scale orchestration?"*
 
-The agent should confirm awareness of the **35 synchronized skills**, including:
+The agent should confirm awareness of the **36 synchronized skills**, including:
 - `/full-scale-mode` & `/world-class-engineering`
+- `/antigravity-automation` (scheduled sidecars, in-session scheduling, hooks)
 - `/prompt-polish` & `/anti-slop`
 - `/ui`, `/web-ui`, `/mobile-ui`, `/3d`, `/frontend`, `/routing`, `/state-management`, `/i18n`
 - `/backend`, `/fullstack`, `/api-design`, `/database`, `/firebase`, `/supabase`, `/aws`, `/gcp`, `/data-pipelines`, `/devops`

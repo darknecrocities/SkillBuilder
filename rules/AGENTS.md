@@ -1,6 +1,6 @@
 # Mandatory Engineering Discipline & Production Etiquette
 
-All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the SkillBuilder suite (35 Modular Skills):
+All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the SkillBuilder suite (36 Modular Skills):
 
 1. **Prompt Polishing First (PPE - `/prompt-polish`)**:
    - Analyze, refine, and structure incoming prompts into clear, token-efficient engineering specifications with explicit verification criteria.
@@ -43,12 +43,18 @@ All software architecture, implementation, refactoring, and pair-programming tas
     - Maintain a strict 500-line physical ceiling on all source files, verified via `check_source_line_limits.py --show-tiers`.
     - Proactively decompose modules entering the 350-line warning zone into cohesive domain slices (target sweet spot: 150–250 lines).
     - Enforce cognitive hygiene: maximum 40 physical lines per function, maximum 3 nesting levels with early return guard clauses, and cyclomatic complexity $\le 10$. Zero arbitrary file-shredding.
-14. **3-Phase Triad Cadence & Autonomous Skill Resonance (`/full-scale-mode`)**:
-    - Orchestrate complex deliverables through the 3-Phase Triad Cadence (Phase 1: Frontend & Interface Architecture -> Phase 2: Backend, Cloud & Data Infrastructure -> Phase 3: Testing, QA & Verifiable Release).
-    - Leverage Autonomous Skill Resonance (ASR) to detect project fingerprints and automatically bind relevant domain skills.
+14. **Structured 5-Stage Lifecycle, Orchestration Memory & Harness Engineering (`/full-scale-mode`, `/world-class-engineering`)**:
+    - Orchestrate complex deliverables through the 5-Stage Delivery Lifecycle (Stage 1: Discover & Memory Recall -> Stage 2: Plan & Architectural Blueprint -> Stage 3: Build & Atomic Execution -> Stage 4: Verify & Harness Loop -> Stage 5: Release & Memory Consolidation).
+    - Maintain structured active session memory in `.agents/memory/orchestration_state.json` via `manage_orchestration_memory.py` across multi-turn handoffs.
+    - Enforce the 5-Tier Evaluation Harness (`orchestration_harness.py`) and bounded Autonomous Self-Healing Loop (maximum 3 iterations) before authorizing any release.
+    - Leverage Autonomous Skill Resonance (ASR) and Platform Domain Specialization (PDS) to prune cross-platform context bloat.
 15. **Autonomous Project Skill Minting (`/project-skills`)**:
     - When establishing unique, project-specific architectures, agents mint self-contained project skills under `.agents/skills/<skill-name>/SKILL.md` using the Skill Synthesis Protocol (SSP).
 16. **Deduplicated Storage Backups, Sensitive Deletion Disclosure & Multi-Agent Synchronization (`/database`, `/firebase`, `/supabase`, `/gcp`, `/aws`, `/full-scale-mode`)**:
     - **Idempotent Single-Slot Backups (Zero Spam)**: Before schema migrations, bulk writes, or storage rule changes, verify or create a single canonical backup keyed by SHA-256 content/schema digest in `.backups/backup_manifest.json` (`manage_deduplicated_backup.py`). Never generate redundant timestamped copies (`*.bak.1`, `*.bak.2`, `dump_copy.sql`) when state is unchanged or across concurrent agent turns.
     - **Sensitive Deletion Human-in-the-Loop Gate**: Always halt and warn the user first before executing any destructive deletion (`DROP TABLE/COLUMN`, `TRUNCATE`, unconditioned `DELETE`, Firestore/Supabase collection or bucket removal, `RemovalPolicy.DESTROY`, `force_destroy = true`, or sensitive file deletion). Disclose the target resource, sensitivity tier, affected scope, and verified backup SHA-256 hash, and await explicit user confirmation.
-    - **Simultaneous Multi-Agent Synchronization**: Concurrent subagents working simultaneously must respect partitioned file ownership, coordinate storage mutations through the shared `.backups/backup_manifest.json` lease lock, and keep all 35 skills and multi-platform instruction files 100% synchronized.
+    - **Simultaneous Multi-Agent Synchronization**: Concurrent subagents working simultaneously must respect partitioned file ownership, coordinate storage mutations through the shared `.backups/backup_manifest.json` lease lock, and keep all 36 skills and multi-platform instruction files 100% synchronized.
+17. **Antigravity Automation & Background Execution (`/antigravity-automation`, `/full-scale-mode`)**:
+    - **Scheduled Sidecars**: Structure background scheduled automations in `~/.gemini/jetski/sidecars/<slug>/sidecar.json` with strict timezone awareness (`CRON_TZ`) and self-contained execution prompts.
+    - **In-Session Scheduling & Zero Polling**: Standardize in-turn timers (`DurationSeconds`, `TimerCondition`) and recurring jobs via the native `schedule` tool. Never poll in loops or use shell `sleep`.
+    - **Active Lifecycle Hooks**: Enforce plugin-level safety gates (`PreToolUse`, `PostToolUse`, `SessionStart`) via `hooks.json` to prevent destructive deletions and enforce the 500-line source ceiling.
