@@ -11,7 +11,17 @@ This skill establishes defensive engineering standards for developing and deploy
 
 ---
 
-## 1. The Core Supabase Architecture Gates
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/supabase-postgresql-rls.md](references/supabase-postgresql-rls.md) | Mandatory RLS activation, tenant scoping policies, service role quarantine. |
+| **Reference** | [references/edge-functions-and-pgvector.md](references/edge-functions-and-pgvector.md) | Deno edge functions, pgvector HNSW indexing, similarity search RPCs. |
+| **Utility** | [scripts/verify_supabase_rls.py](scripts/verify_supabase_rls.py) | Audits SQL schemas for unprotected tables, missing RLS policies, and service role leaks in client code. |
+
+---
+
+## 2. The Core Supabase Architecture Gates
 
 ```mermaid
 flowchart TD

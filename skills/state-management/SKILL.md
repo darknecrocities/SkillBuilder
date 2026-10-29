@@ -11,7 +11,17 @@ This skill establishes production architecture for state management across **Tan
 
 ---
 
-## 1. The Core State Architecture Gates
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/tanstack-query-caching-patterns.md](references/tanstack-query-caching-patterns.md) | Query key factories, stale time configurations, targeted cache invalidation. |
+| **Reference** | [references/zustand-atomic-slices.md](references/zustand-atomic-slices.md) | Slice composition patterns, selector memoization to prevent re-renders. |
+| **Utility** | [scripts/verify_state_hygiene.py](scripts/verify_state_hygiene.py) | Scans components for boolean flag explosions, un-memoized store selections, and inline query keys. |
+
+---
+
+## 2. The Core State Architecture Gates
 
 ```mermaid
 flowchart TD

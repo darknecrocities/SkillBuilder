@@ -36,14 +36,15 @@ Consult the specialized references and reusable templates for detailed execution
 
 ---
 
-## 1.5 The 35 Modular Engineering Skills (`/`)
+## 1.5 The 36 Modular Engineering Skills (`/`)
 
-The SkillBuilder ecosystem decomposes into 35 focused, synchronized skills directly callable via `/`:
+The SkillBuilder ecosystem decomposes into 36 focused, synchronized skills directly callable via `/`:
 
 | Command | Skill Name | Scope & Core Responsibility |
 | :--- | :--- | :--- |
 | `/full-scale-mode` | **Full-Scale Mode** | Master Phased Project Orchestration Engine (aliased with `/world-class-engineering`), 3-phase Triad Cadence (Frontend, Backend, Testing), parallel subagent swarms. |
 | `/world-class-engineering` | **World-Class Engineering** | Master architecture orchestrator, 3-phase Triad Cadence, 500-line source file policy (aliased with `/full-scale-mode`). |
+| `/antigravity-automation` | **Antigravity Automation** | Scheduled sidecars (`~/.gemini/jetski/sidecars/`), in-session timers, lifecycle hooks (`hooks.json`), and reactive subagent execution. |
 | `/anti-slop` | **Anti-AI-Slop & Craftsmanship** | Strips decorative badges, generic marketing fluff, neon gradients, and mock arrays. |
 | `/research` | **Autonomous Research & Fallbacks** | Discovers and evaluates production-grade library alternatives when packages fail. |
 | `/qa` | **Responsiveness QA & Sub-Agents** | Viewport audit (375px/768px/1280px+), a11y, touch targets (>=44px), sub-agent QA. |

@@ -11,7 +11,17 @@ This skill establishes disciplined patterns for paying down technical debt, deco
 
 ---
 
-## 1. The Two-Hat Refactoring Protocol
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/strangler-fig-pattern.md](references/strangler-fig-pattern.md) | Phased execution steps, abstraction facades, rollback safety nets. |
+| **Reference** | [references/characterization-testing.md](references/characterization-testing.md) | Pinning down legacy behavior, boundary assertion protocols, regression prevention. |
+| **Utility** | [scripts/detect_refactor_opportunities.py](scripts/detect_refactor_opportunities.py) | Scans codebase for files $>350$ lines, functions $>40$ lines, and nesting $>3$ levels. |
+
+---
+
+## 2. The Two-Hat Refactoring Protocol
 
 ```mermaid
 flowchart TD

@@ -11,7 +11,17 @@ This skill establishes production observability standards across backend microse
 
 ---
 
-## 1. The Three Pillars of Telemetry
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/opentelemetry-semantic-conventions.md](references/opentelemetry-semantic-conventions.md) | W3C traceparent headers, span semantic attributes for HTTP/DB/RPC. |
+| **Reference** | [references/structured-json-logging.md](references/structured-json-logging.md) | JSON log schemas, correlation IDs, PII redaction rules. |
+| **Utility** | [scripts/verify_telemetry_standards.py](scripts/verify_telemetry_standards.py) | Audits services for console.log statements, missing correlation IDs, and uninstrumented endpoints. |
+
+---
+
+## 2. The Three Pillars of Telemetry
 
 ```mermaid
 flowchart TD

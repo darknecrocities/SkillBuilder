@@ -11,7 +11,17 @@ This skill establishes performance optimization standards across frontend client
 
 ---
 
-## 1. Performance Guardrails & Budgets
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/core-web-vitals-audit.md](references/core-web-vitals-audit.md) | LCP, INP, and CLS metric targets, hero image preloading, layout shift prevention. |
+| **Reference** | [references/memory-leak-profiling.md](references/memory-leak-profiling.md) | Front-end leak sources, detached DOM nodes, Chrome DevTools heap profiling. |
+| **Utility** | [scripts/audit_performance_budgets.py](scripts/audit_performance_budgets.py) | Audits bundle sizes, unoptimized images, inline fetch waterfalls, and N+1 query loops. |
+
+---
+
+## 2. Performance Guardrails & Budgets
 
 ```mermaid
 flowchart TD

@@ -11,7 +11,17 @@ This skill establishes defensive engineering standards for file-based and declar
 
 ---
 
-## 1. The Core Routing Architecture Gates
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/nextjs-app-router-patterns.md](references/nextjs-app-router-patterns.md) | File conventions (page, layout, loading, error), parallel and intercepting routes. |
+| **Reference** | [references/flutter-declarative-routing.md](references/flutter-declarative-routing.md) | GoRouter declarative setups, redirect guards, deep linking on mobile/web. |
+| **Utility** | [scripts/verify_routing_architecture.py](scripts/verify_routing_architecture.py) | Scans route directories for bloated page.tsx files, missing error/loading boundaries, and deep layout nesting. |
+
+---
+
+## 2. The Core Routing Architecture Gates
 
 ```mermaid
 flowchart TD

@@ -9,7 +9,17 @@ The `web-ui` skill establishes modern engineering standards for responsive, flui
 
 ---
 
-## 1. Component-Level Container Queries (`@container`)
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/container-queries-guide.md](references/container-queries-guide.md) | Component container context declarations, `@container` queries, Tailwind v4 `@container`. |
+| **Reference** | [references/oklch-and-fluid-typography.md](references/oklch-and-fluid-typography.md) | Human perceptual OKLCH color spaces, fluid clamp() typography and spacing curves. |
+| **Utility** | [scripts/verify_web_ui_hygiene.py](scripts/verify_web_ui_hygiene.py) | Audits web stylesheets for viewport-only media query reliance, stepped fonts, and sRGB/HSL clashing. |
+
+---
+
+## 2. Component-Level Container Queries (`@container`)
 
 Decouple component styling from the global viewport. A component must adapt based on the size of its immediate parent container (e.g. sidebar, grid column, modal pane), not the browser window:
 

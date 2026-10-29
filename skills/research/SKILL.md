@@ -11,7 +11,17 @@ This skill guides agents and engineers through autonomous deep research, competi
 
 ---
 
-## 1. The Fallback & Alternative Decision Framework
+## 1. Quick Navigation & Progressive Disclosure
+
+| Resource Type | Document | Description |
+| :--- | :--- | :--- |
+| **Reference** | [references/autonomous-research-methodology.md](references/autonomous-research-methodology.md) | Local introspection, 4-dimension trade-off matrix evaluation, drop-in POC validation. |
+| **Reference** | [references/package-deprecation-pivots.md](references/package-deprecation-pivots.md) | Approved production alternatives for moment.js, request, crypto-js, google-generativeai. |
+| **Utility** | [scripts/research_alternatives.py](scripts/research_alternatives.py) | CLI utility to evaluate alternative packages by star velocity, license safety, and maintenance. |
+
+---
+
+## 2. The Fallback & Alternative Decision Framework
 
 When a package fails to install, exhibits breaking bugs, lacks critical features, or fails verification, execute the **4-Step Autonomous Pivot**:
 
