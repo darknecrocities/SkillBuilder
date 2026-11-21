@@ -1,27 +1,31 @@
-# Convention Persistence & Storage Standards
+# Convention Persistence & Deduplication Manual
 
-Conventions must be saved to `.agents/learned_conventions.md` to ensure automatic discovery by Antigravity and other agent engines.
-
----
-
-## 1. Markdown Format Specification
-
-```markdown
-# Learned Conventions & Workspace Invariants
-
-## Invariants
-- [YYYY-MM-DD] Category: Rule description with exact file patterns.
-- [2026-10-29] Testing: All mock APIs must use MSW handlers under `tests/mocks/`.
-- [2026-10-29] Styling: Enforce Lucide SVG icons with `aria-hidden="true"`.
-```
+> **Objective**: Ensure user corrections, repository invariants, and hard-won debugging discoveries persist cleanly across sessions without polluting `.agents/learned_conventions.md` with duplicate or stale notes.
 
 ---
 
-## 2. Programmatic Recording Utility
+## 1. What Deserves Persistence vs. What Does Not
 
-Always execute `scripts/record_learning.py`:
+| Persist in `.agents/learned_conventions.md` | Do NOT Persist |
+| :--- | :--- |
+| Explicit architectural invariants (*"All civic data reads go through `src/data/civic/`"*) | One-off task status (*"Fixed typo in header.tsx"*) |
+| Verified build/test commands & required flags | Speculative guesses or unverified workarounds |
+| Library/OS pitfalls discovered during debugging | Duplicate restatements of global `AGENTS.md` rules |
+| Explicit user formatting/UI/naming preferences | Secrets, API keys, or environment credentials |
+
+---
+
+## 2. Canonical Entry Format & Deduplication
+
+Use `scripts/record_learning.py` so entries are normalized, timestamped, tagged by domain, and deduplicated before appending:
+
 ```bash
 python3 skills/continuous-learning/scripts/record_learning.py \
-    --category "Architecture" \
-    --rule "All backend API errors must conform to RFC 7807 Problem Details."
+  --category "Routing" \
+  --rule "Default English routes stay unprefixed; /en redirects 308 to canonical path"
 ```
+
+### Graduating Repeated Rules into Structure (`Encode Lessons in Structure`)
+If the same convention has to be enforced 3+ times manually:
+1. Encode it as a linter check (`skill_linter.py`, `sanitize_ai_slop.py`), a schema type, or an automated test.
+2. Promote project-wide multi-rule invariants into a dedicated project skill via `/project-skills` (`SSP`).

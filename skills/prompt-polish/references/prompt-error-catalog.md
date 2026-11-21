@@ -1,39 +1,22 @@
-# Prompt Error Catalog & Resolution Guide
+# Prompt Defect & Ambiguity Error Catalog
 
-A structured index of common prompt defects, their root causes, and corrective actions.
-
----
-
-### PRM-ERR-001: Ambiguous Boundary Specification
-- **Symptom**: User asks to "make a dashboard" without specifying data sources, authentication, or rendering framework.
-- **Root Cause**: Missing functional boundaries and architectural context.
-- **Remediation**:
-  1. Halt immediate coding.
-  2. Ask targeted multiple-choice question: Framework (Next.js vs Vite), Auth (JWT vs Session), Data (Mock vs PostgreSQL).
-  3. Propose standard default (Next.js App Router + PostgreSQL) and proceed if confirmed.
+> **Objective**: Catch underspecified requirements, conflicting constraints, and hallucination triggers *before* generating code.
 
 ---
 
-### PRM-ERR-002: Contradictory Architectural Constraints
-- **Symptom**: User requests "fully serverless single-file script that maintains a long-running WebSocket server and local SQLite database".
-- **Root Cause**: Incompatible runtime primitives (ephemeral serverless execution vs persistent stateful connections).
-- **Remediation**:
-  1. Highlight architectural collision clearly.
-  2. Propose containerized deployment (e.g. Cloud Run with minimum 1 instance or Docker container).
+## 1. Common Prompt Defects & Deterministic Fixes
+
+| Defect Pattern | Example Raw Prompt | Polished RFC Remediation |
+| :--- | :--- | :--- |
+| **Missing Persistence Target** | *"Build a user dashboard with tasks"* | Declare real store explicitly (`SQLite better-sqlite3` or `PostgreSQL`), zero mock arrays. |
+| **Unbounded Platform Scope** | *"Make a sleek responsive UI"* | Lock target (`Web React 19 + Tailwind v4` OR `Flutter 120Hz`) and 1 `/ui` art movement. |
+| **Undefined Error & Timeout Semantics** | *"Fetch data from third-party API"* | Mandate `3s` connect / `15s` read timeouts, bounded jitter retries on `5xx`, RFC 7807 error envelope. |
+| **Unverified Mascot / Logo Ask** | *"Add a cool AI mascot and logo"* | Route to `/2d-mascot-motion` (`.riv` or `<35`-node SVG rig) and `/brand-assets` (4 logo stress tests + squircle), banning emoji/blurry raster slop. |
+| **Silent Security Gaps** | *"Add file read tool and user profile endpoint"* | Mandate `realpath` workspace sandboxing (`/mcp-engineering`) and tenant scoping `WHERE id = $1 AND tenant_id = $2` (`/security`). |
+| **Missing Proof Gate** | *"Update the tests and ship"* | Append exact verification commands (`npm test`, `skill_linter.py`, `verify_all_skills.sh`) and `[measured]` output contract. |
 
 ---
 
-### PRM-ERR-003: Conversational Token Bloat
-- **Symptom**: Prompts laden with polite pleasantries, redundant restatements of context, and non-actionable background stories.
-- **Root Cause**: Natural human conversational typing patterns.
-- **Remediation**:
-  1. Run `scripts/polish_prompt.py` to distill into compact requirements matrix.
-  2. Strip conversational noise, leaving only goal, constraints, schema, and verification rules.
-
----
-
-### PRM-ERR-004: Missing Failure & Error Handling Criteria
-- **Symptom**: Prompt specifies happy path only ("user logs in and gets redirected") with no mention of invalid passwords, account lockouts, or rate limits.
-- **Root Cause**: Optimistic bias in specification drafting.
-- **Remediation**:
-  1. Inject standard 3-tier error handling (client validation, server business exceptions, network timeout fallback).
+## 2. When to Ask vs. Proceed
+- **Ask (Focused Multiple-Choice)**: Only when ambiguity alters fundamental DB choice, auth model, or irreversible destructive behavior.
+- **Proceed with Explicit Defaults**: For reversible layout, tooling, or implementation details — run a quick prototype (`playbooks/prototype.md`) and state assumptions clearly.
