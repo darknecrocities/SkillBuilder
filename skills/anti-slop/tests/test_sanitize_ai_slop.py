@@ -72,6 +72,16 @@ export async function fetchUser(id: string) {
         violations = scan_file(fp)
         self.assertTrue(any(v["rule"] == "FuzzyNeonHalo" for v in violations))
 
+    def test_detects_stripped_focus_emoji_and_low_contrast(self):
+        code = (
+            '<button className="focus:outline-none bg-zinc-950 text-zinc-500">🚀 Launch</button>\n'
+        )
+        fp = self._write_temp("Button.tsx", code)
+        rules = {v["rule"] for v in scan_file(fp)}
+        self.assertIn("StrippedFocusOutline", rules)
+        self.assertIn("EmojiControlSlop", rules)
+        self.assertIn("LowContrastDarkText", rules)
+
 
 if __name__ == "__main__":
     unittest.main()
