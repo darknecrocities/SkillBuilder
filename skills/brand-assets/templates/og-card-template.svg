@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Product OpenGraph Card">
+  <defs>
+    <linearGradient id="og-zenith-hairline" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+    <pattern id="og-cad-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#18181b" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#09090b" />
+  <rect width="1200" height="630" fill="url(#og-cad-grid)" />
+  <rect x="64" y="64" width="1072" height="502" rx="24" fill="#111114" stroke="#27272a" stroke-width="1.5" />
+  <rect x="64" y="64" width="1072" height="1.5" fill="url(#og-zenith-hairline)" />
+
+  <g transform="translate(128, 128)">
+    <rect x="0" y="0" width="64" height="64" rx="16" fill="#18181b" stroke="#3f3f46" stroke-width="1.5" />
+    <path d="M 32 14 L 46 32 L 32 50 L 18 32 Z" fill="#f4f4f5" />
+    <circle cx="32" cy="32" r="4.5" fill="#38bdf8" />
+  </g>
+
+  <text x="128" y="280" fill="#a1a1aa" font-family="ui-monospace, SFMono-Regular, monospace" font-size="20" letter-spacing="3">
+    SYSTEMS ARCHITECTURE
+  </text>
+  <text x="128" y="362" fill="#f4f4f5" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="68" letter-spacing="-2">
+    DarkNecroStack
+  </text>
+  <text x="128" y="424" fill="#d4d4d8" font-family="system-ui, -apple-system, sans-serif" font-weight="400" font-size="28">
+    Playbook-driven engineering, anti-slop UI, and verified delivery.
+  </text>
+</svg>
