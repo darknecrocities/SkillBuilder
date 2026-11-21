@@ -1,31 +1,15 @@
-# Database & Datastore Error Catalog
+# Database Hygiene & Migration Error Catalog
 
-Common database errors, deadlocks, and migration traps with actionable remediations.
-
----
-
-### [DB-ERR-001] Missing Index on Foreign Key
-- **Symptom**: `DELETE FROM users WHERE id = $1` takes 12 seconds; full table scan observed on `orders` table.
-- **Root Cause**: Foreign key `orders.user_id` lacks an index. Deleting a user forces PostgreSQL to scan the entire `orders` table to check referential constraints.
-- **Remediation**:
-  ```sql
-  CREATE INDEX CONCURRENTLY idx_orders_user_id ON orders(user_id);
-  ```
+> **Objective**: Rapid diagnosis of migration locks, SQLite contention, backup spam, and injection vulnerabilities.
 
 ---
 
-### [DB-ERR-002] Deadlock Detected on Concurrent Multi-Row Updates
-- **Symptom**: `ERROR: deadlock detected (SQLSTATE 40P01)`.
-- **Root Cause**: Transaction A updates user 1 then user 2; Transaction B updates user 2 then user 1 concurrently.
-- **Remediation**:
-  1. Enforce deterministic lock ordering: always sort IDs in ascending order in application code before locking rows (`SELECT ... FOR UPDATE`).
-  2. Implement exponential backoff retry for error code `40P01`.
+## 1. Failure & Remediation Matrix
 
----
-
-### [DB-ERR-003] Connection Pool Starvation (Remaining connection slots reserved)
-- **Symptom**: `FATAL: remaining connection slots are reserved for non-replication superuser connections`.
-- **Root Cause**: Microservice horizontally autoscales to 20 instances, each configured with 20 connections, surpassing the PostgreSQL `max_connections` ceiling.
-- **Remediation**:
-  1. Reduce per-instance connection pool max size to 3–5.
-  2. Deploy PgBouncer in `pool_mode = transaction`.
+| Error / Anti-Pattern | Root Cause | Remediation |
+| :--- | :--- | :--- |
+| **`SQLITE_BUSY: database is locked`** | Default rollback journal mode or missing busy timeout under concurrent readers/writers. | Enable `PRAGMA journal_mode = WAL;` and `PRAGMA busy_timeout = 5000;`. |
+| **Production API outage during `ADD COLUMN ... DEFAULT`** | Older PG/MySQL rewrite or queued `ACCESS EXCLUSIVE` lock behind long analytical query. | Set `SET lock_timeout = '3s';` and follow 4-phase Expand/Contract protocol. |
+| **Duplicate `.bak.1`, `.bak.2`, `dump_copy.sql` spam** | Agents creating unhashed timestamp backups on every turn regardless of state changes. | Use single-slot SHA-256 backup ledger (`manage_deduplicated_backup.py`). |
+| **Data loss from unconditioned `DELETE` / `DROP`** | Missing human confirmation gate or forgotten `WHERE` clause. | Halt for explicit user confirmation + backup SHA-256 hash; require `WHERE` + `tenant_id`. |
+| **SQL Injection (`UNSAFE-SQL-INTERPOLATION`)** | f-strings or template literals (`SELECT * FROM users WHERE id = '${id}'`). | Exclusively pass parameterized bindings (`$1`, `?`) and whitelist dynamic `ORDER BY` columns via enum map. |
