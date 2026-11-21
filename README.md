@@ -7,9 +7,9 @@
   ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝
 ```
 
-# SkillBuilder: Agentic Engineering Skills
+# DarkNecroStack (formerly SkillBuilder): Dynamic Agentic Engineering Ecosystem
 
-SkillBuilder is a production-grade suite of **36 specialized Agent Skills**, the **5-Stage Orchestration Lifecycle**, the **Orchestration Memory Subsystem**, **Multi-Tier Harness Engineering**, native Antigravity lifecycle hooks, and automated CLI validators. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, toy mock databases, and overengineered buzzwords—transforming AI assistants into disciplined senior architects and pair programmers across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
+**DarkNecroStack (`darknecrostack`)** is a production-grade suite of **48 specialized Agent Skills**, a `pstack`-surpassing **Dynamic Trigger -> Action Router** (`/darknecrostack` + `worker.md` subagent rule propagation + 24 principles + 18 playbooks), **2D Mascot & Rive (`.riv`) Motion Engineering**, **Brand/Logo & App Asset Pipelines**, distilled **MCP / Browser Media WASM / Local-First Data** skills, the **5-Stage Orchestration Lifecycle**, **Orchestration Memory**, **Multi-Tier Harness Engineering**, native Antigravity lifecycle hooks, and **55 automated verification suites**. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, boilerplate repetition, toy mock databases, and unverified claims across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
 
 <p align="center">
   <img src="assets/skillbuilder-workflow-animation.svg" alt="SkillBuilder Universal AI Workflow Animation" width="100%" />
@@ -456,12 +456,24 @@ flowchart LR
 
 ---
 
-## The 36-Skill Master Reference Matrix
+## The 48-Skill Master Reference Matrix
 
-Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules in Cursor:
+Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules in Cursor (`darknecrostack` acts as the dynamic front-door router):
 
 | Command | Skill Name | Domain | Core Capabilities & Focus | Standalone CLI Tool | Primary Guardrail |
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| `/darknecrostack` | **DarkNecroStack Router** | Dynamic OS | `pstack`-surpassing Trigger -> Action router, `worker.md` subagent propagation, 24 principles, 18 playbooks, `show-me-your-work` TSV decision trails. | `route_task.py` & `log_decision_trail.py` | Mandatory `worker.md` kickoff; 2-strike Attack-the-Premise breaker; `[measured]` proof. |
+| `/code-archaeology` | **Code Archaeology (`/how`, `/why`)** | Discovery | Traces runtime execution, ownership, blast radius, and `git log`/ADR load-bearing invariants before editing. | `—` | Subsystem Brief required before unfamiliar edits. |
+| `/architect` | **Interface-First Architect** | Design Gate | Locks discriminated unions, branded IDs, schemas, UI skeleton, and `<500`-line file ownership before writing function bodies. | `—` | Make illegal states unrepresentable; shape before bodies. |
+| `/arena` | **Parallel Candidate Arena** | Exploration | Generates 2–3 orthogonal candidate prototypes, scores on weighted rubric, grafts winning traits cleanly. | `—` | Single clean base; zero Frankenstein bloat. |
+| `/interrogate` | **Adversarial Review (`/unslop`)** | Review | 5-lens pre-ship hostile review (Correctness, Security, Concurrency, Perf, Diff Unslop) & obvious-comment removal. | `sanitize_ai_slop.py` | Zero silent catches, leaks, or speculative wrappers. |
+| `/prove-it-works` | **Runtime Proof Gate (`/prove`)** | Verification | Bans `"it compiles"` completions; repro-first bug rule; `Explain the Number` benchmarks; Documentation Impact gate. | `log_decision_trail.py` | Real artifact execution + honest unverified disclosure. |
+| `/2d-mascot-motion` | **2D Mascots & Rive (`.riv`)** | Motion / Mascot | Silhouette-first 2D character rigs, Rive `MascotSM` state machines, pointer gaze, Lottie, `<35`-node SVGs. | `verify_mascot_assets.py` | Zero emojis/raster cheats; `cleanup()` + `prefers-reduced-motion`. |
+| `/brand-assets` | **Brand, Logos & Illustrations** | Brand / Assets | 4 Logo Stress Tests, Apple continuous squircles, Android `108dp/66dp` adaptive icons, CAD/Swiss/Risograph illustrations, OG cards. | `generate_svg_squircle_kit.py` & `verify_brand_assets.py` | `<30` logo nodes; zero Corporate Memphis or base64 SVG bloat. |
+| `/video-editing` | **Video & Kinetic Motion** | Video / Motion | 17 Swiss/kinetic styles, BPM tempo grid locking, FreeType dynamic vector scaling, FFmpeg audio mastering. | `verify_video_spec.py` & `audio_silence_validator.py` | Zero scaling blur; `>= 0.85s` vocal silence cushion. |
+| `/mcp-engineering` | **MCP Server & Tooling** | Agent / MCP | `stdio`/`SSE`/`Streamable HTTP` lifecycle, strict Zod tool schemas, `realpath` workspace path sandboxing. | `verify_mcp_hygiene.py` | Zero `path.join` traversal; `stderr`-only logs on `stdio`. |
+| `/browser-media-wasm` | **Browser Media & WASM** | Media / Web | Canvas/`OffscreenCanvas`, WebAudio, PDF, QR, Web Worker offloading, deterministic `URL.revokeObjectURL`. | `verify_media_wasm_hygiene.py` | Zero ObjectURL/Worker/AudioContext leaks; magic-byte validation. |
+| `/local-first-data` | **Local-First & Data Boundaries** | Data / Privacy | IndexedDB/OPFS/SQLite matrix, vendored public-data boundary, `PARTIAL`/`NEEDS_RESEARCH` anti-fabrication markers. | `verify_local_first_hygiene.py` | Zero direct raw generated-data imports in UI/routes. |
 | `/full-scale-mode` | **Full-Scale Mode** | Orchestration | Master 5-Stage Orchestration Engine (`Discover` -> `Plan` -> `Build` -> `Verify/Loop` -> `Release`), Orchestration Memory (`.agents/memory/`), Multi-Tier Harness Engineering, and 3-Phase Triad Cadence. | `verify_full_scale_orchestration.py`, `manage_orchestration_memory.py`, `orchestration_harness.py` | Strict 5-stage lifecycle, 5-tier harness convergence, and bounded self-healing loops. |
 | `/antigravity-automation` | **Antigravity Automation** | Automation | Scheduled background sidecars (`sidecar.json`), in-session timers, lifecycle safety hooks (`hooks.json`), reactive subagent swarms. | `generate_sidecar_automation.py` & `verify_antigravity_hooks.py` | Mandatory `CRON_TZ` naming, zero busy-wait loops, pre-tool safety gates. |
 | `/world-class-engineering` | **World-Class Engineering** | Architecture | 6-Phase EOS lifecycle (Understand -> Define -> Plan -> Implement -> Verify -> Deliver). | `check_source_line_limits.py` | Multi-tiered maintainability matrix & 500-line physical ceiling. |
@@ -571,7 +583,7 @@ flowchart TD
 
 ### Option 2: Cursor IDE
 
-Convert all 36 skills into native `.cursor/rules/*.mdc` rule files and a consolidated `.cursorrules`:
+Convert all 48 skills into native `.cursor/rules/*.mdc` rule files and a consolidated `.cursorrules`:
 ```bash
 ./scripts/install.sh --cursor /path/to/my-cursor-project
 ```
@@ -635,15 +647,15 @@ python3 skills/continuous-learning/scripts/record_learning.py --list
 
 ---
 
-## Automated Verification Suites (48 Suites)
+## Automated Verification Suites (55 Suites)
 
-SkillBuilder includes a master test runner executing 48 independent verification suites:
+DarkNecroStack includes a master test runner executing 55 independent verification suites:
 
 ```bash
 ./scripts/verify_all_skills.sh
 ```
 
-All 48 suites run and pass in under 1.5s:
+All 55 suites run and pass in under 2 seconds, including suites `49–55` covering `/darknecrostack` dynamic routing & TSV decision trails, `2d-mascot-motion` (`.riv`/SVG rig audits), `brand-assets` (squircle kit & SVG cleanliness), `mcp-engineering` (`realpath` sandboxing), `browser-media-wasm` (`ObjectURL`/Worker leaks), `local-first-data` (public/private boundaries), and `skill_linter.py --all --strict-depth` (reference density & anti-boilerplate repetition):
 1. **500-Line Source File Policy**: Verifies all source files adhere to the 500-line ceiling.
 2. **World-Class Engineering Unit Tests**: Validates line-checking and EOS extraction logic.
 3. **Anti-AI-Slop Tests**: Validates badge, mock array, and obvious comment sanitization.
@@ -674,7 +686,7 @@ All 48 suites run and pass in under 1.5s:
 28. **Security Auth Rotation & DDoS Tests**: Validates token rotation and rate limiters.
 29. **Security SSRF Post-DNS Defense Tests**: Validates IP parsing and cloud metadata blocks.
 30. **Git Delivery Etiquette & PR Tests**: Validates commit description bodies and push mandates.
-31. **Full-Scale Orchestration & ASR Resonance Tests**: Validates 36-skill catalogue and dynamic resonance.
+31. **Full-Scale Orchestration & ASR Resonance Tests**: Validates 48-skill catalogue and dynamic resonance.
 32. **Google Cloud Platform (GCP) Tests**: Validates Cloud Run timeouts, non-root, and IAM proxies.
 33. **Amazon Web Services (AWS) Tests**: Validates S3 public blocks, KMS encryption, and IAM wildcards.
 34. **Firebase Serverless & Rules Tests**: Validates version 2 rules and unrestricted read/write bans.

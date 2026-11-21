@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # Script: install.sh
-# Purpose: Universal installer for SkillBuilder across Antigravity, Cursor, Claude, Codex, Windsurf & Cline.
+# Purpose: Universal installer for DarkNecroStack across Antigravity, Cursor, Claude, Codex, Windsurf & Cline.
 # Author: Arron Kian Parejas (@darknecrocities)
 # ==============================================================================
 
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-GLOBAL_PLUGIN_DIR="${HOME}/.gemini/config/plugins/skill-builder"
+GLOBAL_PLUGIN_DIR="${HOME}/.gemini/config/plugins/darknecrostack"
+LEGACY_PLUGIN_DIR="${HOME}/.gemini/config/plugins/skill-builder"
 
 show_help() {
   cat << EOF
-SkillBuilder Multi-Platform Installer
+DarkNecroStack Multi-Platform Installer
 
 Usage:
   ./install.sh [OPTIONS]
@@ -41,7 +42,7 @@ EOF
 }
 
 install_global() {
-  echo "=== Installing SkillBuilder Globally for Antigravity ==="
+  echo "=== Installing DarkNecroStack Globally for Antigravity ==="
   echo "Source: ${REPO_DIR}"
   echo "Target: ${GLOBAL_PLUGIN_DIR}"
 
@@ -59,7 +60,11 @@ install_global() {
   fi
 
   ln -s "${REPO_DIR}" "${GLOBAL_PLUGIN_DIR}"
-  echo "[SUCCESS] SkillBuilder installed globally at: ${GLOBAL_PLUGIN_DIR}"
+  if [ -L "${LEGACY_PLUGIN_DIR}" ] || [ ! -e "${LEGACY_PLUGIN_DIR}" ]; then
+    rm -f "${LEGACY_PLUGIN_DIR}"
+    ln -s "${REPO_DIR}" "${LEGACY_PLUGIN_DIR}"
+  fi
+  echo "[SUCCESS] DarkNecroStack installed globally at: ${GLOBAL_PLUGIN_DIR}"
   echo "All Antigravity sessions on this workstation will now load these skills."
 }
 

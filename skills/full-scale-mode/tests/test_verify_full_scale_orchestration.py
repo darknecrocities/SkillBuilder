@@ -30,8 +30,8 @@ class TestVerifyFullScaleOrchestration(unittest.TestCase):
     def setUp(self):
         self.repo_root = Path(__file__).resolve().parent.parent.parent.parent
 
-    def test_repo_skill_registry_has_36_skills(self):
-        self.assertEqual(len(REQUIRED_SKILLS), 36)
+    def test_repo_skill_registry_has_all_required_skills(self):
+        self.assertEqual(len(REQUIRED_SKILLS), 48)
         violations = audit_skill_registry(self.repo_root)
         self.assertEqual(len(violations), 0, f"Expected clean registry, got: {violations}")
 

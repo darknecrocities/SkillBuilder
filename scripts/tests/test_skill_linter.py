@@ -16,6 +16,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 
 from skill_linter import (
     audit_anti_slop,
+    audit_boilerplate_repetition,
     audit_frontmatter,
     audit_markdown_links,
     audit_single_skill,
@@ -71,6 +72,15 @@ class TestSkillLinter(unittest.TestCase):
         allowed_mention = "Never do: const users = [{ id: 1, name: 'Alice' }];"
         clean_violations = audit_anti_slop(allowed_mention)
         self.assertEqual(len(clean_violations), 0)
+
+    def test_audit_boilerplate_repetition(self):
+        repeated = "\n".join(
+            f"## 0{i}. section {i}\n1. For **topic {i}**, establish the exact user-facing outcome and explicitly state out of scope."
+            for i in range(1, 6)
+        )
+        violations = audit_boilerplate_repetition(repeated)
+        self.assertEqual(len(violations), 1)
+        self.assertEqual(violations[0]["rule"], "BOILERPLATE-REPETITION-SLOP")
 
 
 if __name__ == "__main__":
