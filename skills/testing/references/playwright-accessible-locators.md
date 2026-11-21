@@ -1,22 +1,33 @@
-# Playwright Accessible Locators & E2E Testing Discipline
+# Playwright Accessible Locators & Flake-Free E2E Manual
 
-Modern E2E tests should interact with the DOM the way users and assistive technology do.
-
----
-
-## 1. Locator Priority Hierarchy
-
-Priority | Locator Pattern | Avoid
-:--- | :--- | :---
-1 (Best) | `page.getByRole('button', { name: 'Submit' })` | CSS class selectors (`page.locator('.btn-primary')`)
-2 | `page.getByLabel('Email address')` | Raw XPath (`page.locator('//div[3]/input')`)
-3 | `page.getByPlaceholder('Search products...')` | Unstable tag paths (`page.locator('div > span > input')`)
-4 | `page.getByText('Order Confirmation')` | Brittle ID attributes
-5 (Fallback) | `page.getByTestId('checkout-total')` | Only when semantic query cannot be expressed
+> **Objective**: Write resilient E2E tests that verify real user-observable behavior (`Test Behavior, Not Implementation`) with zero arbitrary sleeps or brittle CSS selectors.
 
 ---
 
-## 2. Test Flakiness Prevention
+## 1. Accessible Locator Priority Hierarchy
 
-- Use web-first assertions: `await expect(button).toBeVisible()` automatically retries until timeout.
-- Never use arbitrary `await page.waitForTimeout(3000)`. Wait on explicit network idle or locator state.
+Use locators in strict order of resilience and accessibility alignment:
+
+| Priority | Playwright Locator | Why It Wins |
+| :---: | :--- | :--- |
+| **1 (Best)** | `page.getByRole("button", { name: "Save Changes" })` | Proves both visual control and accessible ARIA role/name work for screen readers |
+| **2** | `page.getByLabel("Email Address")` | Verifies `<label htmlFor>` association |
+| **3** | `page.getByPlaceholder(...)` / `page.getByText(...)` | Resilient to Tailwind class or DOM wrapper refactors |
+| **4 (Last Resort)** | `page.getByTestId("telemetry-chart")` | Use only for non-text canvas/SVG widgets lacking semantic roles |
+| **BANNED** | `page.locator("div.flex > button.bg-zinc-900:nth-child(2)")` | Breaks on every styling tweak and hides missing a11y labels |
+
+---
+
+## 2. Web-First Auto-Waiting Assertions (Zero `waitForTimeout`)
+
+```typescript
+// BAD: Flaky under CI load and wastes test time
+await page.waitForTimeout(2000);
+expect(await page.locator(".toast").isVisible()).toBe(true);
+
+// GOOD: Auto-retries deterministically until assertion holds or timeout fires
+await expect(page.getByRole("status")).toContainText("Project saved");
+await expect(page).toHaveURL(/\/projects\/[a-z0-9-]+$/);
+```
+
+- **Responsive Viewport Matrix**: Run critical E2E smoke assertions at both Mobile (`375x812`) and Desktop (`1280x800`) to catch horizontal overflow (`scrollWidth > innerWidth`) and clipped touch targets automatically.
