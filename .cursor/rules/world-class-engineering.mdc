@@ -37,13 +37,25 @@ Consult the specialized references and reusable templates for detailed execution
 
 ---
 
-## 1.5 The 36 Modular Engineering Skills (`/`)
+## 1.5 The 48 Modular Engineering Skills (`/`)
 
-The SkillBuilder ecosystem decomposes into 36 focused, synchronized skills directly callable via `/`:
+The DarkNecroStack ecosystem decomposes into 48 focused, synchronized skills directly callable via `/` (see [`/darknecrostack`](../darknecrostack/SKILL.md) for dynamic routing and [`/full-scale-mode`](../full-scale-mode/SKILL.md) for the complete 48-skill execution matrix):
 
 | Command | Skill Name | Scope & Core Responsibility |
 | :--- | :--- | :--- |
-| `/full-scale-mode` | **Full-Scale Mode** | Master Phased Project Orchestration Engine (aliased with `/world-class-engineering`), 3-phase Triad Cadence (Frontend, Backend, Testing), parallel subagent swarms. |
+| `/darknecrostack` | **DarkNecroStack Router** | Dynamic Trigger -> Action router, `worker.md` subagent propagation, 24 principles, 18 playbooks. |
+| `/code-archaeology` | **Code Archaeology (`/how`, `/why`)** | Traces execution paths, ownership, and git/ADR load-bearing quirks before editing. |
+| `/architect` | **Interface-First Architect** | Locks data shapes, schemas, state machines, and `<500`-line boundaries before code bodies. |
+| `/arena` | **Parallel Candidate Arena** | Explores 2–3 orthogonal prototypes, scores on weighted rubric, grafts winning traits cleanly. |
+| `/interrogate` | **Adversarial Review (`/unslop`)** | 5-lens pre-ship audit (Correctness, Security, Concurrency, Perf, Diff Unslop). |
+| `/prove-it-works` | **Runtime Proof Gate** | Repro-first bug fixes, real artifact checks, `Explain the Number` benchmarks, TSV trail. |
+| `/2d-mascot-motion` | **2D Mascots & Rive (`.riv`)** | Silhouette-first mascots, Rive `MascotSM` state machines, Lottie, `<35`-node SVG rigs. |
+| `/brand-assets` | **Brand, Logos & Illustrations** | 4 Logo stress tests, continuous squircles, adaptive icons, anti-slop illustrations. |
+| `/mcp-engineering` | **MCP Server & Tooling** | `stdio`/`SSE` lifecycle, `realpath` workspace sandboxing, strict Zod tool contracts. |
+| `/browser-media-wasm` | **Browser Media & WASM** | Canvas/WebAudio/PDF/WASM Worker offloading and `URL.revokeObjectURL` leak defense. |
+| `/local-first-data` | **Local-First & Data Boundaries** | IndexedDB/OPFS/SQLite matrix, public/private vendored boundaries, anti-fabrication markers. |
+| `/video-editing` | **Video & Motion Graphics** | 17 Swiss/kinetic styles, BPM tempo grid, FreeType vector scaling, FFmpeg audio mastering. |
+| `/full-scale-mode` | **Full-Scale Mode** | 5-Stage Lifecycle, Orchestration Memory, 3-Phase Triad Cadence, 5-Tier Harness. |
 | `/world-class-engineering` | **World-Class Engineering** | Master architecture orchestrator, 3-phase Triad Cadence, 500-line source file policy (aliased with `/full-scale-mode`). |
 | `/antigravity-automation` | **Antigravity Automation** | Scheduled sidecars (`~/.gemini/jetski/sidecars/`), in-session timers, lifecycle hooks (`hooks.json`), and reactive subagent execution. |
 | `/anti-slop` | **Anti-AI-Slop & Craftsmanship** | Strips decorative badges, generic marketing fluff, neon gradients, and mock arrays. |

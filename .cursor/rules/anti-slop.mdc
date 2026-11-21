@@ -26,6 +26,8 @@ This skill purges synthetic AI tropes and enforces professional engineering rigo
 | **Reference** | [../ui/references/advanced-motion-web-and-flutter.md](../ui/references/advanced-motion-web-and-flutter.md) | Framer Motion zero-re-render springs & Flutter Impeller 120Hz detent haptics. |
 | **Reference** | [../ui/references/universal-mobile-motion-architecture.md](../ui/references/universal-mobile-motion-architecture.md) | Universal mobile motion: React Native worklets, iOS SwiftUI, Android Compose, and Flutter. |
 | **Reference** | [../ui/references/premium-ui-craft-and-subpixel-engineering.md](../ui/references/premium-ui-craft-and-subpixel-engineering.md) | Sub-pixel directional lighting physics, OLED anti-banding, and acoustic micro-clicks. |
+| **Skill Link** | [../2d-mascot-motion/SKILL.md](../2d-mascot-motion/SKILL.md) | Non-slop 2D mascots with Rive (`.riv`) state machines & clean SVG rigs. |
+| **Skill Link** | [../brand-assets/SKILL.md](../brand-assets/SKILL.md) | Mathematical app logos, continuous squircles, and non-Corporate-Memphis illustrations. |
 | **Template** | [templates/CraftedAppLogo.svg](templates/CraftedAppLogo.svg) | Production-grade mathematical vector SVG logo mark passing all 4 stress tests. |
 | **Template** | [templates/CraftedAppLogo.tsx](templates/CraftedAppLogo.tsx) | React vector logo component with material and monochrome silhouette variants. |
 | **Template** | [../ui/templates/TactileSpringButton.tsx](../ui/templates/TactileSpringButton.tsx) | Production tactile button implementing Apple spring physics and 44x44px touch targets. |
@@ -137,5 +139,13 @@ This CLI audits:
 - Presence of shields.io badges in documentation.
 - Trivial restatement comments in source files.
 - Hardcoded mock data arrays pretending to be state.
-- Neon gradient utility classes and raw emoji buttons.
-- Excessive fuzzy glow drop-shadows and unconfigured typography.
+- Neon gradient utility classes, fuzzy neon halos, and raw emoji inside buttons/headings.
+- Stripped focus outlines (`outline: none` / `focus:outline-none` without `focus-visible`) and low-contrast `text-zinc-500` on `bg-zinc-950`.
+- Generic AI logo & Corporate Memphis illustration tropes.
+
+## 9. Root-Cause Replacement Grammar (Why AI Slop Happens)
+
+LLMs produce AI slop when told *what to avoid* without an explicit replacement grammar:
+- **Instead of 3-Column Icon Card Soup**: Use a **Bento Telemetry Strip** (1 wide focal panel + 2 compact metric cells), a **Master-Detail Split Pane**, or a **Dense Aligned Spec Table**.
+- **Instead of Emoji Mascots or Corporate Memphis Blobs**: Mount [`/2d-mascot-motion`](../2d-mascot-motion/SKILL.md) (`.riv` or `<35`-node SVG rig) and [`/brand-assets`](../brand-assets/SKILL.md) (CAD / Swiss Risograph / Isometric / Sumi Ink).
+- **Instead of Boilerplate Skill Repetition**: Keep every rule and reference concrete, domain-scoped, and verified via `skill_linter.py --strict-depth`.

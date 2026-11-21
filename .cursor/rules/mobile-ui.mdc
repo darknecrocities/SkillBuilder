@@ -1,6 +1,6 @@
 ---
 description: Native mobile UI/UX craftsmanship, kinetic motion, and tactile engineering skill for iOS (SwiftUI/HIG 18/19), Android (Material 3 Expressive/Jetpack Compose), React Native, and Flutter.
-globs: *
+globs: *.swift,*.kt,*.dart,*.native.tsx
 alwaysApply: false
 ---
 

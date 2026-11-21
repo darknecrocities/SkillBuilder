@@ -1,10 +1,10 @@
-# CLAUDE.md - SkillBuilder Engineering Guidelines for Claude Code
+# CLAUDE.md - DarkNecroStack Engineering Guidelines for Claude Code
 
 > Universal Engineering Discipline for Anthropic Claude Code & Claude Desktop.
 
 # Mandatory Engineering Discipline & Production Etiquette
 
-All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the SkillBuilder suite (36 Modular Skills):
+All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the **DarkNecroStack** suite (48 Modular Skills; front-door router `/darknecrostack`):
 
 1. **Prompt Polishing First (PPE - `/prompt-polish`)**:
    - Analyze, refine, and structure incoming prompts into clear, token-efficient engineering specifications with explicit verification criteria.
@@ -57,23 +57,35 @@ All software architecture, implementation, refactoring, and pair-programming tas
 16. **Deduplicated Storage Backups, Sensitive Deletion Disclosure & Multi-Agent Synchronization (`/database`, `/firebase`, `/supabase`, `/gcp`, `/aws`, `/full-scale-mode`)**:
     - **Idempotent Single-Slot Backups (Zero Spam)**: Before schema migrations, bulk writes, or storage rule changes, verify or create a single canonical backup keyed by SHA-256 content/schema digest in `.backups/backup_manifest.json` (`manage_deduplicated_backup.py`). Never generate redundant timestamped copies (`*.bak.1`, `*.bak.2`, `dump_copy.sql`) when state is unchanged or across concurrent agent turns.
     - **Sensitive Deletion Human-in-the-Loop Gate**: Always halt and warn the user first before executing any destructive deletion (`DROP TABLE/COLUMN`, `TRUNCATE`, unconditioned `DELETE`, Firestore/Supabase collection or bucket removal, `RemovalPolicy.DESTROY`, `force_destroy = true`, or sensitive file deletion). Disclose the target resource, sensitivity tier, affected scope, and verified backup SHA-256 hash, and await explicit user confirmation.
-    - **Simultaneous Multi-Agent Synchronization**: Concurrent subagents working simultaneously must respect partitioned file ownership, coordinate storage mutations through the shared `.backups/backup_manifest.json` lease lock, and keep all 36 skills and multi-platform instruction files 100% synchronized.
+    - **Simultaneous Multi-Agent Synchronization**: Concurrent subagents working simultaneously must respect partitioned file ownership, coordinate storage mutations through the shared `.backups/backup_manifest.json` lease lock, and keep all 48 skills and multi-platform instruction files 100% synchronized.
 17. **Antigravity Automation & Background Execution (`/antigravity-automation`, `/full-scale-mode`)**:
     - **Scheduled Sidecars**: Structure background scheduled automations in `~/.gemini/jetski/sidecars/<slug>/sidecar.json` with strict timezone awareness (`CRON_TZ`) and self-contained execution prompts.
     - **In-Session Scheduling & Zero Polling**: Standardize in-turn timers (`DurationSeconds`, `TimerCondition`) and recurring jobs via the native `schedule` tool. Never poll in loops or use shell `sleep`.
     - **Active Lifecycle Hooks**: Enforce plugin-level safety gates (`PreToolUse`, `PostToolUse`, `SessionStart`) via `hooks.json` to prevent destructive deletions and enforce the 500-line source ceiling.
+18. **DarkNecroStack Dynamic Playbooks, Subagent `worker.md`, 2D Mascots (`.riv`), Brand Assets & Past-Project Domains (`/darknecrostack`)**:
+    - **Subagent Rule Propagation**: Line 1 of every spawned subagent kickoff MUST read `skills/darknecrostack/worker.md` so rules propagate cleanly into isolated contexts.
+    - **Trigger -> Action Discipline**: Run `/code-archaeology` (`/how`, `/why`) before editing unfamiliar subsystems; `/architect` before writing implementation bodies; `/arena` on contested designs; **Attack the Premise** after 2 failed fixes sharing an assumption; `/interrogate` (`/unslop`) before commit; `/prove-it-works` with `[measured]` runtime proof and `Documentation impact` disclosure.
+    - **2D Mascots & Brand Assets (`/2d-mascot-motion`, `/brand-assets`)**: Enforce silhouette-first geometric mascots with Rive (`.riv`) state machines or `<35`-node SVG rigs (`prefers-reduced-motion`), 4 Logo Stress Tests, Apple continuous squircles, Android `108dp/66dp` adaptive icons, and non-Corporate-Memphis illustrations.
+    - **MCP, Browser Media & Local-First Data (`/mcp-engineering`, `/browser-media-wasm`, `/local-first-data`)**: Enforce `realpath` MCP path sandboxing, deterministic `URL.revokeObjectURL` / `Worker.terminate()` cleanup, strict public/private data boundaries, and `PARTIAL` / `NEEDS_RESEARCH` anti-fabrication markers.
 
 
-## Available SkillBuilder Disciplines (37 Skills)
+## Available DarkNecroStack Disciplines (48 Skills)
 
+- **`/2d-mascot-motion`**: Engineer non-AI-slop 2D vector mascots and interactive character rigs using Rive (.riv) state machines, Lottie (.lottie), and rigged mathematical SVGs with pointer tracking and reduced-motion fallbacks.
 - **`/3d`**: Interactive 3D WebGL, Three.js, and React Three Fiber (R3F) engineering skill. Enforces 60fps budgets, PBR materials, Draco compression, and studio lighting.
 - **`/ai`**: Architect, implement, and maintain production AI systems, Gemini API agents, Antigravity multi-agent orchestration, structured JSON outputs, reliable tool calling, and RAG retrieval pipelines.
 - **`/anti-slop`**: Anti-AI-slop and clean craftsmanship skill. Eliminates decorative badges, fake mock databases, neon gradients, obvious comments, and marketing fluff.
 - **`/antigravity-automation`**: Automate recurring, background, event-driven, and multi-agent workflows in Google Antigravity. Crafts scheduled sidecars (~/.gemini/jetski/sidecars/<slug>/sidecar.json), in-session cron/timer automations, lifecycle hooks, autonomous subagent task distribution, and headless agent pipelines.
 - **`/api-design`**: API contract design and OpenAPI 3.1 specification skill. Enforces RFC 7807 problem details, idempotency headers, and consistent status codes.
+- **`/architect`**: Interface-first design and shape sketching skill (/architect). Locks types, schemas, state machines, UI layout trees, and file boundaries before implementation.
+- **`/arena`**: Multi-candidate exploration and trait-grafting protocol (/arena). Generates 2-3 genuinely distinct designs or prototypes, scores them on an explicit rubric, and grafts winning traits cleanly.
 - **`/aws`**: Amazon Web Services resilient cloud architecture, serverless Lambda execution, S3 bucket security, DynamoDB single-table design, and IAM least privilege.
 - **`/backend`**: Architect, implement, and maintain resilient backend services, clean architecture, REST/gRPC API contracts, strict schema validation, authentication, rate-limiting, and error handling.
+- **`/brand-assets`**: Production app logos, continuous Apple squircles, Android adaptive icons, dark/light favicons, anti-slop editorial illustrations, OG social cards, and SVG/AVIF resource pipelines.
+- **`/browser-media-wasm`**: Engineer leak-free browser media, Canvas/OffscreenCanvas, WebAudio, PDF, QR, and WebAssembly pipelines using Web Worker offloading, magic-byte validation, and deterministic ObjectURL cleanup.
+- **`/code-archaeology`**: Subsystem comprehension and historical intent analysis (/how and /why) before editing code. Maps runtime execution, ownership boundaries, load-bearing quirks, and blast radius.
 - **`/continuous-learning`**: Continuous conversational learning protocol (CLP) skill. Persists user corrections and project conventions to .agents/learned_conventions.md to prevent repeating mistakes.
+- **`/darknecrostack`**: DarkNecroStack master dynamic router and engineering operating system (aliases /darknecro-mode, /ronskills). Routes intent into goal-specific playbooks, enforces citation-grounded principles, propagates worker.md to subagents, logs decision trails, and requires runtime proof.
 - **`/data-pipelines`**: Data pipeline engineering, streaming ETL with backpressure, Apache Arrow memory structures, DuckDB in-process analytics, schema validation, and dead-letter queues (DLQ).
 - **`/database`**: Architect, implement, and maintain resilient relational and NoSQL databases, zero-downtime schema migrations (expand/contract), index optimization, and connection pooling.
 - **`/devops`**: Architect, implement, and maintain secure cloud infrastructure on GCP/AWS, multi-stage non-root Docker containers, Terraform IaC, CI/CD pipelines, and OpenTelemetry observability.
@@ -84,13 +96,17 @@ All software architecture, implementation, refactoring, and pair-programming tas
 - **`/gcp`**: Google Cloud Platform architecture, Cloud Run serverless deployment, Pub/Sub, Secret Manager, Cloud SQL, and IAM least-privilege security.
 - **`/git-workflow`**: Git branching, atomic commit chunking, and release management skill. Enforces the 1,000-line commit budget, Conventional Commits, and PR authoring.
 - **`/i18n`**: Multi-locale internationalization architecture, ICU MessageFormat, RTL bidirectional layout mirroring, and cultural localization.
+- **`/interrogate`**: Adversarial pre-ship code review and surgical diff unslop protocol (/interrogate, /unslop, /deslop). Audits correctness, security, concurrency, leaks, and strips AI bloat before commit.
+- **`/local-first-data`**: Architect local-first browser/desktop storage (IndexedDB, OPFS, SQLite WAL), public-vs-private vendored data boundaries, zero-fabrication completeness markers (PARTIAL/NEEDS_RESEARCH), and offline privacy invariants.
 - **`/local-llm`**: Local LLM architecture, quantized inference (GGUF Q4_K_M/Q8_0), Ollama, llama.cpp, Apple Silicon MLX, WebLLM, GBNF structured grammars, in-process local RAG, and 3-tier hybrid edge-cloud routing.
+- **`/mcp-engineering`**: Build and harden Model Context Protocol (MCP) servers, transports (stdio, SSE, Streamable HTTP), Zod/JSON Schema tool contracts, workspace path-traversal sandboxing, and bounded process execution.
 - **`/mobile-ui`**: Native mobile UI/UX craftsmanship, kinetic motion, and tactile engineering skill for iOS (SwiftUI/HIG 18/19), Android (Material 3 Expressive/Jetpack Compose), React Native, and Flutter.
 - **`/observability`**: Observability and telemetry engineering skill. Enforces OpenTelemetry distributed tracing, structured JSON logging with correlation IDs, and health probes.
 - **`/performance`**: Performance profiling and optimization skill. Audits Core Web Vitals (LCP, CLS, INP), N+1 queries, bundle budgets, and memory leaks.
 - **`/production-etiquette`**: >-
 - **`/project-skills`**: Autonomous Project Skill Synthesis Protocol (SSP). Introspects repository dependencies, conventions, and architecture to mint persistent, tailored domain skills in .agents/skills/<project-skill>/SKILL.md.
 - **`/prompt-polish`**: Evaluates, manages, and polishes user prompts into token-efficient, crystal-clear engineering specifications with explicit constraints, verification criteria, and edge-case coverage before code generation.
+- **`/prove-it-works`**: Mandatory runtime verification and evidence protocol (/prove-it-works, /prove, /show-me-your-work). Bans "it compiles" completions, requires bug repro-first, enforces benchmark Explain-the-Number checks, and mandates honest unverified disclosure.
 - **`/qa`**: Comprehensive Two-Tier Quality Assurance skill. Features Full UI/Frontend QA (viewports, touch ergonomics, WCAG 2.2 AA, sub-pixel lighting, 120Hz compositor) and Full App Functional QA (state machines, real persistence, 3s/15s network resilience, mobile OS lifecycle, memory leaks, security, and Master Error Catalog).
 - **`/refactor`**: Safe refactoring and technical debt remediation skill. Enforces Strangler Fig patterns, characterization testing, and decomposition of bloated files.
 - **`/research`**: Autonomous deep researcher and fallback engine. Evaluates trade-offs and discovers production-grade alternatives when dependencies fail or libraries are deprecated.
@@ -106,9 +122,9 @@ All software architecture, implementation, refactoring, and pair-programming tas
 
 ## Code Generation, Multi-Agent Sync & Storage Safety Instructions
 - Enforce the multi-tiered 500-line physical limit (target sweet spot: 150–250 lines; warning: 350 lines).
+- Start every spawned subagent kickoff with: `Read <abs-path>/skills/darknecrostack/worker.md before anything else.`
 - Zero fake mock databases: use SQLite, PostgreSQL, or structured file stores.
 - Idempotent Single-Slot Backups (Zero Spam): Maintain one canonical backup per resource state keyed by SHA-256 digest in `.backups/backup_manifest.json`. Never create duplicate `.bak.1`, `.bak.2` copies when state is unchanged.
 - Sensitive Deletion Human-in-the-Loop Gate: Halt and warn the user first before executing any `DROP`, `TRUNCATE`, unconditioned `DELETE`, bucket/collection purge, or sensitive file removal.
-- Simultaneous Multi-Agent Coordination: Partition file ownership across tracks and share `.backups/backup_manifest.json` locks across all 37 synchronized skills.
-- Prohibit neon purple gradients, glowing borders, card-soup layouts, and raw emojis in UI buttons.
-- Keep commits under 1,000 changed lines.
+- Prohibit neon purple gradients, glowing borders, card-soup layouts, Corporate Memphis illustrations, and raw emojis in UI buttons.
+- Keep commits under 1,000 changed lines with Documentation Impact disclosed.
