@@ -1,21 +1,24 @@
-# GCP IAM Least Privilege & Secret Manager Integration
+# GCP IAM Least Privilege, Workload Identity & Secret Manager
+
+> **Objective**: Eliminate static JSON service account keys and broad `roles/editor` / `roles/owner` bindings across Google Cloud deployments.
 
 ---
 
-## 1. Secret Manager Mounting
+## 1. Dedicated Service Accounts & Minimal Roles
 
-Never inject plaintext secrets in environment variables or container image layers. Bind secrets directly via Cloud Run volume mounts or environment secret references:
+Never run Cloud Run, Cloud Functions, or GKE workloads under the default Compute Engine service account (`*-compute@developer.gserviceaccount.com`, which carries excessive `Editor` permissions):
 
-```bash
-gcloud run deploy my-service \
-    --image gcr.io/my-project/my-service:v1 \
-    --set-secrets="DATABASE_URL=projects/123456/secrets/prod-db-url:latest"
-```
+| Workload Need | Prohibited Broad Role | Least-Privilege Role |
+| :--- | :--- | :--- |
+| **Read one app secret** | `roles/secretmanager.admin` at project scope | `roles/secretmanager.secretAccessor` bound on **the specific secret resource** |
+| **Publish domain events** | `roles/pubsub.admin` | `roles/pubsub.publisher` bound on **the specific topic** |
+| **Read/Write GCS assets** | `roles/storage.admin` | `roles/storage.objectUser` bound on **the specific bucket** |
+| **Connect to Cloud SQL** | Public IP `0.0.0.0/0` + superuser | `roles/cloudsql.client` + IAM DB auth over Private VPC / Unix socket |
 
 ---
 
-## 2. Service Account Scoping
+## 2. Secret Manager & Workload Identity Federation
 
-- Create dedicated service accounts per microservice (e.g., `orders-svc@project-id.iam.gserviceaccount.com`).
-- Grant least-privilege roles (`roles/secretmanager.secretAccessor`, `roles/cloudsql.client`).
-- Prohibit wide administrative roles (`roles/owner`, `roles/editor`) on runtime accounts.
+1. **Zero Static Keys**: Authenticate GitHub Actions / CI via **Workload Identity Federation (OIDC)** (`google-github-actions/auth@v2` with `workload_identity_provider`), never exported JSON keys.
+2. **Runtime Secret Mounting**: Bind secrets in Cloud Run (`--set-secrets="DB_PASS=db-pass:latest"` or mounted volume `/secrets/...`) — never bake credentials into `Dockerfile` or `cloudbuild.yaml` plaintext env vars.
+3. **GCS Bucket & Cloud SQL Protection**: Enable uniform bucket-level access, block public access (`public_access_prevention = "enforced"`), and set `deletion_protection = true` on Cloud SQL.

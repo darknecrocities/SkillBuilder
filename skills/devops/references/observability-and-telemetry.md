@@ -1,30 +1,20 @@
-# Observability, Structured Logging & OpenTelemetry
+# Container Observability, Health Probes & Telemetry Wiring
 
-Standards for instrumenting cloud workloads for high observability.
-
----
-
-## 1. Structured JSON Logging Format
-In production, emit single-line JSON logs to stdout:
-
-```json
-{
-  "timestamp": "2026-10-20T00:15:30.123Z",
-  "severity": "INFO",
-  "message": "User authenticated successfully",
-  "logging.googleapis.com/trace": "projects/my-project/traces/a1b2c3d4e5f6",
-  "http_request": {
-    "request_method": "POST",
-    "request_url": "/api/v1/auth/login",
-    "status": 200,
-    "latency": "0.045s"
-  },
-  "user_id": "usr_98765"
-}
-```
+> **Objective**: Ensure every deployed container exposes deterministic health probes, structured JSON logs, and OpenTelemetry traces without leaking sensitive headers.
 
 ---
 
-## 2. Liveness vs Readiness Probes
-- **Liveness (`/healthz`)**: Verifies the HTTP server is alive and not deadlocked. If it fails, the container orchestrator restarts the pod.
-- **Readiness (`/readyz`)**: Verifies the service can accept incoming traffic (database pool connected, caches warm). If it fails, traffic is diverted without restarting the container.
+## 1. Liveness vs. Readiness Probe Contract
+
+| Probe Endpoint | Purpose | Failure Behavior |
+| :--- | :--- | :--- |
+| **`GET /healthz` (Liveness)** | Confirms process event loop / runtime is responsive (`200 { "status": "alive" }`). | Orchestrator restarts container if hung. **Do NOT query external DBs here** (avoids cascading restarts on transient DB blips). |
+| **`GET /readyz` (Readiness)** | Verifies critical local dependencies (DB pool `SELECT 1`, Redis ping, `.riv`/assets mounted) within `1.5s` timeout. | Load balancer removes pod from rotation (`503`) until dependency recovers. |
+
+---
+
+## 2. Structured Container Logging & Trace Propagation
+
+- **JSON to `stdout`**: Write single-line structured JSON (`timestamp`, `level`, `message`, `service`, `trace_id`, `span_id`, `correlation_id`, `duration_ms`) to `stdout`/`stderr`; never write rotating log files inside ephemeral containers.
+- **Scrub Sensitive Fields**: Redact `authorization`, `cookie`, `set-cookie`, `password`, `api_key`, and `token` keys before serializing logs.
+- **Graceful Telemetry Flush**: Call `sdk.shutdown()` / `tracerProvider.forceFlush()` inside the `SIGTERM` shutdown hook so final error spans ship before container exit.

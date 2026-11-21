@@ -1,34 +1,15 @@
-# Cloud, Container & DevOps Error Catalog
+# Cloud & Container DevOps Error Catalog
 
-Diagnoses and resolutions for cloud deployment, container orchestration, and CI/CD defects.
-
----
-
-### [CL-ERR-001] CrashLoopBackOff: Container Exits Immediately
-- **Symptom**: Pod status displays `CrashLoopBackOff`; container restarts continuously.
-- **Root Cause**: Missing required environment variable, binary architecture mismatch (e.g. built on arm64 Mac without `--platform linux/amd64`), or process bound to `localhost` instead of `0.0.0.0`.
-- **Diagnostic Command**: `kubectl logs <pod-name> --previous` or `docker logs <container-id>`.
-- **Remediation**:
-  1. Ensure server listens on `0.0.0.0:$PORT` rather than `127.0.0.1`.
-  2. Verify all boot-time required environment variables are supplied.
-  3. Build with Docker Buildx: `docker buildx build --platform linux/amd64 ...`
+> **Objective**: Rapid diagnosis of Docker build bloat, root-user failures, OOMKilled containers, and CI/CD permission errors.
 
 ---
 
-### [CL-ERR-002] GCP Cloud Run IAM Permission Denied (403)
-- **Symptom**: `The request was not authenticated` or `User not authorized to invoke service`.
-- **Root Cause**: Cloud Run service deployed with ingress restricted or missing `roles/run.invoker` role on caller service account.
-- **Remediation**:
-  - For public APIs: `gcloud run services add-iam-policy-binding <service> --member="allUsers" --role="roles/run.invoker"`
-  - For private services: Grant `roles/run.invoker` to the caller's specific Service Account.
+## 1. Failure & Remediation Matrix
 
----
-
-### [CL-ERR-003] Docker Build Secret Leakage
-- **Symptom**: Security scanner detects `NPM_TOKEN` or `GITHUB_TOKEN` embedded in Docker image layers.
-- **Root Cause**: Passing secret as standard `ARG` or copying `.env` during image build.
-- **Remediation**: Use Docker BuildKit secret mounts:
-  ```dockerfile
-  RUN --mount=type=secret,id=npm_token \
-      NPM_TOKEN=$(cat /run/secrets/npm_token) npm ci
-  ```
+| Error Signature / Symptom | Root Cause | Production Remediation |
+| :--- | :--- | :--- |
+| **`Permission denied` when running as `USER 10001`** | Files copied before user switch remain `root`-owned, or app tries binding privileged port `< 1024` (`:80`/`:443`). | Copy with `COPY --chown=10001:10001`, bind unprivileged port `8080`, and use `WORKDIR /app`. |
+| **`OOMKilled` (Exit Code 137)** | Node/Python memory exceeds container cgroup limit (`--max-old-space-size` unset or unbounded file read). | Stream large payloads, set Node `--max-old-space-size` to `75%` of container RAM limit, raise Cloud Run/K8s memory ceiling. |
+| **Container image exceeds `1.5 GB`** | Shipping `node_modules` devDependencies, build compilers (`gcc`), or `.git` in final image. | Multi-stage Dockerfile (`builder` -> `node:22-alpine` / `distroless`), copy only runtime artifacts, maintain `.dockerignore`. |
+| **Readiness probe flaps / cascade restarts** | `/healthz` liveness endpoint pings external DB, causing K8s/Cloud Run to kill pods during brief DB failover. | Split `/healthz` (process-only) from `/readyz` (dependency check with `1.5s` timeout). |
+| **Exposed `GOOGLE_APPLICATION_CREDENTIALS` JSON** | Static service account key downloaded into repo or GitHub Secret. | Delete key immediately, rotate IAM binding, switch to **Workload Identity Federation (OIDC)**. |

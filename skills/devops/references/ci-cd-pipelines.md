@@ -1,21 +1,25 @@
-# Continuous Integration & Delivery (CI/CD) Architecture
+# CI/CD Pipelines, Security Gates & Artifact Provenance
 
-Guidelines for establishing the 5-Gate automated testing and build pipeline in GitHub Actions.
+> **Objective**: Catch regressions, secret leaks, bloated files, and container CVEs automatically in GitHub Actions / Cloud Build before code merges to `main`.
 
 ---
 
-## The 5 Gates of CI/CD
+## 1. The 5-Gate CI Pipeline Architecture
 
-```mermaid
-flowchart LR
-    G1["Gate 1: Lint & Format"] --> G2["Gate 2: Static Types"]
-    G2 --> G3["Gate 3: Automated Tests"]
-    G3 --> G4["Gate 4: Security Audit"]
-    G4 --> G5["Gate 5: Container Build"]
-```
+1. **Gate 1 — Hygiene & Static Quality**:
+   - Line limits (`check_source_line_limits.py --path .`), anti-slop (`sanitize_ai_slop.py --strict`), skill depth/sync (`skill_linter.py --all --strict-depth`), `eslint` / `ruff`.
+2. **Gate 2 — Type Safety & Contracts**:
+   - `tsc --noEmit`, `mypy` / `pyright`, OpenAPI schema validation, and public-data boundary checks (`bettersanfernando` pattern).
+3. **Gate 3 — Automated Test Suites**:
+   - Unit, integration, and Playwright E2E suites with real ephemeral databases (SQLite/Postgres test containers).
+4. **Gate 4 — Security & Container Scan**:
+   - Dependency vulnerability audit (`npm audit` / `pip-audit`), Trivy container image scan (`CRITICAL`/`HIGH` fail build), and secret scanning (`gitleaks`).
+5. **Gate 5 — Immutable Build & OIDC Deploy**:
+   - Build once, tag with immutable Git SHA (`app:${GITHUB_SHA}`), authenticate to GCP/AWS via **OIDC Workload Identity Federation** (never static long-lived JSON/IAM keys in GitHub Secrets).
 
-1. **Gate 1: Lint & Code Style**: Run formatters and linters (`eslint`, `ruff check`, `prettier --check`).
-2. **Gate 2: Static Type Checking**: Full compiler verification (`tsc --noEmit`, `mypy`, `go vet`).
-3. **Gate 3: Test Suites**: Run unit and integration tests with code coverage report.
-4. **Gate 4: Dependency Security Audit**: Check for known CVEs (`npm audit --audit-level=high`, `pip-audit`, `trivy`).
-5. **Gate 5: Container Build & Verification**: Build the multi-stage Docker container and verify exit status.
+---
+
+## 2. GitHub Actions Security Invariants
+- Pin third-party actions by full commit SHA rather than mutable `@v4` tags where supply-chain policy applies.
+- Grant minimal `permissions: { contents: read, id-token: write }` per job (`GITHUB_TOKEN` least privilege).
+- Concurrency group `cancel-in-progress: true` on PRs; disable cancellation on `main` production deploys so releases never abort mid-migration.

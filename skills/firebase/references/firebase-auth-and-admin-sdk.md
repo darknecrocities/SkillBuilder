@@ -1,30 +1,23 @@
-# Firebase Auth & Admin SDK Production Standards
+# Firebase Auth, Custom Claims & Admin SDK Security Manual
+
+> **Objective**: Enforce server-side token verification, least-privilege Admin SDK initialization, and tamper-proof custom role claims.
 
 ---
 
-## 1. Firebase Auth Client Integration
+## 1. Token Verification & Admin SDK Boundaries
 
-- Store session tokens securely (use httpOnly session cookies for Server-Side Rendering rather than raw local storage).
-- Enforce Multi-Factor Authentication (MFA) on administrative routes.
-- Verify ID tokens server-side on every protected API call using `admin.auth().verifyIdToken(idToken)`.
+- **Never Trust Client UIDs**: On Cloud Functions (`https.onCall` / HTTP routes) or Next.js API routes, always extract identity from `await getAuth().verifyIdToken(idToken, true)` (`checkRevoked: true` on sensitive mutations!). Never trust `req.body.userId`.
+- **Single-Instance Initialization**: Initialize `firebase-admin` once (`getApps().length === 0 ? initializeApp() : getApp()`). Never commit downloaded service account JSON keys into Git (`FIREBASE_SERVICE_ACCOUNT` belongs in Secret Manager or ADC/Workload Identity).
 
 ---
 
-## 2. Admin SDK Backend Execution
+## 2. Custom Claims & RBAC Hygiene
 
-```typescript
-import * as admin from 'firebase-admin';
+- **Keep Claims Compact**: Custom claims live inside the signed JWT (`<= 1,000` bytes max) — store only concise role/tenant keys (`{ role: "editor", tenantId: "t_42" }`), never large arrays or profile fields.
+- **Force Token Refresh on Role Change**: After `setCustomUserClaims(uid, ...)`, record a `claimsUpdatedAt` timestamp in Firestore or revoke refresh tokens (`revokeRefreshTokens(uid)`) for demotions so stale permissions cannot linger for 60 minutes.
 
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.applicationDefault()
-  });
-}
+---
 
-export const db = admin.firestore();
-export const auth = admin.auth();
-```
-
-### Security Rules:
-- Never bundle the Firebase Admin SDK or service account private keys into client-side web bundles.
-- Use Application Default Credentials (ADC) when deploying to Cloud Run or Google Kubernetes Engine.
+## 3. Emulator-First & Backup Discipline
+- Run auth and security-rule integration tests against the **Firebase Emulator Suite** (`firebase emulators:exec`) — never test destructive changes against production data.
+- Before altering rules or running bulk Admin SDK migrations, verify a single SHA-256 export slot via `manage_deduplicated_backup.py`.

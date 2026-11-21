@@ -1,37 +1,46 @@
-# Cloud Firestore Schema Design & Security Rules
+# Firestore Schema Design, Security Rules v2 & Atomic Transactions
+
+> **Objective**: Prevent open-database leaks (`allow read, write: if true;`), unbounded collection queries, and non-atomic counter/balance races in Cloud Firestore.
 
 ---
 
-## 1. Firestore Data Modeling Guidelines
-
-- **Subcollections vs Root Collections**: Use subcollections (`users/{userId}/orders/{orderId}`) when access is hierarchically scoped to an owner.
-- **Denormalization**: Store frequently displayed read data directly on the parent document (e.g., `userName`, `avatarUrl`) to prevent multiple reads.
-- **Index Optimization**: Explicitly define composite indexes in `firestore.indexes.json` for queries with inequality filters and sorting.
-
----
-
-## 2. Hardened Security Rules (`firestore.rules`)
+## 1. Default-Deny Security Rules v2 Blueprint
 
 ```javascript
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Helper functions
-    function isAuthenticated() {
+    match /{document=**} {
+      allow read, write: if false; // Mandatory default deny
+    }
+
+    function isSignedIn() {
       return request.auth != null;
     }
-    function isOwner(userId) {
-      return isAuthenticated() && request.auth.uid == userId;
+
+    function isTenantMember(tenantId) {
+      return isSignedIn() && request.auth.token.tenantId == tenantId;
     }
 
-    match /users/{userId} {
-      allow read: if isAuthenticated();
-      allow write: if isOwner(userId);
-
-      match /private/{docId} {
-        allow read, write: if isOwner(userId);
-      }
+    match /tenants/{tenantId}/projects/{projectId} {
+      allow read: if isTenantMember(tenantId);
+      allow create: if isTenantMember(tenantId)
+        && request.resource.data.keys().hasOnly(['title', 'status', 'createdAt', 'ownerId'])
+        && request.resource.data.ownerId == request.auth.uid
+        && request.resource.data.title is string
+        && request.resource.data.title.size() > 0
+        && request.resource.data.title.size() <= 200;
+      allow update: if isTenantMember(tenantId)
+        && request.resource.data.ownerId == resource.data.ownerId;
+      allow delete: if false; // Route deletions through audited server/soft-delete flow
     }
   }
 }
 ```
+
+---
+
+## 2. Schema, Transactions & Rules Ruleset
+- **No Unbounded Queries**: Always paginate lists (`limit(25)` + `startAfter(lastDoc)`) and enforce `request.query.limit <= 50` in rules where appropriate.
+- **Atomic `runTransaction`**: Wrap multi-document writes or counter/quota checks inside `db.runTransaction` (or `FieldValue.increment`) — never read a doc on the client and write back `count + 1`.
+- **Always Delegate `firestore.rules` Edits When Specialized Tooling Applies**, and test every allow/deny path with `@firebase/rules-unit-testing`.
