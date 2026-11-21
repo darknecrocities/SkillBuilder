@@ -17,12 +17,14 @@ import sys
 from typing import Any, Dict, List, Optional, Set
 
 REQUIRED_SKILLS: Set[str] = {
-    "3d", "ai", "anti-slop", "antigravity-automation", "api-design", "aws", "backend", "continuous-learning",
-    "data-pipelines", "database", "devops", "firebase", "frontend", "full-scale-mode",
-    "fullstack", "gcp", "git-workflow", "i18n", "local-llm", "mobile-ui", "observability",
-    "performance", "production-etiquette", "project-skills", "prompt-polish", "qa",
-    "refactor", "research", "routing", "security", "state-management", "supabase",
-    "testing", "ui", "web-ui", "world-class-engineering",
+    "2d-mascot-motion", "3d", "ai", "anti-slop", "antigravity-automation", "api-design", "architect",
+    "arena", "aws", "backend", "brand-assets", "browser-media-wasm", "code-archaeology",
+    "continuous-learning", "darknecrostack", "data-pipelines", "database", "devops", "firebase",
+    "frontend", "full-scale-mode", "fullstack", "gcp", "git-workflow", "i18n", "interrogate",
+    "local-first-data", "local-llm", "mcp-engineering", "mobile-ui", "observability",
+    "performance", "production-etiquette", "project-skills", "prompt-polish", "prove-it-works",
+    "qa", "refactor", "research", "routing", "security", "state-management", "supabase",
+    "testing", "ui", "video-editing", "web-ui", "world-class-engineering",
 }
 
 BLOATED_FILLER_PATTERNS = re.compile(
@@ -74,9 +76,9 @@ def audit_cross_skill_sync(repo_root: Path) -> List[Dict[str, Any]]:
             })
 
     sync_checks = [
-        (repo_root / "plugin.json", "36 modular skills"),
-        (repo_root / "skills" / "full-scale-mode" / "SKILL.md", "36 modular engineering skills"),
-        (repo_root / "skills" / "world-class-engineering" / "SKILL.md", "The 36 Modular Engineering Skills"),
+        (repo_root / "plugin.json", f"{len(REQUIRED_SKILLS)} modular skills"),
+        (repo_root / "skills" / "full-scale-mode" / "SKILL.md", f"{len(REQUIRED_SKILLS)} modular engineering skills"),
+        (repo_root / "skills" / "world-class-engineering" / "SKILL.md", f"The {len(REQUIRED_SKILLS)} Modular Engineering Skills"),
     ]
     for fpath, expected_phrase in sync_checks:
         if fpath.exists() and expected_phrase.lower() not in fpath.read_text(encoding="utf-8").lower():

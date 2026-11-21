@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # Script: verify_all_skills.sh
-# Purpose: Master test runner for all 36 SkillBuilder verification suites & guardrails.
+# Purpose: Master test runner for all 48 DarkNecroStack skills & verification suites.
 # Author: Arron Kian Parejas (@darknecrocities)
 # ==============================================================================
 
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-echo "=== Running SkillBuilder Master 48-Suite Verification Runner ==="
+echo "=== Running DarkNecroStack Master 55-Suite Verification Runner ==="
 echo "Repository: ${REPO_DIR}"
 echo ""
 
@@ -249,10 +249,45 @@ python3 "${REPO_DIR}/skills/full-scale-mode/tests/test_manage_orchestration_memo
 echo ""
 
 # 48. Orchestration Multi-Tier Evaluation Harness Tests
-echo "[48/48] Running Orchestration Evaluation Harness & Self-Healing Loop tests..."
+echo "[48/55] Running Orchestration Evaluation Harness & Self-Healing Loop tests..."
 python3 "${REPO_DIR}/skills/full-scale-mode/tests/test_orchestration_harness.py"
 echo ""
 
+# 49. DarkNecroStack Dynamic Router & Decision Trail Tests
+echo "[49/55] Running DarkNecroStack dynamic router & TSV trail tests..."
+python3 "${REPO_DIR}/skills/darknecrostack/tests/test_darknecrostack.py"
+echo ""
+
+# 50. 2D Mascot & Vector Motion (.riv / SVG) Tests
+echo "[50/55] Running 2d-mascot-motion verifier & template tests..."
+python3 "${REPO_DIR}/skills/2d-mascot-motion/tests/test_verify_mascot_assets.py"
+echo ""
+
+# 51. Brand Assets & Squircle Kit Tests
+echo "[51/55] Running brand-assets squircle generator & SVG audit tests..."
+python3 "${REPO_DIR}/skills/brand-assets/tests/test_brand_assets.py"
+echo ""
+
+# 52. MCP Engineering Hygiene Tests
+echo "[52/55] Running mcp-engineering path sandbox & stdio tests..."
+python3 "${REPO_DIR}/skills/mcp-engineering/tests/test_verify_mcp_hygiene.py"
+echo ""
+
+# 53. Browser Media & WASM Lifecycle Tests
+echo "[53/55] Running browser-media-wasm ObjectURL & Worker tests..."
+python3 "${REPO_DIR}/skills/browser-media-wasm/tests/test_verify_media_wasm_hygiene.py"
+echo ""
+
+# 54. Local-First Data & Boundary Tests
+echo "[54/55] Running local-first-data & public/private boundary tests..."
+python3 "${REPO_DIR}/skills/local-first-data/tests/test_verify_local_first_hygiene.py"
+echo ""
+
+# 55. Full Ecosystem Strict Depth & Anti-Boilerplate Lint
+echo "[55/55] Running DarkNecroStack strict-depth & anti-boilerplate linter across all 48 skills..."
+python3 "${REPO_DIR}/scripts/skill_linter.py" --all --strict-depth --benchmark
+echo ""
+
 echo "=========================================================="
-echo "[SUCCESS] ALL 48 SKILLBUILDER VERIFICATION SUITES PASSED!"
+echo "[SUCCESS] ALL 55 DARKNECROSTACK VERIFICATION SUITES PASSED!"
 echo "=========================================================="

@@ -1,6 +1,6 @@
 ---
 description: Modern web design systems, Component-Level Container Queries (@container), CSS View Transitions API, OKLCH perceptual color spaces, fluid clamp() typography curves, and single-zenith sub-pixel lighting craftsmanship.
-globs: *
+globs: *.css,*.tsx,*.jsx,*.html
 alwaysApply: false
 ---
 

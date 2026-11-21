@@ -1,37 +1,51 @@
-# Structured Outputs & Function Calling
+# Structured Outputs & Defensive Tool Calling Manual
 
-Deterministic schema enforcement and safe tool orchestration.
+> **Objective**: Guarantee type-safe JSON responses and resilient function-calling loops that never crash or execute unsafe arguments.
 
 ---
 
-## 1. Schema-Constrained Outputs (Pydantic Integration)
+## 1. Pydantic v2 / Zod Schema-Constrained Outputs
+
+Always enforce output structure at decoding time rather than regex-parsing markdown code fences:
 
 ```python
+from enum import Enum
 from pydantic import BaseModel, Field
 from google import genai
 from google.genai import types
 
-class CodeReviewSummary(BaseModel):
-    verdict: str = Field(description="APPROVE, REQUEST_CHANGES, or COMMENT")
-    security_risk_level: str = Field(description="CRITICAL, HIGH, MEDIUM, LOW, or NONE")
-    findings: list[str] = Field(description="Specific actionable code findings")
+class Severity(str, Enum):
+    LOW = "low"
+    HIGH = "high"
+    BLOCKER = "blocker"
+
+class Finding(BaseModel):
+    file_path: str
+    severity: Severity
+    rationale: str = Field(max_length=240)
+
+class ReviewReport(BaseModel):
+    findings: list[Finding]
+    approved: bool
 
 client = genai.Client()
-
-response = client.models.generate_content(
+res = client.models.generate_content(
     model="gemini-2.5-flash",
-    contents="Review this pull request diff...",
+    contents=diff_payload,
     config=types.GenerateContentConfig(
         response_mime_type="application/json",
-        response_schema=CodeReviewSummary,
+        response_schema=ReviewReport,
+        temperature=0.0,
     ),
 )
-# Validated typed object
-review = CodeReviewSummary.model_validate_json(response.text)
+report: ReviewReport = res.parsed
 ```
 
 ---
 
-## 2. Defensive Tool Calling Execution
-- Always validate arguments provided by the model before executing system commands.
-- Return structured tool outputs (`{"status": "success", "result": ...}` or `{"status": "error", "message": ...}`).
+## 2. Defensive Tool-Execution Wrapper
+
+1. **Validate Before Running**: Parse model-generated tool arguments with Pydantic/Zod and sandbox filesystem paths (`realpath` prefix check) before hitting disk or DB.
+2. **Max Loop Guard**: Cap autonomous tool loops (`max_iterations = 8–12`) to prevent runaway token spend on cyclic failures.
+3. **Structured Error Return**: Return `{"ok": False, "code": "INVALID_PATH", "hint": "Use relative path inside src/"}` instead of propagating unhandled exceptions.
+4. **Confirm Irreversible Tools**: Destructive tools (`delete_table`, `send_email`, `deploy_prod`) must require explicit human confirmation before execution.

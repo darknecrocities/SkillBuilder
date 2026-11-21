@@ -1,33 +1,23 @@
-# Anti-Mock Persistence Standards
+# Anti-Mock Persistence Patterns & Local Dev Database Seeding
 
-The Anti-Mock mandate strictly prohibits static mock arrays pretending to be databases in production or integration code.
-
----
-
-## 1. Real Persistence Requirements
-
-Requirement | Production Pattern | Prohibited Slop
-:--- | :--- | :---
-Database Engine | PostgreSQL / SQLite / DuckDB / Prisma | `const users = [{id: 1, name: 'Alice'}, ...]`
-Schema Validation | Zod / Pydantic schemas on disk | Unchecked `any` JSON objects
-Query Execution | Parameterized SQL / ORM client | In-memory `users.filter(u => u.id === req.id)`
-Pre-Mutation Backup | Deduplicated SHA-256 backup | Unrecoverable bulk mutations
+> **Objective**: Eradicate fake in-memory array state in fullstack apps by making real ephemeral/local persistence effortless in dev, test, and production.
 
 ---
 
-## 2. In-Memory SQLite for Rapid Real-Persistence Testing
+## 1. Zero-Friction Real Persistence Choices
 
-When external database credentials are not yet configured, wire up a real SQLite database rather than a toy array:
+| Stack | Local Dev & Test Store | Production Store | Why It Beats Fake Arrays |
+| :--- | :--- | :--- | :--- |
+| **Node / Next.js** | `better-sqlite3` (`:memory:` in tests, `.data/app.db` in dev) | PostgreSQL (`pg` / Drizzle) or Turso | Enforces real SQL constraints, foreign keys, and migrations |
+| **Python / FastAPI** | `sqlite3` / `aiosqlite` (WAL mode) | PostgreSQL (`asyncpg` / SQLAlchemy) | Catches SQL/serialization bugs locally before deploy |
+| **Client-Only Offline** | `IndexedDB` / `OPFS` + `Zod` validation | Same (`IndexedDB` / `OPFS`) | Survives page refresh cleanly with real quota/migration handling |
 
-```typescript
-import Database from 'better-sqlite3';
+---
 
-const db = new Database(':memory:');
-db.exec(`
-  CREATE TABLE users (
-    id TEXT PRIMARY KEY,
-    name TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL
-  );
-`);
-```
+## 2. Legitimate Test Seeding vs. Prohibited Mock Arrays
+
+- **PROHIBITED (AI Slop)**: Exporting `let mockUsers = [{ id: 1, name: "Alice" }]` inside `src/services/` or `src/app/api/` and returning `mockUsers.push(newItem)` as the application backend.
+- **PRODUCTION STANDARD**:
+  1. Run deterministic idempotent seed scripts (`INSERT INTO ... ON CONFLICT DO NOTHING`) against real SQLite/Postgres test databases.
+  2. For incomplete external research datasets, expose explicit `RecordVerificationStatus = "VERIFIED" | "PARTIAL" | "NEEDS_RESEARCH"` rather than inventing fake records (`bettersanfernando` rule).
+  3. Use MSW (`Mock Service Worker`) **only** inside automated test suites to simulate third-party upstream HTTP dependencies (`Stripe`, `GitHub`), never to fake your own app database.

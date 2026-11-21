@@ -1,36 +1,35 @@
-# Gemini API & Google GenAI SDK Patterns
+# Gemini SDK (`google-genai`) & Model Selection Matrix
 
-Best practices for building with Gemini models using the modern `google-genai` SDK.
+> **Objective**: Standardize production Python/TypeScript calls on the unified `google-genai` SDK with predictable latency, cost, and safety settings.
 
 ---
 
-## 1. SDK Initialization & Modern Syntax
-Always use the unified `google-genai` SDK (`from google import genai`):
+## 1. Official SDK Setup (Zero Legacy `google-generativeai`)
 
 ```python
 import os
 from google import genai
 from google.genai import types
 
-client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
-
-response = client.models.generate_content(
-    model="gemini-2.5-flash",
-    contents="Analyze the failure mode in this stack trace...",
-    config=types.GenerateContentConfig(
-        temperature=0.2,
-        max_output_tokens=1000,
-    ),
-)
-print(response.text)
+# Reads GEMINI_API_KEY from environment cleanly (never hardcode keys)
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 ```
 
 ---
 
-## 2. Model Selection Matrix
+## 2. Task-to-Model Selection Matrix
 
-| Model Tier | Ideal Workload | Latency Target | Token Ceiling |
+| Workload Tier | Recommended Model | Temperature | Typical Use Case |
 | :--- | :--- | :--- | :--- |
-| **gemini-2.5-flash** | High-speed classification, API routing, code linter | Ultra Low (< 1s) | 1,000,000 tokens |
-| **gemini-2.5-pro** | Complex refactoring, architecture plans, multi-step math | Deep Reasoning | 2,000,000 tokens |
-| **gemini-live** | Bidirectional real-time audio/video streaming | Sub-500ms streaming | Real-time sessions |
+| **High-Volume / Routing** | `gemini-2.5-flash-lite` | `0.0–0.1` | Classification, intent routing, PII scrub, simple extraction |
+| **Balanced Workhorse** | `gemini-2.5-flash` | `0.1–0.3` | Structured JSON extraction, RAG synthesis, tool-calling agents |
+| **Deep Reasoning / Review** | `gemini-2.5-pro` | `0.2–0.4` | Complex multi-file architecture, adversarial review, forensics |
+
+---
+
+## 3. Streaming, Timeouts & Resilience
+
+1. **Always Configure Timeouts**: Wrap network/API calls with explicit deadlines (`http_options={"timeout": 15000}` ms) so stalled streams never hang worker queues.
+2. **Async Streaming**: Use `client.aio.models.generate_content_stream(...)` in FastAPI/Node SSE endpoints and wire `AbortController` / client disconnect cancellation cleanly.
+3. **Multimodal Hygiene**: Upload large videos/PDFs (`> 20 MB`) via `client.files.upload()` and poll file processing state asynchronously or delete temporary files after session completion.
+4. **System Instructions Separation**: Keep immutable role/schema rules in `system_instruction` and untrusted user/document data strictly inside `contents`.

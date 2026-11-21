@@ -37,7 +37,8 @@ Single-line commits (`git commit -m "update"`) are strictly prohibited. Every co
 3. **Structured Description Body**:
    - `- Context / Why:` Motivation and requirements driving the change.
    - `- Key Changes / What:` Detailed bullet points of modified components and files.
-   - `- Verification / Impact:` Automated test execution commands, line limit checks, and receipts.
+   - `- Verification / Impact:` Automated test execution commands, line limit checks, and receipts (`[measured]`).
+   - `- Documentation Impact:` Exact docs updated, OR `Documentation impact: none — <technical reason>` (`bettersanfernando` standard).
 
 #### Example Production Commit:
 ```text

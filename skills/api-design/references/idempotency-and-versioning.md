@@ -1,30 +1,26 @@
-# API Idempotency & Versioning Standards
+# Idempotency Keys, API Versioning & Safe Retries Manual
+
+> **Objective**: Guarantee safe network retries without duplicate charges/records and evolve APIs cleanly without breaking active mobile/web clients.
 
 ---
 
-## 1. Idempotency Key Handling (`Idempotency-Key`)
+## 1. Idempotency-Key Lifecycle (`POST` / `PATCH`)
 
-For mutating operations (`POST /payments`, `POST /orders`, `POST /refunds`), clients supply a unique `Idempotency-Key` header:
+Accept `Idempotency-Key: <UUIDv4>` on all state-creating or payment endpoints:
 
-```http
-POST /v1/payments HTTP/1.1
-Host: api.example.com
-Idempotency-Key: 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d
-Content-Type: application/json
+| Existing Key State | Request Payload Hash | HTTP Response |
+| :--- | :--- | :--- |
+| **Not found** | Store key as `PENDING` (60s lock) | Execute handler, persist `status_code` + `body` (`24h` TTL), return result |
+| **`PENDING`** | Any | `409 Conflict` (`"Request with this Idempotency-Key is currently processing"`) |
+| **`COMPLETED`** | **Matches** original SHA-256 hash | Replay stored `status_code` + JSON response immediately |
+| **`COMPLETED`** | **Differs** from original hash | `422 Unprocessable Entity` (`"Idempotency-Key reused with different payload"`) |
 
-{"amount": 4900, "currency": "USD"}
-```
-
-### Server Flow:
-1. Check Redis/database for `idempotency:<client_id>:<key>`.
-2. If state is `PENDING`, return HTTP `409 Conflict` (request in progress).
-3. If state is `COMPLETED`, replay the cached HTTP status, headers, and response payload.
-4. If not found, acquire lock with TTL (e.g. 24 hours), execute mutation, cache output, and release lock.
+Never store idempotency state only in process RAM in multi-instance deployments — use Redis (`SET key val NX EX`) or a Postgres `idempotency_keys` table with unique `(tenant_id, key)`.
 
 ---
 
-## 2. API Versioning Conventions
+## 2. API Versioning & Non-Breaking Evolution
 
-- **URI Versioning**: Use `/v1/`, `/v2/` prefixes for breaking structural changes.
-- **Additive Evolution**: Add optional fields without incrementing major version numbers.
-- **Deprecation Header**: Emit `Deprecation: @<timestamp>` and `Sunset: <date>` for expiring endpoints.
+1. **Additive Changes (Non-Breaking)**: Adding optional response fields or optional request parameters with defaults requires no version bump.
+2. **Breaking Changes**: Renaming fields, tightening constraints, or changing types requires a new explicit major prefix (`/v2/...`) and deprecation headers (`Deprecation: true`, `Sunset: <RFC 7231 date>`) on `/v1/...`.
+3. **Never Leak Internal DB Schemas Directly**: Map internal table rows through explicit DTO serializers so column refactors never break API consumers.

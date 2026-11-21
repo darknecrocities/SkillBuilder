@@ -81,6 +81,13 @@ AI slop universally relies on centered purple cards and generic Inter font. Brea
 - **Typography**: Dense tabular monospace matrices, slashed zeros, coordinate indices.
 - **Components**: Orthogonal coordinate grids, crosshair rulers, vector wireframes, spatial dimension annotations.
 
+### 3.5 Domain Movement & Layout Proportion Decision Matrix
+Select **one** art movement per application — never blend three incompatible styles:
+- **DevTools / Observability / Local AI** $\rightarrow$ Industrial Tactical or Technical CAD (`max-w-7xl`, dense `4px/8px` grid, `65ch` prose cap).
+- **Editorial / Portfolio / Marketing** $\rightarrow$ Swiss International Editorial (`>= 35%` intentional negative space, asymmetric 12-col split).
+- **Consumer / Writing / Wellness** $\rightarrow$ Japanese Wabi-Sabi (warm paper/sumi neutrals, generous vertical rhythm).
+- **Mascots & Brand Assets**: Pair every UI movement with matching vector craft via [`/2d-mascot-motion`](../2d-mascot-motion/SKILL.md) and [`/brand-assets`](../brand-assets/SKILL.md).
+
 ---
 
 ## 4. Sub-Pixel Directional Lighting & Ultra-Premium Craftsmanship

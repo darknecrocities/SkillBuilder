@@ -1,16 +1,21 @@
-# Antigravity Automation Error Catalog & Failure Remediation
+# Antigravity Automation, Sidecars & Hooks Error Catalog
 
-Master catalog of common automation errors across scheduled sidecars, in-session scheduling, background daemons, and lifecycle hooks.
+> **Objective**: Rapid diagnosis and resolution of scheduled sidecar, `schedule` tool, and `hooks.json` lifecycle gate failures.
 
 ---
 
-## Error Catalog Table
+## 1. Common Automation & Hook Failure Modes
 
-Error Signature | Root Cause | Impact | Automated Remediation
-:--- | :--- | :--- | :---
-`ERR-AUTO-001: Cron Field Count Mismatch` | Cron expression does not have exactly 5 fields | Sidecar fails to register or silently never triggers | Run `generate_sidecar_automation.py` to validate expression. Ensure standard 5-field syntax (`* * * * *`).
-`ERR-AUTO-002: Missing CRON_TZ Prefix` | Sidecar schedule lacks IANA timezone identifier | Triggers in UTC rather than user's local timezone | Always prepend `CRON_TZ=<IANA_TZ>` (e.g. `CRON_TZ=America/New_York`).
-`ERR-AUTO-003: Shell Sleep Polling Anti-Pattern` | Agent invoked `sleep` in `run_command` in a loop | Wastes turn budget, blocks reactive messages | Replace busy-wait loops with the `schedule` tool or background async tasks (`WaitMsBeforeAsync: 500`).
-`ERR-AUTO-004: Orphan Daemon Task` | Background task launched without supervisor monitoring | Consumes CPU/memory indefinitely | Query `manage_task(Action="list")` and terminate hung processes via `manage_task(Action="kill", TaskId=...)`.
-`ERR-AUTO-005: Hook Timeout Overrun` | Hook script exceeded declared `timeout` in seconds | Antigravity kills the hook and logs warning | Optimize hook script to complete within <2s. Defer expensive computations to background tasks.
-`ERR-AUTO-006: Missing Hook Script Target` | `hooks.json` references non-existent script path | Hook fails to run on lifecycle trigger | Run `verify_antigravity_hooks.py` to audit file paths against the repository root.
+| Failure Signature | Root Cause | Production Remediation |
+| :--- | :--- | :--- |
+| **Hook timeout / tool call blocked unexpectedly** | Hook script hangs waiting on stdin, runs slow full-repo `os.walk`, or exceeds `timeout: 5`s. | Read tool payload quickly from stdin/args, scan only the single target file in `PostToolUse`, keep execution `< 300ms`. |
+| **Scheduled sidecar fires at wrong local hour** | Missing `CRON_TZ` in `~/.gemini/jetski/sidecars/<slug>/sidecar.json` (defaults to UTC). | Explicitly set `"cron_tz": "Asia/Manila"` (or user's IANA timezone) in sidecar manifest. |
+| **Agent stuck in `sleep()` polling loop** | Using `run_command("sleep 10")` or looping `manage_task(status)` instead of reactive wakeup. | Stop calling tools or use native `schedule(DurationSeconds, TimerCondition)` — system wakes automatically on message arrival. |
+| **Subagent ignores `hooks` or project rules** | Spawned worker lacked explicit `worker.md` pointer and file ownership list. | Start subagent kickoff with `Read <abs>/skills/darknecrostack/worker.md before anything else.` |
+| **PostToolUse hook rejects legitimate large doc** | Applying 500-line *source* rule blindly to generated lockfiles, `.sql` dumps, or assets. | Restrict line-guard checks to code extensions (`.py`, `.ts`, `.tsx`, `.js`, `.jsx`, `.go`, `.rs`, `.dart`, `.swift`, `.kt`). |
+
+---
+
+## 2. Hook Safety Checklist
+- Always verify hook scripts locally with `python3 skills/antigravity-automation/scripts/verify_antigravity_hooks.py` before committing `hooks.json`.
+- Ensure `PreToolUse` safety gates catch destructive `rm -rf`, `DROP TABLE`, `TRUNCATE`, and `git push --force` cleanly with clear recovery guidance.

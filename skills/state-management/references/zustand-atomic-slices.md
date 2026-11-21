@@ -1,38 +1,44 @@
-# Zustand Atomic Slices & Selector Memoization
+# Zustand Atomic Slices, Selector Memoization & State Machines
 
-Global client state must be partitioned into cohesive atomic slices to prevent unnecessary component re-renders.
+> **Objective**: Prevent whole-tree re-renders and impossible boolean-soup UI states by using atomic selectors and explicit state machines.
 
 ---
 
-## 1. Slice Pattern Implementation
+## 1. Atomic Selector Pattern (Never Destructure Whole Stores)
 
 ```typescript
-import { create } from 'zustand';
+// BAD: Component re-renders on EVERY unrelated slice update in the store
+const { sidebarOpen, activeFilter, audioVolume } = useAppStore();
 
-interface ThemeSlice {
-  theme: 'light' | 'dark';
-  setTheme: (theme: 'light' | 'dark') => void;
-}
+// GOOD: Subscribe strictly to the single primitive or useShallow tuple
+import { useShallow } from "zustand/react/shallow";
 
-const createThemeSlice = (set): ThemeSlice => ({
-  theme: 'dark',
-  setTheme: (theme) => set({ theme }),
-});
-
-export const useAppStore = create<ThemeSlice>()((...a) => ({
-  ...createThemeSlice(...a),
-}));
+const sidebarOpen = useAppStore((s) => s.sidebarOpen);
+const { activeFilter, setActiveFilter } = useAppStore(
+  useShallow((s) => ({ activeFilter: s.activeFilter, setActiveFilter: s.setActiveFilter }))
+);
 ```
 
 ---
 
-## 2. Selector Discipline
+## 2. Explicit State Machines Over Boolean Flag Soup
 
-Always consume state via atomic selectors:
+Replace `isLoading && !isError && isRetrying` with a typed discriminated transition reducer / XState machine:
+
 ```typescript
-// Good: only re-renders when 'theme' changes
-const theme = useAppStore((state) => state.theme);
-
-// Bad: re-renders on ANY store change
-const { theme } = useAppStore();
+type UploadState =
+  | { status: "idle" }
+  | { status: "validating"; fileName: string }
+  | { status: "processing"; fileName: string; progress: number }
+  | { status: "ready"; outputUrl: string }
+  | { status: "error"; message: string };
 ```
+
+- Validate transitions (`validating -> processing -> ready`) in one pure reducer/transition table so impossible transitions (e.g., jumping directly from `idle` to `ready` with no `outputUrl`) are unrepresentable at compile time.
+
+---
+
+## 3. State Scope Separation Rules
+- **URL Search Params (`nuqs` / `useSearchParams`)**: Shareable filters, pagination, active tabs, selected item IDs.
+- **TanStack Query / RSC**: Remote or persisted database records.
+- **Zustand**: Client-only ephemeral UI shell state (`drawerOpen`, `selectedTool`, `playbackState`) — never duplicate DB entities or form field buffers globally.

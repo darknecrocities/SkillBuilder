@@ -1,37 +1,31 @@
-# Antigravity Multi-Agent Orchestration & Reactive Wakeups
+# Multi-Agent Orchestration & Parallel Execution Manual
 
-Antigravity features a native subagent messaging mesh that enables parallel execution pipelines with zero polling.
-
----
-
-## 1. Subagent Lifecycle Tools
-
-Tool | Primary Purpose | Key Parameters
-:--- | :--- | :---
-`invoke_subagent` | Launch isolated worker subagent in background | `TypeName`, `Role`, `Prompt`, `Workspace`, `Model`
-`define_subagent` | Dynamically register a specialized agent type | `Name`, `Description`, `SystemPrompt`, `EnableWriteTools`
-`send_message` | Deliver asynchronous message to subagent | `Recipient` (conversationId), `Message`
-`manage_subagents` | List active subagents or terminate them | `Action`: `"list"`, `"kill"`, `"kill_all"`
+> **Objective**: Coordinate parallel subagents safely without overlapping edits, lost context, rule amnesia, or redundant storage backups.
 
 ---
 
-## 2. Reactive Wakeup Protocol
+## 1. Mandatory Subagent Kickoff Protocol
 
-The primary agent terminates its turn immediately after dispatching tasks:
-```text
-Parent Agent dispatches Task A & Task B via invoke_subagent()
-Parent Agent calls no more tools (Sleep State)
-Subagent A finishes and sends completion message
-Antigravity automatically wakes Parent Agent with Subagent message in context
-Zero while loops. Zero polling. Zero wasted tokens.
-```
+Every subagent launched via `invoke_subagent` or `swarm` starts with an isolated context and **does not inherit slash-command skills**. Structure every brief identically:
+1. **Line 1**: `Read <abs-path>/skills/darknecrostack/worker.md before anything else.`
+2. **Goal**: One sentence stating the user-facing outcome.
+3. **Owned Files**: Exact paths this worker may create/modify (zero overlap with sibling workers).
+4. **Forbidden Files / Guardrails**: Paths owned by other tracks + active `.agents/learned_conventions.md` rules.
+5. **Proof Command**: Exact test/linter command the worker must run and report `[measured]` before returning.
 
 ---
 
-## 3. Shared Backup Manifest Lease Locking
+## 2. Parallelism & Isolation Matrix
 
-When multiple concurrent subagents perform disk writes, schema migrations, or cloud modifications:
-1. Each subagent reads `.backups/backup_manifest.json`.
-2. Inspects existing SHA-256 backup entries.
-3. If state is unchanged, reuses the canonical backup slot (zero timestamped `*.bak.1` duplicates).
-4. Commits atomic updates before releasing the lease.
+| Scenario | Recommended Workspace Mode | Coordination Rule |
+| :--- | :--- | :--- |
+| **Read-only audit / research / QA** | `inherit` | Zero writes; aggregate findings in parent thread. |
+| **Disjoint domain tracks (Frontend vs Backend)** | `inherit` (strict file partition) | Partition directories explicitly (`src/ui/` vs `src/api/`). |
+| **Competing prototypes (`/arena`) or risky refactors** | `share` or `branch` | Isolated working copy; parent reviews diff and grafts winner cleanly. |
+
+---
+
+## 3. Reactive Wakeup & Storage Sync
+- **Zero Polling**: End turn or continue independent work after spawning subagents; the messaging runtime wakes the coordinator automatically when results arrive.
+- **Single-Slot Backups**: Coordinate database/cloud mutations through `.backups/backup_manifest.json` (`manage_deduplicated_backup.py`) to prevent duplicate `.bak.1` spam across concurrent workers.
+- **Fresh Subagents on Retry**: Dispatch follow-up fixes to a fresh subagent carrying the original brief + prior report unless expensive local state makes resuming mandatory.
