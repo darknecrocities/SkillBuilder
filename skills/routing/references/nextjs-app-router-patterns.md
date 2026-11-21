@@ -1,21 +1,46 @@
-# Next.js App Router Architectural Patterns
+# Next.js App Router, Page-Data Matrix & Bilingual Rewrites
+
+> **Objective**: Structure deterministic Next.js App Router hierarchies with clean static-vs-dynamic boundaries, zero layout cascades, and canonical bilingual routing.
 
 ---
 
-## 1. File-Based Routing Hierarchy
+## 1. Layout Isolation & Parallel / Intercepting Routes
 
-Route Segment | File Name | Purpose
-:--- | :--- | :---
-Page UI | `page.tsx` | Unique leaf route presentation
-Shared Layout | `layout.tsx` | Preserved across child navigations (does not re-render)
-Loading Skeleton | `loading.tsx` | Automatic Suspense boundary wrapper
-Error Boundary | `error.tsx` | Client error boundary (`"use client"`) catching uncaught exceptions
-Not Found UI | `not-found.tsx` | Triggered by `notFound()` invocations
+- **Shared `layout.tsx`**: Keep root and section layouts purely structural (fonts, metadata, nav shell). Never execute blocking slow fetches in the root layout unless cached and streamed via `<Suspense>`.
+- **Route Groups (`(marketing)`, `(app)`)**: Separate public marketing chrome from authenticated workspace shells without polluting URL segments.
+- **Loading & Error Boundaries**: Every dynamic segment (`[id]/`) should provide co-located `loading.tsx` (matching exact card/table heights so `CLS < 0.05`) and `error.tsx` recovery UI.
 
 ---
 
-## 2. Advanced Route Patterns
+## 2. Static vs. Dynamic Route Contract (`bettersanfernando` Pattern)
 
-- **Parallel Routes (`@modal`, `@sidebar`)**: Render multiple pages simultaneously in the same layout.
-- **Intercepting Routes (`(..)photo/[id]`)**: Load routes within current layout (modal photo view) while preserving URL shareability on hard refresh.
-- **Route Groups (`(marketing)`, `(dashboard)`)**: Organize folder hierarchy without altering URL paths.
+Maintain a documented route inventory (`docs/PAGE-DATA-MATRIX.md`) classifying every route explicitly:
+
+| Route Type | Next.js Config | Use Case |
+| :--- | :--- | :--- |
+| **Pre-rendered Record** | `generateStaticParams()` | Service directories, barangay pages, docs, marketing pages |
+| **Search / Filter Directory** | `export const dynamic = "force-dynamic"` | Interactive query parameter filters (`?q=...&category=...`) |
+| **Canonical Redirect** | `permanentRedirect(...)` (`308`) | Redirect legacy `/contact` -> `/government/contact` and `/en/...` -> `/` |
+
+---
+
+## 3. Unprefixed Default Locale + Prefixed Secondary Locale
+
+```typescript
+// middleware.ts pattern for canonical unprefixed primary locale
+import { NextResponse, type NextRequest } from "next/server";
+
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+  if (pathname === "/en" || pathname.startsWith("/en/")) {
+    const cleanPath = pathname.replace(/^\/en/, "") || "/";
+    return NextResponse.redirect(new URL(cleanPath, req.url), 308);
+  }
+  if (!pathname.startsWith("/fil") && !pathname.startsWith("/api") && !pathname.startsWith("/_next")) {
+    const url = req.nextUrl.clone();
+    url.pathname = `/en${pathname === "/" ? "" : pathname}`;
+    return NextResponse.rewrite(url);
+  }
+  return NextResponse.next();
+}
+```
