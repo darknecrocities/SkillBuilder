@@ -22,4 +22,4 @@ Read these principles when planning migrations, evaluating UX trade-offs, explor
 ## 4. Build the Lever
 - **When it applies**: Repetitive multi-file migrations, asset matrix generation, audit sweeps, or verification checks.
 - **Rule**: Build the deterministic tool (script, codemod, generator, linter) that executes or proves the change, rather than doing 30 manual edits by hand. The tool becomes a permanent, rerunnable artifact for reviewers and CI.
-- **Litmus Test**: If a reviewer asks *"how do I know all 48 skills/files match?"*, point to the executable lever you built and ran.
+- **Litmus Test**: If a reviewer asks *"how do I know all 51 skills/files match?"*, point to the executable lever you built and ran.

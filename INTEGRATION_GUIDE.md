@@ -18,7 +18,7 @@ Antigravity discovers skills and plugins hierarchically. Choose the method that 
 
 ## 2. Method 1: Global Plugin Setup (Recommended)
 
-Installing DarkNecroStack as a global plugin ensures that **any** Antigravity session on your workstation automatically inherits all 48 skills without requiring project-by-project setup.
+Installing DarkNecroStack as a global plugin ensures that **any** Antigravity session on your workstation automatically inherits all 51 skills without requiring project-by-project setup.
 
 ### Step 1: Clone or Copy SkillBuilder
 ```bash
@@ -125,17 +125,18 @@ Once installed, Antigravity leverages **Progressive Disclosure** to prevent cont
 Open any conversation in Antigravity and type:
 > *"What skills do you have available for database, cloud storage, and full-scale orchestration?"*
 
-The agent should confirm awareness of the **48 synchronized skills**, including:
+The agent should confirm awareness of the **51 synchronized skills**, including:
 - `/darknecrostack` (`/darknecro-mode`, `/ronskills`), `/code-archaeology`, `/architect`, `/arena`, `/interrogate`, `/prove-it-works`
 - `/2d-mascot-motion` (`.riv`), `/brand-assets`, `/video-editing`
 - `/mcp-engineering`, `/browser-media-wasm`, `/local-first-data`
+- `/computer-vision`, `/vlm-multimodal`, `/local-llm`, `/ai-integration`, `/ai`, `/research`
 - `/full-scale-mode` & `/world-class-engineering`
 - `/antigravity-automation` (scheduled sidecars, in-session scheduling, hooks)
 - `/prompt-polish` & `/anti-slop`
 - `/ui`, `/web-ui`, `/mobile-ui`, `/3d`, `/frontend`, `/routing`, `/state-management`, `/i18n`
 - `/backend`, `/fullstack`, `/api-design`, `/database`, `/firebase`, `/supabase`, `/aws`, `/gcp`, `/data-pipelines`, `/devops`
-- `/security`, `/ai`, `/local-llm`, `/research`
-- `/testing`, `/qa`, `/performance`, `/observability`, `/production-etiquette`, `/refactor`, `/git-workflow`, `/continuous-learning`, `/project-skills`
+- `/security`
+- `/testing` (TDD, Playwright E2E, A/B testing & SRM), `/qa`, `/performance`, `/observability`, `/production-etiquette`, `/refactor`, `/git-workflow`, `/continuous-learning`, `/project-skills`
 
 ### Troubleshooting Common Issues
 

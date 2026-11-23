@@ -36,9 +36,9 @@ Consult the specialized references and reusable templates for detailed execution
 
 ---
 
-## 1.5 The 48 Modular Engineering Skills (`/`)
+## 1.5 The 51 Modular Engineering Skills (`/`)
 
-The DarkNecroStack ecosystem decomposes into 48 focused, synchronized skills directly callable via `/` (see [`/darknecrostack`](../darknecrostack/SKILL.md) for dynamic routing and [`/full-scale-mode`](../full-scale-mode/SKILL.md) for the complete 48-skill execution matrix):
+The DarkNecroStack ecosystem decomposes into 51 focused, synchronized skills directly callable via `/` (see [`/darknecrostack`](../darknecrostack/SKILL.md) for dynamic routing and [`/full-scale-mode`](../full-scale-mode/SKILL.md) for the complete 51-skill execution matrix):
 
 | Command | Skill Name | Scope & Core Responsibility |
 | :--- | :--- | :--- |
@@ -79,7 +79,10 @@ The DarkNecroStack ecosystem decomposes into 48 focused, synchronized skills dir
 | `/data-pipelines` | **Resilient Data Pipelines** | Streaming ETL with backpressure, DuckDB in-process analytics, and Dead-Letter Queues (DLQ). |
 | `/devops` | **Cloud & Container DevOps** | Hardened multi-stage Dockerfiles (`USER 10001`), docker-compose, CI/CD pipelines. |
 | `/ai` | **AI & LLM Engineering** | Production Gemini SDK, structured JSON outputs, defensive tool calling, token budgets. |
-| `/local-llm` | **Local LLM & Edge AI** | Quantized inference (GGUF Q4_K_M), Ollama, MLX, WebLLM, GBNF grammars, hybrid routing. |
+| `/local-llm` | **Local LLM & Edge AI** | Quantized inference (GGUF Q4_K_M), Ollama, MLX, vLLM, SGLang, WebLLM, GBNF, KV-cache tuning. |
+| `/computer-vision` | **Computer Vision Engineering** | OpenCV, YOLO, ONNX, TensorRT, CoreML, SAM2, ByteTrack, OCR, bounded frame pipelines. |
+| `/vlm-multimodal` | **VLM & Multimodal AI** | Qwen2.5-VL, Gemma 3, Florence-2, Gemini multimodal, visual token budgeting, grounding RAG. |
+| `/ai-integration` | **Cross-Project AI Gateway** | Provider-agnostic `ModelGateway`, `CV -> VLM -> LLM` cascade, SSE cancellation, privacy consent. |
 | `/prompt-polish` | **Prompt Refinement (PPE)** | Transforms raw prompts into token-efficient engineering specifications. |
 | `/production-etiquette` | **Production Etiquette** | Secret hygiene (`.env.example`), resilient network client (timeouts, retry with jitter). |
 | `/performance` | **Performance & Web Vitals** | Core Web Vitals (LCP, CLS, INP), N+1 query elimination, bundle size budgets. |

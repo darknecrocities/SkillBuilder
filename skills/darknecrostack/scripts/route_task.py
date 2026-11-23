@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-route_task.py - DarkNecroStack Dynamic Intent Router & PDS Token Pruner.
+route_task.py - DarkNecroStack Dynamic Intent Router, Combo Resolver & PDS Pruner.
 
-Classifies a prompt and repository context into a target playbook, minimal
+Classifies a prompt or named combo preset into a target playbook, minimal
 skill bundle, pruned skills (Platform Domain Specialization), and subagent
 worker kickoff instruction.
 """
@@ -27,9 +27,57 @@ PLAYBOOK_RULES = [
     ("figure-it-out", ("migrate", "rewrite", "autonomous", "overnight", "full-scale", "ecosystem")),
 ]
 
+COMBO_PRESETS: Dict[str, Dict[str, object]] = {
+    "combo-fullstack-web": {
+        "category": "Fullstack & Web Product",
+        "skills": ["architect", "fullstack", "backend", "api-design", "database", "frontend", "web-ui", "routing", "state-management", "testing", "security"],
+        "pruned": ["mobile-ui", "3d"],
+    },
+    "combo-landing-brand": {
+        "category": "Fullstack & Web Product",
+        "skills": ["anti-slop", "ui", "web-ui", "brand-assets", "2d-mascot-motion", "3d", "performance"],
+        "pruned": ["mobile-ui", "database"],
+    },
+    "combo-cv-vlm-edge": {
+        "category": "AI, Computer Vision, VLM & Local LLM",
+        "skills": ["computer-vision", "vlm-multimodal", "local-llm", "ai-integration", "performance", "testing"],
+        "pruned": ["web-ui", "mobile-ui"],
+    },
+    "combo-hybrid-ai-app": {
+        "category": "AI, Computer Vision, VLM & Local LLM",
+        "skills": ["ai", "local-llm", "ai-integration", "backend", "frontend", "web-ui", "security", "testing"],
+        "pruned": ["mobile-ui"],
+    },
+    "combo-mobile-offline": {
+        "category": "Mobile & Offline-First",
+        "skills": ["mobile-ui", "frontend", "routing", "state-management", "local-first-data", "qa", "testing"],
+        "pruned": ["web-ui"],
+    },
+    "combo-cloud-data": {
+        "category": "Cloud, Serverless & Data",
+        "skills": ["gcp", "aws", "firebase", "supabase", "devops", "database", "data-pipelines", "observability", "security"],
+        "pruned": ["web-ui", "mobile-ui"],
+    },
+    "combo-mcp-media": {
+        "category": "MCP, Browser Media & Desktop",
+        "skills": ["mcp-engineering", "browser-media-wasm", "local-first-data", "security", "testing"],
+        "pruned": ["mobile-ui"],
+    },
+    "combo-ab-ship": {
+        "category": "Audit, A/B Testing, Refactor & Release",
+        "skills": ["code-archaeology", "testing", "qa", "interrogate", "prove-it-works", "git-workflow"],
+        "pruned": ["3d"],
+    },
+    "combo-safe-refactor": {
+        "category": "Audit, A/B Testing, Refactor & Release",
+        "skills": ["code-archaeology", "refactor", "testing", "interrogate", "prove-it-works"],
+        "pruned": ["3d"],
+    },
+}
+
 
 def detect_platform_targets(repo_path: Path, prompt_lower: str) -> Set[str]:
-    """Detect client platform targets from repo manifests and prompt signals."""
+    """Detect client, AI, CV, VLM, and tooling targets from repo manifests and prompt signals."""
     platforms: Set[str] = set()
     if (repo_path / "pubspec.yaml").exists() or any(k in prompt_lower for k in ("flutter", "swiftui", "compose", "ios", "android", "mobile", "react native")):
         platforms.add("mobile")
@@ -45,6 +93,14 @@ def detect_platform_targets(repo_path: Path, prompt_lower: str) -> Set[str]:
         platforms.add("media")
     if any(k in prompt_lower for k in ("indexeddb", "opfs", "offline-first", "local-first", "public-data")):
         platforms.add("local_data")
+    if any(k in prompt_lower for k in ("opencv", "cv2", "yolo", "onnx", "mediapipe", "sam2", "bytetrack", "ocr", "computer vision")):
+        platforms.add("cv")
+    if any(k in prompt_lower for k in ("vlm", "multimodal", "qwen2.5-vl", "qwen-vl", "gemma 3", "florence-2", "mmproj", "mlx-vlm", "grounding")):
+        platforms.add("vlm")
+    if (repo_path / "Modelfile").exists() or any(k in prompt_lower for k in ("ollama", "llama.cpp", "llama-server", "gguf", "mlx", "vllm", "sglang", "webllm", "local llm")):
+        platforms.add("local_llm")
+    if any(k in prompt_lower for k in ("model gateway", "ai integration", "hybrid fallback", "cv+vlm", "a/b test", "ab test", "srm")):
+        platforms.add("ai_integration" if "a/b" not in prompt_lower and "ab test" not in prompt_lower and "srm" not in prompt_lower else "ab_test")
     return platforms
 
 
@@ -54,6 +110,19 @@ def match_playbook(prompt_lower: str) -> str:
         if any(kw in prompt_lower for kw in keywords):
             return playbook
     return "feature"
+
+
+def _apply_client_pds(platforms: Set[str], active: List[str], pruned: List[str]) -> None:
+    if "web" in platforms and "mobile" not in platforms:
+        active.append("web-ui")
+        pruned.append("mobile-ui")
+    elif "mobile" in platforms and "web" not in platforms:
+        active.append("mobile-ui")
+        pruned.append("web-ui")
+    elif "web" in platforms and "mobile" in platforms:
+        active.extend(["web-ui", "mobile-ui"])
+    else:
+        pruned.extend(["web-ui", "mobile-ui"])
 
 
 def build_skill_bundle(playbook: str, platforms: Set[str], repo_path: Path) -> Dict[str, List[str]]:
@@ -69,16 +138,8 @@ def build_skill_bundle(playbook: str, platforms: Set[str], repo_path: Path) -> D
         active.append("arena")
     if playbook == "visual-parity" or platforms.intersection({"web", "mobile", "mascot", "brand"}):
         active.extend(["ui", "anti-slop"])
-    if "web" in platforms and "mobile" not in platforms:
-        active.append("web-ui")
-        pruned.append("mobile-ui")
-    elif "mobile" in platforms and "web" not in platforms:
-        active.append("mobile-ui")
-        pruned.append("web-ui")
-    elif "web" in platforms and "mobile" in platforms:
-        active.extend(["web-ui", "mobile-ui"])
-    else:
-        pruned.extend(["web-ui", "mobile-ui"])
+
+    _apply_client_pds(platforms, active, pruned)
 
     platform_map = {
         "mascot": "2d-mascot-motion",
@@ -86,11 +147,20 @@ def build_skill_bundle(playbook: str, platforms: Set[str], repo_path: Path) -> D
         "mcp": "mcp-engineering",
         "media": "browser-media-wasm",
         "local_data": "local-first-data",
+        "cv": "computer-vision",
+        "vlm": "vlm-multimodal",
+        "local_llm": "local-llm",
+        "ai_integration": "ai-integration",
+        "ab_test": "testing",
     }
     for key, skill_name in platform_map.items():
         if key in platforms:
             active.append(skill_name)
+        elif key in {"cv", "vlm", "local_llm"}:
+            pruned.append(skill_name)
 
+    if {"cv", "vlm", "local_llm"}.intersection(platforms) and "ai-integration" not in active:
+        active.append("ai-integration")
     if playbook == "figure-it-out":
         active.append("full-scale-mode")
 
@@ -98,8 +168,28 @@ def build_skill_bundle(playbook: str, platforms: Set[str], repo_path: Path) -> D
     return {
         "active_skills": list(dict.fromkeys(active)),
         "pruned_skills": list(dict.fromkeys(pruned)),
-        "estimated_tokens_saved": [str(len(pruned) * 1850)],
+        "estimated_tokens_saved": [str(len(set(pruned)) * 1850)],
         "worker_kickoff": [f"Read {worker_path} before anything else."],
+    }
+
+
+def route_combo(combo_name: str, repo_path: Path) -> Dict[str, object]:
+    """Resolve a categorized multi-skill combo preset cleanly."""
+    if combo_name not in COMBO_PRESETS:
+        raise ValueError(f"Unknown combo '{combo_name}'. Available: {sorted(COMBO_PRESETS)}")
+    preset = COMBO_PRESETS[combo_name]
+    worker_path = (repo_path / "skills" / "darknecrostack" / "worker.md").resolve()
+    active = ["darknecrostack", *preset["skills"], "prove-it-works"]  # type: ignore[misc]
+    pruned: List[str] = list(preset["pruned"])  # type: ignore[arg-type]
+    return {
+        "playbook": "skills/darknecrostack/playbooks/combo-stacks.md",
+        "combo": combo_name,
+        "category": preset["category"],
+        "detected_platforms": [],
+        "active_skills": list(dict.fromkeys(active)),
+        "pruned_skills": pruned,
+        "estimated_tokens_saved": len(pruned) * 1850,
+        "subagent_kickoff_line_1": f"Read {worker_path} before anything else.",
     }
 
 
@@ -120,20 +210,26 @@ def route_prompt(prompt: str, repo_path: Path) -> Dict[str, object]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Route a prompt via DarkNecroStack dynamic engine.")
-    parser.add_argument("--prompt", "-p", required=True, help="Incoming user prompt")
+    parser = argparse.ArgumentParser(description="Route a prompt or combo preset via DarkNecroStack.")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--prompt", "-p", help="Incoming user prompt")
+    group.add_argument("--combo", "-c", choices=sorted(COMBO_PRESETS), help="Categorized multi-skill combo preset")
     parser.add_argument("--path", default=".", help="Workspace repository path")
     parser.add_argument("--json", action="store_true", help="Emit JSON output")
     args = parser.parse_args()
 
-    decision = route_prompt(args.prompt, Path(args.path).resolve())
+    repo = Path(args.path).resolve()
+    decision = route_combo(args.combo, repo) if args.combo else route_prompt(args.prompt, repo)
     if args.json:
         print(json.dumps(decision, indent=2))
         return 0
 
     print("=== DarkNecroStack Dynamic Route ===")
     print(f"Playbook         : {decision['playbook']}")
-    print(f"Platforms        : {', '.join(decision['detected_platforms']) or 'none'}")
+    if decision.get("combo"):
+        print(f"Combo ({decision['category']}): {decision['combo']}")
+    else:
+        print(f"Platforms        : {', '.join(decision['detected_platforms']) or 'none'}")
     print(f"Active Skills    : {', '.join(decision['active_skills'])}")
     print(f"Pruned (PDS)     : {', '.join(decision['pruned_skills']) or 'none'} (~{decision['estimated_tokens_saved']} tokens saved)")
     print(f"Subagent Line 1  : {decision['subagent_kickoff_line_1']}")

@@ -2,7 +2,7 @@
 
 # Mandatory Engineering Discipline & Production Etiquette
 
-All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the **DarkNecroStack** suite (48 Modular Skills; front-door router `/darknecrostack`):
+All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the **DarkNecroStack** suite (51 Modular Skills; front-door router `/darknecrostack`):
 
 1. **Prompt Polishing First (PPE - `/prompt-polish`)**:
    - Analyze, refine, and structure incoming prompts into clear, token-efficient engineering specifications with explicit verification criteria.
@@ -55,7 +55,7 @@ All software architecture, implementation, refactoring, and pair-programming tas
 16. **Deduplicated Storage Backups, Sensitive Deletion Disclosure & Multi-Agent Synchronization (`/database`, `/firebase`, `/supabase`, `/gcp`, `/aws`, `/full-scale-mode`)**:
     - **Idempotent Single-Slot Backups (Zero Spam)**: Before schema migrations, bulk writes, or storage rule changes, verify or create a single canonical backup keyed by SHA-256 content/schema digest in `.backups/backup_manifest.json` (`manage_deduplicated_backup.py`). Never generate redundant timestamped copies (`*.bak.1`, `*.bak.2`, `dump_copy.sql`) when state is unchanged or across concurrent agent turns.
     - **Sensitive Deletion Human-in-the-Loop Gate**: Always halt and warn the user first before executing any destructive deletion (`DROP TABLE/COLUMN`, `TRUNCATE`, unconditioned `DELETE`, Firestore/Supabase collection or bucket removal, `RemovalPolicy.DESTROY`, `force_destroy = true`, or sensitive file deletion). Disclose the target resource, sensitivity tier, affected scope, and verified backup SHA-256 hash, and await explicit user confirmation.
-    - **Simultaneous Multi-Agent Synchronization**: Concurrent subagents working simultaneously must respect partitioned file ownership, coordinate storage mutations through the shared `.backups/backup_manifest.json` lease lock, and keep all 48 skills and multi-platform instruction files 100% synchronized.
+    - **Simultaneous Multi-Agent Synchronization**: Concurrent subagents working simultaneously must respect partitioned file ownership, coordinate storage mutations through the shared `.backups/backup_manifest.json` lease lock, and keep all 51 skills and multi-platform instruction files 100% synchronized.
 17. **Antigravity Automation & Background Execution (`/antigravity-automation`, `/full-scale-mode`)**:
     - **Scheduled Sidecars**: Structure background scheduled automations in `~/.gemini/jetski/sidecars/<slug>/sidecar.json` with strict timezone awareness (`CRON_TZ`) and self-contained execution prompts.
     - **In-Session Scheduling & Zero Polling**: Standardize in-turn timers (`DurationSeconds`, `TimerCondition`) and recurring jobs via the native `schedule` tool. Never poll in loops or use shell `sleep`.
@@ -65,4 +65,6 @@ All software architecture, implementation, refactoring, and pair-programming tas
     - **Trigger -> Action Discipline**: Run `/code-archaeology` (`/how`, `/why`) before editing unfamiliar subsystems; `/architect` before writing implementation bodies; `/arena` on contested designs; **Attack the Premise** after 2 failed fixes sharing an assumption; `/interrogate` (`/unslop`) before commit; `/prove-it-works` with `[measured]` runtime proof and `Documentation impact` disclosure.
     - **2D Mascots & Brand Assets (`/2d-mascot-motion`, `/brand-assets`)**: Enforce silhouette-first geometric mascots with Rive (`.riv`) state machines or `<35`-node SVG rigs (`prefers-reduced-motion`), 4 Logo Stress Tests, Apple continuous squircles, Android `108dp/66dp` adaptive icons, and non-Corporate-Memphis illustrations.
     - **MCP, Browser Media & Local-First Data (`/mcp-engineering`, `/browser-media-wasm`, `/local-first-data`)**: Enforce `realpath` MCP path sandboxing, deterministic `URL.revokeObjectURL` / `Worker.terminate()` cleanup, strict public/private data boundaries, and `PARTIAL` / `NEEDS_RESEARCH` anti-fabrication markers.
+19. **Computer Vision, VLM, Local LLM, AI Integration & A/B Experimentation (`/computer-vision`, `/vlm-multimodal`, `/local-llm`, `/ai-integration`, `/testing`)**:
+    - Enforce bounded frame queues (`maxsize=2`), deterministic `VideoCapture` release, EXIF normalization, visual token resize caps (`<= 1280–1568px`), `CV -> VLM -> LLM` cost cascades, `AI_PRIVACY_MODE` consent gates, and deterministic SHA-256 A/B bucketing with SRM (`p >= 0.001`) verification.
 

@@ -19,7 +19,16 @@
 
 $$\text{VRAM}_{\text{total}} = \text{Weights} + \text{KV Cache} + \text{Compute Scratch (0.4–1.0 GB)}$$
 
+- **8B `Q4_K_M` at `8,192` Context**: Weights `(8.0 * 4.5 / 8) = 4.5 GB` + KV Cache `~1.25 GB` + CUDA scratch `~0.35 GB` = **`~6.1 GB` VRAM**.
 - **KV-Cache Trap**: Expanding `num_ctx` from `4,096` to `32,768` multiplies KV-cache memory by `8x` and can trigger silent CPU fallback (`10x` slowdown) in Ollama / `llama.cpp`. Always pin `num_ctx` deliberately (`8192` default) and enable **Flash Attention** (`-fa` / `OLLAMA_FLASH_ATTENTION=1`) + `q8_0` KV quantization when scaling context.
+
+### Apple Silicon MLX High-Throughput Service
+```python
+from mlx_lm import load, generate
+
+model, tokenizer = load("mlx-community/Llama-3.2-3B-Instruct-4bit")
+response = generate(model, tokenizer, prompt="Extract entities...", max_tokens=512, verbose=False)
+```
 
 ---
 

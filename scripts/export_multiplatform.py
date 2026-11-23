@@ -20,6 +20,11 @@ CURSOR_GLOB_MAP: Dict[str, str] = {
     "mcp-engineering": "*mcp*,*.ts,*.py",
     "browser-media-wasm": "*.worker.*,*.ts,*.tsx",
     "local-first-data": "*.ts,*.tsx,*.py,*.sql",
+    "computer-vision": "*.py,*.onnx,*.pt,*.ts",
+    "vlm-multimodal": "*.py,*.ts,*.tsx",
+    "local-llm": "Modelfile,*.gguf,*.py,*.ts,*.sh",
+    "ai-integration": "*.py,*.ts,*.tsx,.env*",
+    "testing": "*.test.*,*.spec.*,test_*.py",
     "darknecrostack": "*",
 }
 

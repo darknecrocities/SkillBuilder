@@ -1,109 +1,49 @@
 ---
 name: testing
-description: Test-Driven Development (TDD) discipline, Vitest, Jest, Playwright E2E with accessible locators, MSW contract tests, and mutation testing principles.
+description: Test-Driven Development (TDD), Vitest, Jest, Playwright E2E with accessible locators, MSW contract tests, mutation testing, and controlled A/B testing with deterministic hash bucketing and SRM statistical verification.
 ---
 
-# Test-Driven Discipline, Playwright E2E & Mutation QA (`/testing`)
+# Testing Discipline, E2E & A/B Experimentation (`/testing`)
 
-> **Philosophy**: *Untested code is broken by design. Write failing characterization tests before refactoring. Ban fragile CSS selectors in E2E tests—use accessible roles and semantic labels. Ban hardcoded sleep timers—use auto-waiting web-first assertions. Aim for 80%+ line and branch coverage.*
-
-This skill establishes automated testing discipline across **Vitest**, **Jest**, **Playwright**, **Cypress**, and **Mock Service Worker (MSW)**.
-
----
-
-## 1. Quick Navigation & Progressive Disclosure
-
-| Resource Type | Document | Description |
-| :--- | :--- | :--- |
-| **Reference** | [references/playwright-accessible-locators.md](references/playwright-accessible-locators.md) | Accessible locator hierarchy, web-first assertions, zero sleep timeouts. |
-| **Reference** | [references/tdd-and-msw-contracts.md](references/tdd-and-msw-contracts.md) | Red-Green-Refactor cycle, MSW network interception handlers, fixture isolation. |
-| **Utility** | [scripts/verify_testing_hygiene.py](scripts/verify_testing_hygiene.py) | Audits tests for brittle XPath/class selectors, hardcoded sleep calls, and unisolated state. |
+> **Philosophy**: *Test behavior not implementation, ban fragile selectors and sleep timers, and gate every A/B rollout on deterministic hashing, Sample Ratio Mismatch (SRM) checks, and pre-registered guardrails.*
 
 ---
 
-## 2. The Core Testing Discipline Gates
+## 1. Progressive Disclosure References
+
+| Resource | Purpose |
+| :--- | :--- |
+| [references/playwright-accessible-locators.md](references/playwright-accessible-locators.md) | Accessible locator hierarchy (`getByRole` > `getByLabel`), web-first assertions, zero `waitForTimeout`. |
+| [references/tdd-and-msw-contracts.md](references/tdd-and-msw-contracts.md) | Red-Green-Refactor cycle, MSW HTTP boundary mocking, ephemeral DB isolation. |
+| [references/ab-testing-and-experimentation.md](references/ab-testing-and-experimentation.md) | Experiment contracts (OEC + guardrails), SHA-256/MurmurHash3 bucketing, SRM chi-squared, sequential/CUPED/AI model evals. |
+| [scripts/verify_testing_hygiene.py](scripts/verify_testing_hygiene.py) | Audits fragile CSS selectors, arbitrary `sleep()`/`waitForTimeout()` timers, and missing assertions. |
+| [scripts/verify_ab_experiment.py](scripts/verify_ab_experiment.py) | Audits `Math.random()` bucketing / missing guardrails and computes exact SRM + two-proportion z-tests. |
+
+---
+
+## 2. The 6 Core Testing & Experimentation Gates
 
 ```mermaid
-flowchart TD
-    A["Feature / Bug Fix Request"] --> B["Gate 1: TDD Red Phase (Failing test asserting expected behavior)"]
-    B --> C["Gate 2: Green Phase (Minimal production code to pass)"]
-    C --> D["Gate 3: Refactor Phase (Clean code under 500-line ceiling)"]
-    D --> E["Gate 4: Playwright E2E (Accessible Locators & Web-First Assertions)"]
-    E --> F["Gate 5: Coverage & Mutation Sweep (80%+ branch coverage, zero sleep timers)"]
+flowchart LR
+    G1["1. TDD Red/Green"] --> G2["2. Accessible E2E"]
+    G2 --> G3["3. Zero Sleep Timers"]
+    G3 --> G4["4. MSW HTTP Contracts"]
+    G4 --> G5["5. Ephemeral Isolation"]
+    G5 --> G6["6. A/B Hash & SRM Gate"]
 ```
 
-1. **Gate 1: Test-Driven Red Phase**: Author unit/contract tests asserting the required behavior before modifying production files.
-2. **Gate 2: Accessible E2E Locators**: In Playwright or Cypress, strictly prohibit internal class or DOM selectors (`div > button.btn-12`). Use user-facing accessible locators: `page.getByRole('button', { name: 'Save' })`, `page.getByLabel('Email')`.
-3. **Gate 3: Zero Hardcoded Sleep Timers**: Prohibit `page.waitForTimeout()` or `time.sleep()`. Use Playwright web-first assertions (`await expect(locator).toBeVisible()`) that automatically retry until timeout.
-4. **Gate 4: Mock Service Worker (MSW)**: Mock network requests at the HTTP transport layer using MSW handlers rather than stubbing internal class methods.
-5. **Gate 5: Deterministic Test Isolation**: Every test must run in isolation with ephemeral database transactions or clean fixtures. Tests must never share mutable global state.
+1. **TDD Red-Green-Refactor**: Write failing behavioral/repro tests before modifying production files; target `>= 80%` branch coverage.
+2. **Accessible E2E Locators**: Use `getByRole()`, `getByLabel()`, `getByText()`—ban `div.cls > button` DOM selector soup.
+3. **Zero Arbitrary Sleeps**: Ban `waitForTimeout()` and `time.sleep()`; rely on auto-retrying web-first assertions (`await expect(loc).toBeVisible()`).
+4. **MSW Transport Interception**: Mock external APIs at the HTTP boundary via MSW (`onUnhandledRequest: "error"`) instead of stubbing private methods.
+5. **Deterministic Isolation**: Run every test against clean ephemeral fixtures or rolled-back transactions with zero shared global state.
+6. **Controlled A/B Experimentation**: Assign variants via deterministic `SHA-256`/`MurmurHash3(exp:salt:subject)` (zero `Math.random()` SSR flicker), verify SRM (`p >= 0.001`) before reading lift, enforce latency/error guardrails, and sunset flags within `14` days.
 
 ---
 
-## 2. Resilient Playwright E2E Test (TypeScript)
-
-```typescript
-import { test, expect } from "@playwright/test";
-
-test.describe("User Authentication Flow", () => {
-  test("successfully signs in with valid credentials and redirects to dashboard", async ({ page }) => {
-    await page.goto("/login");
-
-    // ✅ DEFENSIVE: Accessible user-facing locators
-    await page.getByLabel("Email Address").fill("developer@skillbuilder.io");
-    await page.getByLabel("Password").fill("SuperSecretPass123!");
-    await page.getByRole("button", { name: "Sign In" }).click();
-
-    // ✅ DEFENSIVE: Web-first assertion (auto-retries, zero arbitrary sleep)
-    await expect(page).toHaveURL("/dashboard");
-    await expect(page.getByRole("heading", { name: "Workspace Overview" })).toBeVisible();
-    await expect(page.getByText("Welcome back, Developer")).toBeVisible();
-  });
-});
-```
-
----
-
-## 3. Vitest Unit Test with Mock Service Worker (TypeScript)
-
-```typescript
-import { describe, it, expect, beforeAll, afterEach, afterAll } from "vitest";
-import { setupServer } from "msw/node";
-import { http, HttpResponse } from "msw";
-import { fetchProjects } from "./projectClient";
-
-const server = setupServer(
-  http.get("https://api.skillbuilder.io/v1/projects", () => {
-    return HttpResponse.json([
-      { id: "proj_1", name: "Telemetry Engine", status: "active" }
-    ]);
-  })
-);
-
-beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
-
-describe("fetchProjects client", () => {
-  it("fetches and deserializes active projects cleanly", async () => {
-    const projects = await fetchProjects();
-    expect(projects).toHaveLength(1);
-    expect(projects[0].name).toBe("Telemetry Engine");
-  });
-});
-```
-
----
-
-## 4. Testing Hygiene Verification CLI
-
-Audit your test suites for fragile CSS selectors and arbitrary sleep timers:
+## 3. Verification & Statistical CLIs
 
 ```bash
 python3 skills/testing/scripts/verify_testing_hygiene.py --path . --strict
+python3 skills/testing/scripts/verify_ab_experiment.py --path . --srm 5000 4980 --ztest 5000 500 4980 575 --strict
 ```
-
-Audited Rules:
-- `TESTING-ARBITRARY-SLEEP-TIMER`: Flags `waitForTimeout()` or `time.sleep()` in test suites.
-- `TESTING-FRAGILE-CSS-SELECTOR`: Flags non-semantic DOM/CSS selectors in E2E tests (`page.click('div.btn-blue')`).
-- `TESTING-EMPTY-ASSERTIONS`: Flags test blocks with zero assertions or `expect()` calls.
