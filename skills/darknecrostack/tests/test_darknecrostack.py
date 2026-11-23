@@ -76,6 +76,18 @@ class TestDarkNecroStack(unittest.TestCase):
             self.assertIn("frontend", combo["active_skills"])
             self.assertIn("mobile-ui", combo["pruned_skills"])
 
+    def test_route_mobile_responsive_and_app_targets(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            mob = route_task.route_prompt("Build a responsive adaptive tablet layout for iOS and Android", tmp_path)
+            self.assertEqual(mob["playbook"], "skills/darknecrostack/playbooks/mobile-responsive.md")
+            self.assertIn("mobile-ui", mob["active_skills"])
+            self.assertIn("web-ui", mob["pruned_skills"])
+
+            app = route_task.route_prompt("Build an offline Electron desktop app with SQLite", tmp_path)
+            self.assertIn("local-first-data", app["active_skills"])
+            self.assertIn("mobile-ui", app["pruned_skills"])
+
 
 if __name__ == "__main__":
     unittest.main()

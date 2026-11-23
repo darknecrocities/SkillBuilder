@@ -47,6 +47,8 @@ Match the user's task to the smallest sufficient playbook and prune inapplicable
 | **Distributed / Trace Lag** | `playbooks/trace-forensics.md` | `/observability`, `/performance` | Client styling skills |
 | **Safe Refactoring** | `playbooks/refactoring.md` | `/refactor`, `/testing`, `/interrogate` | New feature design skills |
 | **Visual UI / Mascot / Brand** | `playbooks/visual-parity.md` | `/ui`, `/anti-slop`, `/2d-mascot-motion`, `/brand-assets` | Backend/cloud infra unless fullstack |
+| **Responsive Mobile (iOS/Android)** | `playbooks/mobile-responsive.md` | `/mobile-ui`, `/state-management`, `/prove-it-works` | `/web-ui` (PDS) |
+| **Dynamic Target (`mobile`/`app`/`web`)** | `playbooks/dynamic-platform-routing.md` | Matched target bundle (`route_task.py` / `--asr`) | Opposite platform & unused AI bundles |
 | **Large / Uncategorized** | `playbooks/figure-it-out.md` | `/full-scale-mode`, `/architect`, `/prove-it-works` | Non-matching platforms via ASR |
 
 Run the dynamic router CLI to inspect the minimal active bundle or categorized combo preset:
@@ -74,8 +76,8 @@ Read the relevant module before citing or applying it:
 | Category | Playbooks |
 | :--- | :--- |
 | **Discovery & Forensics** | [investigation.md](playbooks/investigation.md), [runtime-forensics.md](playbooks/runtime-forensics.md), [trace-forensics.md](playbooks/trace-forensics.md) |
-| **Engineering & Delivery** | [bug-fix.md](playbooks/bug-fix.md), [feature.md](playbooks/feature.md), [refactoring.md](playbooks/refactoring.md), [prototype.md](playbooks/prototype.md), [perf-issue.md](playbooks/perf-issue.md), [hillclimb.md](playbooks/hillclimb.md), [visual-parity.md](playbooks/visual-parity.md) |
-| **Orchestration & Ops** | [figure-it-out.md](playbooks/figure-it-out.md), [combo-stacks.md](playbooks/combo-stacks.md), [multi-phase-plan.md](playbooks/multi-phase-plan.md), [session-pickup.md](playbooks/session-pickup.md), [pause-safely.md](playbooks/pause-safely.md), [worktree-cleanup.md](playbooks/worktree-cleanup.md), [opening-a-pr.md](playbooks/opening-a-pr.md) |
+| **Engineering & Delivery** | [bug-fix.md](playbooks/bug-fix.md), [feature.md](playbooks/feature.md), [refactoring.md](playbooks/refactoring.md), [prototype.md](playbooks/prototype.md), [perf-issue.md](playbooks/perf-issue.md), [hillclimb.md](playbooks/hillclimb.md), [visual-parity.md](playbooks/visual-parity.md), [mobile-responsive.md](playbooks/mobile-responsive.md) |
+| **Orchestration & Ops** | [figure-it-out.md](playbooks/figure-it-out.md), [dynamic-platform-routing.md](playbooks/dynamic-platform-routing.md), [combo-stacks.md](playbooks/combo-stacks.md), [multi-phase-plan.md](playbooks/multi-phase-plan.md), [session-pickup.md](playbooks/session-pickup.md), [pause-safely.md](playbooks/pause-safely.md), [worktree-cleanup.md](playbooks/worktree-cleanup.md), [opening-a-pr.md](playbooks/opening-a-pr.md) |
 | **Meta & Quality** | [authoring-a-skill.md](playbooks/authoring-a-skill.md), [eval.md](playbooks/eval.md) |
 
 ---

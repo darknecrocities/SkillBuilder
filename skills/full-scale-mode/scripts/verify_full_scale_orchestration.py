@@ -124,10 +124,14 @@ def audit_orchestration_memory(repo_root: Path) -> List[Dict[str, Any]]:
 
 
 def detect_platform_target(repo_root: Path) -> str:
-    """Classifies repository into 'mobile', 'web', 'universal', or 'auto'."""
+    """Classifies repository into 'mobile', 'app', 'web', 'universal', or 'auto'."""
     has_mobile = (
         any((repo_root / d).exists() for d in ["ios", "android", "expo"])
         or any((repo_root / f).exists() for f in ["app.json", "pubspec.yaml", "Podfile"])
+    )
+    has_app = (
+        any((repo_root / d).exists() for d in ["src-tauri", "electron"])
+        or any((repo_root / f).exists() for f in ["electron.vite.config.ts", "electron-builder.yml"])
     )
     has_web = (
         any((repo_root / f).exists() for f in [
@@ -142,6 +146,8 @@ def detect_platform_target(repo_root: Path) -> str:
         return "universal"
     if has_mobile:
         return "mobile"
+    if has_app:
+        return "app"
     if has_web:
         return "web"
     return "auto"
@@ -202,20 +208,33 @@ def analyze_skill_resonance(repo_root: Path, target_platform: str = "auto") -> D
         activated_skills.add("mobile-ui")
         activated_skills.discard("web-ui")
         pruned_skills.add("web-ui")
+        recommended_playbook = "skills/darknecrostack/playbooks/mobile-responsive.md"
+    elif platform == "app":
+        activated_skills.update(["frontend", "local-first-data", "browser-media-wasm"])
+        activated_skills.discard("mobile-ui")
+        pruned_skills.add("mobile-ui")
+        recommended_playbook = "skills/darknecrostack/playbooks/dynamic-platform-routing.md"
     elif platform == "web":
         activated_skills.add("web-ui")
         activated_skills.discard("mobile-ui")
         pruned_skills.add("mobile-ui")
+        recommended_playbook = "skills/darknecrostack/playbooks/visual-parity.md"
     else:  # universal or auto
         if has_mobile_files:
             activated_skills.add("mobile-ui")
         if has_web_files:
             activated_skills.add("web-ui")
+        recommended_playbook = (
+            "skills/darknecrostack/playbooks/dynamic-platform-routing.md"
+            if platform == "universal"
+            else "skills/darknecrostack/playbooks/feature.md"
+        )
 
     token_quota_saved = len(pruned_skills) * 1850
 
     return {
         "platform_target": platform,
+        "recommended_playbook": recommended_playbook,
         "resonant_skills_count": len(activated_skills),
         "resonant_skills": sorted(list(activated_skills)),
         "pruned_skills": sorted(list(pruned_skills)),
@@ -269,7 +288,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--plan", type=str, help="Path to implementation plan markdown to audit")
     parser.add_argument(
         "--platform",
-        choices=["auto", "mobile", "web", "universal"],
+        choices=["auto", "mobile", "app", "web", "universal"],
         default="auto",
         help="Specify or override target platform for Platform Domain Specialization (PDS)"
     )
@@ -354,6 +373,7 @@ def main() -> int:
         print(f"Verified Skills in Registry: {len(REQUIRED_SKILLS)} required skills")
         if args.asr:
             print(f"Platform Domain Specialization: Target = [{asr_data['platform_target'].upper()}]")
+            print(f"Recommended Playbook (DarkNecroStack): {asr_data['recommended_playbook']}")
             print(f"Autonomous Skill Resonance (ASR): Activated {asr_data['resonant_skills_count']} skills:")
             for s in asr_data['resonant_skills']:
                 print(f"  • /{s}")

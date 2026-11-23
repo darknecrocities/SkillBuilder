@@ -103,7 +103,7 @@ All software architecture, implementation, refactoring, and pair-programming tas
 - `/local-first-data`: Architect local-first browser/desktop storage (IndexedDB, OPFS, SQLite WAL), public-vs-private vendored data boundaries, zero-fabrication completeness markers (PARTIAL/NEEDS_RESEARCH), and offline privacy invariants.
 - `/local-llm`: Local LLM architecture, quantized inference (GGUF Q4_K_M/Q8_0), Ollama, llama.cpp, Apple Silicon MLX, vLLM, SGLang, WebLLM/Transformers.js, KV-cache tuning, GBNF structured grammars, in-process local RAG, and 3-tier hybrid routing.
 - `/mcp-engineering`: Build and harden Model Context Protocol (MCP) servers, transports (stdio, SSE, Streamable HTTP), Zod/JSON Schema tool contracts, workspace path-traversal sandboxing, and bounded process execution.
-- `/mobile-ui`: Native mobile UI/UX craftsmanship, kinetic motion, and tactile engineering skill for iOS (SwiftUI/HIG 18/19), Android (Material 3 Expressive/Jetpack Compose), React Native, and Flutter.
+- `/mobile-ui`: Native mobile UI/UX craftsmanship, responsive adaptive layouts (iOS horizontalSizeClass, Android WindowSizeClass, foldables), kinetic spring motion, and tactile engineering for SwiftUI, Jetpack Compose, React Native, and Flutter.
 - `/observability`: Observability and telemetry engineering skill. Enforces OpenTelemetry distributed tracing, structured JSON logging with correlation IDs, and health probes.
 - `/performance`: Performance profiling and optimization skill. Audits Core Web Vitals (LCP, CLS, INP), N+1 queries, bundle budgets, and memory leaks.
 - `/production-etiquette`: >-

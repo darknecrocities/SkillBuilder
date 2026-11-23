@@ -153,9 +153,20 @@ class TestVerifyFullScaleOrchestration(unittest.TestCase):
             (p / "pubspec.yaml").write_text("name: mobile_app", encoding="utf-8")
             res = analyze_skill_resonance(p)
             self.assertEqual(res["platform_target"], "mobile")
+            self.assertEqual(res["recommended_playbook"], "skills/darknecrostack/playbooks/mobile-responsive.md")
             self.assertIn("mobile-ui", res["resonant_skills"])
             self.assertIn("web-ui", res["pruned_skills"])
             self.assertGreaterEqual(res["token_quota_saved"], 1850)
+
+    def test_platform_domain_specialization_app_target(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td)
+            (p / "src-tauri").mkdir()
+            res = analyze_skill_resonance(p)
+            self.assertEqual(res["platform_target"], "app")
+            self.assertEqual(res["recommended_playbook"], "skills/darknecrostack/playbooks/dynamic-platform-routing.md")
+            self.assertIn("local-first-data", res["resonant_skills"])
+            self.assertIn("mobile-ui", res["pruned_skills"])
 
     def test_platform_domain_specialization_web_only(self):
         with tempfile.TemporaryDirectory() as td:

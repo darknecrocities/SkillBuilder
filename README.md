@@ -9,7 +9,7 @@
 
 # DarkNecroStack (formerly SkillBuilder): Dynamic Agentic Engineering Ecosystem
 
-**DarkNecroStack (`darknecrostack` v4.1.0)** is a production-grade suite of **51 specialized Agent Skills** organized across **6 Engineering Categories**, a `pstack`-surpassing **Dynamic Trigger -> Action Router & Combo Resolver** (`/darknecrostack` + `worker.md` subagent rule propagation + 24 principles + 19 playbooks), **Computer Vision / VLM / Local LLM / Cross-Project AI Integration**, **Controlled A/B Testing & SRM Verification**, **2D Mascot & Rive (`.riv`) Motion Engineering**, **Brand/Logo & App Asset Pipelines**, distilled **MCP / Browser Media WASM / Local-First Data** skills, the **5-Stage Orchestration Lifecycle**, **Orchestration Memory**, **Multi-Tier Harness Engineering**, native Antigravity lifecycle hooks, and **59 automated verification suites**. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, boilerplate repetition, toy mock databases, and unverified claims across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
+**DarkNecroStack (`darknecrostack` v4.1.0)** is a production-grade suite of **51 specialized Agent Skills** organized across **6 Engineering Categories**, a `pstack`-surpassing **Dynamic Trigger -> Action Router & Combo Resolver** (`/darknecrostack` + `worker.md` subagent rule propagation + 24 principles + 21 playbooks), **Computer Vision / VLM / Local LLM / Cross-Project AI Integration**, **Controlled A/B Testing & SRM Verification**, **2D Mascot & Rive (`.riv`) Motion Engineering**, **Brand/Logo & App Asset Pipelines**, distilled **MCP / Browser Media WASM / Local-First Data** skills, the **5-Stage Orchestration Lifecycle**, **Orchestration Memory**, **Multi-Tier Harness Engineering**, native Antigravity lifecycle hooks, and **59 automated verification suites**. Authored by **Arron Kian Parejas (@darknecrocities)**, it eliminates generic AI slop, decorative badges, boilerplate repetition, toy mock databases, and unverified claims across **Google Antigravity**, **Cursor**, **Claude Code**, **OpenAI Codex**, **Windsurf**, and **Cline**.
 
 <p align="center">
   <img src="assets/skillbuilder-workflow-animation.svg" alt="SkillBuilder Universal AI Workflow Animation" width="100%" />
@@ -27,7 +27,7 @@ SkillBuilder enforces an uncompromising engineering standard:
 
 ---
 
-## What's New in v4.1.0 (51 Skills • 59 Verification Suites • 60.5% Token Overhead Saved)
+## What's New in v4.1.0 (51 Skills • 21 Playbooks • 59 Suites • 61.3% Token Overhead Saved)
 
 | Release Highlight | What Changed | Measurable Impact & Tooling |
 | :--- | :--- | :--- |
@@ -36,7 +36,8 @@ SkillBuilder enforces an uncompromising engineering standard:
 | **Skill #51: `/ai-integration`** | Cross-project `ModelGateway` adapter swapping Ollama / `llama.cpp` / MLX / vLLM / WebLLM / Gemini via env config | `CV -> ROI Crop -> Local VLM/LLM -> Cloud` cascade (`70–95%` token reduction), `AbortController` streaming, `AI_PRIVACY_MODE` consent gate (`verify_ai_integration.py`). |
 | **Upgraded `/local-llm`** | Expanded to `vLLM`, `SGLang`, `Transformers.js` WebGPU, `q8_0` KV-cache, Flash Attention, and prefix caching | `SKILL.md` compressed **`1,723 -> 865` tokens (`-49.8%`)** while deferring `1,684` tokens (`66.1%` saved) + `LLM-005` `num_ctx` guard. |
 | **Upgraded `/testing` + `/qa` (A/B Testing)** | Full controlled A/B testing guide: deterministic SHA-256 bucketing, Sample Ratio Mismatch (`SRM`), sequential/CUPED, AI model evals | `testing/SKILL.md` compressed **`1,342 -> 807` tokens (`-39.9%`)** with `71.1%` deferred; `verify_ab_experiment.py` adds static audit + exact `--srm` & `--ztest` CLI. |
-| **Categorized Skill Combos** | 9 multi-skill recipes grouped into **6 Engineering Categories** (`combo-stacks.md` + `route_task.py --combo`) | Mounts only the exact multi-layer stack (`backend + frontend + CV/VLM/AI`) and prunes unrelated rules per turn (`60.5%` ecosystem-wide deferred savings across **203,773** tokens). |
+| **Categorized Skill Combos** | 9 multi-skill recipes grouped into **6 Engineering Categories** (`combo-stacks.md` + `route_task.py --combo`) | Mounts only the exact multi-layer stack (`backend + frontend + CV/VLM/AI`) and prunes unrelated rules per turn (`61.3%` ecosystem-wide deferred savings across **205,732** tokens). |
+| **Dynamic Playbooks + `/mobile-ui`** | Added `pstack`-style `mobile-responsive.md` & `dynamic-platform-routing.md` shared by `/darknecrostack` + `/full-scale-mode` (`mobile`/`app`/`web`/`universal`/`ai-edge`) | Compresses `mobile-ui/SKILL.md` (`1,880 -> 888` tokens, `75.7%` saved) with iOS `AnyLayout`/`ViewThatFits` + Android `WindowSizeClass`/`FoldingFeature` specs & `MOB-004..006` audits. |
 
 ---
 
@@ -430,9 +431,10 @@ Loading inapplicable platform styling rules into model prompts inflates context 
 
 | Target Platform Domain | Active Specialized Skill | Pruned Inapplicable Skill | Estimated Token Savings |
 | :--- | :--- | :--- | :--- |
-| **Mobile-First** (iOS, Android, React Native, Flutter) | `/mobile-ui` (Springs, haptics, safe areas) | `/web-ui` (Container queries, DOM CSS) | **~1,850 tokens / turn** (~40% of Phase 1 budget) |
+| **Mobile-First** (iOS, Android, React Native, Flutter) | `/mobile-ui` + `playbooks/mobile-responsive.md` (`Compact`/`Medium`/`Expanded`, safe areas) | `/web-ui` (Container queries, DOM CSS) | **~1,850 tokens / turn** (~40% of Phase 1 budget) |
+| **App-First** (Electron, Tauri, Desktop, Offline-First) | `/frontend` + `/local-first-data` + `/browser-media-wasm` | `/mobile-ui` | **~1,850 tokens / turn** |
 | **Web-First** (React 19, Next.js, Vue, Tailwind) | `/web-ui` (Container queries, View Transitions) | `/mobile-ui` (SwiftUI, Jetpack Compose) | **~1,850 tokens / turn** (~40% of Phase 1 budget) |
-| **Universal / Monorepos** (Web + Native Apps) | Both skills partitioned into isolated subagent tracks | None (strict track isolation) | Zero cross-contamination bleed |
+| **Universal / Monorepos** (Web + Native Apps) | Both skills partitioned into isolated subagent tracks via `playbooks/dynamic-platform-routing.md` | None (strict track isolation) | Zero cross-contamination bleed |
 
 ### The Multi-Tiered Code Quality & 500-Line Maintainability Matrix
 
@@ -483,13 +485,13 @@ python3 skills/darknecrostack/scripts/route_task.py --combo combo-cv-vlm-edge --
 
 ## The 51-Skill Master Reference Matrix (Categorized)
 
-Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules in Cursor (`darknecrostack` acts as the dynamic front-door router), with deep manuals deferred to `references/` (`60.5%` ecosystem-wide context reduction):
+Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules in Cursor (`darknecrostack` acts as the dynamic front-door router), with deep manuals deferred to `references/` (`61.3%` ecosystem-wide context reduction):
 
 ### Category 1: Core Routing, Orchestration & Meta-Engineering (11 Skills)
 
 | Command | Skill Name | Core Capabilities & Focus | Standalone CLI Tool | Primary Guardrail |
 | :--- | :--- | :--- | :--- | :--- |
-| `/darknecrostack` | **DarkNecroStack Router** | Trigger -> Action router, `--combo` stack resolver, `worker.md` subagent propagation, 24 principles, 19 playbooks, TSV trails. | `route_task.py` & `log_decision_trail.py` | Mandatory `worker.md` kickoff; 2-strike Attack-the-Premise; `[measured]` proof. |
+| `/darknecrostack` | **DarkNecroStack Router** | Trigger -> Action router, `--combo` stack resolver, `worker.md` subagent propagation, 24 principles, 21 playbooks, TSV trails. | `route_task.py` & `log_decision_trail.py` | Mandatory `worker.md` kickoff; 2-strike Attack-the-Premise; `[measured]` proof. |
 | `/full-scale-mode` | **Full-Scale Mode** | 5-Stage Lifecycle (`Discover`->`Plan`->`Build`->`Verify/Loop`->`Release`), Orchestration Memory, 5-Tier Harness, Triad Cadence. | `verify_full_scale_orchestration.py`, `manage_orchestration_memory.py`, `orchestration_harness.py` | Strict 5-stage lifecycle, 5-tier harness convergence, bounded 3x loop. |
 | `/world-class-engineering` | **World-Class Engineering** | 6-Phase EOS lifecycle, multi-tiered maintainability matrix, and cognitive complexity ceilings (aliased with `/full-scale-mode`). | `check_source_line_limits.py` | Strict 500-line physical ceiling; `<=40` lines/func; `<=3` nesting levels. |
 | `/code-archaeology` | **Code Archaeology (`/how`, `/why`)** | Traces runtime execution, ownership, blast radius, and `git log`/ADR load-bearing invariants before editing. | `—` | Subsystem Brief required before unfamiliar edits. |
@@ -518,7 +520,7 @@ Every skill is individually invokable via `/` in Antigravity or as `.mdc` rules 
 | `/anti-slop` | **Anti-AI-Slop Sanitizer** | Purges decorative badges, fake mock databases, neon gradients, obvious comments, and marketing copy. | `sanitize_ai_slop.py` | Zero `shields.io`, zero fake mock arrays, zero emojis in UI controls. |
 | `/ui` | **UI Design Systems & Tokens** | Apple HIG, Cupertino blur materials, squircle smoothing, high-contrast neutral scales (zinc/slate), Lucide SVGs. | `verify_ui_tokens.py` | Zero raw emojis in buttons/headers; explicit button types. |
 | `/web-ui` | **Modern Web Design Systems** | Component-Level Container Queries (`@container`), CSS View Transitions, OKLCH perceptual colors, fluid `clamp()`. | `verify_web_ui_hygiene.py` | Accessible `:focus-visible` rings, fluid typography bounds, non-linear timing. |
-| `/mobile-ui` | **Native Mobile UI/UX** | iOS 18/19 HIG, SwiftUI `matchedGeometry`, Material 3 Expressive, `LookaheadScope`, predictive back, haptics. | `verify_mobile_ui_hygiene.py` | Min `44x44pt` touch targets, safe area insets, calibrated spring physics. |
+| `/mobile-ui` | **Native Mobile UI/UX** | iOS `AnyLayout`/`ViewThatFits`/`NavigationSplitView`, Android `WindowSizeClass`/`ListDetailPane`/foldables, RN/Flutter adaptive grids, springs, haptics. | `verify_mobile_ui_hygiene.py` | Active window bounds (`MOB-004`), `44pt`/`48dp` targets, `200%` text scaling, zero portrait locks. |
 | `/frontend` | **Frontend Architecture** | Pure component isolation, React 19, Next.js App Router, Flutter, memory leak prevention. | `verify_frontend_architecture.py` | `AbortController` on async `useEffect`; error boundaries. |
 | `/routing` | **File-Based Routing** | Next.js App Router, TanStack Router, Flutter declarative nested layouts, parallel/intercepting routes. | `verify_routing_architecture.py` | Strict layout boundaries, loading/error boundary pairs, typed search params. |
 | `/state-management` | **Declarative State Machines** | TanStack Query v5 key factories, Zustand sliced stores, XState state machines, signals. | `verify_state_hygiene.py` | Centralized query key factories, immutable mutations, explicit transitions. |
@@ -764,7 +766,7 @@ All 59 suites run and pass in under 3 seconds, including suites `49–59` coveri
 56. **VLM & Multimodal Token Budgeting Tests**: Validates image downscaling before base64, video keyframe sampling, schema grounding, and timeouts (`verify_vlm_hygiene.py`).
 57. **Universal AI Integration Gateway Tests**: Validates env-driven provider config, `AI_PRIVACY_MODE` consent gates, and `AbortController` stream cleanup (`verify_ai_integration.py`).
 58. **A/B Testing, SRM & Statistical Verification Tests**: Validates deterministic SHA-256 bucketing, guardrail enforcement, Sample Ratio Mismatch (`SRM`), and two-proportion z-tests (`verify_ab_experiment.py`).
-59. **Full Ecosystem Strict Depth & Token Efficiency Lint**: Audits all **51 skills** (`skill_linter.py --all --strict-depth --benchmark`) verifying `60.5%` progressive-disclosure context reduction.
+59. **Full Ecosystem Strict Depth & Token Efficiency Lint**: Audits all **51 skills** (`skill_linter.py --all --strict-depth --benchmark`) verifying `61.3%` progressive-disclosure context reduction.
 
 ---
 
@@ -788,7 +790,7 @@ SkillBuilder/
 │   ├── research/                               # Autonomous research & alternative fallbacks
 │   ├── qa/                                     # Two-Tier QA (Full UI & Full App Functionality)
 │   ├── ui/                                     # Design tokens, neutral scales & Lucide icons
-│   ├── mobile-ui/                              # iOS 18/19 HIG, SwiftUI matchedGeometry, M3 Expressive & haptics
+│   ├── mobile-ui/                              # iOS/Android responsive layouts (SizeClass, WindowSizeClass, foldables), springs & haptics
 │   ├── web-ui/                                 # Container queries (@container), CSS View Transitions & OKLCH
 │   ├── 3d/                                     # Three.js, React Three Fiber, PBR shaders & Draco compression
 │   ├── frontend/                               # React 19, Next.js, Flutter & effect cleanup

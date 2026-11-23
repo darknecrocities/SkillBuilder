@@ -126,10 +126,12 @@ flowchart TD
     P2 -->|Engine Gate Passed| P3
 ```
 
-### Platform Domain Specialization (PDS) & Token Quota Preservation (TQP):
-- **Mobile Targets** (iOS, Android, React Native, Flutter): Mounts `/mobile-ui` (SwiftUI `matchedGeometry`, Compose `LookaheadScope`, haptics) and prunes `/web-ui`, saving $\approx 1,850$ tokens per subagent turn.
-- **Web Targets** (React 19, Next.js, Vue, Tailwind): Mounts `/web-ui` (container queries `@container`, View Transitions, OKLCH) and prunes `/mobile-ui`, saving $\approx 1,850$ tokens per subagent turn.
-- **Universal Targets**: Partitions client work into decoupled subagent tracks (`Track 1A-Web` vs `Track 1A-Mobile`).
+### Platform Domain Specialization (PDS) & Dynamic Target Routing:
+Shared dynamic target routing across **`/darknecrostack`** and **`/full-scale-mode`** ([`playbooks/dynamic-platform-routing.md`](../darknecrostack/playbooks/dynamic-platform-routing.md)):
+- **Mobile (`ios/`, `android/`, Flutter, RN)**: Mounts `/mobile-ui` + [`playbooks/mobile-responsive.md`](../darknecrostack/playbooks/mobile-responsive.md), prunes `/web-ui` (`~1,850` tokens saved).
+- **App (Desktop / Electron / Tauri / Offline-First)**: Mounts `/frontend`, `/local-first-data`, `/browser-media-wasm`, prunes `/mobile-ui`.
+- **Web (React 19, Next.js, Vue, Tailwind)**: Mounts `/web-ui` + `playbooks/visual-parity.md`, prunes `/mobile-ui` (`~1,850` tokens saved).
+- **Universal (Web + Mobile)**: Partitions client work into decoupled subagent tracks (`Track-Web` vs `Track-Mobile`) via `worker.md` with zero cross-platform bleed.
 
 ---
 

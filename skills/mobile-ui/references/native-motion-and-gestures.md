@@ -20,15 +20,45 @@ Replace duration-based CSS-style `easeInOut(300ms)` with velocity-preserving spr
 
 ### iOS SwiftUI (`PhaseAnimator` & `matchedGeometryEffect`)
 ```swift
-withAnimation(.spring(response: 0.35, dampingFraction: 0.78)) {
-    selectedCardID = item.id
+struct FeedCardView: View {
+    let item: FeedItem
+    var namespace: Namespace.ID
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Image(item.heroImage)
+                .matchedGeometryEffect(id: "image_\(item.id)", in: namespace)
+                .frame(maxWidth: .infinity, maxHeight: 240)
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            Text(item.title).matchedGeometryEffect(id: "title_\(item.id)", in: namespace)
+        }
+        .padding(16)
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 24, style: .continuous).stroke(Color.white.opacity(0.12), lineWidth: 1))
+    }
 }
 ```
 - Prepare `UIImpactFeedbackGenerator(style: .medium)` before gesture threshold crossings (`generator.prepare()`).
 
 ### Android Jetpack Compose (`SharedTransitionLayout` & `PredictiveBackHandler`)
+```kotlin
+@Composable
+fun SharedElementFeedCard(item: FeedItem, sharedScope: SharedTransitionScope, visScope: AnimatedVisibilityScope) {
+    with(sharedScope) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            tonalElevation = 2.dp,
+            modifier = Modifier.sharedBounds(
+                rememberSharedContentState(key = "card_${item.id}"),
+                animatedVisibilityScope = visScope,
+                boundsTransform = { _, _ -> spring(dampingFraction = 0.78f, stiffness = Spring.StiffnessMediumLow) }
+            )
+        ) { /* Card Content */ }
+    }
+}
+```
 - Use `LookaheadScope` / `SharedTransitionLayout` for continuous bounds morphing without layout re-measurement jank.
-- Cancel or spring back cleanly in `PredictiveBackHandler` when `CancellationException` fires on aborted back swipes.
+- Handle `PredictiveBackHandler` (`CancellationException` springs back cleanly when swipe is aborted).
 
 ### React Native (`react-native-reanimated` v3 Worklets)
 - Mark gesture callbacks `'worklet';` so drag physics run 100% on the native UI thread with zero JS bridge round-trips.

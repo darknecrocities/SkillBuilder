@@ -97,6 +97,16 @@ class TestVerifyMobileUIHygiene(unittest.TestCase):
         errors = [v for v in violations if v.severity == "ERROR"]
         self.assertEqual(len(errors), 0)
 
+    def test_detects_global_bounds_fixed_text_height_and_portrait_lock(self):
+        swift_bad = "let w = UIScreen.main.bounds.width\nText(\"Hi\").frame(height: 36)\n"
+        rules_swift = {v.rule_id for v in audit_mobile_file(self._create_file("Bad.swift", swift_bad))}
+        self.assertIn("MOB-004", rules_swift)
+        self.assertIn("MOB-005", rules_swift)
+
+        xml_bad = '<activity android:name=".MainActivity" android:screenOrientation="portrait" />\n'
+        rules_xml = {v.rule_id for v in audit_mobile_file(self._create_file("AndroidManifest.xml", xml_bad))}
+        self.assertIn("MOB-006", rules_xml)
+
 
 if __name__ == "__main__":
     unittest.main()

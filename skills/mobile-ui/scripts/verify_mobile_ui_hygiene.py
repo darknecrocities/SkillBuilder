@@ -3,7 +3,7 @@
 
 Audits iOS (Swift), Android (Kotlin/Compose), Flutter (Dart), and React Native
 (TSX/JSX) source files for touch target ergonomics, spring animation physics,
-safe area insets, and hardcoded viewport traps.
+safe area insets, hardcoded viewport traps, and responsive layout anti-patterns.
 """
 
 from __future__ import annotations
@@ -25,94 +25,92 @@ class MobileViolation:
     severity: str = "ERROR"
 
 
-# Detection Patterns
 HARDCODED_WIDTH_PATTERN = re.compile(
     r"""(?:\.frame\s*\(\s*width:\s*(?:375|390|393|414|428|430)\b)|"""
     r"""(?:width:\s*['"]?(?:375|390|393|414|428|430)(?:px)?['"]?\s*[,;])|"""
     r"""(?:Modifier\.width\s*\(\s*(?:375|390|393|414|428|430)\.dp\))"""
 )
-
-UNDERSIZED_TARGET_PATTERN = re.compile(
-    r"""(?:Button|TouchableOpacity|Pressable|IconButton)\b[^>]*?"""
-    r"""(?:(?:width|height):\s*(?:[1-3][0-9]|4[0-3])\b|\.frame\s*\([^)]*?(?:width|height):\s*(?:[1-3][0-9]|4[0-3])\b)"""
-)
-
 LINEAR_EASING_PATTERN = re.compile(
     r"""(?:\.animation\s*\(\s*\.linear\b)|"""
     r"""(?:tween\s*\([^)]*?easing\s*=\s*LinearEasing\b)|"""
     r"""(?:withTiming\s*\([^)]*?easing:\s*Easing\.linear\b)"""
 )
+GLOBAL_SCREEN_BOUNDS_PATTERN = re.compile(
+    r"""(?:UIScreen\.main\.bounds|MediaQuery\.of\s*\(\s*context\s*\)\.size\b|Dimensions\.get\s*\(\s*['"](?:window|screen)['"]\s*\))"""
+)
+FIXED_TEXT_HEIGHT_PATTERN = re.compile(
+    r"""(?:Text\s*\([^)]*\)[^\n]*\.(?:frame\s*\(\s*height\s*:|height\s*\()|(?:Modifier\.height\s*\(\s*\d+\.dp\s*\)[^\n]*Text\s*\())"""
+)
+PORTRAIT_LOCK_PATTERN = re.compile(
+    r"""(?:SCREEN_ORIENTATION_PORTRAIT|android:screenOrientation\s*=\s*['"]portrait['"]|SystemChrome\.setPreferredOrientations\s*\(\s*\[\s*DeviceOrientation\.portraitUp\s*\]\s*\))"""
+)
 
 SAFE_AREA_SIGNATURES = [
-    "SafeArea",
-    "SafeAreaView",
-    "WindowInsets.systemBars",
-    "safeAreaInset",
-    "safeAreaPadding",
-    "insets",
-    "useSafeAreaInsets",
+    "SafeArea", "SafeAreaView", "WindowInsets.systemBars",
+    "safeAreaInset", "safeAreaPadding", "insets", "useSafeAreaInsets",
 ]
 
 
-def audit_mobile_file(file_path: str) -> List[MobileViolation]:
-    """Audits a single mobile source file for UX and craftsmanship violations."""
-    violations: List[MobileViolation] = []
+def _check_line_rules(file_path: str, idx: int, line: str, full_content: str) -> List[MobileViolation]:
+    findings: List[MobileViolation] = []
+    if HARDCODED_WIDTH_PATTERN.search(line):
+        findings.append(MobileViolation(
+            file_path, idx, "MOB-001",
+            "Hardcoded device screen width detected. Use relative layout constraints or Safe Area insets.",
+        ))
+    if LINEAR_EASING_PATTERN.search(line):
+        findings.append(MobileViolation(
+            file_path, idx, "MOB-002",
+            "Unnatural linear animation easing detected. Use calibrated spring physics (response: 0.32s, damping: 0.72).",
+        ))
+    if GLOBAL_SCREEN_BOUNDS_PATTERN.search(line) and "useWindowDimensions" not in full_content:
+        findings.append(MobileViolation(
+            file_path, idx, "MOB-004",
+            "Global screen-bounds trap (UIScreen.main.bounds / Dimensions.get / MediaQuery.of.size). Use horizontalSizeClass, WindowSizeClass, useWindowDimensions(), or LayoutBuilder.",
+        ))
+    if FIXED_TEXT_HEIGHT_PATTERN.search(line) and "minHeight" not in line and "heightIn" not in line:
+        findings.append(MobileViolation(
+            file_path, idx, "MOB-005",
+            "Fixed height on Text container risks truncation at 200% Dynamic Type; use minHeight / heightIn(min=).",
+            severity="WARNING",
+        ))
+    if PORTRAIT_LOCK_PATTERN.search(line):
+        findings.append(MobileViolation(
+            file_path, idx, "MOB-006",
+            "Portrait orientation lock detected; blocks tablet, foldable, and Split View responsiveness.",
+            severity="WARNING",
+        ))
+    return findings
 
+
+def audit_mobile_file(file_path: str) -> List[MobileViolation]:
+    """Audits a single mobile source file for UX, responsive layout, and craftsmanship violations."""
+    violations: List[MobileViolation] = []
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             lines = f.readlines()
-    except Exception:
+    except OSError:
         return violations
 
     full_content = "".join(lines)
     ext = os.path.splitext(file_path)[1].lower()
-
-    if ext not in [".swift", ".kt", ".dart", ".tsx", ".jsx"]:
+    if ext not in {".swift", ".kt", ".dart", ".tsx", ".jsx", ".xml"}:
         return violations
 
-    # Check for hardcoded viewport widths and linear transitions
     for idx, line in enumerate(lines, start=1):
         clean_line = line.strip()
         if clean_line.startswith(("//", "/*", "*", "#")):
             continue
+        violations.extend(_check_line_rules(file_path, idx, clean_line, full_content))
 
-        if HARDCODED_WIDTH_PATTERN.search(clean_line):
-            violations.append(
-                MobileViolation(
-                    file_path=file_path,
-                    line_number=idx,
-                    rule_id="MOB-001",
-                    message="Hardcoded device screen width detected. Use relative layout constraints or Safe Area insets.",
-                )
-            )
-
-        if LINEAR_EASING_PATTERN.search(clean_line):
-            violations.append(
-                MobileViolation(
-                    file_path=file_path,
-                    line_number=idx,
-                    rule_id="MOB-002",
-                    message="Unnatural linear animation easing detected. Use calibrated spring physics (response: 0.32s, damping: 0.72).",
-                )
-            )
-
-    # Check for root screens missing Safe Area management
-    is_screen = any(
-        kw in file_path.lower()
-        for kw in ["screen", "view", "page", "activity", "sheet"]
-    )
-    if is_screen and len(lines) > 25:
-        has_safe_area = any(sig in full_content for sig in SAFE_AREA_SIGNATURES)
-        if not has_safe_area:
-            violations.append(
-                MobileViolation(
-                    file_path=file_path,
-                    line_number=1,
-                    rule_id="MOB-003",
-                    message="Screen or sheet component missing Safe Area insets management (e.g., SafeArea, WindowInsets.systemBars).",
-                    severity="WARNING",
-                )
-            )
+    is_screen = any(kw in file_path.lower() for kw in ("screen", "view", "page", "activity", "sheet"))
+    if ext != ".xml" and is_screen and len(lines) > 25:
+        if not any(sig in full_content for sig in SAFE_AREA_SIGNATURES):
+            violations.append(MobileViolation(
+                file_path, 1, "MOB-003",
+                "Screen or sheet component missing Safe Area insets management (e.g., SafeArea, WindowInsets.systemBars).",
+                severity="WARNING",
+            ))
 
     return violations
 
@@ -120,29 +118,22 @@ def audit_mobile_file(file_path: str) -> List[MobileViolation]:
 def audit_mobile_directory(target_dir: str) -> List[MobileViolation]:
     """Audits all mobile source files recursively in target directory."""
     violations: List[MobileViolation] = []
-    supported_extensions = {".swift", ".kt", ".dart", ".tsx", ".jsx"}
+    supported_extensions = {".swift", ".kt", ".dart", ".tsx", ".jsx", ".xml"}
 
     for root, _, files in os.walk(target_dir):
         if any(ignored in root for ignored in [".git", "node_modules", "build", "dist"]):
             continue
         for file in files:
-            ext = os.path.splitext(file)[1].lower()
-            if ext in supported_extensions:
-                full_path = os.path.join(root, file)
-                violations.extend(audit_mobile_file(full_path))
-
+            if os.path.splitext(file)[1].lower() in supported_extensions:
+                violations.extend(audit_mobile_file(os.path.join(root, file)))
     return violations
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Audit mobile source files for native UX craftsmanship and touch ergonomics."
+        description="Audit mobile source files for native UX, responsive layouts, and touch ergonomics."
     )
-    parser.add_argument(
-        "--path",
-        default=".",
-        help="Path to file or directory to audit (default: current directory).",
-    )
+    parser.add_argument("--path", default=".", help="Path to file or directory to audit (default: current directory).")
     args = parser.parse_args()
 
     if os.path.isfile(args.path):
@@ -154,15 +145,14 @@ def main() -> int:
         return 1
 
     if not violations:
-        print("[PASS] All mobile source files adhere to native UX & craftsmanship standards.")
+        print("[PASS] All mobile source files adhere to native UX, responsive layout & craftsmanship standards.")
         return 0
 
     print(f"Mobile UI Hygiene Audit: Found {len(violations)} violation(s):")
     for v in violations:
         print(f"[{v.severity}] {v.file_path}:{v.line_number} ({v.rule_id}) - {v.message}")
 
-    errors = [v for v in violations if v.severity == "ERROR"]
-    return 1 if errors else 0
+    return 1 if any(v.severity == "ERROR" for v in violations) else 0
 
 
 if __name__ == "__main__":

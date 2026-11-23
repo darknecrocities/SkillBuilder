@@ -77,12 +77,14 @@ COMBO_PRESETS: Dict[str, Dict[str, object]] = {
 
 
 def detect_platform_targets(repo_path: Path, prompt_lower: str) -> Set[str]:
-    """Detect client, AI, CV, VLM, and tooling targets from repo manifests and prompt signals."""
+    """Detect client, app, AI, CV, VLM, and tooling targets from repo manifests and prompt signals."""
     platforms: Set[str] = set()
-    if (repo_path / "pubspec.yaml").exists() or any(k in prompt_lower for k in ("flutter", "swiftui", "compose", "ios", "android", "mobile", "react native")):
+    if (repo_path / "pubspec.yaml").exists() or any(k in prompt_lower for k in ("flutter", "swiftui", "compose", "ios", "android", "mobile", "react native", "ipad", "foldable")):
         platforms.add("mobile")
     if (repo_path / "package.json").exists() or any(k in prompt_lower for k in ("next.js", "react", "tailwind", "web", "css", "html", "vite")):
         platforms.add("web")
+    if any((repo_path / f).exists() for f in ("src-tauri", "electron.vite.config.ts", "electron-builder.yml")) or any(k in prompt_lower for k in ("electron", "tauri", "desktop app", "offline app")):
+        platforms.add("app")
     if any(k in prompt_lower for k in ("mcp", "model context protocol")):
         platforms.add("mcp")
     if any(k in prompt_lower for k in ("mascot", ".riv", "rive", "lottie", "2d character")):
@@ -99,13 +101,21 @@ def detect_platform_targets(repo_path: Path, prompt_lower: str) -> Set[str]:
         platforms.add("vlm")
     if (repo_path / "Modelfile").exists() or any(k in prompt_lower for k in ("ollama", "llama.cpp", "llama-server", "gguf", "mlx", "vllm", "sglang", "webllm", "local llm")):
         platforms.add("local_llm")
-    if any(k in prompt_lower for k in ("model gateway", "ai integration", "hybrid fallback", "cv+vlm", "a/b test", "ab test", "srm")):
-        platforms.add("ai_integration" if "a/b" not in prompt_lower and "ab test" not in prompt_lower and "srm" not in prompt_lower else "ab_test")
+    if any(k in prompt_lower for k in ("model gateway", "ai integration", "hybrid fallback", "cv+vlm")):
+        platforms.add("ai_integration")
+    if any(k in prompt_lower for k in ("a/b test", "ab test", "srm")):
+        platforms.add("ab_test")
     return platforms
 
 
-def match_playbook(prompt_lower: str) -> str:
-    """Match prompt text to the highest-priority DarkNecroStack playbook."""
+def match_playbook(prompt_lower: str, platforms: Set[str] | None = None) -> str:
+    """Match prompt text and detected platforms to the highest-priority DarkNecroStack playbook."""
+    active_platforms = platforms or set()
+    mobile_layout_kw = ("responsive", "adaptive", "tablet", "foldable", "split view", "split screen", "safe area", "size class", "windowsizeclass", "landscape")
+    if "mobile" in active_platforms and any(k in prompt_lower for k in mobile_layout_kw):
+        return "mobile-responsive"
+    if ("web" in active_platforms and "mobile" in active_platforms) or any(k in prompt_lower for k in ("dynamic routing", "cross-platform", "mobile and web", "app and web")):
+        return "dynamic-platform-routing"
     for playbook, keywords in PLAYBOOK_RULES:
         if any(kw in prompt_lower for kw in keywords):
             return playbook
@@ -161,6 +171,10 @@ def build_skill_bundle(playbook: str, platforms: Set[str], repo_path: Path) -> D
 
     if {"cv", "vlm", "local_llm"}.intersection(platforms) and "ai-integration" not in active:
         active.append("ai-integration")
+    if "app" in platforms:
+        for s in ("frontend", "local-first-data", "browser-media-wasm"):
+            if s not in active:
+                active.append(s)
     if playbook == "figure-it-out":
         active.append("full-scale-mode")
 
@@ -196,8 +210,8 @@ def route_combo(combo_name: str, repo_path: Path) -> Dict[str, object]:
 def route_prompt(prompt: str, repo_path: Path) -> Dict[str, object]:
     """Compute full routing decision for a given prompt and repo."""
     prompt_lower = prompt.lower()
-    playbook = match_playbook(prompt_lower)
     platforms = detect_platform_targets(repo_path, prompt_lower)
+    playbook = match_playbook(prompt_lower, platforms)
     bundle = build_skill_bundle(playbook, platforms, repo_path)
     return {
         "playbook": f"skills/darknecrostack/playbooks/{playbook}.md",

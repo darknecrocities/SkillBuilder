@@ -1,159 +1,47 @@
 ---
 name: mobile-ui
-description: Native mobile UI/UX craftsmanship, kinetic motion, and tactile engineering skill for iOS (SwiftUI/HIG 18/19), Android (Material 3 Expressive/Jetpack Compose), React Native, and Flutter.
+description: Native mobile UI/UX craftsmanship, responsive adaptive layouts (iOS horizontalSizeClass, Android WindowSizeClass, foldables), kinetic spring motion, and tactile engineering for SwiftUI, Jetpack Compose, React Native, and Flutter.
 ---
 
-# Mobile UI/UX Craftsmanship & Native Engineering
+# Mobile UI/UX, Responsive Layouts & Native Motion (`/mobile-ui`)
 
-The `mobile-ui` skill enforces ultra-premium craftsmanship across native iOS, Android, and cross-platform mobile applications. It replaces stiff layouts and generic web-wrapped interfaces with fluid spring physics, continuous spatial layout morphing, tactile haptics, and strict touch ergonomics.
-
----
-
-## 1. Quick Navigation & Progressive Disclosure
-
-| Resource Type | Document | Description |
-| :--- | :--- | :--- |
-| **Reference** | [references/apple-hig-and-material3.md](references/apple-hig-and-material3.md) | Apple HIG 44pt touch targets, Material 3 48dp metrics, dynamic type, safe areas. |
-| **Reference** | [references/native-motion-and-gestures.md](references/native-motion-and-gestures.md) | Damped spring physics, matchedGeometryEffect, tactile haptic feedback levels. |
-| **Utility** | [scripts/verify_mobile_ui_hygiene.py](scripts/verify_mobile_ui_hygiene.py) | Audits mobile code for missing safe area wrappers, hardcoded touch target violations, and linear animations. |
+> **Philosophy**: *Adapt every screen from active window bounds (`Compact`/`Medium`/`Expanded`), replace linear curves with harmonic springs, respect safe areas and 200% text scaling, and keep touch targets ergonomic.*
 
 ---
 
-## 2. Apple iOS 18/19 HIG & SwiftUI Craftsmanship
+## 1. Progressive Disclosure References & Playbook
 
-### Spatial Layout Morphing (`matchedGeometryEffect`)
-Eliminate jarring navigation pushes and abrupt modal takeovers. Coordinate seamless geometry morphs between compact card surfaces and fullscreen viewports:
-```swift
-struct FeedCardView: View {
-    let item: FeedItem
-    var namespace: Namespace.ID
-    @Binding var selectedID: String?
+| Resource | Purpose |
+| :--- | :--- |
+| [references/responsive-adaptive-layouts.md](references/responsive-adaptive-layouts.md) | Unified iOS & Android breakpoints, `AnyLayout`/`ViewThatFits`/`NavigationSplitView`, `WindowSizeClass`/`NavigationSuiteScaffold`/`ListDetailPaneScaffold`, foldable hinges, RN/Flutter parity. |
+| [references/apple-hig-and-material3.md](references/apple-hig-and-material3.md) | `44pt`/`48dp` touch bounds, safe areas & `imePadding()`, `200%` Dynamic Type scaling, dark/light surface tokens. |
+| [references/native-motion-and-gestures.md](references/native-motion-and-gestures.md) | Harmonic springs, `matchedGeometryEffect`, `SharedTransitionLayout`, `PredictiveBackHandler`, Reanimated 3, Impeller, haptics. |
+| [scripts/verify_mobile_ui_hygiene.py](scripts/verify_mobile_ui_hygiene.py) | Audits hardcoded widths, linear easing, missing safe areas, `UIScreen.main.bounds`/`Dimensions.get` traps, fixed text heights, and portrait locks. |
 
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Image(item.heroImage)
-                .matchedGeometryEffect(id: "image_\(item.id)", in: namespace)
-                .frame(maxWidth: .infinity, maxHeight: 240)
-                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+> **Agent Execution Playbook**: Follow [`skills/darknecrostack/playbooks/mobile-responsive.md`](../darknecrostack/playbooks/mobile-responsive.md) when building or reviewing responsive iOS/Android layouts.
 
-            Text(item.title)
-                .matchedGeometryEffect(id: "title_\(item.id)", in: namespace)
-                .font(.system(.headline, design: .rounded))
-        }
-        .padding(16)
-        .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .stroke(Color.white.opacity(0.12), lineWidth: 1) // 1px specular top highlight
-        )
-    }
-}
+---
+
+## 2. iOS & Android Responsive Breakpoint Matrix
+
+| Class | Width | iOS (SwiftUI) | Android (Compose M3 Adaptive) | Cross-Platform (RN / Flutter) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Compact** | `< 600 dp/pt` | `.compact` + bottom `TabView` | `WindowWidthSizeClass.COMPACT` + `NavigationBar` | `useWindowDimensions()` / `LayoutBuilder` 1-col |
+| **Medium** | `600–839 dp/pt` | `AnyLayout` 2-col + `ViewThatFits` | `MEDIUM` + `NavigationRail` + `FoldingFeature` | 2-col adaptive grid (`min 160–200`) |
+| **Expanded** | `>= 840 dp/pt` | `NavigationSplitView` + `maxWidth: 700` | `EXPANDED` + `ListDetailPaneScaffold` + `widthIn(680.dp)` | Permanent drawer + multi-pane split |
+
+---
+
+## 3. Core Native Craftsmanship Invariants
+
+1. **Active Window Bounds Only**: Size from `horizontalSizeClass` / `WindowSizeClass` / `useWindowDimensions()` / `MediaQuery.sizeOf(context)`—ban `UIScreen.main.bounds`, module-scope `Dimensions.get`, fixed phone widths (`375`–`430`), and portrait locks.
+2. **Safe Areas & 200% Font Scaling**: Wrap root content in `.safeAreaInset` / `WindowInsets.systemBars` + `Modifier.imePadding()`, and use `minHeight`/`heightIn(min=)` so `200%` Dynamic Type never clips text.
+3. **Ergonomic Touch & Spring Motion**: Enforce `>= 44x44 pt` (iOS) / `>= 48x48 dp` (Android) hit bounds in the bottom `60%` thumb arc; ban `.linear` animations in favor of calibrated springs (`response: 0.32s, dampingFraction: 0.72`) and detent haptics.
+
+---
+
+## 4. Automated Mobile Hygiene Verification
+
+```bash
+python3 skills/mobile-ui/scripts/verify_mobile_ui_hygiene.py --path .
 ```
-
-### Apple Harmonic Spring Physics
-Prohibit linear ease-in/ease-out curves. Calibrate physical mass-spring-damper parameters:
-- **Default Interactive Springs**: `response: 0.32s`, `dampingFraction: 0.72`, `blendDuration: 0s`.
-- **Bouncy Confirmation Pop**: `response: 0.28s`, `dampingFraction: 0.64`.
-- **Smooth Sheet Retract**: `response: 0.42s`, `dampingFraction: 0.82`.
-
-### Cupertino Materials & Specular Lighting
-- Layer translucency using `.background(.ultraThinMaterial)`.
-- Enforce continuous Apple squircles: `RoundedRectangle(cornerRadius: 24, style: .continuous)`.
-- Apply a single-zenith top specular hairline: 1px border with `Color.white.opacity(0.12)` in dark mode to simulate physical Fresnel reflection.
-
-### Sensory & Tactile Cues (Haptics)
-- **State Toggles & Card Expansion**:
-  ```swift
-  let generator = UIImpactFeedbackGenerator(style: .medium)
-  generator.prepare()
-  generator.impactOccurred()
-  ```
-- **Discrete Rotary Detents**: Enforce `CoreHaptics` (`CHHapticEngine`) or `UISelectionFeedbackGenerator` on drag thresholds and wheel scrubbing.
-
----
-
-## 2. Android Material 3 Expressive & Jetpack Compose
-
-### Lookahead Bounds Mapping (`SharedTransitionLayout`)
-Leverage Compose's `LookaheadScope` to compute destination bounds ahead of time, decoupling measurement from drawing to guarantee zero dropped frames:
-```kotlin
-@Composable
-fun SharedElementFeedCard(
-    item: FeedItem,
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope
-) {
-    with(sharedTransitionScope) {
-        Surface(
-            shape = RoundedCornerShape(24.dp),
-            tonalElevation = 2.dp,
-            modifier = Modifier
-                .sharedBounds(
-                    rememberSharedContentState(key = "card_${item.id}"),
-                    animatedVisibilityScope = animatedVisibilityScope,
-                    boundsTransform = { _, _ ->
-                        spring(
-                            dampingFraction = 0.78f,
-                            stiffness = Spring.StiffnessMediumLow
-                        )
-                    }
-                )
-        ) {
-            // Card Content
-        }
-    }
-}
-```
-
-### Predictive Back Gesture Navigation
-Support Android 14+ Predictive Back with real-time gesture feedback:
-```kotlin
-PredictiveBackHandler { progress ->
-    try {
-        progress.collect { backEvent ->
-            // Interpolate scale down to 0.92f and soften alpha during gesture progress
-            val scale = lerp(1f, 0.92f, backEvent.progress)
-            val cornerRadius = lerp(0.dp, 32.dp, backEvent.progress)
-            currentSheetScale = scale
-            currentSheetCorners = cornerRadius
-        }
-        navigator.popBackStack()
-    } catch (e: CancellationException) {
-        // User aborted swipe: spring back smoothly to 1.0f
-        resetSheetPhysics()
-    }
-}
-```
-
-### Edge-to-Edge System Inset Geometry
-Enforce seamless edge-to-edge drawing:
-- Bind window insets via `WindowInsets.systemBars.asPaddingValues()`.
-- Dynamically absorb virtual keyboards using `Modifier.imePadding()`.
-
----
-
-## 3. Kinetic Typography & Touch Ergonomics
-
-### Kinetic Variable Fonts & Tabular Numerals
-- Variable axes (`wght`, `opsz`, `wdth`): Dynamically interpolate font weight (`wght` 300 $\rightarrow$ 700) during touch drag or pull-to-refresh.
-- Tabular figures (`tnum`, `zero`): Always format numerical counters, stock tickers, and stopwatch readouts with monospaced numbers to eliminate horizontal layout jitter.
-
-### Touch Target & Ergonomics Matrix
-- **iOS Minimum**: `44x44 pt` interactive touch bounds.
-- **Android Minimum**: `48x48 dp` interactive touch bounds.
-- **Thumb Zone Distribution**: Place primary interactive triggers (tabs, primary action buttons, FABs) within the bottom 60% of the display viewport.
-- **Anti-Trap Guardrail**: Strictly prohibit hardcoded viewport widths (`width: 375`, `width: 414px`). Always anchor layouts to relative safe areas and dynamic flex/grid constraints.
-
----
-
-## 4. Cross-Platform Guidelines (React Native & Flutter)
-
-### React Native / Expo
-- Execute all touch-driven spring gestures on the UI thread via `react-native-reanimated` worklets (`withSpring({ damping: 15, stiffness: 120 })`) and `react-native-gesture-handler`.
-- Always wrap screen roots in `<SafeAreaProvider>` and `<SafeAreaView edges={['top', 'bottom']}>`.
-
-### Flutter
-- Guarantee 120Hz compositor stability on the **Impeller** rendering engine.
-- Implement `Hero` widgets using `MaterialRectArcTween` for natural curved flight paths.
-- Bind haptics via `HapticFeedback.lightImpact()` on drag thresholds and sheet snap points.
