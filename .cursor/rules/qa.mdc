@@ -115,6 +115,8 @@ flowchart LR
    - Strict boundary schema validation (Zod, Pydantic, Serde).
 6. **Resource Cleanup & Leak Prevention**:
    - Explicit teardown of event listeners, timers (`clearInterval`), subscriptions, and coroutine scopes on unmount.
+7. **A/B Variant Parity & Guardrail Telemetry (`/testing`)**:
+   - Verify deterministic SSR/CSR variant assignment (zero hydration flicker across viewports), Sample Ratio Mismatch (`SRM p >= 0.001`), and guardrail bounds (`p95 latency`, `5xx` error rate) via `skills/testing/scripts/verify_ab_experiment.py`.
 
 > 📖 **Deep Architectural Reference**: Read [full-app-functionality-qa-manual.md](file:///Users/arronkianparejas/SkillBuilder/skills/qa/references/full-app-functionality-qa-manual.md) for full functional patterns, state recipes, and lifecycle verification.
 

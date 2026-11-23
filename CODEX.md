@@ -4,7 +4,7 @@
 
 # Mandatory Engineering Discipline & Production Etiquette
 
-All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the **DarkNecroStack** suite (48 Modular Skills; front-door router `/darknecrostack`):
+All software architecture, implementation, refactoring, and pair-programming tasks MUST strictly adhere to the **DarkNecroStack** suite (51 Modular Skills; front-door router `/darknecrostack`):
 
 1. **Prompt Polishing First (PPE - `/prompt-polish`)**:
    - Analyze, refine, and structure incoming prompts into clear, token-efficient engineering specifications with explicit verification criteria.
@@ -57,7 +57,7 @@ All software architecture, implementation, refactoring, and pair-programming tas
 16. **Deduplicated Storage Backups, Sensitive Deletion Disclosure & Multi-Agent Synchronization (`/database`, `/firebase`, `/supabase`, `/gcp`, `/aws`, `/full-scale-mode`)**:
     - **Idempotent Single-Slot Backups (Zero Spam)**: Before schema migrations, bulk writes, or storage rule changes, verify or create a single canonical backup keyed by SHA-256 content/schema digest in `.backups/backup_manifest.json` (`manage_deduplicated_backup.py`). Never generate redundant timestamped copies (`*.bak.1`, `*.bak.2`, `dump_copy.sql`) when state is unchanged or across concurrent agent turns.
     - **Sensitive Deletion Human-in-the-Loop Gate**: Always halt and warn the user first before executing any destructive deletion (`DROP TABLE/COLUMN`, `TRUNCATE`, unconditioned `DELETE`, Firestore/Supabase collection or bucket removal, `RemovalPolicy.DESTROY`, `force_destroy = true`, or sensitive file deletion). Disclose the target resource, sensitivity tier, affected scope, and verified backup SHA-256 hash, and await explicit user confirmation.
-    - **Simultaneous Multi-Agent Synchronization**: Concurrent subagents working simultaneously must respect partitioned file ownership, coordinate storage mutations through the shared `.backups/backup_manifest.json` lease lock, and keep all 48 skills and multi-platform instruction files 100% synchronized.
+    - **Simultaneous Multi-Agent Synchronization**: Concurrent subagents working simultaneously must respect partitioned file ownership, coordinate storage mutations through the shared `.backups/backup_manifest.json` lease lock, and keep all 51 skills and multi-platform instruction files 100% synchronized.
 17. **Antigravity Automation & Background Execution (`/antigravity-automation`, `/full-scale-mode`)**:
     - **Scheduled Sidecars**: Structure background scheduled automations in `~/.gemini/jetski/sidecars/<slug>/sidecar.json` with strict timezone awareness (`CRON_TZ`) and self-contained execution prompts.
     - **In-Session Scheduling & Zero Polling**: Standardize in-turn timers (`DurationSeconds`, `TimerCondition`) and recurring jobs via the native `schedule` tool. Never poll in loops or use shell `sleep`.
@@ -67,12 +67,15 @@ All software architecture, implementation, refactoring, and pair-programming tas
     - **Trigger -> Action Discipline**: Run `/code-archaeology` (`/how`, `/why`) before editing unfamiliar subsystems; `/architect` before writing implementation bodies; `/arena` on contested designs; **Attack the Premise** after 2 failed fixes sharing an assumption; `/interrogate` (`/unslop`) before commit; `/prove-it-works` with `[measured]` runtime proof and `Documentation impact` disclosure.
     - **2D Mascots & Brand Assets (`/2d-mascot-motion`, `/brand-assets`)**: Enforce silhouette-first geometric mascots with Rive (`.riv`) state machines or `<35`-node SVG rigs (`prefers-reduced-motion`), 4 Logo Stress Tests, Apple continuous squircles, Android `108dp/66dp` adaptive icons, and non-Corporate-Memphis illustrations.
     - **MCP, Browser Media & Local-First Data (`/mcp-engineering`, `/browser-media-wasm`, `/local-first-data`)**: Enforce `realpath` MCP path sandboxing, deterministic `URL.revokeObjectURL` / `Worker.terminate()` cleanup, strict public/private data boundaries, and `PARTIAL` / `NEEDS_RESEARCH` anti-fabrication markers.
+19. **Computer Vision, VLM, Local LLM, AI Integration & A/B Experimentation (`/computer-vision`, `/vlm-multimodal`, `/local-llm`, `/ai-integration`, `/testing`)**:
+    - Enforce bounded frame queues (`maxsize=2`), deterministic `VideoCapture` release, EXIF normalization, visual token resize caps (`<= 1280–1568px`), `CV -> VLM -> LLM` cost cascades, `AI_PRIVACY_MODE` consent gates, and deterministic SHA-256 A/B bucketing with SRM (`p >= 0.001`) verification.
 
 
-## Skill Index (48 Skills)
+## Skill Index (51 Skills)
 - `/2d-mascot-motion`: Engineer non-AI-slop 2D vector mascots and interactive character rigs using Rive (.riv) state machines, Lottie (.lottie), and rigged mathematical SVGs with pointer tracking and reduced-motion fallbacks.
 - `/3d`: Interactive 3D WebGL, Three.js, and React Three Fiber (R3F) engineering skill. Enforces 60fps budgets, PBR materials, Draco compression, and studio lighting.
 - `/ai`: Architect, implement, and maintain production AI systems, Gemini API agents, Antigravity multi-agent orchestration, structured JSON outputs, reliable tool calling, and RAG retrieval pipelines.
+- `/ai-integration`: Universal cross-project integration layer for Computer Vision, VLM, Local LLM, and Cloud Gemini via a provider-agnostic ModelGateway, CV-before-VLM cost cascade, SSE AbortController streaming, and privacy-consent fallback gates.
 - `/anti-slop`: Anti-AI-slop and clean craftsmanship skill. Eliminates decorative badges, fake mock databases, neon gradients, obvious comments, and marketing fluff.
 - `/antigravity-automation`: Automate recurring, background, event-driven, and multi-agent workflows in Google Antigravity. Crafts scheduled sidecars (~/.gemini/jetski/sidecars/<slug>/sidecar.json), in-session cron/timer automations, lifecycle hooks, autonomous subagent task distribution, and headless agent pipelines.
 - `/api-design`: API contract design and OpenAPI 3.1 specification skill. Enforces RFC 7807 problem details, idempotency headers, and consistent status codes.
@@ -83,6 +86,7 @@ All software architecture, implementation, refactoring, and pair-programming tas
 - `/brand-assets`: Production app logos, continuous Apple squircles, Android adaptive icons, dark/light favicons, anti-slop editorial illustrations, OG social cards, and SVG/AVIF resource pipelines.
 - `/browser-media-wasm`: Engineer leak-free browser media, Canvas/OffscreenCanvas, WebAudio, PDF, QR, and WebAssembly pipelines using Web Worker offloading, magic-byte validation, and deterministic ObjectURL cleanup.
 - `/code-archaeology`: Subsystem comprehension and historical intent analysis (/how and /why) before editing code. Maps runtime execution, ownership boundaries, load-bearing quirks, and blast radius.
+- `/computer-vision`: Production Computer Vision pipelines (OpenCV, YOLO, ONNX Runtime, TensorRT, CoreML, MediaPipe, SAM2, ByteTrack, OCR) with bounded frame buffers, EXIF/letterbox hygiene, and deterministic GPU/session disposal.
 - `/continuous-learning`: Continuous conversational learning protocol (CLP) skill. Persists user corrections and project conventions to .agents/learned_conventions.md to prevent repeating mistakes.
 - `/darknecrostack`: DarkNecroStack master dynamic router and engineering operating system (aliases /darknecro-mode, /ronskills). Routes intent into goal-specific playbooks, enforces citation-grounded principles, propagates worker.md to subagents, logs decision trails, and requires runtime proof.
 - `/data-pipelines`: Data pipeline engineering, streaming ETL with backpressure, Apache Arrow memory structures, DuckDB in-process analytics, schema validation, and dead-letter queues (DLQ).
@@ -97,7 +101,7 @@ All software architecture, implementation, refactoring, and pair-programming tas
 - `/i18n`: Multi-locale internationalization architecture, ICU MessageFormat, RTL bidirectional layout mirroring, and cultural localization.
 - `/interrogate`: Adversarial pre-ship code review and surgical diff unslop protocol (/interrogate, /unslop, /deslop). Audits correctness, security, concurrency, leaks, and strips AI bloat before commit.
 - `/local-first-data`: Architect local-first browser/desktop storage (IndexedDB, OPFS, SQLite WAL), public-vs-private vendored data boundaries, zero-fabrication completeness markers (PARTIAL/NEEDS_RESEARCH), and offline privacy invariants.
-- `/local-llm`: Local LLM architecture, quantized inference (GGUF Q4_K_M/Q8_0), Ollama, llama.cpp, Apple Silicon MLX, WebLLM, GBNF structured grammars, in-process local RAG, and 3-tier hybrid edge-cloud routing.
+- `/local-llm`: Local LLM architecture, quantized inference (GGUF Q4_K_M/Q8_0), Ollama, llama.cpp, Apple Silicon MLX, vLLM, SGLang, WebLLM/Transformers.js, KV-cache tuning, GBNF structured grammars, in-process local RAG, and 3-tier hybrid routing.
 - `/mcp-engineering`: Build and harden Model Context Protocol (MCP) servers, transports (stdio, SSE, Streamable HTTP), Zod/JSON Schema tool contracts, workspace path-traversal sandboxing, and bounded process execution.
 - `/mobile-ui`: Native mobile UI/UX craftsmanship, kinetic motion, and tactile engineering skill for iOS (SwiftUI/HIG 18/19), Android (Material 3 Expressive/Jetpack Compose), React Native, and Flutter.
 - `/observability`: Observability and telemetry engineering skill. Enforces OpenTelemetry distributed tracing, structured JSON logging with correlation IDs, and health probes.
@@ -113,9 +117,10 @@ All software architecture, implementation, refactoring, and pair-programming tas
 - `/security`: Security hardening and vulnerability defense skill. Enforces OWASP Top 10 mitigations, zero hardcoded secrets, input sanitization, and SQL parameterization.
 - `/state-management`: Declarative state machines, TanStack Query server-state caching, invalidation, optimistic updates, atomic Zustand slices, and signals.
 - `/supabase`: Supabase fullstack architecture, PostgreSQL Row Level Security (RLS), Supabase Auth, Edge Functions, and pgvector embeddings.
-- `/testing`: Test-Driven Development (TDD) discipline, Vitest, Jest, Playwright E2E with accessible locators, MSW contract tests, and mutation testing principles.
+- `/testing`: Test-Driven Development (TDD), Vitest, Jest, Playwright E2E with accessible locators, MSW contract tests, mutation testing, and controlled A/B testing with deterministic hash bucketing and SRM statistical verification.
 - `/ui`: UI design systems, tokens, Apple HIG, and glassmorphism craftsmanship skill. Enforces disciplined neutral palettes, fluid typography, Cupertino materials, and semantic Lucide SVG icons.
 - `/video-editing`: Production motion graphics, video editing, programmatic animation, and audio-visual synchronization. Embodies the 17 Awesome Claude motion styles (Swiss kinetic type, liquid morphing, HUD drafting, live line drawing, 3D card flips), high-performance Python-to-FFmpeg rawvideo pipelines, tempo-locked BPM grid choreography, and broadcast audio mastering.
+- `/vlm-multimodal`: Vision-Language Models (Qwen2.5-VL, Gemma 3, Llama-3.2-Vision, Florence-2, mlx-vlm, llama.cpp mmproj, Ollama vision, Gemini multimodal) with visual token budgeting, video keyframe sampling, structured grounding, and multimodal RAG.
 - `/web-ui`: Modern web design systems, Component-Level Container Queries (@container), CSS View Transitions API, OKLCH perceptual color spaces, fluid clamp() typography curves, and single-zenith sub-pixel lighting craftsmanship.
 - `/world-class-engineering`: A rigorous engineering skill for architecture, implementation, refactoring, AI/ML integration, testing, security, code review, and production-quality software delivery.
 

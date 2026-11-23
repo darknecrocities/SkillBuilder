@@ -31,7 +31,7 @@ class TestVerifyFullScaleOrchestration(unittest.TestCase):
         self.repo_root = Path(__file__).resolve().parent.parent.parent.parent
 
     def test_repo_skill_registry_has_all_required_skills(self):
-        self.assertEqual(len(REQUIRED_SKILLS), 48)
+        self.assertEqual(len(REQUIRED_SKILLS), 51)
         violations = audit_skill_registry(self.repo_root)
         self.assertEqual(len(violations), 0, f"Expected clean registry, got: {violations}")
 
@@ -51,6 +51,8 @@ class TestVerifyFullScaleOrchestration(unittest.TestCase):
             (p / "app.json").write_text("{}", encoding="utf-8")
             (p / "tailwind.config.js").write_text("// tailwind", encoding="utf-8")
             (p / "Modelfile").write_text("FROM llama-3.2", encoding="utf-8")
+            (p / "weights").mkdir()
+            (p / "vlm_config.json").write_text("{}", encoding="utf-8")
             res = analyze_skill_resonance(p)
             self.assertIn("firebase", res["resonant_skills"])
             self.assertIn("routing", res["resonant_skills"])
@@ -59,6 +61,9 @@ class TestVerifyFullScaleOrchestration(unittest.TestCase):
             self.assertIn("mobile-ui", res["resonant_skills"])
             self.assertIn("web-ui", res["resonant_skills"])
             self.assertIn("local-llm", res["resonant_skills"])
+            self.assertIn("computer-vision", res["resonant_skills"])
+            self.assertIn("vlm-multimodal", res["resonant_skills"])
+            self.assertIn("ai-integration", res["resonant_skills"])
 
     def test_clean_subagent_prompt_passes(self):
         prompt = (

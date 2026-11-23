@@ -31,8 +31,11 @@ class TestExportMultiplatform(unittest.TestCase):
 
     def test_get_all_skills(self):
         skills = get_all_skills(self.repo_dir)
-        self.assertGreaterEqual(len(skills), 48, f"Expected at least 48 skills, found {len(skills)}")
+        self.assertGreaterEqual(len(skills), 51, f"Expected at least 51 skills, found {len(skills)}")
         names = [s[0] for s in skills]
+        self.assertIn("computer-vision", names)
+        self.assertIn("vlm-multimodal", names)
+        self.assertIn("ai-integration", names)
         self.assertIn("darknecrostack", names)
         self.assertIn("code-archaeology", names)
         self.assertIn("architect", names)

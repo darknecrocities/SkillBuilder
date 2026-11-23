@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # Script: verify_all_skills.sh
-# Purpose: Master test runner for all 48 DarkNecroStack skills & verification suites.
+# Purpose: Master test runner for all 51 DarkNecroStack skills & 59 verification suites.
 # Author: Arron Kian Parejas (@darknecrocities)
 # ==============================================================================
 
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-echo "=== Running DarkNecroStack Master 55-Suite Verification Runner ==="
+echo "=== Running DarkNecroStack Master 59-Suite Verification Runner ==="
 echo "Repository: ${REPO_DIR}"
 echo ""
 
@@ -283,11 +283,31 @@ echo "[54/55] Running local-first-data & public/private boundary tests..."
 python3 "${REPO_DIR}/skills/local-first-data/tests/test_verify_local_first_hygiene.py"
 echo ""
 
-# 55. Full Ecosystem Strict Depth & Anti-Boilerplate Lint
-echo "[55/55] Running DarkNecroStack strict-depth & anti-boilerplate linter across all 48 skills..."
+# 55. Computer Vision Pipeline Hygiene Tests
+echo "[55/59] Running computer-vision bounded queue & runtime hygiene tests..."
+python3 "${REPO_DIR}/skills/computer-vision/tests/test_verify_cv_hygiene.py"
+echo ""
+
+# 56. VLM & Multimodal Token Budgeting Tests
+echo "[56/59] Running vlm-multimodal visual token & grounding tests..."
+python3 "${REPO_DIR}/skills/vlm-multimodal/tests/test_verify_vlm_hygiene.py"
+echo ""
+
+# 57. Universal AI Integration Gateway Tests
+echo "[57/59] Running ai-integration gateway, privacy & cascade tests..."
+python3 "${REPO_DIR}/skills/ai-integration/tests/test_verify_ai_integration.py"
+echo ""
+
+# 58. A/B Testing, SRM & Experimentation Hygiene Tests
+echo "[58/59] Running testing A/B bucketing, SRM & z-test verification tests..."
+python3 "${REPO_DIR}/skills/testing/tests/test_verify_ab_experiment.py"
+echo ""
+
+# 59. Full Ecosystem Strict Depth & Anti-Boilerplate Lint
+echo "[59/59] Running DarkNecroStack strict-depth & anti-boilerplate linter across all 51 skills..."
 python3 "${REPO_DIR}/scripts/skill_linter.py" --all --strict-depth --benchmark
 echo ""
 
 echo "=========================================================="
-echo "[SUCCESS] ALL 55 DARKNECROSTACK VERIFICATION SUITES PASSED!"
+echo "[SUCCESS] ALL 59 DARKNECROSTACK VERIFICATION SUITES PASSED!"
 echo "=========================================================="

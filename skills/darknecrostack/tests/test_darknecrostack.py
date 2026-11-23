@@ -62,6 +62,20 @@ class TestDarkNecroStack(unittest.TestCase):
             self.assertEqual(rows[1][3], "Run pytest")
             self.assertEqual(rows[1][4], "PASS")
 
+    def test_route_cv_vlm_local_llm_and_combo(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            decision = route_task.route_prompt("Build a YOLO + Qwen2.5-VL + Ollama local pipeline", tmp_path)
+            self.assertIn("computer-vision", decision["active_skills"])
+            self.assertIn("vlm-multimodal", decision["active_skills"])
+            self.assertIn("local-llm", decision["active_skills"])
+            self.assertIn("ai-integration", decision["active_skills"])
+
+            combo = route_task.route_combo("combo-fullstack-web", tmp_path)
+            self.assertIn("backend", combo["active_skills"])
+            self.assertIn("frontend", combo["active_skills"])
+            self.assertIn("mobile-ui", combo["pruned_skills"])
+
 
 if __name__ == "__main__":
     unittest.main()

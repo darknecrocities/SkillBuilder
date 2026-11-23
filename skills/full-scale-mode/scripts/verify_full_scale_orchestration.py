@@ -17,14 +17,14 @@ import sys
 from typing import Any, Dict, List, Optional, Set
 
 REQUIRED_SKILLS: Set[str] = {
-    "2d-mascot-motion", "3d", "ai", "anti-slop", "antigravity-automation", "api-design", "architect",
-    "arena", "aws", "backend", "brand-assets", "browser-media-wasm", "code-archaeology",
+    "2d-mascot-motion", "3d", "ai", "ai-integration", "anti-slop", "antigravity-automation", "api-design", "architect",
+    "arena", "aws", "backend", "brand-assets", "browser-media-wasm", "code-archaeology", "computer-vision",
     "continuous-learning", "darknecrostack", "data-pipelines", "database", "devops", "firebase",
     "frontend", "full-scale-mode", "fullstack", "gcp", "git-workflow", "i18n", "interrogate",
     "local-first-data", "local-llm", "mcp-engineering", "mobile-ui", "observability",
     "performance", "production-etiquette", "project-skills", "prompt-polish", "prove-it-works",
     "qa", "refactor", "research", "routing", "security", "state-management", "supabase",
-    "testing", "ui", "video-editing", "web-ui", "world-class-engineering",
+    "testing", "ui", "video-editing", "vlm-multimodal", "web-ui", "world-class-engineering",
 }
 
 BLOATED_FILLER_PATTERNS = re.compile(
@@ -175,9 +175,13 @@ def analyze_skill_resonance(repo_root: Path, target_platform: str = "auto") -> D
     if any((repo_root / f).exists() for f in ["duckdb", "pipeline", "pipelines"]):
         activated_skills.add("data-pipelines")
 
-    # Local LLM & Quantized Inference
+    # Local LLM, Computer Vision, VLM & Cross-Project AI Integration
     if any((repo_root / f).exists() for f in ["Modelfile", "modelfile"]) or any((repo_root / d).exists() for d in ["models", "gguf"]):
-        activated_skills.add("local-llm")
+        activated_skills.update(["local-llm", "ai-integration"])
+    if any((repo_root / f).exists() for f in ["yolov8n.onnx", "cv_pipeline.py"]) or (repo_root / "weights").exists():
+        activated_skills.update(["computer-vision", "ai-integration"])
+    if any((repo_root / f).exists() for f in ["mmproj.gguf", "vlm_config.json"]):
+        activated_skills.update(["vlm-multimodal", "ai-integration"])
 
     # PDS Platform Domain Specialization
     has_mobile_files = (

@@ -8,7 +8,7 @@ description: Master Project Orchestration Engine (aliased as /world-class-engine
 > **Role**: Master AI Systems Architect & Multi-Agent Conductor  
 > **Philosophy**: *Understand deeply. Plan deliberately. Dispatch concurrently. Budget tokens relentlessly. Harness continuously. Deliver atomically.*
 
-**Full-Scale Mode (`/full-scale-mode`)** is the multi-stage project orchestration engine inside the **DarkNecroStack** ecosystem (front-door router: [`/darknecrostack`](../darknecrostack/SKILL.md)). It unifies all **48 modular engineering skills** into a structured, closed-loop delivery engine featuring:
+**Full-Scale Mode (`/full-scale-mode`)** is the multi-stage project orchestration engine inside the **DarkNecroStack** ecosystem (front-door router: [`/darknecrostack`](../darknecrostack/SKILL.md)). It unifies all **51 modular engineering skills** into a structured, closed-loop delivery engine featuring:
 1. **The 5-Stage Delivery Lifecycle**: `Discover` $\rightarrow$ `Plan` $\rightarrow$ `Build` $\rightarrow$ `Verify & Harness Loop` $\rightarrow$ `Release`.
 2. **Orchestration Memory Subsystem**: Active session tracking, milestone progression, and multi-agent coordination via `.agents/memory/orchestration_state.json`.
 3. **Multi-Tier Harness Engineering & Bounded Self-Healing Loop**: 5 verification tiers with automated error diagnostics and regression-free remediation (up to 3 loop iterations).
@@ -137,7 +137,7 @@ flowchart TD
 ASR automatically detects project patterns and dynamically activates resonant skills:
 - **Mobile (`ios/`, `android/`, `app.json`, `pubspec.yaml`)** $\rightarrow$ Activates `/mobile-ui`, prunes `/web-ui`.
 - **Web (`tailwind.config.*`, `next.config.*`, `vite.config.*`)** $\rightarrow$ Activates `/web-ui`, prunes `/mobile-ui`.
-- **Edge AI / Local LLM (`Modelfile`, `gguf`, `mlx`)** $\rightarrow$ Activates `/local-llm`.
+- **Edge AI, CV, VLM & Local LLM (`Modelfile`, `gguf`, `mlx`, `weights/`, `mmproj`)** $\rightarrow$ Activates `/local-llm`, `/computer-vision`, `/vlm-multimodal`, `/ai-integration`.
 - **Cloud Infrastructure (`Dockerfile`, `cloudbuild.yaml`, `cdk.json`)** $\rightarrow$ Activates `/gcp`, `/aws`, `/devops`.
 - **Serverless Persistence (`firebase.json`, `supabase`)** $\rightarrow$ Activates `/firebase`, `/supabase`, `/database`.
 - **Core Engineering Gates (Always Active)** $\rightarrow$ `/darknecrostack`, `/prompt-polish`, `/code-archaeology`, `/architect`, `/interrogate`, `/prove-it-works`, `/qa`, `/security`, `/git-workflow`, `/world-class-engineering`.
@@ -154,7 +154,7 @@ Concurrent agents executing across persistence or cloud layers enforce:
 
 ---
 
-## 7. The 48-Skill Execution Catalogue
+## 7. The 51-Skill Execution Catalogue
 
 | Skill Command | Primary Stage & Phase | Role in Full-Scale Mode |
 | :--- | :--- | :--- |
@@ -190,7 +190,10 @@ Concurrent agents executing across persistence or cloud layers enforce:
 | `/devops` | Stage 3 / Phase 2 | Hardened multi-stage non-root Dockerfiles (`USER 10001`) and CI/CD pipelines. |
 | `/security` | Stage 3 / Phase 2 | OWASP Top 10, SSRF IP validation, token family rotation, and rate limits. |
 | `/ai` | Stage 3 / Phase 2 | Production Gemini SDK, structured JSON outputs, and defensive tool calling. |
-| `/local-llm` | Stage 3 / Phase 2 | Quantized local inference (GGUF Q4_K_M), MLX, WebLLM, GBNF, and hybrid routing. |
+| `/local-llm` | Stage 3 / Phase 2 | Quantized local inference (GGUF Q4_K_M), MLX, vLLM, SGLang, WebLLM, GBNF, and KV-cache tuning. |
+| `/computer-vision` | Stage 3 / Phase 2 | OpenCV, YOLO, ONNX, TensorRT, CoreML, SAM2, ByteTrack, OCR, and bounded frame queues. |
+| `/vlm-multimodal` | Stage 3 / Phase 2 | Qwen2.5-VL, Gemma 3, Llama-3.2-Vision, Gemini multimodal, visual token budgets, keyframe sampling. |
+| `/ai-integration` | Stage 3 / Phase 2 | Provider-agnostic `ModelGateway`, `CV -> VLM -> LLM` cascade, SSE cancellation, privacy gate. |
 | `/research` | Stage 3 / Phase 2 | Autonomous deep research and package benchmarking via P.A.T.H.S. |
 | `/antigravity-automation` | Stage 3 / Phase 2 | Antigravity scheduled sidecars, in-session timers, lifecycle hooks, and daemon control. |
 | `/interrogate` | Stage 4 / Phase 3 | 5-lens adversarial pre-ship review and surgical diff unslop scrubber (`/unslop`). |
