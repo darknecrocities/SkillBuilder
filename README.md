@@ -273,7 +273,7 @@ flowchart LR
     S5["Stage 5: Release & Consolidate<br/><b>Memory • PR • Walkthrough</b>"]
 
     S1 --> S2 --> S3 --> S4 --> S5
-    S4 -.->|Loop on Failure (Max 3x)| S3
+    S4 -.->|"Loop on Failure (Max 3x)"| S3
 ```
 
 ### The 5-Stage Orchestration Lifecycle
@@ -346,8 +346,8 @@ flowchart TD
     Diagnose --> Patch["2. Apply Targeted Atomic Patch"]
     Patch --> Recheck["3. Re-run Full Harness (Regression Guard)"]
     Recheck -->|Pass| H5
-    Recheck -->|Fail & Iteration < 3| Loop
-    Recheck -->|Fail & Iteration >= 3| Escalate["Halt & Escalate to Human with Failure Report"]
+    Recheck -->|"Fail & Iteration < 3"| Loop
+    Recheck -->|"Fail & Iteration >= 3"| Escalate["Halt & Escalate to Human with Failure Report"]
 
     H5 -->|All 5 Tiers Pass| Release["Stage 5: Release & Memory Consolidation"]
 ```

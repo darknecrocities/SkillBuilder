@@ -32,7 +32,7 @@ flowchart LR
     S5["Stage 5: Release & Consolidate<br/><b>Memory • PR • Walkthrough</b>"]
 
     S1 --> S2 --> S3 --> S4 --> S5
-    S4 -.->|Loop on Failure (Max 3x)| S3
+    S4 -.->|"Loop on Failure (Max 3x)"| S3
 ```
 
 1. **Stage 1: Discover & Memory Recall (`stage:discover`)**:
