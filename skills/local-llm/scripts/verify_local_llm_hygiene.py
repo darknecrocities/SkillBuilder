@@ -108,6 +108,20 @@ def audit_local_llm_file(file_path: str) -> List[LocalLLMViolation]:
                     )
                 )
 
+    # Rule LLM-005: Unbounded num_ctx > 32768 without Flash Attention or q8_0 KV cache
+    ctx_match = re.search(r"(?:num_ctx|--ctx-size|-c)\s+(\d+)", full_content)
+    if ctx_match and int(ctx_match.group(1)) > 32768:
+        if not any(k in full_content for k in ("-fa", "FLASH_ATTENTION", "KV_CACHE_TYPE", "q8_0")):
+            violations.append(
+                LocalLLMViolation(
+                    file_path=file_path,
+                    line_number=1,
+                    rule_id="LLM-005",
+                    message=f"Context window {ctx_match.group(1)} > 32768 without Flash Attention (-fa) or q8_0 KV-cache quantization.",
+                    severity="WARNING",
+                )
+            )
+
     return violations
 
 

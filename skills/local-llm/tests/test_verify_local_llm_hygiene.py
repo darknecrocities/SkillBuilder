@@ -76,6 +76,11 @@ class TestVerifyLocalLLMHygiene(unittest.TestCase):
         errors = [v for v in violations if v.severity == "ERROR"]
         self.assertEqual(len(errors), 0)
 
+    def test_warns_on_extreme_num_ctx_without_kv_quant(self):
+        modelfile = "FROM qwen2.5:7b-instruct-q4_K_M\nPARAMETER num_ctx 65536\n"
+        violations = audit_local_llm_file(self._create_file("Modelfile", modelfile))
+        self.assertTrue(any(v.rule_id == "LLM-005" for v in violations))
+
 
 if __name__ == "__main__":
     unittest.main()
